@@ -145,33 +145,37 @@ body, a:hover, button:hover {
 
 /* Infinite auto scroll by Digital Moves */
 
-/* ===== AP—REPS v0.3 — Safe aspect-ratio enforcement ===== */
-.apreps [data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid .slide.portrait .margin-wrapper {
-  aspect-ratio: 3 / 4;
+/* ===== AP—REPS v0.4 — JS-driven intrinsic ratio, no aspect-ratio ===== */
+
+/* Reset any aspect-ratio we added earlier */
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
+  aspect-ratio: auto !important;      /* ensure our padding-top wins */
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;                   /* temporary fallback only */
+  background: #fff;
 }
 
-.apreps [data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid .slide.landscape .margin-wrapper {
-  aspect-ratio: 4 / 3;
+/* Fill the box; crop top */
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper .image-slide-anchor,
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
   object-position: top center;
   display: block;
 }
 
-/* Lazy‑load fallback: keep slides tall while images load */
-.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
-  min-height: 200px;       /* fallback height until image is ready */
-  background-color: #fff;  /* optional: prevent flash of grey */
+/* When JS finishes, drop the min-height */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide.loaded .margin-wrapper {
+  min-height: 0;
 }
 
-.apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-title,
-.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-block-caption,
-.apreps .sqs-gallery.sqs-gallery-design-grid .image-meta {
-  text-align: left !important;
-  margin-top: 0.5rem;
-  line-height: 1.3;
-}
+/* Optional: quick debug outline — remove after confirming */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide.portrait  { /* outline: 1px solid blue; */ }
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide.landscape { /* outline: 1px solid red;  */ }

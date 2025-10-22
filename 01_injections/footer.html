@@ -19,64 +19,37 @@
 <!-- Tabs Code Javascript From Will-Myers.com -->
 <script src="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.js"></script>
 
-<!-- AP—REPS v0.3.3 — classify slides by orientation (lazy‑load visual fix) -->
-<script>
-(function(){
-  function classify(img){
-    if (!img) return;
-    const slide = img.closest('.sqs-gallery-design-grid .slide');
-    if (!slide) return;
+<!-- /* ===== AP—REPS v0.4 — JS-driven intrinsic ratio, no aspect-ratio ===== */
 
-    // compute landscape vs portrait
-    const dim = img.getAttribute('data-image-dimensions');
-    let w = 0, h = 0;
-    if (dim && /(\d+)\s*x\s*(\d+)/i.test(dim)) {
-      const m = dim.match(/(\d+)\s*x\s*(\d+)/i);
-      w = +m[1]; h = +m[2];
-    } else if (img.naturalWidth && img.naturalHeight) {
-      w = img.naturalWidth; h = img.naturalHeight;
-    }
-    if (!(w && h)) return;
-    const land = w > h;
-    slide.classList.toggle('landscape', land);
-    slide.classList.toggle('portrait', !land);
-    slide.classList.add('loaded');  // mark as ready
-  }
+/* Reset any aspect-ratio we added earlier */
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
+  aspect-ratio: auto !important;      /* ensure our padding-top wins */
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;                   /* temporary fallback only */
+  background: #fff;
+}
 
-  function scan(root){
-    (root || document)
-      .querySelectorAll('.apreps .tab-panel.active .sqs-gallery.sqs-gallery-design-grid img.thumb-image')
-      .forEach(function(img){
-        if (img.complete && (img.naturalWidth || img.getAttribute('data-image-dimensions'))) {
-          classify(img);
-        } else {
-          img.addEventListener('load', function onLoad(){
-            img.removeEventListener('load', onLoad);
-            classify(img);
-          });
-        }
-      });
-  }
+/* Fill the box; crop top */
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper .image-slide-anchor,
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
 
-  // run scan only after Squarespace’s lazy loader has definitely finished
-  function delayedScan(){
-    setTimeout(scan, 1500);
-  }
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
 
-  // run on load
-  window.addEventListener('load', delayedScan);
+/* When JS finishes, drop the min-height */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide.loaded .margin-wrapper {
+  min-height: 0;
+}
 
-  // re-scan after clicking on tab buttons (allowing extra time)
-  document.addEventListener('click', function(e){
-    const isTabBtn = e.target.closest('.tabs-header [role="tab"], .tabs-header button');
-    if (isTabBtn) setTimeout(scan, 300);
-  });
-
-  // re-scan after Squarespace’s dynamic content loads
-  document.addEventListener('sqs-content-loaded', function(e){
-    setTimeout(function(){
-      scan(e.detail ? e.detail.target : document);
-    }, 200);
-  });
-})();
-</script>
+/* Optional: quick debug outline — remove after confirming */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide.portrait  { /* outline: 1px solid blue; */ }
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide.landscape { /* outline: 1px solid red;  */ }
