@@ -19,25 +19,50 @@
 <!-- Tabs Code Javascript From Will-Myers.com -->
 <script src="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.js"></script>
 
-<!-- Gallery aspect ratio logic — AP-REPS (Tabs plugin aware) -->
+<!-- AP—REPS v0.2 — classify slides by orientation -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Only run inside tabs-based pages
-  document.querySelectorAll('[data-wm-plugin="tabs"] .sqs-gallery img').forEach(img => {
-    const assignClass = () => {
-      const w = img.naturalWidth;
-      const h = img.naturalHeight;
-      if (!w || !h) {
-        // Retry until Squarespace replaces placeholder with real image
-        setTimeout(assignClass, 200);
-        return;
-      }
-      img.classList.toggle('landscape', w > h);
-      img.classList.toggle('portrait', w <= h);
-    };
-    if (img.complete) assignClass();
-    else img.addEventListener('load', assignClass);
+(function(){
+  function classify(img){
+    if(!img) return;
+    var slide = img.closest('.sqs-gallery-design-grid .slide');
+    if(!slide) return;
+
+    // Prefer explicit dimensions if present
+    var dim = img.getAttribute('data-image-dimensions'); // "W x H" or "WxH"
+    var w=0,h=0;
+    if (dim && /(\d+)\s*x\s*(\d+)/i.test(dim)) {
+      var m = dim.match(/(\d+)\s*x\s*(\d+)/i);
+      w = +m[1]; h = +m[2];
+    } else if (img.naturalWidth && img.naturalHeight) {
+      w = img.naturalWidth; h = img.naturalHeight;
+    }
+    if(!(w && h)) return;
+
+    var land = w > h;
+    slide.classList.toggle('landscape', land);
+    slide.classList.toggle('portrait', !land);
+  }
+
+  function scan(root){
+    (root || document)
+      .querySelectorAll('.apreps .tab-panel.active .sqs-gallery.sqs-gallery-design-grid img.thumb-image')
+      .forEach(function(img){
+        if (img.complete && (img.naturalWidth || img.getAttribute('data-image-dimensions'))) classify(img);
+        else img.addEventListener('load', function on(){ img.removeEventListener('load', on); classify(img); });
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){ scan(); });
+
+  // Will Myers Tabs emits aria-hidden toggles; re-scan after click
+  document.addEventListener('click', function(e){
+    var isTabBtn = e.target.closest('.tabs-header [role="tab"], .tabs-header button');
+    if (isTabBtn) setTimeout(scan, 60);
   });
-});
+
+  // Squarespace content refresh hook
+  document.addEventListener('sqs-content-loaded', function(e){
+    scan(e.detail ? e.detail.target : document);
+  });
+})();
 </script>
-<!-- End Gallery aspect ratio logic -->
