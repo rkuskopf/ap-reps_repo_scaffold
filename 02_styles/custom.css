@@ -151,3 +151,42 @@ body, a:hover, button:hover {
 
 /* Infinite auto scroll by Digital Moves */
 
+/* ===== AP-REPS v0.5 — anti-stripe grid fix ===== */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide {
+  position: relative;
+}
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  min-height: 200px; /* fallback height */
+}
+
+/* Aspect boxes on wrapper */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide.portrait  .margin-wrapper::before {
+  content:"";
+  display:block;
+  padding-top:133.333%; /* 3:4 */
+}
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide.landscape .margin-wrapper::before {
+  content:"";
+  display:block;
+  padding-top:75%; /* 4:3 */
+}
+
+/* Fill box, crop top */
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper .image-slide-anchor,
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+}
+
+/* Remove fallback height after load */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide.loaded .margin-wrapper {
+  min-height:0;
+}
