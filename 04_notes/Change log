@@ -164,3 +164,7 @@ https://www.dropbox.com/scl/fi/7syotwhe8qwh10dfy5ian/Screenshot-2025-10-22-at-3.
 git add 02_styles/custom.css
 git commit -m "feat(gallery): v0.3 aspect-ratio enforcement and caption alignment"
 https://www.dropbox.com/scl/fi/dgnrjsj5i6rlahj1wut11/Screenshot-2025-10-22-at-6.35.05-pm.png?rlkey=jzyi8agfl6ibryuonplhppx3j&dl=0
+
+v0.3.1 height fallback
+still stripey
+

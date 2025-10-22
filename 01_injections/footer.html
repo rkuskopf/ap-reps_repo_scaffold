@@ -19,7 +19,7 @@
 <!-- Tabs Code Javascript From Will-Myers.com -->
 <script src="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.js"></script>
 
-<!-- AP—REPS v0.2 — classify slides by orientation -->
+<!-- AP—REPS v0.3 — classify slides by orientation, with delayed scan -->
 <script>
 (function(){
   function classify(img){
@@ -28,7 +28,7 @@
     if(!slide) return;
 
     // Prefer explicit dimensions if present
-    var dim = img.getAttribute('data-image-dimensions'); // "W x H" or "WxH"
+    var dim = img.getAttribute('data-image-dimensions');
     var w=0,h=0;
     if (dim && /(\d+)\s*x\s*(\d+)/i.test(dim)) {
       var m = dim.match(/(\d+)\s*x\s*(\d+)/i);
@@ -52,17 +52,20 @@
       });
   }
 
-  document.addEventListener('DOMContentLoaded', function(){ scan(); });
+  // Delay initial scan slightly to allow Squarespace lazy load to finish
+  document.addEventListener('DOMContentLoaded', function(){
+    setTimeout(function(){ scan(); }, 400);
+  });
 
-  // Will Myers Tabs emits aria-hidden toggles; re-scan after click
+  // Rescan after tab change
   document.addEventListener('click', function(e){
     var isTabBtn = e.target.closest('.tabs-header [role="tab"], .tabs-header button');
-    if (isTabBtn) setTimeout(scan, 60);
+    if (isTabBtn) setTimeout(scan, 200);
   });
 
   // Squarespace content refresh hook
   document.addEventListener('sqs-content-loaded', function(e){
-    scan(e.detail ? e.detail.target : document);
+    setTimeout(function(){ scan(e.detail ? e.detail.target : document); }, 200);
   });
 })();
 </script>
