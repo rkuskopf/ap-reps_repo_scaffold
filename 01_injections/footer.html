@@ -19,51 +19,64 @@
 <!-- Tabs Code Javascript From Will-Myers.com -->
 <script src="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.js"></script>
 
-<!-- AP—REPS v0.3.2 — classify slides by orientation, with stronger lazy-load wait -->
+<!-- AP—REPS v0.3.3 — classify slides by orientation (lazy‑load visual fix) -->
 <script>
 (function(){
   function classify(img){
-    if(!img) return;
+    if (!img) return;
     const slide = img.closest('.sqs-gallery-design-grid .slide');
-    if(!slide) return;
+    if (!slide) return;
 
-    // Prefer explicit dimensions if present
+    // compute landscape vs portrait
     const dim = img.getAttribute('data-image-dimensions');
-    let w=0,h=0;
+    let w = 0, h = 0;
     if (dim && /(\d+)\s*x\s*(\d+)/i.test(dim)) {
       const m = dim.match(/(\d+)\s*x\s*(\d+)/i);
       w = +m[1]; h = +m[2];
     } else if (img.naturalWidth && img.naturalHeight) {
       w = img.naturalWidth; h = img.naturalHeight;
     }
-    if(!(w && h)) return;
-
+    if (!(w && h)) return;
     const land = w > h;
     slide.classList.toggle('landscape', land);
     slide.classList.toggle('portrait', !land);
+    slide.classList.add('loaded');  // mark as ready
   }
 
   function scan(root){
     (root || document)
       .querySelectorAll('.apreps .tab-panel.active .sqs-gallery.sqs-gallery-design-grid img.thumb-image')
       .forEach(function(img){
-        if (img.complete && (img.naturalWidth || img.getAttribute('data-image-dimensions'))) classify(img);
-        else img.addEventListener('load', function on(){ img.removeEventListener('load', on); classify(img); });
+        if (img.complete && (img.naturalWidth || img.getAttribute('data-image-dimensions'))) {
+          classify(img);
+        } else {
+          img.addEventListener('load', function onLoad(){
+            img.removeEventListener('load', onLoad);
+            classify(img);
+          });
+        }
       });
   }
 
-  function delayedScan() {
-    // Run after Squarespace lazy loader is definitely done
-    requestAnimationFrame(() => setTimeout(scan, 1000));
+  // run scan only after Squarespace’s lazy loader has definitely finished
+  function delayedScan(){
+    setTimeout(scan, 1500);
   }
 
+  // run on load
   window.addEventListener('load', delayedScan);
+
+  // re-scan after clicking on tab buttons (allowing extra time)
   document.addEventListener('click', function(e){
     const isTabBtn = e.target.closest('.tabs-header [role="tab"], .tabs-header button');
-    if (isTabBtn) setTimeout(scan, 200);
+    if (isTabBtn) setTimeout(scan, 300);
   });
+
+  // re-scan after Squarespace’s dynamic content loads
   document.addEventListener('sqs-content-loaded', function(e){
-    setTimeout(function(){ scan(e.detail ? e.detail.target : document); }, 200);
+    setTimeout(function(){
+      scan(e.detail ? e.detail.target : document);
+    }, 200);
   });
 })();
 </script>

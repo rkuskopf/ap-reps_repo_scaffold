@@ -162,10 +162,10 @@ body, a:hover, button:hover {
   display: block;
 }
 
-/* === AP—REPS v0.3.1 — Height fallback for lazy-load === */
+/* Lazy‑load fallback: keep slides tall while images load */
 .apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
-  min-height: 200px; /* fallback while image loads */
-  background-color: #fff; /* optional: prevents flash of transparent background */
+  min-height: 200px;       /* fallback height until image is ready */
+  background-color: #fff;  /* optional: prevent flash of grey */
 }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-title,
