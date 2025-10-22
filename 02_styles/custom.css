@@ -22,16 +22,16 @@ div.wm-tabs {
   --tabs-header-border-bottom-width: 0px;
 
   --tab-button-active-background: transparent;
-  --tab-button-active-color: ~'hsla(var(--wm-accent-hsl), 1)';
+  --tab-button-active-color: currentColor;
 
   --tab-indicator-track-size: 4px;
-  --tab-indicator-track-background: ~'hsla(var(--wm-text-hsl), 0.15)';
+  --tab-indicator-track-background: rgba(0,0,0,.15);
   --active-indicator-size: 4px;
   --active-indicator-border-radius: 0px;
 }
 .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button {
   flex-grow: 1;
-  flex-basis: ~'calc(100% / var(--tabs-count))';
+  flex-basis: calc(100% / var(--tabs-count));
 }
 .wm-tabs,
 .wm-tabs .tabs-header,
@@ -123,25 +123,19 @@ body, a:hover, button:hover {
   opacity: 0;
   transform: none;
   transition: all 150ms linear;
-
-  & > div {
-    max-width: 100%;
-    white-space: wrap;
-    padding: 0 10px;
-  }
-
-  .list-item-content__button {
-    margin-top: 10px;
-
-  }
-
-  // any mobile sizing changes
-  @media (max-width: 480px) {
-    h2 { font-size: 24px!important }
-  }
 }
 
-// Hover animation
+.auto-scroll-content > div {
+  max-width: 100%;
+  white-space: normal;
+  padding: 0 10px;
+}
+.auto-scroll-content .list-item-content__button { margin-top: 10px; }
+@media (max-width: 480px) {
+  .auto-scroll-content h2 { font-size: 24px !important; }
+}
+
+/* Hover animation */
 .auto-scroll-slide:hover .auto-scroll-content {
   opacity: 1;
   transform: scale(1)
@@ -190,7 +184,20 @@ body, a:hover, button:hover {
 }
 
 /* Optional: kill built-in square/specific AR styles trying to size the grid */
+/*
 .apreps .sqs-gallery-block-grid [style*="width:"],
 .apreps .sqs-gallery-block-grid [style*="height:"] {
   /* Do not nuke everything — we override only the image/anchor above */
+}
+*/
+
+/* --- patch: correct grid item sizing while debugging --- */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide { height: auto !important; }
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper::before { display: none; }
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
+  position: static !important;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: cover;
+  object-position: top center;
 }

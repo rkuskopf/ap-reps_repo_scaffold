@@ -141,7 +141,21 @@ You’ll see blue vs red boxes; crops should be top-flush.
 
 If any artist page uses a different section type (not portfolio-grid-overlay), tell me the class on that <section> and I’ll add a second scope line. Otherwise, this set matches your DOM and won’t spill onto other pages.
 
+/* ---- result: https://www.dropbox.com/scl/fi/7q3hizhbbom3w8juj1rgl/Screenshot-2025-10-22-at-3.55.19-pm.png?rlkey=0w8gg3p25uvzoxze8cd17svr5&dl=0
+  fucked skinny lines --- */
 
 
+Atempt 2
+Done. I cleaned and patched your custom.css:
+	•	fixed the invalid LESS/SCSS bits so Squarespace actually parses the file (~'...', & > div, white-space: wrap, nested @media, stray // comments).
+	•	commented out the “kill built-in width/height” block so we stop fighting the Squarespace grid.
+	•	added a temporary sizing patch to remove the stripe effect and get images rendering normally while we steady the ratio logic.
 
+Next step (1 min):
+	1.	Save in Squarespace → Design → Custom CSS (paste updated file), then refresh the front-end page.
+	2.	If the grid now looks normal (no stripes), we’ll re-enable the aspect-ratio block properly on the wrapper and dial in the heights without nuking grid sizing.
 
+Want me to flip it back to enforced 3:4 / 4:3 once you confirm the grid is stable?
+
+/* made everything portrait */
+https://www.dropbox.com/scl/fi/7syotwhe8qwh10dfy5ian/Screenshot-2025-10-22-at-3.59.45-pm.png?rlkey=2oqdia6dkvttv0xdj5ec7zs2c&dl=0
