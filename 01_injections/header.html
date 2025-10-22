@@ -1,0 +1,35 @@
+<!-- Utilities for Will-Myers.com Plugins -->
+<script src="https://cdn.jsdelivr.net/gh/willmyerscode/toolkit@1/index.min.js"></script>
+<!-- Tabs Code CSS From Will-Myers.com -->
+<link href="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.css" rel="stylesheet">
+
+<!-- Dot Cursor by digitalmoves.com.au -->
+<script>
+document.addEventListener("DOMContentLoaded", () => { // once the page is ready
+    // add the element to the body
+    const cursor = document.createElement("span")
+    cursor.classList.add("dot-cursor")
+    cursor.innerHTML = "<span />" // add inner element
+    cursor.style.opacity = 0 // hide until mouse move
+    document.body.appendChild(cursor)
+
+    // update the dot position on mouse move
+    document.addEventListener("mousemove", (e) => {
+        if(e.clientX < 3 || e.clientY < 3){
+            // hide on edges of screen
+            cursor.style.opacity = 0
+        } else {
+            cursor.style.opacity = 1;
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        }
+    })
+
+    // add hover effect when over links and buttons
+    const targets = document.querySelectorAll("a, button") // CSS selectors for which elements have the hover effect
+    targets.forEach((target) => {
+        target.addEventListener("mouseenter", () => cursor.classList.add("active"))
+        target.addEventListener("mouseleave", () => cursor.classList.remove("active"))
+    })
+})
+</script>
+<!-- Dot Cursor by digitalmoves.com.au -->

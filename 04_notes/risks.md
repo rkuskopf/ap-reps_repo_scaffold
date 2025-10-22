@@ -1,0 +1,3 @@
+- Third-party plugin dependencies: Will-Myers Tabs, DigitalMoves (Embla)
+- Global CSS collisions
+- Squarespace parser rejecting Sass syntax

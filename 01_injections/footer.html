@@ -1,0 +1,43 @@
+<!-- Image hover list by digitalmoves.com.au -->
+<script src="//unpkg.com/@digitalmoves/image-hover-list"></script>
+<link href="//unpkg.com/@digitalmoves/image-hover-list/dist/main.css" rel="stylesheet" />
+<!-- Image hover list by digitalmoves.com.au -->
+
+<!-- Copy to Clipboard Code Snippet by digitalmoves.com.au -->
+<script src="//unpkg.com/@digitalmoves/code-tools"></script>
+<script>
+  CodeTools.init({ theme: "monokai-sublime" });
+</script>
+<!-- Copy to Clipboard Code Snippet by digitalmoves.com.au -->
+
+<!-- Infinite auto scroll by digitalmoves.com.au/plugins -->
+<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+<script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
+<script src="//unpkg.com/@digitalmoves/infinite-auto-scroll"></script>
+<!-- Infinite auto scroll by digitalmoves.com.au/plugins -->
+
+<!-- Tabs Code Javascript From Will-Myers.com -->
+<script src="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.js"></script>
+
+<!-- Gallery aspect ratio logic — AP-REPS (Tabs plugin aware) -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Only run inside tabs-based pages
+  document.querySelectorAll('[data-wm-plugin="tabs"] .sqs-gallery img').forEach(img => {
+    const assignClass = () => {
+      const w = img.naturalWidth;
+      const h = img.naturalHeight;
+      if (!w || !h) {
+        // Retry until Squarespace replaces placeholder with real image
+        setTimeout(assignClass, 200);
+        return;
+      }
+      img.classList.toggle('landscape', w > h);
+      img.classList.toggle('portrait', w <= h);
+    };
+    if (img.complete) assignClass();
+    else img.addEventListener('load', assignClass);
+  });
+});
+</script>
+<!-- End Gallery aspect ratio logic -->
