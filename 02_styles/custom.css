@@ -22,16 +22,16 @@ div.wm-tabs {
   --tabs-header-border-bottom-width: 0px;
 
   --tab-button-active-background: transparent;
-  --tab-button-active-color: currentColor;
+  --tab-button-active-color: ~'hsla(var(--wm-accent-hsl), 1)';
 
   --tab-indicator-track-size: 4px;
-  --tab-indicator-track-background: rgba(0,0,0,.15);
+  --tab-indicator-track-background: ~'hsla(var(--wm-text-hsl), 0.15)';
   --active-indicator-size: 4px;
   --active-indicator-border-radius: 0px;
 }
 .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button {
   flex-grow: 1;
-  flex-basis: calc(100% / var(--tabs-count));
+  flex-basis: ~'calc(100% / var(--tabs-count))';
 }
 .wm-tabs,
 .wm-tabs .tabs-header,
@@ -123,19 +123,25 @@ body, a:hover, button:hover {
   opacity: 0;
   transform: none;
   transition: all 150ms linear;
+
+  & > div {
+    max-width: 100%;
+    white-space: wrap;
+    padding: 0 10px;
+  }
+
+  .list-item-content__button {
+    margin-top: 10px;
+
+  }
+
+  // any mobile sizing changes
+  @media (max-width: 480px) {
+    h2 { font-size: 24px!important }
+  }
 }
 
-.auto-scroll-content > div {
-  max-width: 100%;
-  white-space: normal;
-  padding: 0 10px;
-}
-.auto-scroll-content .list-item-content__button { margin-top: 10px; }
-@media (max-width: 480px) {
-  .auto-scroll-content h2 { font-size: 24px !important; }
-}
-
-/* Hover animation */
+// Hover animation
 .auto-scroll-slide:hover .auto-scroll-content {
   opacity: 1;
   transform: scale(1)
@@ -145,37 +151,3 @@ body, a:hover, button:hover {
 
 /* Infinite auto scroll by Digital Moves */
 
-/* ===== AP—REPS v0.4 — JS-driven intrinsic ratio, no aspect-ratio ===== */
-
-/* Reset any aspect-ratio we added earlier */
-.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
-  aspect-ratio: auto !important;      /* ensure our padding-top wins */
-  position: relative;
-  overflow: hidden;
-  min-height: 180px;                   /* temporary fallback only */
-  background: #fff;
-}
-
-/* Fill the box; crop top */
-.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper .image-slide-anchor,
-.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-}
-
-/* When JS finishes, drop the min-height */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide.loaded .margin-wrapper {
-  min-height: 0;
-}
-
-/* Optional: quick debug outline — remove after confirming */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide.portrait  { /* outline: 1px solid blue; */ }
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide.landscape { /* outline: 1px solid red;  */ }
