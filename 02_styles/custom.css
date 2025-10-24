@@ -261,7 +261,8 @@ body, a:hover, button:hover {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: var(--ap-object-position, center center) !important;
+  /* let Squarespace's per-image focal point win by default */
+  object-position: var(--ap-object-position, center center);
   display: block !important;
   position: absolute !important;
   inset: 0;
@@ -276,10 +277,12 @@ body, a:hover, button:hover {
 .apreps .sqs-gallery.sqs-gallery-design-grid { margin-bottom: -10px !important; }
 
 /* Utility classes for quick crop bias (apply to gallery block) */
-.apreps { --ap-object-position: top center; }
-.apreps .crop-top { --ap-object-position: top center; }
-.apreps .crop-center { --ap-object-position: center center; }
-.apreps .crop-bottom { --ap-object-position: bottom center; }
+.apreps .crop-top { --ap-object-position: top center !important; }
+.apreps .crop-center { --ap-object-position: center center !important; }
+.apreps .crop-bottom { --ap-object-position: bottom center !important; }
+
+/* Force vertical spacing via slide margins (robust across templates) */
+.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide { margin-bottom: 10px !important; }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
 .apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
