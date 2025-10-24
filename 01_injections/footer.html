@@ -19,23 +19,18 @@
 <!-- Tabs Code Javascript From Will-Myers.com -->
 <script src="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.js"></script>
 
-
-<!-- AP—REPS v0.8 — per-slide aspect via CSS variable -->
+<!-- AP—REPS v0.9 — per-slide aspect via CSS variable + wmTabs bridges + idempotent init -->
 <script>
-/* AP—REPS v0.9 — per-slide aspect via CSS variable + wmTabs bridges + idempotent init */
 (function () {
   if (window.__apAspectInitDone) return;
   window.__apAspectInitDone = true;
 
-  // Given an IMG inside a Squarespace grid gallery, set its parent slide's --ap-aspect
-  function classify(img){
+  function classify(img) {
     if (!img) return;
-    // Find the nearest .slide; don't use compound selector with closest()
     const slide = img.closest('.slide');
     if (!slide || !slide.closest('.sqs-gallery.sqs-gallery-design-grid')) return;
 
-    // Prefer Squarespace-provided dimensions (fast + accurate), fallback to natural sizes
-    const dim = img.getAttribute('data-image-dimensions'); // e.g. "1434x1979"
+    const dim = img.getAttribute('data-image-dimensions');
     let w = 0, h = 0;
     if (dim) {
       const m = dim.match(/(\d+)\s*x\s*(\d+)/i);
@@ -44,16 +39,14 @@
     if (!(w && h) && img.naturalWidth && img.naturalHeight) {
       w = img.naturalWidth; h = img.naturalHeight;
     }
-    if (!(w && h)) return; // not ready yet
+    if (!(w && h)) return;
 
     const isLandscape = w >= h;
-    // Write aspect directly to the slide so CSS can read it
     slide.style.setProperty('--ap-aspect', isLandscape ? '4 / 3' : '3 / 4');
-    slide.setAttribute('data-ap-aspect', isLandscape ? '4/3' : '3/4'); // debug tag
+    slide.setAttribute('data-ap-aspect', isLandscape ? '4/3' : '3/4');
   }
 
-  // Scan a root for gallery images (handles lazy-load)
-  function scan(root){
+  function scan(root) {
     (root || document)
       .querySelectorAll('.sqs-gallery.sqs-gallery-design-grid img.thumb-image')
       .forEach(img => {
@@ -61,41 +54,27 @@
           classify(img);
         } else {
           img.addEventListener('load', () => classify(img), { once:true });
-          // Safety retry in case the node swaps
           setTimeout(() => classify(img), 600);
         }
       });
   }
 
-  // === Boot ===
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => scan());
   } else {
     scan();
   }
 
-  // Squarespace lifecycle events
-  document.addEventListener('sqs-content-loaded', e => {
-    scan(e && e.detail && e.detail.target ? e.detail.target : document);
-  });
-  document.addEventListener('sqs:images-loaded',  e => scan(e && e.target ? e.target : document));
+  document.addEventListener('sqs-content-loaded', e =>
+    scan(e && e.detail && e.detail.target ? e.detail.target : document)
+  );
 
-  // Will Myers Tabs (SOURCE / MOVE)
-  document.addEventListener('wmTabs:afterInit', () => {
-    // Force a scan once the plugin has built panels
-    document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } }));
-  });
-  document.addEventListener('wmTabs:afterOpenTab', () => {
-    // Short delay so panel DOM settles before scanning
-    setTimeout(() => {
-      document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } }));
-    }, 100);
-  });
-
-  // As a fallback, when you click a tab button, re-scan shortly after
-  document.addEventListener('click', e => {
-    const isTab = e.target.closest('.tabs-header [role="tab"], .tabs-header button');
-    if (isTab) setTimeout(() => scan(), 200);
-  });
+  document.addEventListener('wmTabs:afterInit', () =>
+    document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } }))
+  );
+  document.addEventListener('wmTabs:afterOpenTab', () =>
+    setTimeout(() =>
+      document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } })), 100)
+  );
 })();
 </script>

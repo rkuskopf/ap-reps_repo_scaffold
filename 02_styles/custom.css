@@ -243,3 +243,38 @@ body, a:hover, button:hover {
 .apreps .wm-tabs .tab-panel > .tab-content > .page-section .section-border {
   display: none !important;
 }
+
+/* Scoped just to AP-REPS galleries — safe for other plugins */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper,
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .image-wrapper,
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper {
+  aspect-ratio: var(--ap-aspect, 4 / 3) !important;
+  overflow: hidden;
+}
+
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  display: block !important;
+  position: static !important;
+}
+
+.apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
+.apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
+.apreps .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper,
+.apreps .sqs-gallery.sqs-gallery-design-grid .thumb-image-wrapper {
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Left-align captions */
+.apreps .sqs-gallery-block-show-meta .image-slide-title,
+.apreps .sqs-gallery-block-show-meta .image-meta,
+.apreps .sqs-gallery-block-show-meta .sqs-block-caption {
+  text-align: left !important;
+  margin-top: .5rem;
+  line-height: 1.3;
+}
