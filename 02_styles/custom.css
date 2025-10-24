@@ -155,6 +155,7 @@ body, a:hover, button:hover {
 .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
   aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
   overflow: hidden;
+  position: relative;
 }
 
 .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
@@ -163,7 +164,8 @@ body, a:hover, button:hover {
   object-fit: cover;
   object-position: top center; /* flush-top */
   display: block;
-  position: static !important; /* neutralize any earlier absolute rules */
+  position: absolute !important;
+  inset: 0;
 }
 
 /* Captions left across all grid galleries */
@@ -193,7 +195,8 @@ body, a:hover, button:hover {
   .sqs-gallery-block-grid .image-slide-anchor .thumb-image,
 .apreps .wm-tabs .tab-panel > .tab-content 
   .sqs-gallery-block-grid .js-gallery-lightbox-opener .thumb-image {
-  position: static !important;
+  position: absolute !important;
+  inset: 0;
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
@@ -250,6 +253,7 @@ body, a:hover, button:hover {
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper {
   aspect-ratio: var(--ap-aspect, 4 / 3) !important;
   overflow: hidden;
+  position: relative;
 }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
@@ -258,7 +262,8 @@ body, a:hover, button:hover {
   object-fit: cover !important;
   object-position: top center !important;
   display: block !important;
-  position: static !important;
+  position: absolute !important;
+  inset: 0;
 }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
