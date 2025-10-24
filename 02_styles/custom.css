@@ -151,42 +151,40 @@ body, a:hover, button:hover {
 
 /* Infinite auto scroll by Digital Moves */
 
-/* ===== AP-REPS v0.5 — anti-stripe grid fix ===== */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide {
-  position: relative;
-}
+/* AP-REPS v0.5 — anti-stripe grid fix */
 .apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
   position: relative;
   overflow: hidden;
   background: #fff;
   min-height: 200px; /* fallback height */
+  height: auto;      /* make sure it's flexible */
 }
 
-/* Aspect boxes on wrapper */
+/* Portrait vs landscape boxes */
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide.portrait  .margin-wrapper::before {
   content:"";
   display:block;
-  padding-top:133.333%; /* 3:4 */
+  padding-top:133.333%; /* 3:4 ratio for portrait images */
 }
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide.landscape .margin-wrapper::before {
   content:"";
   display:block;
-  padding-top:75%; /* 4:3 */
+  padding-top:75%; /* 4:3 ratio for landscape images */
 }
 
-/* Fill box, crop top */
+/* Force images to fill the box */
 .apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper .image-slide-anchor,
 .apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
-  position:absolute !important;
-  inset:0 !important;
-  width:100% !important;
-  height:100% !important;
-  object-fit:cover;
-  object-position:top center;
-  display:block;
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
 }
 
-/* Remove fallback height after load */
+/* Remove fallback height after classification */
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide.loaded .margin-wrapper {
-  min-height:0;
+  min-height: 0;
 }

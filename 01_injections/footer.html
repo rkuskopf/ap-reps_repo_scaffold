@@ -22,38 +22,59 @@
 <!-- AP-REPS v0.5 — solid non-stripe gallery -->
 <script>
 (function(){
-  function classify(img){
-    if(!img) return;
-    const slide = img.closest('.sqs-gallery-design-grid .slide');
-    if(!slide) return;
-    const dim = img.getAttribute('data-image-dimensions');
-    let w=0,h=0;
-    if(dim && /(\d+)\s*x\s*(\d+)/i.test(dim)){
-      const m = dim.match(/(\d+)\s*x\s*(\d+)/i);
-      w = +m[1]; h = +m[2];
-    } else if(img.naturalWidth && img.naturalHeight){
-      w = img.naturalWidth; h = img.naturalHeight;
+  // Target the page with `.apreps` for better scoping
+  const scope = document.querySelector('.apreps') || document;
+
+  function classify(img) {
+    const slide = img.closest('.slide');
+    if (!slide) return;
+
+    // Look for Squarespace-provided dimensions first
+    let w, h;
+    const dims = img.getAttribute('data-image-dimensions');
+    if (dims && dims.includes('x')) {
+      const parts = dims.split('x');
+      w = parseInt(parts[0], 10);
+      h = parseInt(parts[1], 10);
+    } else if (img.naturalWidth && img.naturalHeight) {
+      w = img.naturalWidth;
+      h = img.naturalHeight;
     }
-    if(!(w&&h)) return;
-    const land = w > h;
-    slide.classList.toggle('landscape', land);
-    slide.classList.toggle('portrait', !land);
+    if (!w || !h) return;
+
+    const isLandscape = (w / h) >= 1; // treat squares as landscape by default
+    slide.classList.toggle('landscape', isLandscape);
+    slide.classList.toggle('portrait', !isLandscape);
     slide.classList.add('loaded');
   }
 
-  function scan(root){
-    (root||document)
-      .querySelectorAll('.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image')
-      .forEach(img=>{
-        if(img.complete && (img.naturalWidth || img.getAttribute('data-image-dimensions'))) classify(img);
-        else img.addEventListener('load', function on(){
-          img.removeEventListener('load', on);
-          classify(img);
-        });
-      });
+  function scan() {
+    scope.querySelectorAll('.sqs-gallery.sqs-gallery-design-grid .thumb-image').forEach(img => {
+      if (img.complete) {
+        classify(img);
+      } else {
+        img.addEventListener('load', () => classify(img), { once: true });
+      }
+    });
   }
 
-  document.addEventListener('DOMContentLoaded', ()=>scan());
-  document.addEventListener('sqs-content-loaded', e=>scan(e.detail?e.detail.target:document));
+  // Run classification on page load and when content is injected
+  const kick = () => setTimeout(scan, 600);
+  document.addEventListener('DOMContentLoaded', kick);
+  window.addEventListener('load', kick);
+
+  // Re-scan when tabs are clicked
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.tabs-header [role="tab"], .tabs-header button')) {
+      setTimeout(scan, 400);
+    }
+  });
+
+  // Handle lazy-loaded images when they come into view
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(ent => { if (ent.isIntersecting) classify(ent.target); });
+  }, { rootMargin: '200px' });
+  
+  scope.querySelectorAll('.sqs-gallery-design-grid .thumb-image').forEach(img => io.observe(img));
 })();
 </script>
