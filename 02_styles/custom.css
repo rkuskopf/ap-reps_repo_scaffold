@@ -160,6 +160,14 @@ body, a:hover, button:hover {
   margin-bottom: 10px !important;
 }
 
+/* Robust vertical gap: spacer element inside ratio box (survives lazyload)
+   Uses --ap-gap so you can tune per scope */
+.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper::after {
+  content: "";
+  display: block;
+  height: var(--ap-gap, 10px);
+}
+
 .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
   width: 100%;
   height: 100%;
@@ -259,6 +267,15 @@ body, a:hover, button:hover {
   position: relative;
   margin-bottom: 10px !important;
 }
+
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper::after {
+  content: "";
+  display: block;
+  height: var(--ap-gap, 10px);
+}
+
+/* Default AP‑REPS gap variable */
+.apreps { --ap-gap: 10px; }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
   width: 100% !important;
