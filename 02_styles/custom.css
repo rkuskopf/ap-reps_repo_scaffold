@@ -289,9 +289,9 @@ body, a:hover, button:hover {
 }
 
 /* Optional: support vertical spacing outside tabs too */
-.apreps .sqs-gallery-block-grid .gallery-grid { row-gap: 10px !important; }
+.apreps .sqs-gallery-block-grid .gallery-grid { row-gap: 10px !important; column-gap: 10px !important; grid-column-gap: 10px !important; }
 /* Stronger selector to override Squarespace defaults */
-.apreps .sqs-gallery.sqs-gallery-design-grid .gallery-grid { gap: 10px 0 !important; row-gap: 10px !important; }
+.apreps .sqs-gallery.sqs-gallery-design-grid .gallery-grid { row-gap: 10px !important; column-gap: 10px !important; grid-column-gap: 10px !important; }
 /* Fallback if some templates ignore grid gaps */
 .apreps .sqs-gallery.sqs-gallery-design-grid .gallery-grid-item { margin-bottom: 10px !important; }
 .apreps .sqs-gallery.sqs-gallery-design-grid { margin-bottom: -10px !important; }
