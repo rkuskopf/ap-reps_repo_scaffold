@@ -26,6 +26,7 @@
   window.__apAspectInitDone = true;
 
   var GAP_PX = 10; // vertical row gap in pixels
+  var GUTTER_PX = 10; // horizontal gutter in pixels
 
   function classify(img) {
     if (!img) return;
@@ -56,14 +57,25 @@
       if (grid) {
         grid.style.setProperty('row-gap', GAP_PX + 'px', 'important');
         grid.style.setProperty('gap', GAP_PX + 'px 0', 'important');
+        // Compensate outer edges when using child margins for horizontal gutters
+        grid.style.setProperty('margin-left', (-GUTTER_PX/2) + 'px', 'important');
+        grid.style.setProperty('margin-right', (-GUTTER_PX/2) + 'px', 'important');
       }
       // Child-level fallback (robust across lazy-load/template changes)
       gallery.querySelectorAll('.sqs-gallery-design-grid-slide, .gallery-grid-item, .slide').forEach(item => {
-        if (item && item.style) item.style.setProperty('margin-bottom', GAP_PX + 'px', 'important');
+        if (item && item.style) {
+          item.style.setProperty('margin-bottom', GAP_PX + 'px', 'important');
+          item.style.setProperty('margin-left', (GUTTER_PX/2) + 'px', 'important');
+          item.style.setProperty('margin-right', (GUTTER_PX/2) + 'px', 'important');
+        }
       });
       // Also pad the inner wrappers for stubborn templates
       gallery.querySelectorAll('.slide .margin-wrapper, .gallery-grid-item .margin-wrapper').forEach(w => {
-        if (w && w.style) w.style.setProperty('margin-bottom', GAP_PX + 'px', 'important');
+        if (w && w.style) {
+          w.style.setProperty('margin-bottom', GAP_PX + 'px', 'important');
+          w.style.setProperty('margin-left', (GUTTER_PX/2) + 'px', 'important');
+          w.style.setProperty('margin-right', (GUTTER_PX/2) + 'px', 'important');
+        }
       });
       // Compensate bottom edge
       gallery.style.setProperty('margin-bottom', (GAP_PX * -1) + 'px', 'important');
