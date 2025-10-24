@@ -151,43 +151,72 @@ body, a:hover, button:hover {
 
 /* Infinite auto scroll by Digital Moves */
 
-/* AP—REPS v0.7 — lock grid cells by CSS var set per slide */
-.sqs-gallery.sqs-gallery-design-grid .slide {
-  /* default if JS hasn't run yet */
-  --ap-aspect: 4 / 3;
+/* === AP—REPS scoped gallery crop + flush === */
+
+/*  anchors behave as ratio boxes; our JS (or native aspect rules) control height  */
+.apreps .wm-tabs .tab-panel > .tab-content 
+  .sqs-gallery-block-grid .image-slide-anchor,
+.apreps .wm-tabs .tab-panel > .tab-content 
+  .sqs-gallery-block-grid .js-gallery-lightbox-opener {
+  position: relative !important;
+  display: block !important;
+  overflow: hidden !important;
+  width: 100% !important;
 }
 
-.sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
-  position: relative;
-  overflow: hidden;
-  /* lock the box to our per-slide aspect */
-  aspect-ratio: var(--ap-aspect);
-  min-height: 120px; /* prevents “stripe” flash while loading */
-}
-
-/* Fill the box, crop flush-top */
-.sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
-.sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+/* fill & crop */
+.apreps .wm-tabs .tab-panel > .tab-content 
+  .sqs-gallery-block-grid .image-slide-anchor .thumb-image,
+.apreps .wm-tabs .tab-panel > .tab-content 
+  .sqs-gallery-block-grid .js-gallery-lightbox-opener .thumb-image {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: cover !important;
+  display: block !important;
 }
 
-/* When JS classified, override the default var (optional redundancy) */
-.sqs-gallery.sqs-gallery-design-grid .slide.portrait  { --ap-aspect: 3 / 4; }
-.sqs-gallery.sqs-gallery-design-grid .slide.landscape { --ap-aspect: 4 / 3; }
-
-/* Hard override: ensure our --ap-aspect box sizing wins over Squarespace inline height */
-.sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
-  aspect-ratio: var(--ap-aspect) !important;
-  height: auto !important;
-  min-height: 160px; /* prevents collapsing during lazy load */
+/* flush top edge of the grid inside tabs only */
+.apreps .wm-tabs .tab-panel > .tab-content .page-section:first-of-type {
+  --section-padding-top: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
-/* Optional debug: highlight if our var isn't applied */
-.sqs-gallery.sqs-gallery-design-grid .slide:not([data-ap-aspect]) .margin-wrapper {
-  outline: 2px dashed rgba(255,0,0,0.4);
+.apreps .wm-tabs .tab-panel > .tab-content .page-section .sqs-block-gallery {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* normalize grid internals */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
+  align-items: start !important;
+  margin-top: 0 !important;
+  row-gap: 0 !important; /* bump if you want gutters */
+}
+
+/* kill stray top margins that push row 1 down */
+.apreps .wm-tabs .tab-panel > .tab-content 
+  .sqs-gallery-block-grid .gallery-grid-item,
+.apreps .wm-tabs .tab-panel > .tab-content 
+  .sqs-gallery-block-grid figure,
+.apreps .wm-tabs .tab-panel > .tab-content 
+  .sqs-gallery-block-grid .meta {
+  margin-top: 0 !important;
+}
+
+/* captions left, tight */
+.apreps .wm-tabs .tab-panel > .tab-content 
+  .sqs-gallery-block-grid .image-slide-title,
+.apreps .wm-tabs .tab-panel > .tab-content 
+  .sqs-gallery-block-grid .image-slide-description {
+  margin-top: 0.5rem;
+  line-height: 1.2;
+  text-align: left !important;
+}
+
+/* tidy fetched-section chrome inside tabs */
+.apreps .wm-tabs .tab-panel > .tab-content > .page-section .section-border {
+  display: none !important;
 }
