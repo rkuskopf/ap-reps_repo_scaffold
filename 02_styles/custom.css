@@ -179,3 +179,15 @@ body, a:hover, button:hover {
 /* When JS classified, override the default var (optional redundancy) */
 .sqs-gallery.sqs-gallery-design-grid .slide.portrait  { --ap-aspect: 3 / 4; }
 .sqs-gallery.sqs-gallery-design-grid .slide.landscape { --ap-aspect: 4 / 3; }
+
+/* Hard override: ensure our --ap-aspect box sizing wins over Squarespace inline height */
+.sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
+  aspect-ratio: var(--ap-aspect) !important;
+  height: auto !important;
+  min-height: 160px; /* prevents collapsing during lazy load */
+}
+
+/* Optional debug: highlight if our var isn't applied */
+.sqs-gallery.sqs-gallery-design-grid .slide:not([data-ap-aspect]) .margin-wrapper {
+  outline: 2px dashed rgba(255,0,0,0.4);
+}
