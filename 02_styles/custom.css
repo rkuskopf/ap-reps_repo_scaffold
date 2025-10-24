@@ -152,28 +152,30 @@ body, a:hover, button:hover {
 /* Infinite auto scroll by Digital Moves */
 
 /* AP—REPS v0.7 — lock grid cells by CSS var set per slide */
-.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
+.sqs-gallery.sqs-gallery-design-grid .slide {
+  /* default if JS hasn't run yet */
+  --ap-aspect: 4 / 3;
+}
+
+.sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
   position: relative;
   overflow: hidden;
-  background: #fff;
+  /* lock the box to our per-slide aspect */
+  aspect-ratio: var(--ap-aspect);
+  min-height: 120px; /* prevents “stripe” flash while loading */
 }
 
-.apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor {
-  display: block;
-  width: 100%;
-  aspect-ratio: var(--ap-aspect, 4 / 3); /* default if JS hasn’t run yet */
-}
-
-/* Fill box, crop top */
-.apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor > img.thumb-image {
+/* Fill the box, crop flush-top */
+.sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
+.sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  position: absolute !important;
+  inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: cover;
   object-position: top center;
-  display: block;
 }
 
-/* Preload guard so rows don’t “stripe” while waiting */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide:not(.loaded) .image-slide-anchor {
-  min-height: 200px;
-}
+/* When JS classified, override the default var (optional redundancy) */
+.sqs-gallery.sqs-gallery-design-grid .slide.portrait  { --ap-aspect: 3 / 4; }
+.sqs-gallery.sqs-gallery-design-grid .slide.landscape { --ap-aspect: 4 / 3; }
