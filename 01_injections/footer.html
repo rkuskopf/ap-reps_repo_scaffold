@@ -19,11 +19,13 @@
 <!-- Tabs Code Javascript From Will-Myers.com -->
 <script src="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.js"></script>
 
-<!-- AP—REPS v0.9 — per-slide aspect via CSS variable + wmTabs bridges + idempotent init -->
+<!-- AP—REPS v0.95 — per-slide aspect via CSS variable + enforce grid gaps after lazyload + wmTabs bridges + idempotent init -->
 <script>
 (function () {
   if (window.__apAspectInitDone) return;
   window.__apAspectInitDone = true;
+
+  var GAP_PX = 10; // vertical row gap in pixels
 
   function classify(img) {
     if (!img) return;
@@ -46,17 +48,35 @@
     slide.setAttribute('data-ap-aspect', isLandscape ? '4/3' : '3/4');
   }
 
+  function enforceGaps(root) {
+    const scope = root || document;
+    scope.querySelectorAll('.apreps .sqs-gallery.sqs-gallery-design-grid').forEach(gallery => {
+      // Container-level gaps (works when container is grid)
+      const grid = gallery.querySelector('.gallery-grid');
+      if (grid) {
+        grid.style.setProperty('row-gap', GAP_PX + 'px', 'important');
+        grid.style.setProperty('gap', GAP_PX + 'px 0', 'important');
+      }
+      // Child-level fallback (robust across lazy-load/template changes)
+      gallery.querySelectorAll('.slide .margin-wrapper, .gallery-grid-item .margin-wrapper').forEach(w => {
+        w.style.setProperty('margin-bottom', GAP_PX + 'px', 'important');
+      });
+    });
+  }
+
   function scan(root) {
     (root || document)
       .querySelectorAll('.sqs-gallery.sqs-gallery-design-grid img.thumb-image')
       .forEach(img => {
         if (img.complete || img.getAttribute('data-image-dimensions')) {
           classify(img);
+          enforceGaps(img.closest('.sqs-gallery'));
         } else {
-          img.addEventListener('load', () => classify(img), { once:true });
-          setTimeout(() => classify(img), 600);
+          img.addEventListener('load', () => { classify(img); enforceGaps(img.closest('.sqs-gallery')); }, { once:true });
+          setTimeout(() => { classify(img); enforceGaps(img.closest('.sqs-gallery')); }, 600);
         }
       });
+    enforceGaps(root);
   }
 
   if (document.readyState === 'loading') {
@@ -76,5 +96,22 @@
     setTimeout(() =>
       document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } })), 100)
   );
+
+  // MutationObserver: catch lazyload DOM swaps and re-enforce gaps
+  try {
+    const obs = new MutationObserver(mutations => {
+      for (const m of mutations) {
+        if (m.addedNodes && m.addedNodes.length) {
+          m.addedNodes.forEach(node => {
+            if (!(node instanceof HTMLElement)) return;
+            if (node.matches && (node.matches('.sqs-gallery, .sqs-gallery *'))) {
+              enforceGaps(node.closest && node.closest('.sqs-gallery'));
+            }
+          });
+        }
+      }
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+  } catch (e) { /* no-op */ }
 })();
 </script>
