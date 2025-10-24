@@ -58,9 +58,15 @@
         grid.style.setProperty('gap', GAP_PX + 'px 0', 'important');
       }
       // Child-level fallback (robust across lazy-load/template changes)
-      gallery.querySelectorAll('.slide .margin-wrapper, .gallery-grid-item .margin-wrapper').forEach(w => {
-        w.style.setProperty('margin-bottom', GAP_PX + 'px', 'important');
+      gallery.querySelectorAll('.sqs-gallery-design-grid-slide, .gallery-grid-item, .slide').forEach(item => {
+        if (item && item.style) item.style.setProperty('margin-bottom', GAP_PX + 'px', 'important');
       });
+      // Also pad the inner wrappers for stubborn templates
+      gallery.querySelectorAll('.slide .margin-wrapper, .gallery-grid-item .margin-wrapper').forEach(w => {
+        if (w && w.style) w.style.setProperty('margin-bottom', GAP_PX + 'px', 'important');
+      });
+      // Compensate bottom edge
+      gallery.style.setProperty('margin-bottom', (GAP_PX * -1) + 'px', 'important');
     });
   }
 
