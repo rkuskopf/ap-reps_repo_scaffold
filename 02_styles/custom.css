@@ -156,6 +156,8 @@ body, a:hover, button:hover {
   aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
   overflow: hidden;
   position: relative;
+  /* create consistent vertical spacing between rows */
+  margin-bottom: 10px !important;
 }
 
 .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
@@ -255,6 +257,7 @@ body, a:hover, button:hover {
   aspect-ratio: var(--ap-aspect, 4 / 3) !important;
   overflow: hidden;
   position: relative;
+  margin-bottom: 10px !important;
 }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
