@@ -161,11 +161,11 @@ body, a:hover, button:hover {
 }
 
 /* Robust vertical gap: spacer element inside ratio box (survives lazyload)
-   Uses --ap-gap-y so you can tune per scope */
+   Uses --ap-gap so you can tune per scope */
 .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper::after {
   content: "";
   display: block;
-  height: var(--ap-gap-y, 10px);
+  height: var(--ap-gap, 10px);
 }
 
 .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
@@ -265,27 +265,17 @@ body, a:hover, button:hover {
   aspect-ratio: var(--ap-aspect, 4 / 3) !important;
   overflow: hidden;
   position: relative;
-  margin-bottom: var(--ap-gap-y, 10px) !important;
-  /* horizontal gutter via child margins; container compensates with negative margins */
-  margin-left: calc(var(--ap-gap-x, 10px) / 2) !important;
-  margin-right: calc(var(--ap-gap-x, 10px) / 2) !important;
+  margin-bottom: 10px !important;
 }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper::after {
   content: "";
   display: block;
-  height: var(--ap-gap-y, 10px);
+  height: var(--ap-gap, 10px);
 }
 
-/* Default AP‑REPS gap variables */
-.apreps { --ap-gap-y: 10px; --ap-gap-x: 10px; }
-
-/* Compensate outer edges so child left/right margins don't add outer padding */
-.apreps .sqs-gallery.sqs-gallery-design-grid .gallery-grid {
-  margin-left: calc(var(--ap-gap-x, 10px) / -2) !important;
-  margin-right: calc(var(--ap-gap-x, 10px) / -2) !important;
-  gap: var(--ap-gap-y, 10px) 0 !important; /* still try to use grid gap vertically */
-}
+/* Default AP‑REPS gap variable */
+.apreps { --ap-gap: 10px; }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
   width: 100% !important;
