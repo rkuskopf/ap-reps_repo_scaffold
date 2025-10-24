@@ -151,6 +151,30 @@ body, a:hover, button:hover {
 
 /* Infinite auto scroll by Digital Moves */
 
+/* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
+.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
+  aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
+  overflow: hidden;
+}
+
+.sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center; /* flush-top */
+  display: block;
+  position: static !important; /* neutralize any earlier absolute rules */
+}
+
+/* Captions left across all grid galleries */
+.sqs-gallery-block-show-meta .image-slide-title,
+.sqs-gallery-block-show-meta .image-meta,
+.sqs-gallery-block-show-meta .sqs-block-caption {
+  text-align: left !important;
+  margin-top: .5rem;
+  line-height: 1.3;
+}
+
 /* === AP—REPS scoped gallery crop + flush === */
 
 /*  anchors behave as ratio boxes; our JS (or native aspect rules) control height  */
@@ -169,8 +193,7 @@ body, a:hover, button:hover {
   .sqs-gallery-block-grid .image-slide-anchor .thumb-image,
 .apreps .wm-tabs .tab-panel > .tab-content 
   .sqs-gallery-block-grid .js-gallery-lightbox-opener .thumb-image {
-  position: absolute !important;
-  inset: 0 !important;
+  position: static !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;

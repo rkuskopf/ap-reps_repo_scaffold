@@ -1,4 +1,7 @@
-
+<!-- Image hover list by digitalmoves.com.au -->
+<script src="//unpkg.com/@digitalmoves/image-hover-list"></script>
+<link href="//unpkg.com/@digitalmoves/image-hover-list/dist/main.css" rel="stylesheet" />
+<!-- Image hover list by digitalmoves.com.au -->
 
 <!-- Copy to Clipboard Code Snippet by digitalmoves.com.au -->
 <script src="//unpkg.com/@digitalmoves/code-tools"></script>
@@ -19,14 +22,19 @@
 
 <!-- AP—REPS v0.8 — per-slide aspect via CSS variable -->
 <script>
+/* AP—REPS v0.9 — per-slide aspect via CSS variable + wmTabs bridges + idempotent init */
 (function () {
-  // Find every grid gallery image and set its slide's --ap-aspect to 3/4 or 4/3
+  if (window.__apAspectInitDone) return;
+  window.__apAspectInitDone = true;
+
+  // Given an IMG inside a Squarespace grid gallery, set its parent slide's --ap-aspect
   function classify(img){
     if (!img) return;
-    const slide = img.closest('.sqs-gallery.sqs-gallery-design-grid .slide');
-    if (!slide) return;
+    // Find the nearest .slide; don't use compound selector with closest()
+    const slide = img.closest('.slide');
+    if (!slide || !slide.closest('.sqs-gallery.sqs-gallery-design-grid')) return;
 
-    // Prefer Squarespace's baked-in dimensions attr; falls back to natural sizes
+    // Prefer Squarespace-provided dimensions (fast + accurate), fallback to natural sizes
     const dim = img.getAttribute('data-image-dimensions'); // e.g. "1434x1979"
     let w = 0, h = 0;
     if (dim) {
@@ -36,40 +44,55 @@
     if (!(w && h) && img.naturalWidth && img.naturalHeight) {
       w = img.naturalWidth; h = img.naturalHeight;
     }
-    if (!(w && h)) return; // still not ready; caller handles retries
+    if (!(w && h)) return; // not ready yet
 
-    const isLandscape = w > h;
-    // Write aspect directly to the slide so the wrapper inherits it
+    const isLandscape = w >= h;
+    // Write aspect directly to the slide so CSS can read it
     slide.style.setProperty('--ap-aspect', isLandscape ? '4 / 3' : '3 / 4');
-    // (Optional debug)
-    slide.setAttribute('data-ap-aspect', isLandscape ? '4/3' : '3/4');
+    slide.setAttribute('data-ap-aspect', isLandscape ? '4/3' : '3/4'); // debug tag
   }
 
-  // Scan routine that handles lazy-loaded images
+  // Scan a root for gallery images (handles lazy-load)
   function scan(root){
     (root || document)
       .querySelectorAll('.sqs-gallery.sqs-gallery-design-grid img.thumb-image')
       .forEach(img => {
-        // If image not “ready”, retry once it loads
-        if (img.complete && (img.naturalWidth || img.getAttribute('data-image-dimensions'))) {
+        if (img.complete || img.getAttribute('data-image-dimensions')) {
           classify(img);
         } else {
-          const retry = () => { classify(img); };
-          img.addEventListener('load', retry, { once:true });
-          // Safety: periodic retry in case Squarespace swaps the node
+          img.addEventListener('load', () => classify(img), { once:true });
+          // Safety retry in case the node swaps
           setTimeout(() => classify(img), 600);
         }
       });
   }
 
-  // Initial pass
-  document.addEventListener('DOMContentLoaded', () => scan());
+  // === Boot ===
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => scan());
+  } else {
+    scan();
+  }
 
-  // Squarespace content refresh hooks (when tabs/panels change or images swap)
-  document.addEventListener('sqs-content-loaded', e => scan(e.detail ? e.detail.target : document));
-  document.addEventListener('sqs:images-loaded',  e => scan(e.target || document));
+  // Squarespace lifecycle events
+  document.addEventListener('sqs-content-loaded', e => {
+    scan(e && e.detail && e.detail.target ? e.detail.target : document);
+  });
+  document.addEventListener('sqs:images-loaded',  e => scan(e && e.target ? e.target : document));
 
-  // Will Myers Tabs: re-scan shortly after a tab click
+  // Will Myers Tabs (SOURCE / MOVE)
+  document.addEventListener('wmTabs:afterInit', () => {
+    // Force a scan once the plugin has built panels
+    document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } }));
+  });
+  document.addEventListener('wmTabs:afterOpenTab', () => {
+    // Short delay so panel DOM settles before scanning
+    setTimeout(() => {
+      document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } }));
+    }, 100);
+  });
+
+  // As a fallback, when you click a tab button, re-scan shortly after
   document.addEventListener('click', e => {
     const isTab = e.target.closest('.tabs-header [role="tab"], .tabs-header button');
     if (isTab) setTimeout(() => scan(), 200);
