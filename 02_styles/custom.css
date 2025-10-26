@@ -219,7 +219,7 @@ body, a:hover, button:hover {
 .apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
   align-items: start !important;
   margin-top: 0 !important;
-  row-gap: 0 !important; /* bump if you want gutters */
+  row-gap: 10px !important; /* bump if you want gutters */
 }
 
 /* kill stray top margins that push row 1 down */
