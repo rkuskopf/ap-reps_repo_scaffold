@@ -289,3 +289,12 @@ body, a:hover, button:hover {
   margin-top: .5rem;
   line-height: 1.3;
 }
+
+/* AP—REPS: side gutter on the floated slide itself (float-safe) */
+.apreps .sqs-gallery-block-grid .sqs-gallery-design-grid-slide,
+.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
+.apreps .sqs-gallery-block-grid .slide,
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide {
+  box-sizing: border-box !important;
+  padding-right: 10px !important;
+}
