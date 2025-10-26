@@ -290,6 +290,9 @@ body, a:hover, button:hover {
 
 /* Optional: support vertical spacing outside tabs too */
 .apreps .sqs-gallery-block-grid .gallery-grid { row-gap: 10px !important; column-gap: 10px !important; grid-column-gap: 10px !important; }
+/* Some templates use the container itself as the grid */
+.apreps .sqs-gallery-block-grid .sqs-gallery-design-grid,
+.apreps .sqs-gallery.sqs-gallery-design-grid { row-gap: 10px !important; column-gap: 10px !important; grid-column-gap: 10px !important; }
 /* Stronger selector to override Squarespace defaults */
 .apreps .sqs-gallery.sqs-gallery-design-grid .gallery-grid { row-gap: 10px !important; column-gap: 10px !important; grid-column-gap: 10px !important; }
 /* Fallback if some templates ignore grid gaps */
