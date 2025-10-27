@@ -25,7 +25,7 @@
   if (window.__apAspectInitDone) return;
   window.__apAspectInitDone = true;
 
-  var GAP_PX = 10; // vertical row gap in pixels
+  var GAP_PX = 0; // vertical row gap in pixels (handled in CSS)
 
   function classify(img) {
     if (!img) return;
@@ -57,16 +57,8 @@
         grid.style.setProperty('row-gap', GAP_PX + 'px', 'important');
         grid.style.setProperty('gap', GAP_PX + 'px 0', 'important');
       }
-      // Child-level fallback (robust across lazy-load/template changes)
-      gallery.querySelectorAll('.sqs-gallery-design-grid-slide, .gallery-grid-item, .slide').forEach(item => {
-        if (item && item.style) item.style.setProperty('margin-bottom', GAP_PX + 'px', 'important');
-      });
-      // Also pad the inner wrappers for stubborn templates
-      gallery.querySelectorAll('.slide .margin-wrapper, .gallery-grid-item .margin-wrapper').forEach(w => {
-        if (w && w.style) w.style.setProperty('margin-bottom', GAP_PX + 'px', 'important');
-      });
-      // Compensate bottom edge
-      gallery.style.setProperty('margin-bottom', (GAP_PX * -1) + 'px', 'important');
+      // Vertical spacing is controlled via CSS padding-bottom on .margin-wrapper.
+      // Do not set inline bottom margins here to avoid double gaps.
     });
   }
 
