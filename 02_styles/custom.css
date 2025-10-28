@@ -298,3 +298,35 @@ body, a:hover, button:hover {
   box-sizing: border-box !important;
   padding-right: 10px !important;
 }
+
+/* ——— AP–DIFF: Minimal, targeted difference blend for main header (Mix‑2 style) ——— */
+/* Turn off header background layers so content can blend with the page */
+.ap-diff #header .header-background,
+.ap-diff #header .header-background-solid,
+.ap-diff #header .header-background-gradient,
+.ap-diff #header .header-blur-background {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Make visible header elements invert against background */
+.ap-diff #header .header-title-text a,
+.ap-diff #header .header-nav-list a,
+.ap-diff #header .header-actions *,
+.ap-diff #header .burger .top-bun,
+.ap-diff #header .burger .patty,
+.ap-diff #header .burger .bottom-bun {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Keep the overlay/mobile menu readable (no blending inside overlay) */
+.ap-diff .header-menu,
+.ap-diff .header-menu * {
+  mix-blend-mode: normal !important;
+  color: inherit !important;
+}
