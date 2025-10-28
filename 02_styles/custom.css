@@ -360,3 +360,57 @@ body, a:hover, button:hover {
 .ap-diff #siteWrapper {
   background: transparent !important;
 }
+
+/* ——— AP–DIFF: make TOP NAV TEXT blend ——— */
+
+/* Ensure header itself can see through */
+.ap-diff #header,
+.ap-diff #header:before,
+.ap-diff #header:after,
+.ap-diff #header .header-background,
+.ap-diff #header .header-background-solid,
+.ap-diff #header .header-background-gradient,
+.ap-diff #header .header-blur-background {
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+.ap-diff #header { isolation: auto !important; }
+
+/* Target the actual link text nodes Squarespace uses */
+.ap-diff #header .header-nav a,
+.ap-diff #header .header-nav .header-nav-item a,
+.ap-diff #header .header-nav .nav-item a,
+.ap-diff #header .header-actions a,
+.ap-diff #header .header-title-text a,
+.ap-diff #header .header-title-text,
+.ap-diff #header .header-actions-action,
+.ap-diff #header .header-actions-action svg {
+  mix-blend-mode: difference !important;
+  color: #fff !important;          /* blends to black on white, white on dark */
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  background: transparent !important;
+}
+
+/* Some themes wrap text in spans; grab those too */
+.ap-diff #header .header-nav a span,
+.ap-diff #header .header-nav a .label,
+.ap-diff #header .header-nav-item-label {
+  mix-blend-mode: inherit !important;
+  color: inherit !important;
+}
+
+/* Keep overlay/mobile menu readable */
+.ap-diff .header-menu,
+.ap-diff .header-menu * {
+  mix-blend-mode: normal !important;
+  color: inherit !important;
+}
+
+/* Make sure we’re actually overlapping content (not sitting above white) */
+.ap-diff .page-section:first-of-type {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
