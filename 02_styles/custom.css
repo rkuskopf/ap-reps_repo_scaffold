@@ -326,6 +326,11 @@ body, a:hover, button:hover {
   will-change: auto !important;
 }
 
+/* Ensure blending happens at the header container as well */
+.ap-diff #header .header-inner {
+  mix-blend-mode: difference !important;
+}
+
 /* Make visible header elements invert against background */
 /* Apply difference broadly to visible header content (safer) */
 .ap-diff #header .header-inner * {
@@ -340,4 +345,16 @@ body, a:hover, button:hover {
 .ap-diff .header-menu * {
   mix-blend-mode: normal !important;
   color: inherit !important;
+}
+
+/* Prevent ancestors from isolating the blend */
+.ap-diff body, .ap-diff .site-wrapper, .ap-diff #siteWrapper {
+  isolation: auto !important;
+  background: transparent !important;
+}
+
+/* Pull first section under the header so blending has a backdrop */
+.ap-diff .page-section:first-of-type {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
