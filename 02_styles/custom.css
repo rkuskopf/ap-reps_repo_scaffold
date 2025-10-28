@@ -331,3 +331,30 @@ body, a:hover, button:hover {
   mix-blend-mode: normal !important;
   color: inherit !important;
 }
+
+/* Let the backdrop show THROUGH the header container */
+.ap-diff #header,
+.ap-diff #header:before,
+.ap-diff #header:after {
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+.ap-diff #header { isolation: auto !important; }
+
+/* Title-only difference (keep your existing block) */
+.ap-diff #header .header-title-text,
+.ap-diff #header .header-title-text *,
+.ap-diff #header .header-title-text a,
+.ap-diff #header #site-title {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+}
+
+/* Ensure the hero actually sits under the header */
+.ap-diff .page-section:first-of-type {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
