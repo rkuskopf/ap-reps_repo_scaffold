@@ -299,118 +299,35 @@ body, a:hover, button:hover {
   padding-right: 10px !important;
 }
 
-/* ——— AP–DIFF: force true difference header ——— */
-
-/* 0) Make sure the top section actually sits under the header */
-.ap-diff .page-section:first-of-type {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* 1) Kill all header background layers that block blending */
-.ap-diff #header,
-.ap-diff #header:before,
-.ap-diff #header:after,
+/* ——— AP–DIFF: Difference only on the site title text ——— */
+/* Keep header background layers transparent so title blends with page */
 .ap-diff #header .header-background,
 .ap-diff #header .header-background-solid,
 .ap-diff #header .header-background-gradient,
 .ap-diff #header .header-blur-background {
   background: transparent !important;
-  box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
 
-/* 2) Remove isolation / stacking contexts that break mix-blend */
-.ap-diff #header,
-.ap-diff #header *,
-.ap-diff .site-wrapper,
-.ap-diff #siteWrapper,
-.ap-diff body {
-  isolation: auto !important;       /* was 'isolate' sometimes */
-  transform: none !important;       /* sticky/scale wrappers */
-  filter: none !important;
-  perspective: none !important;
-  will-change: auto !important;
-}
-
-/* 3) Put the blending on the visible inner layer */
-.ap-diff #header .header-inner {
-  mix-blend-mode: difference !important;
-}
-
-/* 4) Apply difference to text/icons; keep color simple (white inverts nicely) */
-.ap-diff #header .header-inner * {
+/* Apply difference ONLY to the title text */
+.ap-diff #header .header-title-text,
+.ap-diff #header .header-title-text *,
+.ap-diff #header .header-title-text a,
+.ap-diff #header #site-title {
   mix-blend-mode: difference !important;
   color: #fff !important;
-  fill: currentColor !important;
-  stroke: currentColor !important;
+  background: transparent !important;
 }
 
-/* 5) Don’t blend inside the opened overlay/menu (readability) */
+/* Keep everything else (nav, actions, burger, overlay) normal */
+.ap-diff #header .header-nav-list a,
+.ap-diff #header .header-actions *,
+.ap-diff #header .burger .top-bun,
+.ap-diff #header .burger .patty,
+.ap-diff #header .burger .bottom-bun,
 .ap-diff .header-menu,
 .ap-diff .header-menu * {
   mix-blend-mode: normal !important;
   color: inherit !important;
-}
-
-/* 6) Ensure nothing “under” the header is just flat white */
-.ap-diff body,
-.ap-diff .site-wrapper,
-.ap-diff #siteWrapper {
-  background: transparent !important;
-}
-
-/* ——— AP–DIFF: make TOP NAV TEXT blend ——— */
-
-/* Ensure header itself can see through */
-.ap-diff #header,
-.ap-diff #header:before,
-.ap-diff #header:after,
-.ap-diff #header .header-background,
-.ap-diff #header .header-background-solid,
-.ap-diff #header .header-background-gradient,
-.ap-diff #header .header-blur-background {
-  background: transparent !important;
-  box-shadow: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-.ap-diff #header { isolation: auto !important; }
-
-/* Target the actual link text nodes Squarespace uses */
-.ap-diff #header .header-nav a,
-.ap-diff #header .header-nav .header-nav-item a,
-.ap-diff #header .header-nav .nav-item a,
-.ap-diff #header .header-actions a,
-.ap-diff #header .header-title-text a,
-.ap-diff #header .header-title-text,
-.ap-diff #header .header-actions-action,
-.ap-diff #header .header-actions-action svg {
-  mix-blend-mode: difference !important;
-  color: #fff !important;          /* blends to black on white, white on dark */
-  fill: currentColor !important;
-  stroke: currentColor !important;
-  background: transparent !important;
-}
-
-/* Some themes wrap text in spans; grab those too */
-.ap-diff #header .header-nav a span,
-.ap-diff #header .header-nav a .label,
-.ap-diff #header .header-nav-item-label {
-  mix-blend-mode: inherit !important;
-  color: inherit !important;
-}
-
-/* Keep overlay/mobile menu readable */
-.ap-diff .header-menu,
-.ap-diff .header-menu * {
-  mix-blend-mode: normal !important;
-  color: inherit !important;
-}
-
-/* Make sure we’re actually overlapping content (not sitting above white) */
-.ap-diff .page-section:first-of-type {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
 }
