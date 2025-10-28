@@ -299,40 +299,47 @@ body, a:hover, button:hover {
   padding-right: 10px !important;
 }
 
-/* ——— AP–DIFF: Minimal, targeted difference blend for main header (Mix‑2 style) ——— */
-/* Turn off header background layers so content can blend with the page */
+/* ——— AP–DIFF: force true difference header ——— */
+
+/* 0) Make sure the top section actually sits under the header */
+.ap-diff .page-section:first-of-type {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 1) Kill all header background layers that block blending */
+.ap-diff #header,
+.ap-diff #header:before,
+.ap-diff #header:after,
 .ap-diff #header .header-background,
 .ap-diff #header .header-background-solid,
 .ap-diff #header .header-background-gradient,
 .ap-diff #header .header-blur-background {
   background: transparent !important;
+  box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
-  box-shadow: none !important;
 }
 
-/* Remove isolation/filters/transforms that break blending */
-.ap-diff #header {
-  isolation: unset !important;
-  background: transparent !important;
-}
-.ap-diff #header:before,
-.ap-diff #header:after { background: transparent !important; box-shadow: none !important; }
+/* 2) Remove isolation / stacking contexts that break mix-blend */
 .ap-diff #header,
-.ap-diff #header * {
-  transform: none !important;
-  perspective: none !important;
+.ap-diff #header *,
+.ap-diff .site-wrapper,
+.ap-diff #siteWrapper,
+.ap-diff body {
+  isolation: auto !important;       /* was 'isolate' sometimes */
+  transform: none !important;       /* sticky/scale wrappers */
   filter: none !important;
+  perspective: none !important;
   will-change: auto !important;
 }
 
-/* Ensure blending happens at the header container as well */
+/* 3) Put the blending on the visible inner layer */
 .ap-diff #header .header-inner {
   mix-blend-mode: difference !important;
 }
 
-/* Make visible header elements invert against background */
-/* Apply difference broadly to visible header content (safer) */
+/* 4) Apply difference to text/icons; keep color simple (white inverts nicely) */
 .ap-diff #header .header-inner * {
   mix-blend-mode: difference !important;
   color: #fff !important;
@@ -340,21 +347,16 @@ body, a:hover, button:hover {
   stroke: currentColor !important;
 }
 
-/* Keep the overlay/mobile menu readable (no blending inside overlay) */
+/* 5) Don’t blend inside the opened overlay/menu (readability) */
 .ap-diff .header-menu,
 .ap-diff .header-menu * {
   mix-blend-mode: normal !important;
   color: inherit !important;
 }
 
-/* Prevent ancestors from isolating the blend */
-.ap-diff body, .ap-diff .site-wrapper, .ap-diff #siteWrapper {
-  isolation: auto !important;
+/* 6) Ensure nothing “under” the header is just flat white */
+.ap-diff body,
+.ap-diff .site-wrapper,
+.ap-diff #siteWrapper {
   background: transparent !important;
-}
-
-/* Pull first section under the header so blending has a backdrop */
-.ap-diff .page-section:first-of-type {
-  padding-top: 0 !important;
-  margin-top: 0 !important;
 }
