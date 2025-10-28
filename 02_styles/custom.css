@@ -311,13 +311,24 @@ body, a:hover, button:hover {
   box-shadow: none !important;
 }
 
+/* Remove isolation/filters/transforms that break blending */
+.ap-diff #header {
+  isolation: unset !important;
+  background: transparent !important;
+}
+.ap-diff #header:before,
+.ap-diff #header:after { background: transparent !important; box-shadow: none !important; }
+.ap-diff #header,
+.ap-diff #header * {
+  transform: none !important;
+  perspective: none !important;
+  filter: none !important;
+  will-change: auto !important;
+}
+
 /* Make visible header elements invert against background */
-.ap-diff #header .header-title-text a,
-.ap-diff #header .header-nav-list a,
-.ap-diff #header .header-actions *,
-.ap-diff #header .burger .top-bun,
-.ap-diff #header .burger .patty,
-.ap-diff #header .burger .bottom-bun {
+/* Apply difference broadly to visible header content (safer) */
+.ap-diff #header .header-inner * {
   mix-blend-mode: difference !important;
   color: #fff !important;
   fill: currentColor !important;
