@@ -320,7 +320,7 @@ body, a:hover, button:hover {
   background: transparent !important;
 }
 
-/* Keep everything else (nav, actions, burger, overlay) normal */
+/* Let navigation + actions inherit the difference blend as well */
 .ap-diff #header .header-nav-list a,
 .ap-diff #header .header-actions *,
 .ap-diff #header .burger .top-bun,
@@ -328,8 +328,9 @@ body, a:hover, button:hover {
 .ap-diff #header .burger .bottom-bun,
 .ap-diff .header-menu,
 .ap-diff .header-menu * {
-  mix-blend-mode: normal !important;
-  color: inherit !important;
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
 }
 
 /* Let the backdrop show THROUGH the header container */
