@@ -1,361 +1,146 @@
-////HEADER OVERLAYS OVER SLIDESHOW /////
-        .page-section.gallery-section {
-          padding-top: 0px !important;
-        }
+/* ---- existing styles you had ---- */
 
-/**
- * Tabs Plugin
- * From Will-Myers.com
- * Equal Width Tabs
-**/
-.wm-tabs[data-navigation-type="horizontal"] {
-  --nav-scrollbar-display: none;
-  --tabs-header-gap: 0px;
-}
-/**
- * Tabs Plugin
- * From Will-Myers.com
- * Tab Underlines
-**/
+/* HEADER OVERLAYS OVER SLIDESHOW */
+.page-section.gallery-section { padding-top: 0px !important; }
+
+/* Tabs Plugin (Will Myers) */
+.wm-tabs[data-navigation-type="horizontal"] { --nav-scrollbar-display: none; --tabs-header-gap: 0px; }
 div.wm-tabs {
   --nav-scrollbar-display: none;
   --tabs-header-border-bottom-width: 0px;
-
   --tab-button-active-background: transparent;
   --tab-button-active-color: ~'hsla(var(--wm-accent-hsl), 1)';
-
   --tab-indicator-track-size: 4px;
   --tab-indicator-track-background: ~'hsla(var(--wm-text-hsl), 0.15)';
   --active-indicator-size: 4px;
   --active-indicator-border-radius: 0px;
 }
 .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button {
-  flex-grow: 1;
-  flex-basis: ~'calc(100% / var(--tabs-count))';
+  flex-grow: 1; flex-basis: ~'calc(100% / var(--tabs-count))';
 }
-.wm-tabs,
-.wm-tabs .tabs-header,
-.wm-tabs .tabs-content {
-  background: none !important;
-  background-color: transparent !important;
+.wm-tabs, .wm-tabs .tabs-header, .wm-tabs .tabs-content {
+  background: none !important; background-color: transparent !important;
 }
-
-  /* Only allow sticky inside the active tab panel */
-.wm-tabs, .wm-tabs .tabs-content, .wm-tabs [role="tabpanel"], .wm-tabs [data-tab-panel]
-{
-  	overflow: visible !important;
-	max-height: none !important; 			transform: none !important; 			contain: none !important;
-  	filter: none !important;
-  	perspective: none !important;
-  	will-change: auto !important; 			position: static !important;
+/* Only allow sticky inside the active tab panel */
+.wm-tabs, .wm-tabs .tabs-content, .wm-tabs [role="tabpanel"], .wm-tabs [data-tab-panel]{
+  overflow: visible !important; max-height: none !important;
+  transform: none !important; contain: none !important;
+  filter: none !important; perspective: none !important;
+  will-change: auto !important; position: static !important;
 }
-/* Collapse non-active panels so they don't push the layout */
-.wm-tabs [role="tabpanel"][aria-hidden="true"] { display: none !important;
-}
-
+/* Collapse non-active panels */
+.wm-tabs [role="tabpanel"][aria-hidden="true"] { display: none !important; }
 
 /* Dot cursor by digitalmoves.com.au */
-.dot-cursor {
-    /* customise */
-    mix-blend-mode: difference;
-    transition: all 100ms ease-out;
-
-    /* position */
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99999;
-
-    /* prevent hover issues */
-    pointer-events: none;
-}
-
-.dot-cursor span {
-    /* customise */
-    width: 16px;
-    height: 16px;
-    border-radius: 8px;
-    background-color: white;
-    transition: all 150ms ease-out;
-
-    /* sizing */
-    display: block;
-}
-
-.dot-cursor.active span {
-    /* customise - hover effect */
-}
-
-body, a:hover, button:hover {
-    /* hide default cursor */
-    cursor: none!important;
-}
-
-@media (pointer: coarse) {
-
-    /* disable on touch devices */
-    .dot-cursor {
-        display: none !important;
-    }
-
-}
-
-
-/* Dot cursor by digitalmoves.com.au */
+.dot-cursor { mix-blend-mode: difference; transition: all 100ms ease-out;
+  position: fixed; top: 0; left: 0; z-index: 99999; pointer-events: none; }
+.dot-cursor span { width: 16px; height: 16px; border-radius: 8px; background-color: white;
+  transition: all 150ms ease-out; display: block; }
+body, a:hover, button:hover { cursor: none !important; }
+@media (pointer: coarse) { .dot-cursor { display: none !important; } }
 
 /* Infinite auto scroll by Digital Moves */
 .auto-scroll-slide { position: relative }
-
 .auto-scroll-content {
-  position: absolute!important;
-  z-index: 999;
-  top: 0px;
-  left: 0px;
-  width: calc(100%);
-  height: calc(100%);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  white-space: nowrap;
-  background-color: rgba(255,255,255,.8);
-  border-radius: 0px;
-  opacity: 0;
-  transform: none;
-  transition: all 150ms linear;
-
-  & > div {
-    max-width: 100%;
-    white-space: wrap;
-    padding: 0 10px;
-  }
-
-  .list-item-content__button {
-    margin-top: 10px;
-
-  }
-
-  // any mobile sizing changes
-  @media (max-width: 480px) {
-    h2 { font-size: 24px!important }
-  }
+  position: absolute!important; z-index: 999; top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+  white-space: nowrap; background-color: rgba(255,255,255,.8); border-radius: 0; opacity: 0;
+  transform: none; transition: all 150ms linear;
 }
-
-// Hover animation
-.auto-scroll-slide:hover .auto-scroll-content {
-  opacity: 1;
-  transform: scale(1)
- }
- /* Hide section button */
+.auto-scroll-content > div { max-width: 100%; white-space: wrap; padding: 0 10px; }
+.auto-scroll-content .list-item-content__button { margin-top: 10px; }
+@media (max-width: 480px) { .auto-scroll-content h2 { font-size: 24px!important } }
+.auto-scroll-slide:hover .auto-scroll-content { opacity: 1; transform: scale(1) }
 .auto-scroll .list-item-content__button { display: none }
 
-/* Infinite auto scroll by Digital Moves */
-
-/* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
+/* —— AP–REPS gallery rules (unchanged) —— */
 .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
-  aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
-  overflow: hidden;
-  position: relative;
-  box-sizing: content-box;
-  padding-bottom: var(--ap-gap, 10px) !important;
-  padding-right: var(--ap-gap-x, 10px) !important;
+  aspect-ratio: var(--ap-aspect, 4 / 3);
+  overflow: hidden; position: relative; box-sizing: content-box;
+  padding-bottom: var(--ap-gap, 10px) !important; padding-right: var(--ap-gap-x, 10px) !important;
 }
-
 .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center; /* flush-top */
-  display: block;
-  position: absolute !important;
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  display: block; position: absolute !important;
   inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
 }
-
-/* Captions left across all grid galleries */
 .sqs-gallery-block-show-meta .image-slide-title,
 .sqs-gallery-block-show-meta .image-meta,
-.sqs-gallery-block-show-meta .sqs-block-caption {
-  text-align: left !important;
-  margin-top: .5rem;
-  line-height: 1.3;
-}
-
-/* === AP—REPS scoped gallery crop + flush === */
+.sqs-gallery-block-show-meta .sqs-block-caption { text-align: left !important; margin-top: .5rem; line-height: 1.3; }
 
 .apreps { --ap-gap-x: 10px; }
-
-/*  anchors behave as ratio boxes; our JS (or native aspect rules) control height  */
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .image-slide-anchor,
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .js-gallery-lightbox-opener {
-  position: relative !important;
-  display: block !important;
-  overflow: hidden !important;
-  width: 100% !important;
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-anchor,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .js-gallery-lightbox-opener {
+  position: relative !important; display: block !important; overflow: hidden !important; width: 100% !important;
 }
-
-/* fill & crop */
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .image-slide-anchor .thumb-image,
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .js-gallery-lightbox-opener .thumb-image {
-  position: absolute !important;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-anchor .thumb-image,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .js-gallery-lightbox-opener .thumb-image {
+  position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important;
 }
-
-/* flush top edge of the grid inside tabs only */
-.apreps .wm-tabs .tab-panel > .tab-content .page-section:first-of-type {
-  --section-padding-top: 0 !important;
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-}
-
-.apreps .wm-tabs .tab-panel > .tab-content .page-section .sqs-block-gallery {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* normalize grid internals */
-.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
-  align-items: start !important;
-  margin-top: 0 !important;
-  row-gap: 10px !important; /* bump if you want gutters */
-}
-
-/* kill stray top margins that push row 1 down */
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .gallery-grid-item,
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid figure,
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .meta {
-  margin-top: 0 !important;
-}
-
-/* captions left, tight */
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .image-slide-title,
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .image-slide-description {
-  margin-top: 0.5rem;
-  line-height: 1.2;
-  text-align: left !important;
-}
-
-/* tidy fetched-section chrome inside tabs */
-.apreps .wm-tabs .tab-panel > .tab-content > .page-section .section-border {
-  display: none !important;
-}
-
-/* Scoped just to AP-REPS galleries — safe for other plugins */
+.apreps .wm-tabs .tab-panel > .tab-content .page-section:first-of-type { --section-padding-top: 0 !important; padding-top: 0 !important; margin-top: 0 !important; }
+.apreps .wm-tabs .tab-panel > .tab-content .page-section .sqs-block-gallery { margin-top: 0 !important; padding-top: 0 !important; }
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid { align-items: start !important; margin-top: 0 !important; row-gap: 10px !important; }
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid-item,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid figure,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .meta { margin-top: 0 !important; }
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-title,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-description { margin-top: .5rem; line-height: 1.2; text-align: left !important; }
+.apreps .wm-tabs .tab-panel > .tab-content > .page-section .section-border { display: none !important; }
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper,
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .image-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper {
-  aspect-ratio: var(--ap-aspect, 4 / 3) !important;
-  overflow: hidden;
-  position: relative;
-  padding-right: var(--ap-gap-x, 10px) !important;
-}
-
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper { aspect-ratio: var(--ap-aspect, 4 / 3) !important; overflow: hidden; position: relative; padding-right: var(--ap-gap-x, 10px) !important; }
 .apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: top center !important;
-  display: block !important;
-  position: absolute !important;
-  inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
+  width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: top center !important;
+  display: block !important; position: absolute !important; inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
 }
-
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
 .apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
 .apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .thumb-image-wrapper {
-  display: block !important;
-  width: 100% !important;
-}
-
-/* Left-align captions */
+.apreps .sqs-gallery.sqs-gallery-design-grid .thumb-image-wrapper { display: block !important; width: 100% !important; }
 .apreps .sqs-gallery-block-show-meta .image-slide-title,
 .apreps .sqs-gallery-block-show-meta .image-meta,
-.apreps .sqs-gallery-block-show-meta .sqs-block-caption {
-  text-align: left !important;
-  margin-top: .5rem;
-  line-height: 1.3;
-}
-
-/* AP—REPS: side gutter on the floated slide itself (float-safe) */
+.apreps .sqs-gallery-block-show-meta .sqs-block-caption { text-align: left !important; margin-top: .5rem; line-height: 1.3; }
 .apreps .sqs-gallery-block-grid .sqs-gallery-design-grid-slide,
 .apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
 .apreps .sqs-gallery-block-grid .slide,
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide {
-  box-sizing: border-box !important;
-  padding-right: 10px !important;
-}
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide { box-sizing: border-box !important; padding-right: 10px !important; }
 
-/* ——— AP–DIFF: Difference only on the site title text ——— */
-/* Keep header background layers transparent so title blends with page */
-.ap-diff #header .header-background,
-.ap-diff #header .header-background-solid,
-.ap-diff #header .header-background-gradient,
-.ap-diff #header .header-blur-background {
-  background: transparent !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
+/* ---- NEW: title-only difference + header transparency ---- */
 
-/* Apply difference ONLY to the title text */
-.ap-diff #header .header-title-text,
-.ap-diff #header .header-title-text *,
-.ap-diff #header .header-title-text a,
-.ap-diff #header #site-title {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  background: transparent !important;
-}
-
-/* Let navigation + actions inherit the difference blend as well */
-.ap-diff #header .header-nav-list a,
-.ap-diff #header .header-actions *,
-.ap-diff #header .burger .top-bun,
-.ap-diff #header .burger .patty,
-.ap-diff #header .burger .bottom-bun,
-.ap-diff .header-menu,
-.ap-diff .header-menu * {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  background: transparent !important;
-}
-
-/* Let the backdrop show THROUGH the header container */
-.ap-diff #header,
-.ap-diff #header:before,
-.ap-diff #header:after {
+/* Header container must be see-through so the title can "see" the page */
+#header,
+#header:before,
+#header:after {
   background: transparent !important;
   box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
+  isolation: auto !important;
 }
-.ap-diff #header { isolation: auto !important; }
 
-/* Title-only difference (keep your existing block) */
-.ap-diff #header .header-title-text,
-.ap-diff #header .header-title-text *,
-.ap-diff #header .header-title-text a,
-.ap-diff #header #site-title {
+/* Apply difference ONLY to the site title (covers text and logo variants) */
+#header .header-title,
+#header .header-title-text,
+#header .header-title-text a,
+#header .header-title-logo a {
   mix-blend-mode: difference !important;
   color: #fff !important;
   background: transparent !important;
+  text-shadow: none !important;
 }
 
-/* Ensure the hero actually sits under the header */
-.ap-diff .page-section:first-of-type {
+/* Keep nav + actions normal (no blending) */
+#header .header-nav a,
+#header .header-actions *,
+#header .header-actions-action svg {
+  mix-blend-mode: normal !important;
+  color: inherit !important;
+  background: transparent !important;
+}
+
+/* Make sure the first section sits right under the header */
+.page-section:first-of-type {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }

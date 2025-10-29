@@ -5,27 +5,23 @@
 
 <!-- Copy to Clipboard Code Snippet by digitalmoves.com.au -->
 <script src="//unpkg.com/@digitalmoves/code-tools"></script>
-<script>
-  CodeTools.init({ theme: "monokai-sublime" });
-</script>
-<!-- Copy to Clipboard Code Snippet by digitalmoves.com.au -->
+<script> CodeTools.init({ theme: "monokai-sublime" }); </script>
 
 <!-- Infinite auto scroll by digitalmoves.com.au/plugins -->
 <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
 <script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
 <script src="//unpkg.com/@digitalmoves/infinite-auto-scroll"></script>
-<!-- Infinite auto scroll by digitalmoves.com.au/plugins -->
 
 <!-- Tabs Code Javascript From Will-Myers.com -->
 <script src="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.js"></script>
 
-<!-- AP—REPS v0.95 — per-slide aspect via CSS variable + enforce grid gaps after lazyload + wmTabs bridges + idempotent init -->
+<!-- AP—REPS v0.95 — gallery aspect + gap enforcement -->
 <script>
 (function () {
   if (window.__apAspectInitDone) return;
   window.__apAspectInitDone = true;
 
-  var GAP_PX = 0; // vertical row gap in pixels (handled in CSS)
+  var GAP_PX = 0;
 
   function classify(img) {
     if (!img) return;
@@ -38,9 +34,7 @@
       const m = dim.match(/(\d+)\s*x\s*(\d+)/i);
       if (m) { w = +m[1]; h = +m[2]; }
     }
-    if (!(w && h) && img.naturalWidth && img.naturalHeight) {
-      w = img.naturalWidth; h = img.naturalHeight;
-    }
+    if (!(w && h) && img.naturalWidth && img.naturalHeight) { w = img.naturalWidth; h = img.naturalHeight; }
     if (!(w && h)) return;
 
     const isLandscape = w >= h;
@@ -51,14 +45,11 @@
   function enforceGaps(root) {
     const scope = root || document;
     scope.querySelectorAll('.apreps .sqs-gallery.sqs-gallery-design-grid').forEach(gallery => {
-      // Container-level gaps (works when container is grid)
       const grid = gallery.querySelector('.gallery-grid');
       if (grid) {
         grid.style.setProperty('row-gap', GAP_PX + 'px', 'important');
         grid.style.setProperty('gap', GAP_PX + 'px 0', 'important');
       }
-      // Vertical spacing is controlled via CSS padding-bottom on .margin-wrapper.
-      // Do not set inline bottom margins here to avoid double gaps.
     });
   }
 
@@ -67,8 +58,7 @@
       .querySelectorAll('.sqs-gallery.sqs-gallery-design-grid img.thumb-image')
       .forEach(img => {
         if (img.complete || img.getAttribute('data-image-dimensions')) {
-          classify(img);
-          enforceGaps(img.closest('.sqs-gallery'));
+          classify(img); enforceGaps(img.closest('.sqs-gallery'));
         } else {
           img.addEventListener('load', () => { classify(img); enforceGaps(img.closest('.sqs-gallery')); }, { once:true });
           setTimeout(() => { classify(img); enforceGaps(img.closest('.sqs-gallery')); }, 600);
@@ -77,25 +67,15 @@
     enforceGaps(root);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => scan());
-  } else {
-    scan();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => scan());
+  else scan();
 
-  document.addEventListener('sqs-content-loaded', e =>
-    scan(e && e.detail && e.detail.target ? e.detail.target : document)
-  );
-
-  document.addEventListener('wmTabs:afterInit', () =>
-    document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } }))
-  );
+  document.addEventListener('sqs-content-loaded', e => scan(e?.detail?.target || document));
+  document.addEventListener('wmTabs:afterInit', () => document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } })));
   document.addEventListener('wmTabs:afterOpenTab', () =>
-    setTimeout(() =>
-      document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } })), 100)
+    setTimeout(() => document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } })), 100)
   );
 
-  // MutationObserver: catch lazyload DOM swaps and re-enforce gaps
   try {
     const obs = new MutationObserver(mutations => {
       for (const m of mutations) {
@@ -110,7 +90,45 @@
       }
     });
     obs.observe(document.body, { childList: true, subtree: true });
-  } catch (e) { /* no-op */ }
+  } catch (e) {}
 })();
 </script>
 
+<!-- HEADER: hide overlay bg unless menu is actually open (prevents blue slab under title) -->
+<script>
+(function () {
+  function isOpen(el) {
+    if (!el) return false;
+    const cs = getComputedStyle(el);
+    return cs.display !== 'none' && cs.visibility !== 'hidden' && el.getBoundingClientRect().height > 0;
+  }
+
+  function syncOverlayBg() {
+    const header = document.querySelector('#header');
+    const menu   = header && header.querySelector('.header-menu');
+    const bg     = header && header.querySelector('.header-menu-bg');
+    if (!header || !menu || !bg) return;
+
+    // keep header truly transparent
+    header.style.setProperty('background', 'transparent', 'important');
+    header.style.setProperty('background-color', 'transparent', 'important');
+    header.style.setProperty('isolation', 'auto', 'important');
+    header.style.setProperty('backdrop-filter', 'none', 'important');
+    header.style.setProperty('-webkit-backdrop-filter', 'none', 'important');
+
+    // make overlay bg harmless unless menu is open
+    bg.style.setProperty('backdrop-filter', 'none', 'important');
+    bg.style.setProperty('-webkit-backdrop-filter', 'none', 'important');
+    bg.style.setProperty('isolation', 'auto', 'important');
+    bg.style.display = isOpen(menu) ? '' : 'none';
+  }
+
+  const run = () => requestAnimationFrame(syncOverlayBg);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+  window.addEventListener('load', run);
+  window.addEventListener('resize', run);
+  window.addEventListener('scroll', run, { passive: true });
+  document.addEventListener('click', run, true);
+  document.addEventListener('sqs-content-loaded', run);
+})();
+</script>

@@ -2,44 +2,36 @@
 <script src="https://cdn.jsdelivr.net/gh/willmyerscode/toolkit@1/index.min.js"></script>
 <!-- Tabs Code CSS From Will-Myers.com -->
 <link href="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.css" rel="stylesheet">
+
+<!-- Boot flags -->
 <script>
-(function () {
-  const html = document.documentElement;
-  html.classList.add('apreps');
-  // enable .ap-diff wherever you want the title to invert
-  html.classList.add('ap-diff'); // (or keep your homepage-only logic if that’s intended)
-})();
+  (function () {
+    // Keep your site-scoped class
+    document.documentElement.classList.add('apreps');
+  })();
 </script>
-
-
 
 <!-- Dot Cursor by digitalmoves.com.au -->
 <script>
-document.addEventListener("DOMContentLoaded", () => { // once the page is ready
-    // add the element to the body
-    const cursor = document.createElement("span")
-    cursor.classList.add("dot-cursor")
-    cursor.innerHTML = "<span />" // add inner element
-    cursor.style.opacity = 0 // hide until mouse move
-    document.body.appendChild(cursor)
+document.addEventListener("DOMContentLoaded", () => {
+  const cursor = document.createElement("span");
+  cursor.classList.add("dot-cursor");
+  cursor.innerHTML = "<span />";
+  cursor.style.opacity = 0;
+  document.body.appendChild(cursor);
 
-    // update the dot position on mouse move
-    document.addEventListener("mousemove", (e) => {
-        if(e.clientX < 3 || e.clientY < 3){
-            // hide on edges of screen
-            cursor.style.opacity = 0
-        } else {
-            cursor.style.opacity = 1;
-            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-        }
-    })
+  document.addEventListener("mousemove", (e) => {
+    if (e.clientX < 3 || e.clientY < 3) {
+      cursor.style.opacity = 0;
+    } else {
+      cursor.style.opacity = 1;
+      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    }
+  });
 
-    // add hover effect when over links and buttons
-    const targets = document.querySelectorAll("a, button") // CSS selectors for which elements have the hover effect
-    targets.forEach((target) => {
-        target.addEventListener("mouseenter", () => cursor.classList.add("active"))
-        target.addEventListener("mouseleave", () => cursor.classList.remove("active"))
-    })
-})
+  document.querySelectorAll("a, button").forEach((target) => {
+    target.addEventListener("mouseenter", () => cursor.classList.add("active"));
+    target.addEventListener("mouseleave", () => cursor.classList.remove("active"));
+  });
+});
 </script>
-<!-- Dot Cursor by digitalmoves.com.au -->
