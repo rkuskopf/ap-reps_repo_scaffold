@@ -125,7 +125,6 @@ body, a:hover, button:hover { cursor: none !important; }
 #header .header-title-text a,
 #header .header-title-logo a {
   mix-blend-mode: difference !important;
-  color: #fff !important;
   background: transparent !important;
   text-shadow: none !important;
 }
@@ -143,4 +142,10 @@ body, a:hover, button:hover { cursor: none !important; }
 .page-section:first-of-type {
   margin-top: 0 !important;
   padding-top: 0 !important;
+}
+
+header#header a#site-title,
+header#header .header-nav-item > a,
+header#header .nav-toggle-label { /* include toggle or other text elements as needed */
+  color: #fff !important;
 }
