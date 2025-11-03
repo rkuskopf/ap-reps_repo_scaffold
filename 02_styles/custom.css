@@ -348,3 +348,37 @@ body, a:hover, button:hover {
 html, body {
   background-color: #ffffff;
 }
+
+/* ——— Artist name titles inside Will-Myers plugin ——— */
+[data-wm-plugin="tabs"] h3,
+[data-wm-plugin="tabs"] h3 *,
+[data-wm-plugin="tabs"] .sqsrte-text-color--black {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+/* If the HTML block wrapper isolates the blend, clear it */
+[data-wm-plugin="tabs"] .sqs-block.html-block,
+[data-wm-plugin="tabs"] .sqs-block.html-block .sqs-block-content {
+  isolation: auto !important;
+  background: transparent !important;
+}
+
+/* ——— Artist name titles inside Will-Myers plugin ——— */
+[data-wm-plugin="tabs"] h3,
+[data-wm-plugin="tabs"] h3 *,
+[data-wm-plugin="tabs"] .sqsrte-text-color--black {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+/* If the HTML block wrapper isolates the blend, clear it */
+[data-wm-plugin="tabs"] .sqs-block.html-block,
+[data-wm-plugin="tabs"] .sqs-block.html-block .sqs-block-content {
+  isolation: auto !important;
+  background: transparent !important;
+}
