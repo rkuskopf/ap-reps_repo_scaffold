@@ -349,223 +349,34 @@ html, body {
   background-color: #ffffff;
 }
 
-/* —— Overlay label for guaranteed blend —— */
-.ap-name-overlay{
-  position:absolute;
-  z-index: 9990;
-  pointer-events:none;
-  mix-blend-mode:difference;
-  color:#fff;
-  white-space:nowrap;
-  background:transparent;
-  text-shadow:none;
-  transform:translate3d(0,0,0);
+/* keep the label’s wrapper neutral */
+.fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
+  mix-blend-mode: initial !important;   /* undo inline 'normal' */
+  background: transparent !important;
+  isolation: auto !important;
 }
 
-/* Likely tile hosts need positioning so overlay anchors correctly */
-.sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
-.sqs-gallery.sqs-gallery-design-grid .image-wrapper,
-.sqs-gallery.sqs-gallery-design-grid .margin-wrapper,
-.sqs-gallery.sqs-gallery-design-grid .slide {
+/* if any HTML block adds a bg, kill it */
+.sqs-block-html,
+.sqs-block-content,
+.sqs-html-content {
+  background: transparent !important;
+}
+
+/* the artist name (H3) does the blending */
+.sqs-html-content h3,
+.sqs-html-content h3 * {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
   position: relative;
+  z-index: 2;
 }
 
-/* Hide original label text when overlay is present to prevent doubles */
-.ap-hide-original-label .sqs-html-content h3,
-.ap-hide-original-label .image-slide-title,
-.ap-hide-original-label .sqs-html-content h3 *,
-.ap-hide-original-label .image-slide-title * {
-  visibility: hidden !important;
-  opacity: 0 !important;
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-  text-shadow: none !important;
-}
-
-/* ---- FIX ISOLATION THAT WAS KILLING BLEND ---- */
-/* Squarespace sometimes paints the whole app in a new layer via transform */
-#siteWrapper,
-#siteWrapper:before,
-#siteWrapper:after,
-.site-wrapper {                 /* fallback for alt theme markup */
-  transform: none !important;
-  isolation: auto !important;
-  will-change: auto !important;
-}
-
-/* ---- ARTIST LABELS INSIDE WM TABS ---- */
-/* 1) The sticky HTML block wrapper sometimes gets inline mix-blend or bg */
-[data-wm-plugin="tabs"] .fe-block[style*="mix-blend-mode"],
-[data-wm-plugin="tabs"] .fe-block[style*="background"] {
-  mix-blend-mode: initial !important;
-  background: transparent !important;
-  isolation: auto !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-
-/* 2) Make the HTML-block shells transparent so text blends with the photo */
-[data-wm-plugin="tabs"] .sqs-block.html-block.sqs-background-enabled,
-[data-wm-plugin="tabs"] .sqs-block-content,
-[data-wm-plugin="tabs"] .sqs-html-content {
-  background: transparent !important;
-  isolation: auto !important;
-  transform: none !important;
-  filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-
-/* 3) Actual label text gets the blend */
-[data-wm-plugin="tabs"] .sqs-html-content h3,
-[data-wm-plugin="tabs"] .sqs-html-content h3 * {
-  position: relative !important;
-  z-index: 2 !important;
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  background: transparent !important;
-  text-shadow: none !important;
-}
-
-/* 4) Kill forced color spans from the editor */
-[data-wm-plugin="tabs"] .sqsrte-text-color--black,
-[data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
+/* neutralise editor-forced font colors (e.g. “Black”) */
+.sqs-html-content [class*="sqsrte-text-color"] {
   color: #fff !important;
   mix-blend-mode: difference !important;
   background: transparent !important;
-}
-
-/* 5) Ensure photos sit behind the labels so difference has a backdrop */
-[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-/* editor/HTML block background shells – make fully transparent */
-[data-wm-plugin="tabs"] .sqs-block-background,
-[data-wm-plugin="tabs"] .sqs-block.html-block.sqs-background-enabled,
-[data-wm-plugin="tabs"] .sqs-block-content,
-[data-wm-plugin="tabs"] .sqs-html-content {
-  background: transparent !important;
-  isolation: auto !important;
-  filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-
-/* actual label */
-[data-wm-plugin="tabs"] .sqs-html-content h3,
-[data-wm-plugin="tabs"] .sqs-html-content h3 * {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  position: relative !important;
-  z-index: 2 !important;
-  background: transparent !important;
-}
-
-/* image must be behind the label to act as the backdrop */
-[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-/* nuke forced editor colors */
-[data-wm-plugin="tabs"] .sqsrte-text-color--black,
-[data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
-  color: #fff !important;
-  mix-blend-mode: difference !important;
-  background: transparent !important;
-}
-
-/* editor/HTML block background shells – make fully transparent */
-[data-wm-plugin="tabs"] .sqs-block-background,
-[data-wm-plugin="tabs"] .sqs-block.html-block.sqs-background-enabled,
-[data-wm-plugin="tabs"] .sqs-block-content,
-[data-wm-plugin="tabs"] .sqs-html-content {
-  background: transparent !important;
-  isolation: auto !important;
-  filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-
-/* actual label */
-[data-wm-plugin="tabs"] .sqs-html-content h3,
-[data-wm-plugin="tabs"] .sqs-html-content h3 * {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  position: relative !important;
-  z-index: 2 !important;
-  background: transparent !important;
-}
-
-/* image must be behind the label to act as the backdrop */
-[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-/* nuke forced editor colors */
-[data-wm-plugin="tabs"] .sqsrte-text-color--black,
-[data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
-  color: #fff !important;
-  mix-blend-mode: difference !important;
-  background: transparent !important;
-}
-
-/* remove compositing traps around the tab panels */
-.wm-tabs .tab-panel,
-.wm-tabs .tab-content,
-.sqs-gallery-block-grid,
-.sqs-gallery.sqs-gallery-design-grid,
-.sqs-gallery.sqs-gallery-design-grid .gallery-grid,
-.sqs-gallery.sqs-gallery-design-grid .slide,
-.sqs-gallery.sqs-gallery-design-grid .image-wrapper {
-  transform: none !important;
-  filter: none !important;
-  opacity: 1 !important;
-  isolation: auto !important;
-  backdrop-filter: none !important;
-}
-
-/* Collapse any gallery block that has no items */
-.sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, img, picture, .slide, .thumb-image)) {
-  display: none !important;
-  height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* If that empty gallery is the only thing in its section, hide the section too */
-section:has(.sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, img, picture, .slide, .thumb-image))) {
-  display: none !important;
-  height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Mobile belt-and-braces: re-assert at smaller breakpoints */
-@media (max-width: 900px) {
-  .sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, img, picture, .slide, .thumb-image)) {
-    display: none !important;
-  }
-}
-
-/* Tablet kill-switch for ghost galleries (Squarespace 7.1) */
-@media (min-width: 641px) and (max-width: 1200px) {
-  /* Hide any gallery block with zero items */
-  .sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, img, picture, .slide, .thumb-image)) {
-    display: none !important;
-    height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  /* If that empty gallery is the only thing in its section, collapse the section too */
-  section:has(.sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, img, picture, .slide, .thumb-image))) {
-    display: none !important;
-    min-height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
 }
