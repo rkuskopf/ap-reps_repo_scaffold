@@ -180,11 +180,11 @@ body, a:hover, button:hover {
   line-height: 1.3;
 }
 
-/* === AP—REPS scoped gallery crop + flush === */
+/* Gallery ratios by Rowan */
 
 .apreps { --ap-gap-x: 10px; }
 
-/*  anchors behave as ratio boxes; our JS (or native aspect rules) control height  */
+/*  anchors  */
 .apreps .wm-tabs .tab-panel > .tab-content 
   .sqs-gallery-block-grid .image-slide-anchor,
 .apreps .wm-tabs .tab-panel > .tab-content 
@@ -208,7 +208,7 @@ body, a:hover, button:hover {
   display: block !important;
 }
 
-/* flush top edge of the grid inside tabs only */
+/* top alignment */
 .apreps .wm-tabs .tab-panel > .tab-content .page-section:first-of-type {
   --section-padding-top: 0 !important;
   padding-top: 0 !important;
@@ -227,7 +227,7 @@ body, a:hover, button:hover {
   row-gap: 10px !important; /* bump if you want gutters */
 }
 
-/* kill stray top margins that push row 1 down */
+/* stray margins */
 .apreps .wm-tabs .tab-panel > .tab-content 
   .sqs-gallery-block-grid .gallery-grid-item,
 .apreps .wm-tabs .tab-panel > .tab-content 
@@ -237,7 +237,7 @@ body, a:hover, button:hover {
   margin-top: 0 !important;
 }
 
-/* captions left, tight */
+/* captions left */
 .apreps .wm-tabs .tab-panel > .tab-content 
   .sqs-gallery-block-grid .image-slide-title,
 .apreps .wm-tabs .tab-panel > .tab-content 
@@ -252,7 +252,7 @@ body, a:hover, button:hover {
   display: none !important;
 }
 
-/* Scoped just to AP-REPS galleries — safe for other plugins */
+/* ratios */
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper,
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .image-wrapper,
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper {
@@ -298,3 +298,66 @@ body, a:hover, button:hover {
   box-sizing: border-box !important;
   padding-right: 10px !important;
 }
+
+
+/* ---- header mix blend ---- */
+
+/* Header container must be see-through so the text can "see" the page */
+#header,
+#header:before,
+#header:after {
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  isolation: auto !important;
+  mix-blend-mode: difference !important;
+  transform: translate3d(0,0,0); /* helps Safari render blend properly */
+}
+
+/* Apply difference */
+#header .header-title,
+#header .header-title-text,
+#header .header-title-text a,
+#header .header-title-logo a,
+#header .header-nav a,
+#header .header-actions *,
+#header .header-actions-action svg,
+#header .nav-toggle-label {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  fill: #fff !important;
+}
+
+/* Optional: hover */
+#header .header-nav a:hover,
+#header .header-actions-action:hover {
+  color: #fff !important;
+  mix-blend-mode: difference !important;
+}
+
+
+/* 1) Stop the sticky wrapper from forcing normal blend */
+.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
+  mix-blend-mode: difference !important;
+  background: transparent !important;
+  isolation: auto !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+
+/* 3) Force the artist name to blend like the header */
+.apreps .sqs-block.html-block .sqs-html-content h3,
+.apreps .sqs-block.html-block .sqs-html-content h3 *,
+.apreps .sqs-block.html-block .sqsrte-text-color--black {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+
+
