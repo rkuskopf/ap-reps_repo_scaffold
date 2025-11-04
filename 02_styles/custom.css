@@ -349,34 +349,41 @@ html, body {
   background-color: #ffffff;
 }
 
-/* — Fix blend without killing sticky — */
+/* ---- FIX ISOLATION THAT WAS KILLING BLEND ---- */
+/* Squarespace sometimes paints the whole app in a new layer via transform */
+#siteWrapper,
+#siteWrapper:before,
+#siteWrapper:after,
+.site-wrapper {                 /* fallback for alt theme markup */
+  transform: none !important;
+  isolation: auto !important;
+  will-change: auto !important;
+}
 
-/* 1) Undo the inline blend on the editor wrapper */
-[data-wm-plugin="tabs"] .fe-block[style*="mix-blend-mode"] {
-  mix-blend-mode: initial !important;   /* stop isolating */
+/* ---- ARTIST LABELS INSIDE WM TABS ---- */
+/* 1) The sticky HTML block wrapper sometimes gets inline mix-blend or bg */
+[data-wm-plugin="tabs"] .fe-block[style*="mix-blend-mode"],
+[data-wm-plugin="tabs"] .fe-block[style*="background"] {
+  mix-blend-mode: initial !important;
   background: transparent !important;
   isolation: auto !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
 
-/* 2) Make the HTML-block wrappers transparent so the label isn't blending with white */
+/* 2) Make the HTML-block shells transparent so text blends with the photo */
 [data-wm-plugin="tabs"] .sqs-block.html-block.sqs-background-enabled,
 [data-wm-plugin="tabs"] .sqs-block-content,
 [data-wm-plugin="tabs"] .sqs-html-content {
   background: transparent !important;
   isolation: auto !important;
+  transform: none !important;
   filter: none !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
-  transform: none !important;
 }
 
-/* 3) Ensure the image is the backdrop and sits under the label */
-[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
-  position: relative !important;
-  z-index: 1 !important;
-}
+/* 3) Actual label text gets the blend */
 [data-wm-plugin="tabs"] .sqs-html-content h3,
 [data-wm-plugin="tabs"] .sqs-html-content h3 * {
   position: relative !important;
@@ -387,7 +394,7 @@ html, body {
   text-shadow: none !important;
 }
 
-/* 4) Nuke forced black spans */
+/* 4) Kill forced color spans from the editor */
 [data-wm-plugin="tabs"] .sqsrte-text-color--black,
 [data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
   color: #fff !important;
@@ -395,35 +402,7 @@ html, body {
   background: transparent !important;
 }
 
-/* Stronger safety net: sticky HTML blocks that act as labels */
-.apreps .fe-block.sqs-position-sticky .sqs-html-content,
-.apreps .fe-block.sqs-position-sticky .sqs-html-content * {
-  color: #fff !important;
-  mix-blend-mode: difference !important;
-  background: transparent !important;
-  text-shadow: none !important;
-}
-
-/* Remove Squarespace's transform isolation so mix-blend-mode works */
-#siteWrapper,
-#siteWrapper:before,
-#siteWrapper:after {
-  transform: none !important;
-  isolation: auto !important;
-  will-change: auto !important;
-}
-
-/* Ensure the artist names still render above their images */
-[data-wm-plugin="tabs"] .sqs-html-content h3,
-[data-wm-plugin="tabs"] .sqs-html-content h3 * {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  position: relative !important;
-  z-index: 2 !important;
-  background: transparent !important;
-}
-
-/* Keep images behind text for blending */
+/* 5) Ensure photos sit behind the labels so difference has a backdrop */
 [data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
   position: relative !important;
   z-index: 1 !important;
