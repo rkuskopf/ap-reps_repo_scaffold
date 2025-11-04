@@ -199,19 +199,37 @@
     '.thumb-image','.slide','.sqs-image','.sqs-video-wrapper',
     '.sqs-block-content > *' // any real child inside a Squarespace block
   ].join(',');
+  const BLOCK_DENYLIST = ['block-11f3e6e7']; // known duplicate ghost block id prefix
 
   function isEmptyBlock(block){
-    // If any obvious content exists, it's not empty
+    // 1) If there is any obvious visible media/content, it's not empty
     if (block.querySelector(VISIBLE_SEL)) return false;
 
-    // Consider text-only blocks: remove zero\u200Bwidth spaces then check
+    // 2) Check text content (strip zero-width/nbsp and whitespace)
     const c = block.querySelector('.sqs-block-content') || block;
-    if ((c.textContent || '').replace(/\u200B/g,'').trim().length) return false;
+    const text = (c.textContent || '')
+      .replace(/\u200B/g,'')
+      .replace(/\u00A0/g,' ')
+      .trim();
+    if (text.length) return false;
 
-    // Special case: inner gallery element present but with no items
+    // 3) If there are element children, see if any are actually visible (non-zero size)
+    const els = Array.from(c.children || []);
+    if (els.length){
+      const anyVisible = els.some(el => {
+        const cs = getComputedStyle(el);
+        if (['SCRIPT','STYLE','LINK','META','NOSCRIPT'].includes(el.tagName)) return false;
+        return cs.display !== 'none' && cs.visibility !== 'hidden' &&
+               (el.offsetWidth > 0 || el.offsetHeight > 0);
+      });
+      if (anyVisible) return false;
+    }
+
+    // 4) Special case: inner gallery present but has no items (still counts as empty)
     const g = block.querySelector('.sqs-gallery-block');
     if (g && g.querySelector(VISIBLE_SEL)) return false;
 
+    // 5) Otherwise treat block as empty
     return true;
   }
 
@@ -227,6 +245,17 @@
   function clean(root = document){
     // 1) Hide empty Squarespace blocks of any type
     root.querySelectorAll('.sqs-block').forEach(block => {
+      // hard snipe any known bad IDs
+      const id = block.id || '';
+      if (BLOCK_DENYLIST.some(p => id.startsWith(p))) {
+        hide(block);
+        const cell = block.closest('.fe-block');
+        if (cell) {
+          hide(cell);
+          cell.style.setProperty('--fe-block-min-height','0px');
+        }
+        return; // skip to next block
+      }
       if (isEmptyBlock(block)) {
         hide(block);
         const wrap = block.closest('.sqs-block-gallery, .sqs-block-image, .sqs-block-code, .sqs-block-video, .sqs-block-html') || block;

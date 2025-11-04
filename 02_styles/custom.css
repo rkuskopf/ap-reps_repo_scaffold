@@ -569,3 +569,20 @@ section:has(.sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, im
     margin: 0 !important;
   }
 }
+
+/* Kill the duplicate ghost block everywhere */
+[id^="block-11f3e6e7"]{
+  display:none !important;
+  height:0 !important;
+  min-height:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+/* If it's the only thing in its section, collapse the section too */
+section:has([id^="block-11f3e6e7"]){
+  display:none !important;
+  height:0 !important;
+  min-height:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+}
