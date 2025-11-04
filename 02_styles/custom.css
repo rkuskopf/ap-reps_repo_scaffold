@@ -372,28 +372,9 @@ html, body {
 }
 
 /* Optional: hide the original label so only the blended overlay is visible */
-.ap-hide-original-label h1,
-.ap-hide-original-label h2,
 .ap-hide-original-label h3,
-.ap-hide-original-label h4,
-.ap-hide-original-label h5,
-.ap-hide-original-label .image-slide-title {
-  visibility: hidden !important; /* preserve layout for overlay positioning */
-  opacity: 0 !important;         /* fallback for engines with odd visibility paint */
-}
-
-/* Ensure nested spans (e.g., sqsrte-text-color--black) don’t leak color */
-.ap-hide-original-label h1 *,
-.ap-hide-original-label h2 *,
-.ap-hide-original-label h3 *,
-.ap-hide-original-label h4 *,
-.ap-hide-original-label h5 *,
-.ap-hide-original-label .image-slide-title * {
-  visibility: hidden !important;
-  opacity: 0 !important;
+.ap-hide-original-label .image-slide-title{
   color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-  text-shadow: none !important;
 }
 
 /* (Debug) outline overlays if needed */
