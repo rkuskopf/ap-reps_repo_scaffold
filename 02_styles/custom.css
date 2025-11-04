@@ -349,67 +349,33 @@ html, body {
   background-color: #ffffff;
 }
 
-/* ——— Artist names: free the blend inside Will-Myers tabs ——— */
-
-[data-wm-plugin="tabs"] .fe-block,
-[data-wm-plugin="tabs"] .sqs-block,
-[data-wm-plugin="tabs"] .sqs-block.html-block,
-[data-wm-plugin="tabs"] .sqs-block.html-block.sqs-background-enabled,
-[data-wm-plugin="tabs"] .sqs-block-content,
-[data-wm-plugin="tabs"] .sqs-html-content {
-  background: transparent !important;
-  isolation: auto !important;
-  transform: none !important;
-  filter: none !important;
-  will-change: auto !important;
+/* The overlay label itself */
+.ap-name-overlay{
+  position:absolute;
+  z-index: 9990;                  /* above the image */
+  pointer-events:none;
+  mix-blend-mode:difference;
+  color:#fff;
+  white-space:nowrap;
+  line-height:1;
+  transform:translate3d(0,0,0);
 }
 
-[data-wm-plugin="tabs"] h3,
-[data-wm-plugin="tabs"] h3 *,
-[data-wm-plugin="tabs"] .image-slide-title,
-[data-wm-plugin="tabs"] .image-slide-title * {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  background: transparent !important;
-  text-shadow: none !important;
+/* Ensure likely tile hosts are positioned so overlay can anchor correctly */
+[data-wm-plugin="tabs"] .sqs-gallery-block-grid .sqs-gallery-design-grid-slide,
+[data-wm-plugin="tabs"] .sqs-gallery-block-grid .slide,
+[data-wm-plugin="tabs"] .sqs-gallery-block-grid .image-wrapper,
+[data-wm-plugin="tabs"] .sqs-gallery-block-grid .margin-wrapper,
+[data-wm-plugin="tabs"] .sqs-gallery-block-grid .image-slide-anchor,
+[data-wm-plugin="tabs"] .sqs-gallery-block-grid .js-gallery-lightbox-opener {
+  position: relative;
 }
 
-[data-wm-plugin="tabs"] .sqsrte-text-color--black,
-[data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
-  color: #fff !important;
-  mix-blend-mode: difference !important;
-  background: transparent !important;
+/* Optional: hide the original label so only the blended overlay is visible */
+.ap-hide-original-label h3,
+.ap-hide-original-label .image-slide-title{
+  color: transparent !important;
 }
 
-/* ——— Artist names: blend outside tabs as well ——— */
-/* Ensures HTML blocks with headings or sqsrte color spans can blend */
-.apreps .sqs-block.html-block.sqs-background-enabled,
-.apreps .sqs-block.html-block.sqs-background-enabled .sqs-block-content,
-.apreps .sqs-block.html-block.sqs-background-enabled .sqs-html-content {
-  background: transparent !important;
-  isolation: auto !important;
-  transform: none !important;
-  filter: none !important;
-  will-change: auto !important;
-}
-
-.apreps .sqs-block.html-block .sqs-html-content h1,
-.apreps .sqs-block.html-block .sqs-html-content h2,
-.apreps .sqs-block.html-block .sqs-html-content h3,
-.apreps .sqs-block.html-block .sqs-html-content h1 *,
-.apreps .sqs-block.html-block .sqs-html-content h2 *,
-.apreps .sqs-block.html-block .sqs-html-content h3 *,
-.apreps .sqs-block.html-block .sqsrte-text-color--black,
-.apreps .sqs-block.html-block [class*="sqsrte-text-color"] {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  background: transparent !important;
-  text-shadow: none !important;
-}
-
-/* Optional utility: add class "artist-title" to specific blocks for precision */
-.apreps .artist-title {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  background: transparent !important;
-}
+/* (Debug) outline overlays if needed */
+html.ap-debug .ap-name-overlay{ outline:1px dashed red; }
