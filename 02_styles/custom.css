@@ -351,7 +351,6 @@ html, body {
 
 /* ——— Artist names: free the blend inside Will-Myers tabs ——— */
 
-/* 1) Neutralise wrapper backgrounds / isolation that block blending */
 [data-wm-plugin="tabs"] .fe-block,
 [data-wm-plugin="tabs"] .sqs-block,
 [data-wm-plugin="tabs"] .sqs-block.html-block,
@@ -365,7 +364,6 @@ html, body {
   will-change: auto !important;
 }
 
-/* 2) The actual title text (covers <h3> and gallery .image-slide-title variants) */
 [data-wm-plugin="tabs"] h3,
 [data-wm-plugin="tabs"] h3 *,
 [data-wm-plugin="tabs"] .image-slide-title,
@@ -376,7 +374,6 @@ html, body {
   text-shadow: none !important;
 }
 
-/* 3) Nuke Squarespace’s forced color spans */
 [data-wm-plugin="tabs"] .sqsrte-text-color--black,
 [data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
   color: #fff !important;
