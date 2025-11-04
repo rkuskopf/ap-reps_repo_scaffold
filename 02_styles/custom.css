@@ -514,16 +514,12 @@ html, body {
 }
 
 /* remove compositing traps around the tab panels */
+.wm-tabs .tabs-content,
+.wm-tabs .tabs-content-wrapper,
 .wm-tabs .tab-panel,
-.wm-tabs .tab-content,
-.sqs-gallery-block-grid,
-.sqs-gallery.sqs-gallery-design-grid,
-.sqs-gallery.sqs-gallery-design-grid .gallery-grid,
-.sqs-gallery.sqs-gallery-design-grid .slide,
-.sqs-gallery.sqs-gallery-design-grid .image-wrapper {
+.wm-tabs .tab-content {
   transform: none !important;
   filter: none !important;
-  opacity: 1 !important;
   isolation: auto !important;
   backdrop-filter: none !important;
 }
