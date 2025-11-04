@@ -191,76 +191,83 @@
 })();
 </script>
 <script>
-/* GLOBAL: remove empty Squarespace gallery blocks/sections, incl. late injections and mobile stacks */
+/* GLOBAL CLEANUP (AP-REPS): remove empty blocks (gallery/code/image/spacer), collapse FE cells/sections.
+   - Handles first load, AJAX nav (Squarespace 7.1 mercury:load), late plugin injections, and breakpoint resizes. */
 (function () {
-  function isEmptyGallery(node) {
-    const g = node.matches('.sqs-gallery-block') ? node : node.querySelector('.sqs-gallery-block');
-    if (!g) return false;
-    // treat as empty if there are no real slides/thumbs
-    return !g.querySelector('.sqs-gallery-item, img, picture, .slide, .thumb-image');
+  const VISIBLE_SEL = [
+    '.sqs-gallery-item','img','picture','video','iframe','canvas',
+    '.thumb-image','.slide','.sqs-image','.sqs-video-wrapper',
+    '.sqs-block-content > *' // any real child inside a Squarespace block
+  ].join(',');
+
+  function isEmptyBlock(block){
+    // If any obvious content exists, it's not empty
+    if (block.querySelector(VISIBLE_SEL)) return false;
+
+    // Consider text-only blocks: remove zero\u200Bwidth spaces then check
+    const c = block.querySelector('.sqs-block-content') || block;
+    if ((c.textContent || '').replace(/\u200B/g,'').trim().length) return false;
+
+    // Special case: inner gallery element present but with no items
+    const g = block.querySelector('.sqs-gallery-block');
+    if (g && g.querySelector(VISIBLE_SEL)) return false;
+
+    return true;
   }
 
-  function clean(root = document) {
-    root.querySelectorAll('.sqs-block-gallery, .sqs-block.gallery-block, .sqs-gallery-block').forEach(node => {
-      if (!isEmptyGallery(node)) return;
+  function hide(el){
+    if (!el) return;
+    el.style.display = 'none';
+    el.style.height = 0;
+    el.style.minHeight = 0;
+    el.style.padding = 0;
+    el.style.margin = 0;
+  }
 
-      // If it’s the only thing in its section, hide the whole section; otherwise just hide the block
-      const section = node.closest('section');
-      if (section && section.querySelectorAll('.sqs-gallery-block').length === 1) {
-        Object.assign(section.style, { display:'none', height:0, padding:0, margin:0 });
-      } else {
-        const wrap = node.closest('.sqs-block-gallery, .sqs-block.gallery-block') || node;
-        Object.assign(wrap.style, { display:'none', height:0, padding:0, margin:0 });
+  function clean(root = document){
+    // 1) Hide empty Squarespace blocks of any type
+    root.querySelectorAll('.sqs-block').forEach(block => {
+      if (isEmptyBlock(block)) {
+        hide(block);
+        const wrap = block.closest('.sqs-block-gallery, .sqs-block-image, .sqs-block-code, .sqs-block-video, .sqs-block-html') || block;
+        hide(wrap);
       }
+    });
+
+    // 2) Collapse empty Fluid Engine cells (fe-block) that only contain hidden/empty blocks
+    root.querySelectorAll('.fe-block').forEach(cell => {
+      const blocks = cell.querySelectorAll('.sqs-block');
+      const anyVisible = Array.from(blocks).some(b => {
+        const cs = getComputedStyle(b);
+        return cs.display !== 'none' && b.offsetHeight > 0;
+      });
+      if (!anyVisible) {
+        hide(cell);
+        cell.style.setProperty('--fe-block-min-height','0px');
+      }
+    });
+
+    // 3) Collapse sections that end up with no visible content
+    root.querySelectorAll('section').forEach(section => {
+      const anyVisible = Array.from(section.querySelectorAll('.sqs-block, .fe-block')).some(el => {
+        const cs = getComputedStyle(el);
+        return cs.display !== 'none' && el.offsetHeight > 0;
+      });
+      if (!anyVisible) hide(section);
     });
   }
 
-  const init = () => {
-    clean();
-    // a few delayed passes catch plugins that init after paint or at mobile breakpoints
-    setTimeout(clean, 200);
-    setTimeout(clean, 800);
-    setTimeout(clean, 2000);
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
+  // Run early and with delayed passes to catch lazy/plugin inserts
+  const init = () => { clean(); setTimeout(clean, 200); setTimeout(clean, 800); setTimeout(clean, 2000); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once:true }); else init();
 
   // Squarespace 7.1 AJAX navigation
   document.addEventListener('mercury:load', init);
 
-  // Watch for DOM changes (plugins cloning/injecting)
-  new MutationObserver(() => clean()).observe(document.body, { childList: true, subtree: true });
-
-  // Re-check on resize (some plugins add at mobile only)
-  let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(clean, 150); });
-})();
-</script>
-
-<script>
-(function () {
-  const hasItems = g => !!g.querySelector('.sqs-gallery-item, img, picture, .slide, .thumb-image');
-  const hide = el => Object.assign(el.style, { display:'none', height:0, minHeight:0, padding:0, margin:0 });
-
-  function clean(root = document) {
-    root.querySelectorAll('.sqs-block-gallery, .sqs-block.gallery-block, .sqs-gallery-block').forEach(node => {
-      const g = node.matches('.sqs-gallery-block') ? node : node.querySelector('.sqs-gallery-block');
-      if (!g || hasItems(g)) return;
-
-      const section = node.closest('section');
-      if (section) hide(section);
-      const wrap = node.closest('.sqs-block-gallery, .sqs-block.gallery-block') || node;
-      hide(wrap);
-    });
-  }
-
-  const init = () => { clean(); setTimeout(clean, 200); setTimeout(clean, 800); setTimeout(clean, 2000); };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once:true }); else init();
-  document.addEventListener('mercury:load', init);
+  // Late injections (plugins, tabs, etc.)
   new MutationObserver(() => clean()).observe(document.body, { childList:true, subtree:true });
+
+  // Re-check on resize (different breakpoint layouts can inject or reveal empties)
   let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(clean, 150); });
 })();
 </script>
