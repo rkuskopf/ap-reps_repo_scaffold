@@ -349,3 +349,148 @@ html, body {
   background-color: #ffffff;
 }
 
+/* ---- FIX ISOLATION THAT WAS KILLING BLEND ---- */
+/* Squarespace sometimes paints the whole app in a new layer via transform */
+#siteWrapper,
+#siteWrapper:before,
+#siteWrapper:after,
+.site-wrapper {                 /* fallback for alt theme markup */
+  transform: none !important;
+  isolation: auto !important;
+  will-change: auto !important;
+}
+
+/* ---- ARTIST LABELS INSIDE WM TABS ---- */
+/* 1) The sticky HTML block wrapper sometimes gets inline mix-blend or bg */
+[data-wm-plugin="tabs"] .fe-block[style*="mix-blend-mode"],
+[data-wm-plugin="tabs"] .fe-block[style*="background"] {
+  mix-blend-mode: initial !important;
+  background: transparent !important;
+  isolation: auto !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* 2) Make the HTML-block shells transparent so text blends with the photo */
+[data-wm-plugin="tabs"] .sqs-block.html-block.sqs-background-enabled,
+[data-wm-plugin="tabs"] .sqs-block-content,
+[data-wm-plugin="tabs"] .sqs-html-content {
+  background: transparent !important;
+  isolation: auto !important;
+  transform: none !important;
+  filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* 3) Actual label text gets the blend */
+[data-wm-plugin="tabs"] .sqs-html-content h3,
+[data-wm-plugin="tabs"] .sqs-html-content h3 * {
+  position: relative !important;
+  z-index: 2 !important;
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+/* 4) Kill forced color spans from the editor */
+[data-wm-plugin="tabs"] .sqsrte-text-color--black,
+[data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
+  color: #fff !important;
+  mix-blend-mode: difference !important;
+  background: transparent !important;
+}
+
+/* 5) Ensure photos sit behind the labels so difference has a backdrop */
+[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* editor/HTML block background shells – make fully transparent */
+[data-wm-plugin="tabs"] .sqs-block-background,
+[data-wm-plugin="tabs"] .sqs-block.html-block.sqs-background-enabled,
+[data-wm-plugin="tabs"] .sqs-block-content,
+[data-wm-plugin="tabs"] .sqs-html-content {
+  background: transparent !important;
+  isolation: auto !important;
+  filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* actual label */
+[data-wm-plugin="tabs"] .sqs-html-content h3,
+[data-wm-plugin="tabs"] .sqs-html-content h3 * {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  position: relative !important;
+  z-index: 2 !important;
+  background: transparent !important;
+}
+
+/* image must be behind the label to act as the backdrop */
+[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* nuke forced editor colors */
+[data-wm-plugin="tabs"] .sqsrte-text-color--black,
+[data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
+  color: #fff !important;
+  mix-blend-mode: difference !important;
+  background: transparent !important;
+}
+
+/* editor/HTML block background shells – make fully transparent */
+[data-wm-plugin="tabs"] .sqs-block-background,
+[data-wm-plugin="tabs"] .sqs-block.html-block.sqs-background-enabled,
+[data-wm-plugin="tabs"] .sqs-block-content,
+[data-wm-plugin="tabs"] .sqs-html-content {
+  background: transparent !important;
+  isolation: auto !important;
+  filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* actual label */
+[data-wm-plugin="tabs"] .sqs-html-content h3,
+[data-wm-plugin="tabs"] .sqs-html-content h3 * {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  position: relative !important;
+  z-index: 2 !important;
+  background: transparent !important;
+}
+
+/* image must be behind the label to act as the backdrop */
+[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* nuke forced editor colors */
+[data-wm-plugin="tabs"] .sqsrte-text-color--black,
+[data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
+  color: #fff !important;
+  mix-blend-mode: difference !important;
+  background: transparent !important;
+}
+
+/* remove compositing traps around the tab panels */
+.wm-tabs .tab-panel,
+.wm-tabs .tab-content,
+.sqs-gallery-block-grid,
+.sqs-gallery.sqs-gallery-design-grid,
+.sqs-gallery.sqs-gallery-design-grid .gallery-grid,
+.sqs-gallery.sqs-gallery-design-grid .slide,
+.sqs-gallery.sqs-gallery-design-grid .image-wrapper {
+  transform: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  isolation: auto !important;
+  backdrop-filter: none !important;
+}
