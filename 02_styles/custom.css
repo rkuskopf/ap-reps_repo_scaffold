@@ -349,6 +349,39 @@ html, body {
   background-color: #ffffff;
 }
 
+/* —— Overlay label for guaranteed blend —— */
+.ap-name-overlay{
+  position:absolute;
+  z-index: 9990;
+  pointer-events:none;
+  mix-blend-mode:difference;
+  color:#fff;
+  white-space:nowrap;
+  background:transparent;
+  text-shadow:none;
+  transform:translate3d(0,0,0);
+}
+
+/* Likely tile hosts need positioning so overlay anchors correctly */
+.sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
+.sqs-gallery.sqs-gallery-design-grid .image-wrapper,
+.sqs-gallery.sqs-gallery-design-grid .margin-wrapper,
+.sqs-gallery.sqs-gallery-design-grid .slide {
+  position: relative;
+}
+
+/* Hide original label text when overlay is present to prevent doubles */
+.ap-hide-original-label .sqs-html-content h3,
+.ap-hide-original-label .image-slide-title,
+.ap-hide-original-label .sqs-html-content h3 *,
+.ap-hide-original-label .image-slide-title * {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+}
+
 /* ---- FIX ISOLATION THAT WAS KILLING BLEND ---- */
 /* Squarespace sometimes paints the whole app in a new layer via transform */
 #siteWrapper,

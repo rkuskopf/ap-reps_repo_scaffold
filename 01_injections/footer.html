@@ -8,6 +8,72 @@
 <script>
   CodeTools.init({ theme: "monokai-sublime" });
 </script>
+
+<!-- AP — Artist name overlay (difference) -->
+<script>
+(function(){
+  const SCOPE = document; // whole page
+  const HOST_SEL = [
+    '.sqs-gallery-design-grid-slide',
+    '.image-wrapper',
+    '.margin-wrapper',
+    '.image-slide-anchor',
+    '.js-gallery-lightbox-opener',
+    '.slide'
+  ].join(',');
+  const LABEL_SEL = '.sqs-html-content h3, .image-slide-title';
+
+  function copyType(from, to){
+    const cs = getComputedStyle(from);
+    [
+      'fontFamily','fontSize','fontWeight','fontStyle','letterSpacing',
+      'textTransform','textDecoration','fontStretch','lineHeight'
+    ].forEach(p => { try { to.style[p] = cs[p]; } catch(_){} });
+  }
+
+  function bestHostFor(el){ return el.closest(HOST_SEL) || el.parentElement; }
+
+  function ensureOverlay(label){
+    const host = bestHostFor(label);
+    if(!host) return;
+
+    host.classList.add('ap-hide-original-label');
+
+    let overlay = host.querySelector(':scope > .ap-name-overlay');
+    if(!overlay){
+      overlay = document.createElement('div');
+      overlay.className = 'ap-name-overlay';
+      host.appendChild(overlay);
+    }
+
+    const text = (label.innerText || label.textContent || '').trim();
+    overlay.textContent = text;
+    copyType(label, overlay);
+
+    // Position overlay to match label within the host
+    const rH = host.getBoundingClientRect();
+    const rL = label.getBoundingClientRect();
+    overlay.style.top  = Math.round(rL.top  - rH.top)  + 'px';
+    overlay.style.left = Math.round(rL.left - rH.left) + 'px';
+    overlay.style.height = rL.height + 'px';
+    overlay.style.lineHeight = getComputedStyle(label).lineHeight;
+  }
+
+  function scan(){
+    SCOPE.querySelectorAll(LABEL_SEL).forEach(ensureOverlay);
+  }
+
+  const tick = () => requestAnimationFrame(scan);
+  if(document.readyState !== 'loading') tick();
+  else document.addEventListener('DOMContentLoaded', tick);
+  window.addEventListener('load', tick);
+  window.addEventListener('resize', tick);
+  window.addEventListener('scroll', tick, {passive:true});
+  document.addEventListener('sqs-content-loaded', tick);
+  document.addEventListener('wmTabs:afterInit', tick);
+  document.addEventListener('wmTabs:afterOpenTab', () => setTimeout(tick, 100));
+})();
+</script>
 <!-- Copy to Clipboard Code Snippet by digitalmoves.com.au -->
 
 <!-- Infinite auto scroll by digitalmoves.com.au/plugins -->
