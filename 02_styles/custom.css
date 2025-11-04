@@ -403,3 +403,28 @@ html, body {
   background: transparent !important;
   text-shadow: none !important;
 }
+
+/* Remove Squarespace's transform isolation so mix-blend-mode works */
+#siteWrapper,
+#siteWrapper:before,
+#siteWrapper:after {
+  transform: none !important;
+  isolation: auto !important;
+  will-change: auto !important;
+}
+
+/* Ensure the artist names still render above their images */
+[data-wm-plugin="tabs"] .sqs-html-content h3,
+[data-wm-plugin="tabs"] .sqs-html-content h3 * {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  position: relative !important;
+  z-index: 2 !important;
+  background: transparent !important;
+}
+
+/* Keep images behind text for blending */
+[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  position: relative !important;
+  z-index: 1 !important;
+}
