@@ -349,14 +349,11 @@ html, body {
   background-color: #ffffff;
 }
 
-/* —— AP tabs: allow blend to see the photo and push titles above it —— */
+/* ===== AP REPS — Artist labels: make blend work inside WM Tabs (CSS-only) ===== */
 
-/* 1) Nuke paint/stacking barriers on the wrappers around the labels */
-[data-wm-plugin="tabs"] .tabs-content,
-[data-wm-plugin="tabs"] .tab-panel,
-[data-wm-plugin="tabs"] .tab-content,
-[data-wm-plugin="tabs"] .page-section,
-[data-wm-plugin="tabs"] .sqs-block,
+/* 1) Kill isolation/flattening on Squarespace block wrappers (the real culprit) */
+[data-wm-plugin="tabs"] .fe-block,                                 /* outer editor wrapper */
+[data-wm-plugin="tabs"] .sqs-block,                                /* html/image block */
 [data-wm-plugin="tabs"] .sqs-block.html-block,
 [data-wm-plugin="tabs"] .sqs-block-content,
 [data-wm-plugin="tabs"] .sqs-html-content {
@@ -369,20 +366,28 @@ html, body {
   backdrop-filter: none !important;
 }
 
-/* 2) Make sure the image tile is a positioned backdrop we can sit on */
+/* Specifically undo the inline styles Squarespace injects on the fe-block */
+[data-wm-plugin="tabs"] .fe-block[style*="mix-blend-mode"] {
+  mix-blend-mode: unset !important;
+}
+[data-wm-plugin="tabs"] .fe-block.sqs-position-sticky {
+  position: static !important;   /* sticky makes a new stacking context */
+}
+
+/* 2) Make the image tile a positioned backdrop */
 [data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
 [data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
 [data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
   position: relative !important;
 }
 
-/* 3) Ensure the photo sits below the label in z-order */
+/* Ensure the photo is under the label in z-order */
 [data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
   position: relative !important;
   z-index: 1 !important;
 }
 
-/* 4) The actual artist names: blend + sit above photo */
+/* 3) Labels: actually blend with the photo */
 [data-wm-plugin="tabs"] .sqs-html-content h3,
 [data-wm-plugin="tabs"] .sqs-html-content h3 *,
 [data-wm-plugin="tabs"] .image-slide-title,
@@ -395,10 +400,19 @@ html, body {
   text-shadow: none !important;
 }
 
-/* 5) Kill Squarespace’s forced color spans that keep it black */
+/* 4) Nuke Squarespace text-color spans that force black */
 [data-wm-plugin="tabs"] .sqsrte-text-color--black,
 [data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
   color: #fff !important;
   background: transparent !important;
   mix-blend-mode: difference !important;
 }
+
+/* (Optional) If your grid adds a semi-opaque veil, keep labels above it */
+[data-wm-plugin="tabs"] .image-overlay,
+[data-wm-plugin="tabs"] .image-card-overlay {
+  z-index: 1 !important;
+}
+
+/* (Optional debug) add .ap-debug to <html> to outline labels */
+html.ap-debug [data-wm-plugin="tabs"] .sqs-html-content h3 { outline: 1px dashed red; }
