@@ -338,45 +338,26 @@ body, a:hover, button:hover {
   mix-blend-mode: difference !important;
 }
 
-/* align sections */
-.page-section:first-of-type {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
 
-/* Base body background */
-html, body {
-  background-color: #ffffff;
-}
-
-/* keep the label’s wrapper neutral */
-.fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
-  mix-blend-mode: initial !important;   /* undo inline 'normal' */
+/* 1) Stop the sticky wrapper from forcing normal blend */
+.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
+  mix-blend-mode: difference !important;
   background: transparent !important;
   isolation: auto !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
 }
 
-/* if any HTML block adds a bg, kill it */
-.sqs-block-html,
-.sqs-block-content,
-.sqs-html-content {
-  background: transparent !important;
-}
 
-/* the artist name (H3) does the blending */
-.sqs-html-content h3,
-.sqs-html-content h3 * {
+/* 3) Force the artist name to blend like the header */
+.apreps .sqs-block.html-block .sqs-html-content h3,
+.apreps .sqs-block.html-block .sqs-html-content h3 *,
+.apreps .sqs-block.html-block .sqsrte-text-color--black {
   mix-blend-mode: difference !important;
   color: #fff !important;
   background: transparent !important;
   text-shadow: none !important;
-  position: relative;
-  z-index: 2;
 }
 
-/* neutralise editor-forced font colors (e.g. “Black”) */
-.sqs-html-content [class*="sqsrte-text-color"] {
-  color: #fff !important;
-  mix-blend-mode: difference !important;
-  background: transparent !important;
-}
+
+
