@@ -349,33 +349,56 @@ html, body {
   background-color: #ffffff;
 }
 
-/* The overlay label itself */
-.ap-name-overlay{
-  position:absolute;
-  z-index: 9990;                  /* above the image */
-  pointer-events:none;
-  mix-blend-mode:difference;
-  color:#fff;
-  white-space:nowrap;
-  line-height:1;
-  transform:translate3d(0,0,0);
+/* —— AP tabs: allow blend to see the photo and push titles above it —— */
+
+/* 1) Nuke paint/stacking barriers on the wrappers around the labels */
+[data-wm-plugin="tabs"] .tabs-content,
+[data-wm-plugin="tabs"] .tab-panel,
+[data-wm-plugin="tabs"] .tab-content,
+[data-wm-plugin="tabs"] .page-section,
+[data-wm-plugin="tabs"] .sqs-block,
+[data-wm-plugin="tabs"] .sqs-block.html-block,
+[data-wm-plugin="tabs"] .sqs-block-content,
+[data-wm-plugin="tabs"] .sqs-html-content {
+  background: transparent !important;
+  isolation: auto !important;
+  transform: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
 }
 
-/* Ensure likely tile hosts are positioned so overlay can anchor correctly */
-[data-wm-plugin="tabs"] .sqs-gallery-block-grid .sqs-gallery-design-grid-slide,
-[data-wm-plugin="tabs"] .sqs-gallery-block-grid .slide,
-[data-wm-plugin="tabs"] .sqs-gallery-block-grid .image-wrapper,
-[data-wm-plugin="tabs"] .sqs-gallery-block-grid .margin-wrapper,
-[data-wm-plugin="tabs"] .sqs-gallery-block-grid .image-slide-anchor,
-[data-wm-plugin="tabs"] .sqs-gallery-block-grid .js-gallery-lightbox-opener {
-  position: relative;
+/* 2) Make sure the image tile is a positioned backdrop we can sit on */
+[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
+[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
+[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
+  position: relative !important;
 }
 
-/* Optional: hide the original label so only the blended overlay is visible */
-.ap-hide-original-label h3,
-.ap-hide-original-label .image-slide-title{
-  color: transparent !important;
+/* 3) Ensure the photo sits below the label in z-order */
+[data-wm-plugin="tabs"] .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  position: relative !important;
+  z-index: 1 !important;
 }
 
-/* (Debug) outline overlays if needed */
-html.ap-debug .ap-name-overlay{ outline:1px dashed red; }
+/* 4) The actual artist names: blend + sit above photo */
+[data-wm-plugin="tabs"] .sqs-html-content h3,
+[data-wm-plugin="tabs"] .sqs-html-content h3 *,
+[data-wm-plugin="tabs"] .image-slide-title,
+[data-wm-plugin="tabs"] .image-slide-title * {
+  position: relative !important;
+  z-index: 2 !important;
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+/* 5) Kill Squarespace’s forced color spans that keep it black */
+[data-wm-plugin="tabs"] .sqsrte-text-color--black,
+[data-wm-plugin="tabs"] [class*="sqsrte-text-color"] {
+  color: #fff !important;
+  background: transparent !important;
+  mix-blend-mode: difference !important;
+}
