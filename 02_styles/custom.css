@@ -380,3 +380,36 @@ html, body {
   mix-blend-mode: difference !important;
   background: transparent !important;
 }
+
+/* ——— Artist names: blend outside tabs as well ——— */
+/* Ensures HTML blocks with headings or sqsrte color spans can blend */
+.apreps .sqs-block.html-block.sqs-background-enabled,
+.apreps .sqs-block.html-block.sqs-background-enabled .sqs-block-content,
+.apreps .sqs-block.html-block.sqs-background-enabled .sqs-html-content {
+  background: transparent !important;
+  isolation: auto !important;
+  transform: none !important;
+  filter: none !important;
+  will-change: auto !important;
+}
+
+.apreps .sqs-block.html-block .sqs-html-content h1,
+.apreps .sqs-block.html-block .sqs-html-content h2,
+.apreps .sqs-block.html-block .sqs-html-content h3,
+.apreps .sqs-block.html-block .sqs-html-content h1 *,
+.apreps .sqs-block.html-block .sqs-html-content h2 *,
+.apreps .sqs-block.html-block .sqs-html-content h3 *,
+.apreps .sqs-block.html-block .sqsrte-text-color--black,
+.apreps .sqs-block.html-block [class*="sqsrte-text-color"] {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+/* Optional utility: add class "artist-title" to specific blocks for precision */
+.apreps .artist-title {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+}
