@@ -12,16 +12,9 @@
 <!-- AP — Artist name overlay (difference) -->
 <script>
 (function(){
-  const SCOPE = document; // whole page
-  const HOST_SEL = [
-    '.sqs-gallery-design-grid-slide',
-    '.image-wrapper',
-    '.margin-wrapper',
-    '.image-slide-anchor',
-    '.js-gallery-lightbox-opener',
-    '.slide'
-  ].join(',');
   const LABEL_SEL = '.sqs-html-content h3, .image-slide-title';
+  const SLIDE_MATCH = '.sqs-gallery.sqs-gallery-design-grid .slide, .sqs-gallery-design-grid-slide';
+  const HOST_MATCH = '.margin-wrapper, .image-wrapper, .thumb-image-wrapper';
 
   function copyType(from, to){
     const cs = getComputedStyle(from);
@@ -31,13 +24,34 @@
     ].forEach(p => { try { to.style[p] = cs[p]; } catch(_){} });
   }
 
-  function bestHostFor(el){ return el.closest(HOST_SEL) || el.parentElement; }
+  function slideUnderLabel(label){
+    const r = label.getBoundingClientRect();
+    const cx = r.left + r.width/2;
+    const cy = r.top + r.height/2;
+    let el = document.elementFromPoint(cx, cy);
+    while (el && !(el.matches && el.matches(SLIDE_MATCH))) el = el.parentElement;
+    return el || label.closest(SLIDE_MATCH) || label.parentElement;
+  }
+
+  function hostForOverlay(slide){
+    if (!slide) return null;
+    // Prefer the wrapper that directly contains the image so we share its stacking context
+    const img = slide.querySelector('img.thumb-image');
+    if (img) {
+      const host = img.closest(HOST_MATCH);
+      if (host) return host;
+    }
+    return slide.querySelector(HOST_MATCH) || slide;
+  }
 
   function ensureOverlay(label){
-    const host = bestHostFor(label);
+    const slide = slideUnderLabel(label);
+    if(!slide) return;
+    const host = hostForOverlay(slide);
     if(!host) return;
 
-    host.classList.add('ap-hide-original-label');
+    const block = label.closest('.sqs-block') || label.parentElement;
+    if (block) block.classList.add('ap-hide-original-label');
 
     let overlay = host.querySelector(':scope > .ap-name-overlay');
     if(!overlay){
@@ -50,18 +64,15 @@
     overlay.textContent = text;
     copyType(label, overlay);
 
-    // Position overlay to match label within the host
-    const rH = host.getBoundingClientRect();
+    const rS = host.getBoundingClientRect();
     const rL = label.getBoundingClientRect();
-    overlay.style.top  = Math.round(rL.top  - rH.top)  + 'px';
-    overlay.style.left = Math.round(rL.left - rH.left) + 'px';
+    overlay.style.top  = Math.round(rL.top  - rS.top)  + 'px';
+    overlay.style.left = Math.round(rL.left - rS.left) + 'px';
     overlay.style.height = rL.height + 'px';
     overlay.style.lineHeight = getComputedStyle(label).lineHeight;
   }
 
-  function scan(){
-    SCOPE.querySelectorAll(LABEL_SEL).forEach(ensureOverlay);
-  }
+  function scan(){ document.querySelectorAll(LABEL_SEL).forEach(ensureOverlay); }
 
   const tick = () => requestAnimationFrame(scan);
   if(document.readyState !== 'loading') tick();
