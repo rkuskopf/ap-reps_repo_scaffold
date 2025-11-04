@@ -365,6 +365,11 @@ html, body {
 [data-wm-plugin="tabs"] .sqs-block-content,
 [data-wm-plugin="tabs"] .sqs-html-content {
   background: transparent !important;
+  isolation: auto !important;
+  filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  transform: none !important;
 }
 
 /* 3) Ensure the image is the backdrop and sits under the label */
@@ -388,4 +393,13 @@ html, body {
   color: #fff !important;
   mix-blend-mode: difference !important;
   background: transparent !important;
+}
+
+/* Stronger safety net: sticky HTML blocks that act as labels */
+.apreps .fe-block.sqs-position-sticky .sqs-html-content,
+.apreps .fe-block.sqs-position-sticky .sqs-html-content * {
+  color: #fff !important;
+  mix-blend-mode: difference !important;
+  background: transparent !important;
+  text-shadow: none !important;
 }
