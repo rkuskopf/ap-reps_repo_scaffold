@@ -320,16 +320,32 @@ body, a:hover, button:hover {
   background: transparent !important;
 }
 
-/* Keep everything else (nav, actions, burger, overlay) normal */
+/* Let navigation + actions inherit the difference blend as well */
+.ap-diff #header .header-nav,
+.ap-diff #header .header-nav nav,
+.ap-diff #header .header-nav-list,
+.ap-diff #header .header-nav-list li,
 .ap-diff #header .header-nav-list a,
-.ap-diff #header .header-actions *,
-.ap-diff #header .burger .top-bun,
-.ap-diff #header .burger .patty,
-.ap-diff #header .burger .bottom-bun,
+.ap-diff #header .header-nav-list a *,
+.ap-diff #header .header-actions,
+.ap-diff #header .header-actions .header-actions-action,
+.ap-diff #header .header-actions .header-actions-action *,
+.ap-diff #header .burger,
+.ap-diff #header .burger * {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  background: transparent !important;
+}
+
+/* Keep the overlay menu legible with the default blend */
 .ap-diff .header-menu,
 .ap-diff .header-menu * {
   mix-blend-mode: normal !important;
   color: inherit !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
 }
 
 /* Let the backdrop show THROUGH the header container */
@@ -342,16 +358,6 @@ body, a:hover, button:hover {
   backdrop-filter: none !important;
 }
 .ap-diff #header { isolation: auto !important; }
-
-/* Title-only difference (keep your existing block) */
-.ap-diff #header .header-title-text,
-.ap-diff #header .header-title-text *,
-.ap-diff #header .header-title-text a,
-.ap-diff #header #site-title {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  background: transparent !important;
-}
 
 /* Ensure the hero actually sits under the header */
 .ap-diff .page-section:first-of-type {
