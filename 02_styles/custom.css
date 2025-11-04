@@ -528,21 +528,44 @@ html, body {
   backdrop-filter: none !important;
 }
 
-/* —— Global overlay blend sanity (works with or without tabs) —— */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide,
-.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
-.apreps .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .thumb-image-wrapper {
-  position: relative !important;
-  background: transparent !important;
-  isolation: auto !important;
-  transform: none !important;
-  filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  contain: none !important;
+/* Collapse any gallery block that has no items */
+.sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, img, picture, .slide, .thumb-image)) {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image { position: relative !important; z-index: 1 !important; }
-.apreps .ap-name-overlay { z-index: 2 !important; }
+/* If that empty gallery is the only thing in its section, hide the section too */
+section:has(.sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, img, picture, .slide, .thumb-image))) {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Mobile belt-and-braces: re-assert at smaller breakpoints */
+@media (max-width: 900px) {
+  .sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, img, picture, .slide, .thumb-image)) {
+    display: none !important;
+  }
+}
+
+/* Tablet kill-switch for ghost galleries (Squarespace 7.1) */
+@media (min-width: 641px) and (max-width: 1200px) {
+  /* Hide any gallery block with zero items */
+  .sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, img, picture, .slide, .thumb-image)) {
+    display: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* If that empty gallery is the only thing in its section, collapse the section too */
+  section:has(.sqs-block-gallery .sqs-gallery-block:not(:has(.sqs-gallery-item, img, picture, .slide, .thumb-image))) {
+    display: none !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
