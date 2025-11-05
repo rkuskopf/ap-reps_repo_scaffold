@@ -180,6 +180,31 @@ body, a:hover, button:hover {
   line-height: 1.3;
 }
 
+/* AP-REPS: make sections shrink-wrap content everywhere */
+.apreps .page-section,
+.apreps .fe-section,
+.apreps .fluid-engine {
+  min-height: 0 !important;
+}
+
+/* Kill Fluid Engine's "fill screen" row sizing */
+.apreps .fluid-engine {
+  --unstretched-row-height: 0px !important; /* FE uses this to pad rows */
+}
+
+/* Let FE blocks size to their contents instead of 100% of section */
+.apreps .fluid-engine .fluid-engine-block-contents,
+.apreps .fe-block.sqs-block {
+  height: auto !important;
+}
+
+/* Gallery block: never force a fixed height */
+.apreps .sqs-block-gallery,
+.apreps .sqs-block-gallery .sqs-gallery,
+.apreps .sqs-gallery-design-autogrid .sqs-gallery-container {
+  height: auto !important;
+}
+
 /* Gallery ratios by Rowan */
 
 .apreps { --ap-gap-x: 10px; }
@@ -513,17 +538,14 @@ html, body {
   background: transparent !important;
 }
 
-/* remove compositing traps around the tab panels */
+/* remove compositing traps around the tab panels and gallery block footer */
+.wm-tabs .tabs-content,
+.wm-tabs .tabs-content-wrapper,
 .wm-tabs .tab-panel,
 .wm-tabs .tab-content,
-.sqs-gallery-block-grid,
-.sqs-gallery.sqs-gallery-design-grid,
-.sqs-gallery.sqs-gallery-design-grid .gallery-grid,
-.sqs-gallery.sqs-gallery-design-grid .slide,
-.sqs-gallery.sqs-gallery-design-grid .image-wrapper {
+.sqs-block-gallery .sqs-block-footer {
   transform: none !important;
   filter: none !important;
-  opacity: 1 !important;
   isolation: auto !important;
   backdrop-filter: none !important;
 }
