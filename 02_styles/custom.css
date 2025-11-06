@@ -360,4 +360,32 @@ body, a:hover, button:hover {
 }
 
 
+/* Scope to the Will Myers tabs host so only artist tabs are affected */
+.apreps [data-wm-plugin="tabs"] .page-section,
+.apreps [data-wm-plugin="tabs"] .content-wrapper{
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
 
+/* Galleries inside tabs should never carry hard heights */
+.apreps [data-wm-plugin="tabs"] .sqs-block-gallery,
+.apreps [data-wm-plugin="tabs"] .sqs-block-gallery > .sqs-block-content,
+.apreps [data-wm-plugin="tabs"] .sqs-block-gallery-block.sqs-block-gallery{
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Mobile: nothing sticky so the layout can collapse */
+@media (max-width: 767px){
+  .apreps [data-wm-plugin="tabs"] .sqs-position-sticky{
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
+}

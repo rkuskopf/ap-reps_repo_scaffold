@@ -34,3 +34,42 @@ document.addEventListener("DOMContentLoaded", () => { // once the page is ready
 })
 </script>
 <!-- Dot Cursor by digitalmoves.com.au -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const mount = document.querySelector('[data-wm-plugin="tabs"]');
+  if (!mount) return;
+
+  const fixHeights = (ctx) => {
+    // Let sections + wrappers size to content
+    ctx.querySelectorAll('.page-section, .content-wrapper').forEach(el => {
+      el.style.height = 'auto';
+      el.style.minHeight = '0';
+      el.style.maxHeight = 'none';
+      el.style.paddingTop = '0';
+      el.style.paddingBottom = '0';
+      el.style.overflow = 'visible';
+    });
+
+    // Nuke inline height/min-height on galleries + their inner wrappers
+    ctx.querySelectorAll('.sqs-block-gallery, .sqs-block-gallery > .sqs-block-content, .sqs-block-gallery-block')
+      .forEach(el => {
+        el.style.height = 'auto';
+        el.style.minHeight = '0';
+        el.style.maxHeight = 'none';
+        el.style.overflow = 'visible';
+      });
+  };
+
+  // Run once now
+  fixHeights(mount);
+
+  // Run whenever tabs load/swap content
+  const mo = new MutationObserver(muts => {
+    for (const m of muts) {
+      m.addedNodes.forEach(n => n.nodeType === 1 && fixHeights(n));
+    }
+  });
+  mo.observe(mount, { childList: true, subtree: true });
+});
+</script>
