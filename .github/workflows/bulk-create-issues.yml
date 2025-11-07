@@ -1,0 +1,22 @@
+name: Bulk create issues from inbox/issues.md
+on:
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm i @octokit/rest
+      - name: Create issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # provided automatically in Actions
+          REPO: ${{ github.repository }}
+        run: node scripts/create-issues-from-md.js
