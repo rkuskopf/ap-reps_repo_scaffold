@@ -169,4 +169,127 @@ section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
 }
 
 
+/* Scope to the Will Myers tabs host so only artist tabs are affected */
+.apreps [data-wm-plugin="tabs"] .page-section,
+.apreps [data-wm-plugin="tabs"] .content-wrapper{
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
 
+/* Galleries inside tabs should never carry hard heights */
+.apreps [data-wm-plugin="tabs"] .sqs-block-gallery,
+.apreps [data-wm-plugin="tabs"] .sqs-block-gallery > .sqs-block-content,
+.apreps [data-wm-plugin="tabs"] .sqs-block-gallery-block.sqs-block-gallery{
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Mobile: nothing sticky so the layout can collapse */
+@media (max-width: 767px){
+  .apreps [data-wm-plugin="tabs"] .sqs-position-sticky{
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
+}
+
+
+/* Catch when Squarespace puts height/min-height on the grid itself */
+.apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="height"],
+.apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="min-height"]{
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+/* Catch FE wrappers that get a min-height inline */
+.apreps [data-wm-plugin="tabs"] .fe-block[style*="min-height"],
+.apreps [data-wm-plugin="tabs"] .sqs-block-content[style*="min-height"]{
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+/* Keep FE from stretching the block anyway */
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-block{ align-self: start !important; }
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-row,
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-column{ min-height: 0 !important; }
+
+
+/* Force Grid Gallery blocks to hug content */
+.apreps .sqs-block.sqs-block-gallery,
+.apreps .sqs-block.sqs-block-gallery > .sqs-block-content,
+.apreps .sqs-block.sqs-block-gallery .sqs-gallery,
+.apreps .sqs-gallery-block-grid,
+.apreps .sqs-gallery.sqs-gallery-design-grid {
+height: auto !important;
+min-height: 0 !important;
+max-height: none !important;
+padding-bottom: 0 !important; 
+}
+
+/* Let artist name overlay the gallery, not push it down */
+.apreps [data-wm-plugin="tabs"] .artist-name {
+  position: absolute !important;
+  top: 0;                /* adjust for placement, e.g. 1rem */
+  left: 0;
+  right: 0;              /* if you want full width */
+  z-index: 5;            /* higher than gallery */
+  mix-blend-mode: difference;
+  pointer-events: none;  /* so clicks go to gallery images */
+}
+
+/* Make sure the gallery section is a positioning context */
+.apreps [data-wm-plugin="tabs"] .page-section:has(.sqs-block-gallery),
+.apreps [data-wm-plugin="tabs"] .sqs-block-gallery > .sqs-block-content {
+  position: relative !important;
+}
+
+/* Ensure grid tracks don’t enforce extra height */
+.apreps .sqs-gallery-block-grid .gallery-grid {
+grid-auto-rows: auto !important;
+align-items: start !important;
+}
+
+
+/* Override any editor-dragged inline heights */
+.apreps .sqs-block.sqs-block-gallery[style="height"],
+.apreps .sqs-block.sqs-block-gallery[style*="min-height"],
+.apreps .sqs-block.sqs-block-gallery > .sqs-block-content[style*="height"],
+.apreps .sqs-block.sqs-block-gallery > .sqs-block-content[style*="min-height"],
+.apreps .sqs-gallery-block-grid[style*="height"],
+.apreps .sqs-gallery-block-grid[style*="min-height"],
+.apreps .sqs-gallery.sqs-gallery-design-grid[style*="height"],
+.apreps .sqs-gallery.sqs-gallery-design-grid[style*="min-height"] {
+height: auto !important;
+min-height: 0 !important;
+}
+
+.apreps .wm-tabs [data-tab-panel] .sqs-block.sqs-block-gallery,
+.apreps .wm-tabs [data-tab-panel] .sqs-gallery-block-grid { height: auto !important; min-height: 0 !important; }
+
+/* Nuke FE's inline height on the pulled artist section wrappers */
+.apreps [data-wm-plugin="tabs"] .content-wrapper[style*="height"],
+.apreps [data-wm-plugin="tabs"] .page-section[style*="height"]{
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Inside Will Myers tabs: let FE sections shrink to content */
+.apreps [data-wm-plugin="tabs"] [class^="fe-"]{
+  grid-template-rows: none !important;          /* drop the fixed repeat(...) */
+  grid-auto-rows: minmax(8px, auto) !important; /* implicit rows size to content */
+}
+
+/* Let Fluid Engine shrink-wrap to the gallery content */
+.apreps [data-wm-plugin="tabs"] [class^="fe-"] {
+  grid-template-rows: none !important;
+  grid-auto-rows: minmax(8px, auto) !important;
+}
