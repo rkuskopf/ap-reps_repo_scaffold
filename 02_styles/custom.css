@@ -359,8 +359,9 @@ body, a:hover, button:hover {
   text-shadow: none !important;
 }
 
+/* ----- Reduce Gallery Height Issues --------- */
 
-/* Scope to the Will Myers tabs host so only artist tabs are affected */
+/* Scope to the Will Myers tabs host so only they're are affected */
 .apreps [data-wm-plugin="tabs"] .page-section,
 .apreps [data-wm-plugin="tabs"] .content-wrapper{
   height: auto !important;
