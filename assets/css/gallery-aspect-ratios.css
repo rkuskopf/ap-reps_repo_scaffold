@@ -1,0 +1,86 @@
+/*
+ * Gallery aspect ratio utilities
+ * Ensures portrait (.ratio-3-4) and landscape (.ratio-4-3) gallery tiles
+ * maintain their intrinsic ratios while letting imagery scale responsively.
+ */
+
+.ratio-3-4,
+.ratio-4-3 {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.ratio-3-4 {
+  --ap-aspect: 3 / 4;
+}
+
+.ratio-4-3 {
+  --ap-aspect: 4 / 3;
+}
+
+.ratio-3-4 :is(
+    .margin-wrapper,
+    .image-wrapper,
+    .thumb-image-wrapper,
+    .image-slide-anchor,
+    .js-gallery-lightbox-opener
+  ),
+.ratio-4-3 :is(
+    .margin-wrapper,
+    .image-wrapper,
+    .thumb-image-wrapper,
+    .image-slide-anchor,
+    .js-gallery-lightbox-opener
+  ) {
+  aspect-ratio: var(--ap-aspect);
+  display: block;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.ratio-3-4 :is(
+    .margin-wrapper,
+    .image-wrapper,
+    .thumb-image-wrapper,
+    .image-slide-anchor,
+    .js-gallery-lightbox-opener
+  ) > :is(img, picture),
+.ratio-4-3 :is(
+    .margin-wrapper,
+    .image-wrapper,
+    .thumb-image-wrapper,
+    .image-slide-anchor,
+    .js-gallery-lightbox-opener
+  ) > :is(img, picture),
+.ratio-3-4 picture > img,
+.ratio-4-3 picture > img,
+.ratio-3-4 img.thumb-image,
+.ratio-4-3 img.thumb-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+
+.ratio-3-4 figure,
+.ratio-4-3 figure {
+  margin: 0;
+}
+
+.ratio-3-4 figcaption,
+.ratio-4-3 figcaption,
+.ratio-3-4 .image-slide-title,
+.ratio-4-3 .image-slide-title,
+.ratio-3-4 .image-meta,
+.ratio-4-3 .image-meta,
+.ratio-3-4 .sqs-block-caption,
+.ratio-4-3 .sqs-block-caption {
+  text-align: left;
+  margin-top: 0.5rem;
+}
