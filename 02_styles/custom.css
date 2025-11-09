@@ -275,6 +275,34 @@ body, a:hover, button:hover {
   --wm-focal-point: 50% 50% !important;
 }
 
+.apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
+.apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
+.apreps .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper,
+.apreps .sqs-gallery.sqs-gallery-design-grid .thumb-image-wrapper {
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Left-align captions */
+.apreps .sqs-gallery-block-show-meta .image-slide-title,
+.apreps .sqs-gallery-block-show-meta .image-meta,
+.apreps .sqs-gallery-block-show-meta .sqs-block-caption {
+  text-align: left !important;
+  margin-top: .5rem;
+  line-height: 1.3;
+}
+
+/* AP—REPS: side gutter on the floated slide itself (float-safe) */
+.apreps .sqs-gallery-block-grid .sqs-gallery-design-grid-slide,
+.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
+.apreps .sqs-gallery-block-grid .slide,
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide {
+  box-sizing: border-box !important;
+  padding-right: 10px !important;
+}
+
+
 /* Implements [Follow-up][D1]: Center image crops + .crop-top utility */
 .apreps .sqs-gallery.sqs-gallery-design-grid picture > img {
   width: 100% !important;
@@ -312,74 +340,25 @@ picture > img.crop-top {
   object-position: 50% 50% !important;
 }
 
-.apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
-.apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
-.apreps .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .thumb-image-wrapper {
-  display: block !important;
+/* Hard override: ignore Squarespace's inline focal offsets on gallery images */
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image,
+.apreps .sqs-gallery-block-grid img.thumb-image,
+.apreps .sqs-gallery.sqs-gallery-design-grid picture > img,
+.apreps .sqs-gallery-block-grid picture > img {
+  position: absolute !important;
+  /* wipe any inline left/top that JS writes */
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  /* also win against translate-based centering */
+  transform: none !important;
+
   width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: 50% 50% !important; /* default centred crop */
 }
 
-/* Left-align captions */
-.apreps .sqs-gallery-block-show-meta .image-slide-title,
-.apreps .sqs-gallery-block-show-meta .image-meta,
-.apreps .sqs-gallery-block-show-meta .sqs-block-caption {
-  text-align: left !important;
-  margin-top: .5rem;
-  line-height: 1.3;
-}
 
-/* AP—REPS: side gutter on the floated slide itself (float-safe) */
-.apreps .sqs-gallery-block-grid .sqs-gallery-design-grid-slide,
-.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
-.apreps .sqs-gallery-block-grid .slide,
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide {
-  box-sizing: border-box !important;
-  padding-right: 10px !important;
-}
-
-/* AP—REPS: keep tabs horizontal + padded on narrow viewports */
-@media (max-width: 480px) {
-  .apreps .wm-tabs[data-mobile-navigation-type="horizontal"] .tabs-header,
-  .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header {
-    --tabs-header-padding-block: 0.75rem;
-    --tabs-header-padding-inline: var(--sqs-mobile-site-gutter, 6vw);
-    min-height: 3.25rem;
-  }
-
-  .apreps .wm-tabs[data-mobile-navigation-type="horizontal"] .tabs-header .nav-container,
-  .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header .nav-container {
-    display: block !important;
-  }
-
-  .apreps .wm-tabs[data-mobile-navigation-type="horizontal"] .tabs-header nav,
-  .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav {
-    display: flex !important;
-    gap: var(--tabs-header-gap, 0);
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .apreps .wm-tabs[data-mobile-navigation-type="horizontal"] .tabs-header nav::-webkit-scrollbar,
-  .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  .apreps .wm-tabs[data-mobile-navigation-type="horizontal"] .tabs-header nav button,
-  .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button {
-    flex: 0 0 auto;
-    min-height: 44px;
-    padding: 0.75rem 1rem;
-  }
-
-  .apreps .wm-tabs[data-mobile-navigation-type="horizontal"] .tabs-header [data-tab-select],
-  .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header [data-tab-select],
-  .apreps .wm-tabs[data-mobile-navigation-type="horizontal"] .tabs-header select,
-  .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header select {
-    display: none !important;
-  }
-}
 /* END D1:GALLERY-RATIOS v1 2025-11-08  */
