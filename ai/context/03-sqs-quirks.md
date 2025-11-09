@@ -1,0 +1,25 @@
+
+## Squarespace 7.1 quirks
+- Code injection order:
+  - Site Styles (theme) → Custom CSS → Code Injection (header/footer) → Page header code.
+  - Prefer site/global scope for editor iframe coverage.
+- Fluid Engine (FE) behaviors:
+  - Saves breakpoint-specific grid spans and row templates causing tall sections.
+  - "Fill Screen" can force viewport-height sections; disable globally via CSS if needed.
+  - FE block shells often have height: 100% inline; reset to height: auto and min-height: 0.
+- Gallery block quirks:
+  - .sqs-block-gallery may reserve extra height; ensure height: auto; min-height: 0.
+  - Slides nested via .sqs-gallery-container → .sqs-gallery.sqs-gallery-design-grid → .slide .margin-wrapper.
+  - Bottom gaps appear when sticky siblings reserve flow space; avoid by disabling stickiness or removing from flow on mobile.
+- Sticky elements:
+  - .fe-block.sqs-position-sticky may expand section height when scrolled past gallery.
+  - On mobile, labels can end at bottom or duplicate-like; disable sticky/hide on narrow widths.
+- Known mobile/layout bugs to watch:
+  - Duplicate gallery on narrow viewports when compositing reset not scoped to tabs container.
+  - Bottom gap under gallery due to FE's row grid/Fill Screen or sticky blocks.
+  - Footer translation too early at some widths (fixed in editor; keep regression watch).
+- Test pages/URLs:
+  - Editor: <!-- TODO: clarify test page slugs -->
+  - Preview: https://elk-cornet-8nlm.squarespace.com/jamie-green-all
+  - Code Injector: https://elk-cornet-8nlm.squarespace.com/config/pages/code-injection
+  - CSS panel: https://elk-cornet-8nlm.squarespace.com/config/pages/custom-css
