@@ -37,12 +37,33 @@ Define where code lives, how selectors are structured, and the guardrails for ed
 > Keep this short and durable. Page-specific selectors belong in `ai/context/selectors-map.md`.
 
 **Galleries**
-- `.sqs-block-gallery`
+## Selector reference — Gallery aspect-ratio fix
+
+### Active scope
+- `.apreps .wm-tabs .tab-panel > .tab-content`
+  - contains all artist tab content and nested gallery blocks.
 - `.sqs-gallery.sqs-gallery-design-grid`
-- `.sqs-gallery-container`
-- `.slide`, `.margin-wrapper`, `.image-wrapper`, `.thumb-image-wrapper`
-- `img.thumb-image`, `picture > img`
-- `figcaption`, `.image-meta`, `.image-slide-title`
+  - main Squarespace grid gallery pattern.
+
+### Key elements touched
+| Purpose | Selector | Notes |
+|----------|-----------|-------|
+| Anchor shells | `.image-slide-anchor`, `.js-gallery-lightbox-opener` | forced block layout, overflow hidden |
+| Image fill | `.thumb-image` | `object-fit: cover`, `position:absolute`, flush top |
+| Wrapper ratios | `.margin-wrapper`, `.image-wrapper`, `.thumb-image-wrapper` | `aspect-ratio` control, `overflow:hidden` |
+| Section padding | `.page-section:first-of-type` | top padding removed for flush-top |
+| Caption alignment | `.image-slide-title`, `.image-slide-description` | left-aligned across tabs |
+| Chrome cleanup | `.section-border` | hidden inside tabs |
+| Grid gap | `.gallery-grid-item`, `figure`, `.meta` | zeroed top margins |
+| Gutter control | `.slide` etc. | `padding-right:10px`, box-sizing fixes |
+
+### Summary
+This block establishes custom aspect-ratio logic (3:4 / 4:3), removes Squarespace’s stray top/bottom margins, and enforces left-aligned captions within **tabbed gallery sections**.  
+It is **tab-scoped** (Will-Myers Tabs only) and should not affect standalone galleries outside `.wm-tabs`.
+
+### Status
+✅ implemented and stable in `custom.css`
+⚠️ monitor tablet breakpoints for minor crop offset
 
 **Fluid Engine / layout shells**
 - `.page-section`, `.fe-section`, `[data-fluid-engine] .fluid-engine`

@@ -38,6 +38,7 @@ Done:
 
 ✅ done
 🧩 partial
+⚠️ problem
 ❌ pending
 
 # Project overview
@@ -52,7 +53,8 @@ Squarespace 7.1 site (AP-REPS). Front-end fixes, refinements, and cross-browser 
 - ✅ Enforce 3:4 for portrait and 4:3 for landscape.  
 - ✅ Ensure cropped, flush-top alignment and left-aligned captions.  
 - ✅ Captions left-aligned across all gallery instances.
-- ❌ Images need to fill their container correctly 
+- ⚠️ Images need to fill their container correctly 
+- ⚠️ tabs are now in a drop down instead of the horizontal scroll and the header shrinks for some reason. 
 
 ### 2. Blend-mode compatibility
 - Implement mix-blend-mode effects on:
