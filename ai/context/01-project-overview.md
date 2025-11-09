@@ -22,10 +22,10 @@ Squarespace 7.1 site (AP-REPS). Front-end fixes, refinements, and cross-browser 
 
 ### 2. Blend-mode compatibility
 - Implement mix-blend-mode effects on:
-  - Artist names and sub-header tabs on artist pages.
-  - Homepage hero text (SVG/PNG assets).
-  - Global headers and nav.
-- Add Safari and Firefox fallback styles per WCAG AA contrast rules.
+  - ✅ Artist names and sub-header tabs on artist pages.
+  - ✅ Homepage hero text (SVG/PNG assets).
+  - ✅ Global headers and nav.
+- ❌ Add Safari and Firefox fallback styles per WCAG AA contrast rules.
 
 ### 3. Overscroll
 - Remove overscroll behavior for smoother scroll boundaries and reduced UI jitter on iOS/Android.

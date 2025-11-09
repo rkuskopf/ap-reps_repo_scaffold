@@ -17,7 +17,7 @@ Maintain horizontal scroll tabs on mobile and preserve header padding, without b
 assets/**/*.css, assets/**/*.js
 
 ## Preview URL
-<!-- TODO -->
+<!-- DONE -->
 
 
 # ISSUE
@@ -40,6 +40,24 @@ assets/**/*.css, assets/**/*.js
 <!-- TODO -->
 
 
+# ISSUE
+**Title:** [Regression][D2] Hero banner text turned white
+**Labels:** bug, ready
+**Origin:** Deliverable 2 — Blend-mode compatibility (see: context/06-outstanding-issues.md → Group B)
 
+## Goal
+Restore hero banner text (“AP-REPS”) to solid black, removing all `mix-blend-mode` or color overrides that caused it to render white.
+
+## Acceptance criteria
+- Hero banner text color: `#000` (black)
+- `mix-blend-mode` and `text-shadow` properties removed or disabled
+- No visual blend effects apply to the hero heading across breakpoints
+- Change limited to hero banner; no effect on other text blocks
+
+## Allowed paths
+assets/**/*.css
+
+## Preview URL
+<!-- TODO -->
 
 

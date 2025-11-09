@@ -32,13 +32,12 @@ function splitIssues(fileText) {
 }
 
 function section(text, startHeader, endHeaderRegex) {
-  const reStart = new RegExp(`^\\s*${startHeader}\\s*`, 'i');
-  const idx = text.search(reStart);
-  if (idx === -1) return '';
-  const after = text.slice(idx + text.match(reStart)[0].length);
-  const reEnd = endHeaderRegex;
-  const m = after.match(reEnd);
-  const end = m ? m.index : after.length;
+  const reStart = new RegExp(`^\\s*${startHeader}\\s*`, 'mi');
+  const mStart = reStart.exec(text);
+  if (!mStart) return '';
+  const after = text.slice(mStart.index + mStart[0].length);
+  const mEnd = endHeaderRegex ? after.match(endHeaderRegex) : null;
+  const end = mEnd ? mEnd.index : after.length;
   return after.slice(0, end).trim();
 }
 
@@ -54,7 +53,7 @@ function parseIssueBlock(b) {
   // ...
   // ## Preview URL
   // ...
-  const titleMatch = b.match(/\*\*Title:\*\*\s*\[Task\]:\s*(.+)\s*/i);
+  const titleMatch = b.match(/\*\*Title:\*\*\s*(.+)\s*/i);
   const labelsMatch = b.match(/\*\*Labels:\*\*\s*([^\n]+)\n/i);
 
   const bodyStart = /(^|\n)##\s*Goal\s*/i;
@@ -65,7 +64,7 @@ function parseIssueBlock(b) {
   const paths = section(b, '##\\s*Allowed paths', /\n##\s*Preview URL\b/i) || 'assets/**/*.css, assets/**/*.js';
   const preview = section(b, '##\\s*Preview URL', /$(?!\s\S)/) || '<!-- TODO: add preview URL -->';
 
-  const title = `[Task]: ${titleMatch ? titleMatch[1].trim() : 'Untitled task'}`;
+  const title = titleMatch ? titleMatch[1].trim() : 'Untitled task';
   const labels = labelsMatch
     ? labelsMatch[1].split(',').map(s => s.trim()).filter(Boolean)
     : ['ai-draft', 'ready'];

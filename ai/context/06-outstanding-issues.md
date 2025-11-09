@@ -1,18 +1,28 @@
+✅ done
+🧩 partial
+🐞 bug
+❌ pending
+
+
+
+
 # Outstanding Issues
 
 ## Group A — Deliverable 1: Gallery function regressions
 Context: These issues arose directly from the aspect-ratio / flush-top gallery implementation (D1).
 
 ### A1. Gallery crops from top only
-**Status:** ❌ unresolved  
+**Status:** ❌ unresolved
 **Observed:** Images within `.sqs-gallery.sqs-gallery-design-grid` default to `object-position: top center`, causing off-center crops.  
 **Goal:** Center imagery within each tile while preserving `object-fit: cover`.  
 **Fix:** Adjust `object-position` to `center center` globally; add `.crop-top` utility for intentional overrides.  
 
+**Update::** no fixes have worked so far. branch: center-image-crop
+
 ---
 
 ### A2. Mobile: tabs switch to dropdown and header shrinks
-**Status:** ❌ unresolved  
+**Status:** ✅ resolved  
 **Observed:** At ≤767 px, Will-Myers tabs revert to `<select>` dropdown; header height collapses.  
 **Goal:** Maintain horizontal scroll tabs and consistent header padding.  
 **Root cause:** Height resets in D1 affected header min-height.  
@@ -21,11 +31,17 @@ Context: These issues arose directly from the aspect-ratio / flush-top gallery i
 ---
 
 ### A3. Header collapse 
-**Status:** ❌ pending  
+**Status:**  ✅ resolved  
 **Origin:** Deliverable 1 — gallery flush-top height resets.  
 **Goal:** Reinstate header’s intended height/padding while keeping D1 fixes.  
 **Notes:** Guard `.site-header`, `.Header-inner` from min-height resets.
 
 ---
 
+## Group B - Deliverable 2: Blend-mode compatibility
 
+### B1. Hero banner 'APREPS' is white.
+**Status:** 🐞 bug
+**Origin:** Deliverable 2, commit: 'merge from mix-2'
+**Observed:** I accidentally made the hero text 'APREPS' white. 
+**Goal:** this needs to be black, with no mix blend applyied
