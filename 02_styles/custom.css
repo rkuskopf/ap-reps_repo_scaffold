@@ -153,6 +153,7 @@ body, a:hover, button:hover {
 
 /* BEGIN D1:GALLERY-RATIOS v1 2025-11-08 */
 
+
 /* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
 .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
   aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
@@ -274,12 +275,25 @@ body, a:hover, button:hover {
   --wm-focal-point: 50% 50% !important;
 }
 
+/* Implements [Follow-up][D1]: Center image crops + .crop-top utility */
+.apreps .sqs-gallery.sqs-gallery-design-grid picture > img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
+}
+
 /* Utility: restore top-biased crop when needed */
-/* Apply `.crop-top` to a slide/wrapper or directly on the image */
+/* Apply `.crop-top` to a slide/wrapper, picture, or directly on the image */
 .crop-top .thumb-image,
 .crop-top img.thumb-image,
 img.thumb-image.crop-top,
-.thumb-image.crop-top {
+.thumb-image.crop-top,
+.crop-top picture > img,
+picture > img.crop-top {
   object-position: top center !important;
   --wm-focal-point: 50% 0% !important;
 }
