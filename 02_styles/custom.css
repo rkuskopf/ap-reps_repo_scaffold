@@ -333,6 +333,10 @@ img.thumb-image.crop-top,
 #header .header-actions *,
 #header .header-actions-action svg,
 #header .nav-toggle-label,
+#header .header-burger,
+#header .header-burger *,
+#header .header-burger-btn,
+#header .burger-box,
 #header .burger-inner {
 mix-blend-mode: difference !important;
 color: #fff !important;
@@ -345,45 +349,8 @@ fill: #fff !important;
 #header .burger-inner .top-bun,
 #header .burger-inner .patty,
 #header .burger-inner .bottom-bun {
-  background-color: #fff !important;
-  mix-blend-mode: difference !important;
-}
-
-/* Burger containers should not blend; keep transparent */
-#header .header-burger,
-#header .header-burger *,
-#header .header-burger-btn,
-#header .burger-box {
-  mix-blend-mode: normal !important;
-  background: transparent !important;
-}
-
-/* Disable blending in overlay menu state */
-.menu-open #header,
-.menu-open #header .header-title,
-.menu-open #header .header-title-text,
-.menu-open #header .header-title-text a,
-.menu-open #header .header-nav a,
-.menu-open #header .nav-toggle-label,
-.menu-open #header .header-actions *,
-.menu-open #header .header-actions-action svg,
-.menu-open #header .burger-inner {
-  mix-blend-mode: normal !important;
-  color: #000 !important;
-  fill: currentColor !important;
-  text-shadow: none !important;
-}
-
-.menu-open #header .burger-inner .top-bun,
-.menu-open #header .burger-inner .patty,
-.menu-open #header .burger-inner .bottom-bun {
-  background-color: currentColor !important;
-}
-
-.menu-open .header-menu {
-  mix-blend-mode: normal !important;
-  background: #fff !important;
-  color: #000 !important;
+background-color: #fff !important;
+mix-blend-mode: difference !important;
 }
 
 
@@ -421,3 +388,4 @@ fill: #fff !important;
 
 
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
+
