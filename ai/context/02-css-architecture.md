@@ -81,9 +81,9 @@ It is **tab-scoped** (Will-Myers Tabs only) and should not affect standalone gal
 
 ---
 
-**Mix blend**
+**DELIBERABLE 2: MIX BLEND**
 
-<div class="header-menu-nav-wrapper">
+
   
 
 

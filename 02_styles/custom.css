@@ -387,5 +387,29 @@ mix-blend-mode: difference !important;
 
 
 
-/* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
+/* Overlay menu: make all overlay containers opaque and non-blending */
+.menu-open .header-menu,
+.menu-open .header-menu-bg,
+.menu-open .header-menu-nav,
+.menu-open .header-menu-nav-list,
+.menu-open .header-menu-nav-folder,
+.menu-open .header-menu-nav-folder-content,
+.menu-open .header-menu-nav-folder-list,
+.menu-open .header-menu-nav-wrapper {
+  mix-blend-mode: normal !important;
+  background: #fff !important;
+  color: #000 !important;
+}
 
+.menu-open .header-menu-nav-item,
+.menu-open .header-menu-nav-item a {
+  mix-blend-mode: normal !important;
+  background: transparent !important;
+  color: #000 !important;
+  text-shadow: none !important;
+  fill: currentColor !important;
+}
+
+.menu-open .header-menu-nav-item a:hover { color: #000 !important; opacity: .85; }
+
+/* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
