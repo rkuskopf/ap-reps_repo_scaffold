@@ -1,72 +1,45 @@
 
 # ISSUE
-**Title:** [Gallery margins]: Remove right/bottom gap from .sqs-block-gallery tiles
+**Title:** [Regression][D1] Mobile tabs switched to dropdown & header shrinks
 **Labels:** ai-draft, ready
+**Origin:** Deliverable 1 — Gallery Function (see: context/06-outstanding-issues.md → Group A)
 
 ## Goal
-- Neutralize extra right and bottom margins around gallery items caused by `.margin-wrapper` / slide shells.
-- Ensure gallery grid has **no trailing white gap** at any breakpoint.
-- Keep captions left-aligned and aspect-ratio rules intact.
+Maintain horizontal scroll tabs on mobile and preserve header padding, without breaking D1 (gallery ratio/flush-top fixes).
 
 ## Acceptance criteria
-- At 390 / 1024 / 1440: no visible rightmost gap; last column aligns flush with section gutter.
-- At 390 / 1024 / 1440: no bottom white gap under gallery; grid computes to content height.
-- Ratios preserved (3:4 portrait, 4:3 landscape); flush-top cropping holds; captions left.
-- No regression to lightbox/anchor behavior inside slides.
+- 390 px: WM Tabs render as a horizontal, scrollable strip; no `<select>` dropdown visible.
+- 390 px: header height/padding stable on load and scroll (no “over-shrink”).
+- 390 / 1024 / 1440: no reappearance of gallery bottom gap or FE height expansion.
+- No change to desktop/tablet tab behavior.
 
 ## Allowed paths
 assets/**/*.css, assets/**/*.js
 
 ## Preview URL
-<!-- TODO: add preview URL -->
-
+<!-- TODO -->
 
 
 # ISSUE
-**Title:** [Image sizing]: Ensure images resize correctly within enforced aspect ratios
+**Title:** [Follow-up][D1] Center image crops; add .crop-top utility
 **Labels:** ai-draft, ready
+**Origin:** Deliverable 1 — Gallery Function (see: context/06-outstanding-issues.md → Group A)
 
 ## Goal
-- Make gallery images **size to their container** while enforcing: portrait = 3:4 (`.ratio-3-4`), landscape = 4:3 (`.ratio-4-3`).
-- Prevent distortion or overflow when the container changes size across breakpoints.
+Default gallery imagery to `object-position:center center` and provide `.crop-top` utility for intentional top-biased crops.
 
 ## Acceptance criteria
-- At 390 / 1024 / 1440: no stretching; images fill their ratio boxes via `object-fit`/intrinsic ratio utilities.
-- Flush-top cropping holds; no unexpected top/bottom padding inside tiles.
-- Captions remain left-aligned and do not collide with imagery.
+- 390 / 1024 / 1440: tiles fill cleanly; subjects appear centered by default.
+- Applying `.crop-top` on a slide/wrapper restores top-biased crop for specific images.
+- No change to D1 aspect-ratio/flush-top logic.
 
 ## Allowed paths
 assets/**/*.css, assets/**/*.js
 
 ## Preview URL
-<!-- TODO: add preview URL -->
+<!-- TODO -->
 
 
 
-# ISSUE
-**Title:** [Regression check]: Gallery + footer spacing at key widths
-**Labels:** ai-draft, ready
-
-## Goal
-- Run a sweep to confirm gallery tile margins and footer spacing are correct at 390 / 1024 / 1440 and adjacent widths.
-
-## Acceptance criteria
-- No right/bottom gaps in gallery tiles at test widths and ±80px around each breakpoint.
-- Footer spacing equals side gutter (±2 px); no early translation or unexpected extra gap.
-- No duplicate gallery instances on narrow tabs pages; no sticky-induced expansion on mobile.
-
-## Allowed paths
-assets/**/*.css, assets/**/*.js
-
-## Preview URL
-<!-- TODO: add preview URL -->
 
 
-
-How to run the drill
-	1.	Save the blocks above into inbox/issues.md.
-	2.	Use the bulk creator we set up (or paste by hand) so each issue gets labels ai-draft, ready.
-	3.	Your ai-pr.yml will fire, create branches, draft patches, and open PRs.
-	4.	You review diffs/screens, merge, then paste final CSS/JS into Squarespace.
-
-Want me to spit these into a single issues.md file you can drop straight in? I can also add a tiny “Epic” issue that links the four.
