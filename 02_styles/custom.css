@@ -182,8 +182,6 @@ body, a:hover, button:hover {
   line-height: 1.3;
 }
 
-
-
 .apreps { --ap-gap-x: 10px; }
 
 /*  anchors  */
@@ -354,12 +352,25 @@ mix-blend-mode: difference !important;
 }
 
 
-
 /* Optional: hover */
 #header .header-nav a:hover,
 #header .header-actions-action:hover {
   color: #fff !important;
   mix-blend-mode: difference !important;
+}
+
+/* Mobile menu overlay needs solid background */
+#header .header-menu,
+#header .header-menu-bg {
+  background: #000 !important; /* solid black background */
+  mix-blend-mode: normal !important; /* reset blend mode for overlay */
+  isolation: isolate !important; /* create stacking context */
+}
+
+/* Mobile menu items should be white on the black background */
+#header .header-menu .header-menu-nav-item a {
+  color: #fff !important;
+  mix-blend-mode: normal !important;
 }
 
 
@@ -384,32 +395,5 @@ mix-blend-mode: difference !important;
 }
 
 
-
-
-
-/* Overlay menu: make all overlay containers opaque and non-blending */
-.menu-open .header-menu,
-.menu-open .header-menu-bg,
-.menu-open .header-menu-nav,
-.menu-open .header-menu-nav-list,
-.menu-open .header-menu-nav-folder,
-.menu-open .header-menu-nav-folder-content,
-.menu-open .header-menu-nav-folder-list,
-.menu-open .header-menu-nav-wrapper {
-  mix-blend-mode: normal !important;
-  background: #fff !important;
-  color: #000 !important;
-}
-
-.menu-open .header-menu-nav-item,
-.menu-open .header-menu-nav-item a {
-  mix-blend-mode: normal !important;
-  background: transparent !important;
-  color: #000 !important;
-  text-shadow: none !important;
-  fill: currentColor !important;
-}
-
-.menu-open .header-menu-nav-item a:hover { color: #000 !important; opacity: .85; }
-
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
+
