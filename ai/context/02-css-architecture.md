@@ -57,6 +57,7 @@ Define where code lives, how selectors are structured, and the guardrails for ed
 | Grid gap | `.gallery-grid-item`, `figure`, `.meta` | zeroed top margins |
 | Gutter control | `.slide` etc. | `padding-right:10px`, box-sizing fixes |
 
+
 ### Summary
 This block establishes custom aspect-ratio logic (3:4 / 4:3), removes Squarespace’s stray top/bottom margins, and enforces left-aligned captions within **tabbed gallery sections**.  
 It is **tab-scoped** (Will-Myers Tabs only) and should not affect standalone galleries outside `.wm-tabs`.
