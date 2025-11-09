@@ -309,3 +309,64 @@ img.thumb-image.crop-top,
   padding-right: 10px !important;
 }
 
+/* ---- header mix blend ---- */
+
+/* Header container must be see-through so the text can "see" the page */
+#header,
+#header:before,
+#header:after {
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  isolation: auto !important;
+  mix-blend-mode: difference !important;
+  transform: translate3d(0,0,0); /* helps Safari render blend properly */
+}
+
+/* Apply difference */
+#header .header-title,
+#header .header-title-text,
+#header .header-title-text a,
+#header .header-title-logo a,
+#header .header-nav a,
+#header .header-actions *,
+#header .header-actions-action svg,
+#header .nav-toggle-label {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  fill: #fff !important;
+}
+
+/* Optional: hover */
+#header .header-nav a:hover,
+#header .header-actions-action:hover {
+  color: #fff !important;
+  mix-blend-mode: difference !important;
+}
+
+
+/* 1) Stop the sticky wrapper from forcing normal blend */
+.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
+  mix-blend-mode: difference !important;
+  background: transparent !important;
+  isolation: auto !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+
+/* 3) Force the artist name to blend like the header */
+.apreps .sqs-block.html-block .sqs-html-content h3,
+.apreps .sqs-block.html-block .sqs-html-content h3 *,
+.apreps .sqs-block.html-block .sqsrte-text-color--black {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+
+
