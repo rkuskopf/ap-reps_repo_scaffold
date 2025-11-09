@@ -166,8 +166,8 @@ body, a:hover, button:hover {
 .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center center; /* default centered crop */
+  object-fit: cover !important;
+  object-position: center center !important; /* default centered crop */
   display: block;
   position: absolute !important;
   inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
