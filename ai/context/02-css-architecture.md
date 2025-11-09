@@ -81,6 +81,11 @@ It is **tab-scoped** (Will-Myers Tabs only) and should not affect standalone gal
 
 ---
 
+**Mix blend**
+
+<div class="header-menu-nav-wrapper">
+  
+
 
 Do-not list (AI must respect)
 	•	Do not edit HTML/DOM structure.

@@ -40,8 +40,10 @@ Context: These issues arose directly from the aspect-ratio / flush-top gallery i
 
 ## Group B - Deliverable 2: Blend-mode compatibility
 
-### B1. Hero banner 'APREPS' is white.
+### B1. Mobile menu, are not mix blend and are appearing just white.
 **Status:** 🐞 bug
 **Origin:** Deliverable 2, commit: 'merge from mix-2'
-**Observed:** I accidentally made the hero text 'APREPS' white. 
+**Observed:** Mobile hamburger menu is white, and the menu overlay is wrong. 
 **Goal:** this needs to be black, with no mix blend applyied
+**Notes:** mix blend is required for the #header nav 'dev copy', but not the hero text below it
+

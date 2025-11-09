@@ -368,5 +368,36 @@ img.thumb-image.crop-top,
   text-shadow: none !important;
 }
 
+
+/* MOBILE MENU OVERLAY — solid white background */
+.apreps .header-menu,
+.apreps .header-menu-nav-wrapper {
+  background: #fff !important;          /* solid white overlay */
+  mix-blend-mode: normal !important;    /* the sheet itself doesn't blend */
+  isolation: isolate !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+}
+
+/* MENU CONTENT — still in difference mode */
+.apreps .header-menu *,
+.apreps .header-menu-nav-wrapper * {
+  mix-blend-mode: difference !important;
+  color: #000 !important;               /* will appear reversed because of difference */
+  text-shadow: none !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* GLOBAL blend behaviour (hero, header, rest of site) */
+.apreps,
+.apreps * {
+  mix-blend-mode: difference !important;
+  text-shadow: none !important;
+}
+
+
+
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
