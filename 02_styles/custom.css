@@ -360,5 +360,21 @@ picture > img.crop-top {
   object-position: 50% 50% !important; /* default centred crop */
 }
 
+/* Fix oversized images: enforce scaling inside ratio wrapper */
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image,
+.apreps .sqs-gallery-block-grid img.thumb-image,
+.apreps .sqs-gallery.sqs-gallery-design-grid picture > img,
+.apreps .sqs-gallery-block-grid picture > img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
+  position: absolute !important;
+  inset: 0 !important;
+  transform: none !important;
+}
+
 
 /* END D1:GALLERY-RATIOS v1 2025-11-08  */
