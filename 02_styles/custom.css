@@ -269,21 +269,7 @@ body, a:hover, button:hover {
   padding-right: var(--ap-gap-x, 10px) !important;
 }
 
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center center !important; /* default centered crop */
-  display: block !important;
-  position: absolute !important;
-  inset: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  transform: none !important;
-  object-position: 50% 50% !important;
-}
+
 
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
 .apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
@@ -314,11 +300,10 @@ body, a:hover, button:hover {
 
 
 /* Implements [Follow-up][D1]: Center image crops + .crop-top utility */
-.apreps .sqs-gallery.sqs-gallery-design-grid picture > img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center center !important;
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image,
+.apreps .sqs-gallery-block-grid img.thumb-image,
+.apreps .sqs-gallery.sqs-gallery-design-grid picture > img,
+.apreps .sqs-gallery-block-grid picture > img {
   display: block !important;
   position: absolute !important;
   inset: 0 !important;
@@ -326,20 +311,14 @@ body, a:hover, button:hover {
   right: 0 !important;
   top: 0 !important;
   bottom: 0 !important;
-  transform: none !important;
-  object-position: 50% 50% !important;
-}
+  transform: none !important;   /* some builds use translate for centering */
 
-/* Utility: restore top-biased crop when needed */
-/* Apply `.crop-top` to a slide/wrapper, picture, or directly on the image */
-.crop-top .thumb-image,
-.crop-top img.thumb-image,
-img.thumb-image.crop-top,
-.thumb-image.crop-top,
-.crop-top picture > img,
-picture > img.crop-top {
-  object-position: top center !important;
-  --wm-focal-point: 50% 0% !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  object-position: var(--ap-gallery-crop, 50% 50%) !important;
 }
 
 /* Force center crop by cancelling Squarespace's inline offsets */
@@ -353,60 +332,23 @@ picture > img.crop-top {
   bottom: 0 !important;         /* pairs with inset reset */
   transform: none !important;   /* some builds use translate for centering */
   object-fit: cover !important;
-  object-position: 50% 50% !important;
+  object-position: var(--ap-gallery-crop, 50% 50%) !important;
 }
 
-/* Hard override: ignore Squarespace's inline focal offsets on gallery images */
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image,
-.apreps .sqs-gallery-block-grid img.thumb-image,
-.apreps .sqs-gallery.sqs-gallery-design-grid picture > img,
-.apreps .sqs-gallery-block-grid picture > img {
-  position: absolute !important;
-  /* wipe any inline left/top that JS writes */
-  left: 0 !important;
-  right: 0 !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  /* also win against translate-based centering */
-  transform: none !important;
-
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: 50% 50% !important; /* default centred crop */
-}
-
-/* Fix oversized images: enforce scaling inside ratio wrapper */
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image,
-.apreps .sqs-gallery-block-grid img.thumb-image,
-.apreps .sqs-gallery.sqs-gallery-design-grid picture > img,
-.apreps .sqs-gallery-block-grid picture > img {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: 50% 50% !important;
-  position: absolute !important;
-  inset: 0 !important;
-  transform: none !important;
-}
-
-/* Normalise any inline width/height Squarespace writes on gallery imgs */
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image,
-.apreps .sqs-gallery-block-grid img.thumb-image,
-.apreps .sqs-gallery.sqs-gallery-design-grid picture > img,
-.apreps .sqs-gallery-block-grid picture > img {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  position: absolute !important;
-  inset: 0 !important;
-  left: 0 !important; right: 0 !important; top: 0 !important; bottom: 0 !important;
-  transform: none !important;
-  object-fit: cover !important;
-  object-position: 50% 50% !important;
+/* Utility: restore top-biased crop when needed */
+/* Apply `.crop-top` to a slide/wrapper, picture, or directly on the image */
+.crop-top,
+.crop-top .thumb-image,
+.crop-top img.thumb-image,
+img.thumb-image.crop-top,
+.thumb-image.crop-top,
+.crop-top picture,
+.crop-top picture > img,
+picture.crop-top > img,
+picture > img.crop-top {
+  object-position: top center !important;
+  --ap-gallery-crop: 50% 0% !important;
+  --wm-focal-point: 50% 0% !important;
 }
 
 
