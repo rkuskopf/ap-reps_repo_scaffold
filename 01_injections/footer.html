@@ -62,8 +62,28 @@
     });
   }
 
+  function forceCenterCrop(root) {
+    const scope = root || document;
+    scope.querySelectorAll('.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image, .apreps .sqs-gallery-block-grid img.thumb-image, .apreps .sqs-gallery.sqs-gallery-design-grid picture > img, .apreps .sqs-gallery-block-grid picture > img')
+      .forEach(img => {
+        // neutralise Squarespace inline focal offsets/sizing
+        img.style.left = '0';
+        img.style.right = '0';
+        img.style.top = '0';
+        img.style.bottom = '0';
+        img.style.transform = 'none';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '100%';
+        img.style.objectFit = 'cover';
+        img.style.objectPosition = '50% 50%';
+      });
+  }
+
   function scan(root) {
-    (root || document)
+    const scope = root || document;
+    scope
       .querySelectorAll('.sqs-gallery.sqs-gallery-design-grid img.thumb-image')
       .forEach(img => {
         if (img.complete || img.getAttribute('data-image-dimensions')) {
@@ -74,13 +94,18 @@
           setTimeout(() => { classify(img); enforceGaps(img.closest('.sqs-gallery')); }, 600);
         }
       });
-    enforceGaps(root);
+    enforceGaps(scope);
+    forceCenterCrop(scope);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => scan());
+    document.addEventListener('DOMContentLoaded', () => {
+      scan();
+      forceCenterCrop();
+    });
   } else {
     scan();
+    forceCenterCrop();
   }
 
   document.addEventListener('sqs-content-loaded', e =>
@@ -94,6 +119,7 @@
     setTimeout(() =>
       document.dispatchEvent(new CustomEvent('sqs-content-loaded', { detail: { target: document } })), 100)
   );
+  document.addEventListener('wmTabs:afterOpenTab', () => forceCenterCrop(document));
 
   // MutationObserver: catch lazyload DOM swaps and re-enforce gaps
   try {
@@ -103,7 +129,9 @@
           m.addedNodes.forEach(node => {
             if (!(node instanceof HTMLElement)) return;
             if (node.matches && (node.matches('.sqs-gallery, .sqs-gallery *'))) {
-              enforceGaps(node.closest && node.closest('.sqs-gallery'));
+              const g = node.closest && node.closest('.sqs-gallery');
+              enforceGaps(g || node);
+              forceCenterCrop(g || node);
             }
           });
         }
