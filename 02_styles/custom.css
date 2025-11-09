@@ -361,16 +361,24 @@ mix-blend-mode: difference !important;
 
 /* Mobile menu overlay needs solid background */
 #header .header-menu,
-#header .header-menu-bg {
+#header .header-menu-bg,
+#header .header-menu-nav,
+#header .header-menu-nav-list,
+#header .header-menu-nav-folder {
   background: #000 !important; /* solid black background */
   mix-blend-mode: normal !important; /* reset blend mode for overlay */
   isolation: isolate !important; /* create stacking context */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 /* Mobile menu items should be white on the black background */
-#header .header-menu .header-menu-nav-item a {
+#header .header-menu .header-menu-nav-item a,
+#header .header-menu-nav-folder a,
+#header .header-menu-nav-list a {
   color: #fff !important;
   mix-blend-mode: normal !important;
+  background: transparent !important;
 }
 
 
