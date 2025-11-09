@@ -320,8 +320,7 @@ img.thumb-image.crop-top,
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   isolation: auto !important;
-  /* Container should not blend; let children handle it */
-  mix-blend-mode: normal !important;
+  mix-blend-mode: difference !important;
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
@@ -334,29 +333,24 @@ img.thumb-image.crop-top,
 #header .header-actions *,
 #header .header-actions-action svg,
 #header .nav-toggle-label,
+#header .header-burger,
+#header .header-burger *,
+#header .header-burger-btn,
+#header .burger-box,
 #header .burger-inner {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  background: transparent !important;
-  text-shadow: none !important;
-  fill: #fff !important;
+mix-blend-mode: difference !important;
+color: #fff !important;
+background: transparent !important;
+text-shadow: none !important;
+fill: #fff !important;
 }
 
 /* Hamburger lines */
 #header .burger-inner .top-bun,
 #header .burger-inner .patty,
 #header .burger-inner .bottom-bun {
-  background-color: #fff !important;
-  mix-blend-mode: difference !important;
-}
-
-/* Burger containers should not blend */
-#header .header-burger,
-#header .header-burger *,
-#header .header-burger-btn,
-#header .burger-box {
-  mix-blend-mode: normal !important;
-  background: transparent !important;
+background-color: #fff !important;
+mix-blend-mode: difference !important;
 }
 
 
@@ -393,30 +387,5 @@ img.thumb-image.crop-top,
 
 
 
-/* Overlay menu: force normal (no blend) */
-.menu-open .header-menu,
-.menu-open .header-menu-nav,
-.menu-open .header-menu-nav-list,
-.menu-open .header-menu-nav-folder,
-.menu-open .header-menu-nav-wrapper {
-  mix-blend-mode: normal !important;
-  background: #fff !important;
-  color: #000 !important;
-}
-
-/* Items and links */
-.menu-open .header-menu-nav-item,
-.menu-open .header-menu-nav-item a {
-  mix-blend-mode: normal !important;
-  background: transparent !important;
-  color: #000 !important;
-  text-shadow: none !important;
-  fill: currentColor !important;
-}
-
-.menu-open .header-menu-nav-item a:hover {
-  color: #000 !important;
-  opacity: .85;
-}
-
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
+
