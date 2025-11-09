@@ -43,7 +43,8 @@ Context: These issues arose directly from the aspect-ratio / flush-top gallery i
 ### B1. Mobile menu, are not mix blend and are appearing just white.
 **Status:** 🐞 bug
 **Origin:** Deliverable 2, commit: 'merge from mix-2'
-**Observed:** Mobile hamburger menu is white, and the menu overlay is wrong. 
-**Goal:** this needs to be black, with no mix blend applyied
+**Observed:** Mobile hamburger menu is white, and the menu overlay is see through
+**Goal:** hamburger needs to be visible, like the site title on the left. 
+the overlay menu needs to have a solid background so the menu items can be seen
 **Notes:** mix blend is required for the #header nav 'dev copy', but not the hero text below it
 

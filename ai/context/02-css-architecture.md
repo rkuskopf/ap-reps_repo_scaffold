@@ -9,7 +9,7 @@ Define where code lives, how selectors are structured, and the guardrails for ed
 - `assets/css/custom.css` — **primary overrides** (global layout fixes, galleries, spacing, footer).
 
 
-> All project-wide rules are namespaced with `.apreps` to avoid bleeding into other SQS sites.
+> The `.apreps` namespace applies specifically to the Will Myers tabs context (artist gallery sections). Global elements such as the header, footer, or hero are not wrapped in `.apreps` and should be targeted without this namespace.
 
 ---
 
