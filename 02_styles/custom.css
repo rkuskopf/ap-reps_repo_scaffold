@@ -209,13 +209,13 @@ body, a:hover, button:hover {
 }
 
 /* top alignment */
-.apreps .wm-tabs .tab-panel > .tab-content .page-section:first-of-type {
+.apreps .wm-tabs .tab-panel > .tab-content .page-section:first-of-type:has(.sqs-block-gallery) {
   --section-padding-top: 0 !important;
   padding-top: 0 !important;
   margin-top: 0 !important;
 }
 
-.apreps .wm-tabs .tab-panel > .tab-content .page-section .sqs-block-gallery {
+.apreps .wm-tabs .tab-panel > .tab-content .page-section:has(.sqs-block-gallery) .sqs-block-gallery {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
@@ -247,7 +247,7 @@ body, a:hover, button:hover {
 }
 
 /* tidy fetched-section chrome inside tabs */
-.apreps .wm-tabs .tab-panel > .tab-content > .page-section .section-border {
+.apreps .wm-tabs .tab-panel > .tab-content > .page-section:has(.sqs-block-gallery) .section-border {
   display: none !important;
 }
 
