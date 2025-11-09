@@ -447,3 +447,59 @@ mix-blend-mode: difference !important;
 
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
+/* Additional mobile menu targeting for better coverage */
+.header-menu--folder-list,
+.header-menu.white,
+[data-section-theme="white"],
+[data-test="header-menu"] {
+  background: white !important;
+  background-color: white !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Target the background div specifically */
+#overlay-nav .header-menu-bg,
+[data-section-id="overlay-nav"] .header-menu-bg,
+.header-menu-bg.theme-bg--primary {
+  background: white !important;
+  background-color: white !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Ensure menu navigation area is white */
+#overlay-nav .header-menu-nav,
+[data-section-id="overlay-nav"] .header-menu-nav,
+#overlay-nav .header-menu-nav-list,
+[data-section-id="overlay-nav"] .header-menu-nav-list {
+  background: white !important;
+  background-color: white !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Container elements should also be white */
+#overlay-nav .container,
+[data-section-id="overlay-nav"] .container,
+#overlay-nav .header-menu-nav-item,
+[data-section-id="overlay-nav"] .header-menu-nav-item {
+  background: white !important;
+  background-color: white !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Ensure any theme classes don't override */
+#overlay-nav.white,
+[data-section-id="overlay-nav"].white,
+#overlay-nav .white,
+[data-section-id="overlay-nav"] .white {
+  background: white !important;
+  background-color: white !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Force override any inline styles */
+#overlay-nav[style],
+[data-section-id="overlay-nav"][style] {
+  background: white !important;
+  background-color: white !important;
+}
+
