@@ -8,6 +8,8 @@ Context: These issues arose directly from the aspect-ratio / flush-top gallery i
 **Observed:** Images within `.sqs-gallery.sqs-gallery-design-grid` default to `object-position: top center`, causing off-center crops.  
 **Goal:** Center imagery within each tile while preserving `object-fit: cover`.  
 **Fix:** Adjust `object-position` to `center center` globally; add `.crop-top` utility for intentional overrides.  
+**Failed attempt**: see commit: 2
+
 
 ---
 
