@@ -1,40 +1,4 @@
-# FILE: ai/context/01-project-overview.md
-## Project overview
-- Scope: AP-REPS Squarespace 7.1 site fixes and polish for artist pages, gallery, footer, breakpoints, blend-mode, and mobile behaviors.
-- Deliverables:
-Done:
-  - Gallery: force images in the will meyers plugin gallery to be portrait or landscape
-  - Footer and breakpoints: fix unidentified space below the will meyers gallery and page section
-  - Blend-mode hygiene: Safari and Firefox fallbacks while maintaining WCAG AA.
-  - Mobile hero layout rules.
-  - Pointer and hover consistency.
-  To do
-  Gallery: images resize into container
-- Out of scope:
-  - Server-side or backend changes (Squarespace SaaS only).
-  - Content entry and editorial production not explicitly listed as tasks.
-  - Template redesign beyond CSS/JS behavior and minor layout constraints.
-- Workflow:
-  - Code in GitHub repository → produce CSS/JS diffs.
-  - Paste CSS/JS into Squarespace Code Injection and/or Site Styles.
-  - Validate on preview URLs and target breakpoints (390, 1024, 1440 px).
-- Constraints:
-  - Preserve agreed aspect ratios (portrait 3:4, landscape 4:3).
-  - Enforce flush-top cropping where required.
-  - Keep captions left-aligned.
-  - Keep bottom padding equal to side margin (±2 px).
-  - Maintain Safari/Firefox fallbacks for mix-blend-mode.
-- Known blockers:
-  - Confirm intended mobile design for artist pages with client (Lulu). <!-- TODO: clarify -->
-- References:
-  - Apreps project page context and working notes captured here. 
-  - Pinned preview/editor links exist for quick testing. <!-- TODO: clarify URLs if needed -->
 
-
-  ### 1. Gallery function
-- ✅ Aspect-ratio utilities implemented (3:4 portrait, 4:3 landscape).
-- ⚠️ Flush-top alignment still inconsistent on tablet.
-- ⏳ Caption alignment under review for mobile.
 
 ✅ done
 🧩 partial
