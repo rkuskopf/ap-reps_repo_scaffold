@@ -58,10 +58,6 @@ Define where code lives, how selectors are structured, and the guardrails for ed
 | Gutter control | `.slide` etc. | `padding-right:10px`, box-sizing fixes |
 
 
-Dev tools image thumbnail:
-<img class="thumb-image loaded" elementtiming="system-gallery-block-grid" data-src="https://images.squarespace-cdn.com/content/v1/68f6c5d2fe6b9523c00e47a9/1761003158003-S7C4EPMYWI68YGQ68TUG/034_DARREN+SUMMORS-CAMPAIGN.jpg" data-image="https://images.squarespace-cdn.com/content/v1/68f6c5d2fe6b9523c00e47a9/1761003158003-S7C4EPMYWI68YGQ68TUG/034_DARREN+SUMMORS-CAMPAIGN.jpg" data-image-dimensions="1500x1001" data-image-focal-point="0.5,0.5" data-load="false" data-image-id="68f6c696fe6b9523c00e5f04" data-type="image" data-parent-ratio="0.8" style="--wm-focal-point: 50% 50%; opacity: 1; left: -145.209px; top: 0px; width: 581.419px; height: 388px; position: absolute;" alt="034_DARREN SUMMORS-CAMPAIGN.jpg" data-image-resolution="1500w" src="https://images.squarespace-cdn.com/content/v1/68f6c5d2fe6b9523c00e47a9/1761003158003-S7C4EPMYWI68YGQ68TUG/034_DARREN+SUMMORS-CAMPAIGN.jpg?format=1500w">
-
-
 
 ### Summary
 This block establishes custom aspect-ratio logic (3:4 / 4:3), removes Squarespace’s stray top/bottom margins, and enforces left-aligned captions within **tabbed gallery sections**.  
@@ -70,6 +66,14 @@ It is **tab-scoped** (Will-Myers Tabs only) and should not affect standalone gal
 ### Status
 ✅ implemented and stable in `custom.css`
 ⚠️ monitor tablet breakpoints for minor crop offset
+
+
+### A1: Gallery crops from top only
+Dev tools image thumbnail:
+<img class="thumb-image loaded" elementtiming="system-gallery-block-grid" data-src="https://images.squarespace-cdn.com/content/v1/68f6c5d2fe6b9523c00e47a9/1761003158003-S7C4EPMYWI68YGQ68TUG/034_DARREN+SUMMORS-CAMPAIGN.jpg" data-image="https://images.squarespace-cdn.com/content/v1/68f6c5d2fe6b9523c00e47a9/1761003158003-S7C4EPMYWI68YGQ68TUG/034_DARREN+SUMMORS-CAMPAIGN.jpg" data-image-dimensions="1500x1001" data-image-focal-point="0.5,0.5" data-load="false" data-image-id="68f6c696fe6b9523c00e5f04" data-type="image" data-parent-ratio="0.8" style="--wm-focal-point: 50% 50%; opacity: 1; left: -145.209px; top: 0px; width: 581.419px; height: 388px; position: absolute;" alt="034_DARREN SUMMORS-CAMPAIGN.jpg" data-image-resolution="1500w" src="https://images.squarespace-cdn.com/content/v1/68f6c5d2fe6b9523c00e47a9/1761003158003-S7C4EPMYWI68YGQ68TUG/034_DARREN+SUMMORS-CAMPAIGN.jpg?format=1500w">
+
+
+
 
 **Fluid Engine / layout shells**
 - `.page-section`, `.fe-section`, `[data-fluid-engine] .fluid-engine`
