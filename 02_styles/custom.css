@@ -171,7 +171,12 @@ body, a:hover, button:hover {
   object-position: center center; /* default centered crop */
   display: block;
   position: absolute !important;
-  inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
+  inset: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
 }
 
 /* Captions left across all grid galleries */
@@ -271,8 +276,13 @@ body, a:hover, button:hover {
   object-position: center center !important; /* default centered crop */
   display: block !important;
   position: absolute !important;
-  inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
-  --wm-focal-point: 50% 50% !important;
+  inset: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
+  object-position: 50% 50% !important;
 }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
@@ -311,7 +321,13 @@ body, a:hover, button:hover {
   object-position: center center !important;
   display: block !important;
   position: absolute !important;
-  inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
+  inset: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
+  object-position: 50% 50% !important;
 }
 
 /* Utility: restore top-biased crop when needed */
@@ -374,6 +390,23 @@ picture > img.crop-top {
   position: absolute !important;
   inset: 0 !important;
   transform: none !important;
+}
+
+/* Normalise any inline width/height Squarespace writes on gallery imgs */
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image,
+.apreps .sqs-gallery-block-grid img.thumb-image,
+.apreps .sqs-gallery.sqs-gallery-design-grid picture > img,
+.apreps .sqs-gallery-block-grid picture > img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  position: absolute !important;
+  inset: 0 !important;
+  left: 0 !important; right: 0 !important; top: 0 !important; bottom: 0 !important;
+  transform: none !important;
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
 }
 
 
