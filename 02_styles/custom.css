@@ -298,6 +298,20 @@ picture > img.crop-top {
   --wm-focal-point: 50% 0% !important;
 }
 
+/* Force center crop by cancelling Squarespace's inline offsets */
+.apreps .sqs-gallery-block-grid .image-slide-anchor.content-fill .thumb-image,
+.apreps .sqs-gallery-block-grid .js-gallery-lightbox-opener.content-fill .thumb-image,
+.apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor.content-fill .thumb-image,
+.apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener.content-fill .thumb-image {
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;         /* pairs with inset reset */
+  transform: none !important;   /* some builds use translate for centering */
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
+}
+
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
 .apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
