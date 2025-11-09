@@ -314,7 +314,9 @@ img.thumb-image.crop-top,
 #header .header-menu-bg,
 #header .header-menu-nav,
 #header .header-menu-nav-list,
-#header .header-menu-nav-folder {
+#header .header-menu-nav-folder,
+#header .header-menu-nav-folder-content,
+#header .header-menu-nav-wrapper {
   background: #fff !important; /* solid white background */
   mix-blend-mode: normal !important; /* reset blend mode for overlay */
   isolation: isolate !important; /* create stacking context */
@@ -322,10 +324,21 @@ img.thumb-image.crop-top,
   -webkit-backdrop-filter: none !important;
 }
 
+/* Ensure mobile menu takes full screen */
+#header .header-menu {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 9999 !important;
+}
+
 /* Mobile menu items should be black on the white background */
 #header .header-menu .header-menu-nav-item a,
 #header .header-menu-nav-folder a,
-#header .header-menu-nav-list a {
+#header .header-menu-nav-list a,
+#header .header-menu-nav-wrapper a {
   color: #000 !important;
   mix-blend-mode: normal !important;
   background: transparent !important;
