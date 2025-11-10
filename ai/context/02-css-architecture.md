@@ -36,7 +36,7 @@ Define where code lives, how selectors are structured, and the guardrails for ed
 ### Core selector map (targets the AI can safely touch)
 > Keep this short and durable. Page-specific selectors belong in `ai/context/selectors-map.md`.
 
-**Galleries**
+**DELIVERABLE 1: GALLERY AND ASPECT RATIO**
 ## Selector reference — Gallery aspect-ratio fix
 
 ### Active scope
@@ -164,7 +164,48 @@ The fundamental issue is that broad blend mode rules for header elements inevita
 }
 ```
 
+**DELIVERABLE 4: BREAKPOINTS / GALLERY HEIGHT**
+Deliverable 4 — Artist Gallery Height (Tabs + Fluid Engine)
 
+What was happening
+	•	Fluid Engine (FE) generated hundreds of explicit grid rows on the section wrapper:
+	•	grid-template-rows: repeat(N, minmax(...))
+	•	This locked the section to ~5,000px+ even when the gallery content was much shorter.
+	•	Duplicate or sticky artist-name blocks sometimes pinned the section tall on mobile.
+	•	Extra padding on .page-section / .content-wrapper added a visible band under the gallery.
+
+Constraints we kept
+	•	Keep the gallery aspect-ratio logic (portrait/landscape).
+	•	Preserve blend-mode labels.
+	•	Fix must apply across all artist pages using the Will Myers Tabs plugin.
+
+Final approach (high level)
+	1.	Neutralise FE’s fixed rows inside the active tab so the section shrink-wraps to content.
+	2.	Strip section/content padding in the active tab.
+	3.	Unstick name labels on mobile so nothing holds the section open.
+	4.	Move gutters to grid gaps (no per-tile padding) and add outer side padding only.
+
+Core CSS (ship this)
+
+/* Collapse FE rows inside the active tab panel (all artist pages) */
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"])
+  .tab-panel[aria-hidden="false"] .page-section .fluid-engine{
+  grid-template-rows: none !important;          /* kill repeat(...) */
+  grid-auto-rows: minmax(8px, auto) !important; /* rows size to content */
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: block !important;                    /* belt + braces */
+}
+
+/* Strip padding that left a white band under the gallery */
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"])
+  .tab-panel[aria-hidden="false"] .page-section .content-wrapper{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/*
 
   
 

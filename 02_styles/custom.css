@@ -414,7 +414,7 @@ html, body {
 
 /* ### END DELIVERABLE 3. Overscroll 10.11.25 */
 
-/* ### BEGIN DELIVERABLE 4. Overscroll 10.11.25 */
+/* ### BEGIN DELIVERABLE 4. Breakpoints 10.11.25 */
 
 /* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
 .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
@@ -510,15 +510,16 @@ padding-bottom: 0 !important;
 }
 
 /* Let artist name overlay the gallery, not push it down */
-.apreps [data-wm-plugin="tabs"] .artist-name {
+/* Removed: position: absolute, top, left, right, z-index, pointer-events, mix-blend-mode for .artist-name so it is visible and not overlayed. */
+/* .apreps [data-wm-plugin="tabs"] .artist-name {
   position: absolute !important;
-  top: 0;                /* adjust for placement, e.g. 1rem */
+  top: 0;
   left: 0;
-  right: 0;              /* if you want full width */
-  z-index: 5;            /* higher than gallery */
+  right: 0;
+  z-index: 5;
   mix-blend-mode: difference;
-  pointer-events: none;  /* so clicks go to gallery images */
-}
+  pointer-events: none;
+} */
 
 /* Make sure the gallery section is a positioning context */
 .apreps [data-wm-plugin="tabs"] .page-section:has(.sqs-block-gallery),
