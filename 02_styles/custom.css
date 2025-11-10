@@ -503,3 +503,56 @@ mix-blend-mode: difference !important;
   background-color: white !important;
 }
 
+/* NUCLEAR OPTION - Force mobile menu background */
+/* Use !important with highest specificity */
+html body #overlay-nav,
+html body [data-section-id="overlay-nav"],
+html body #header [data-section-id="overlay-nav"],
+body #overlay-nav,
+body [data-section-id="overlay-nav"] {
+  background: white !important;
+  background-color: white !important;
+  background-image: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
+
+/* Override any background gradients or images */
+#overlay-nav::before,
+#overlay-nav::after,
+[data-section-id="overlay-nav"]::before,
+[data-section-id="overlay-nav"]::after {
+  display: none !important;
+  background: none !important;
+  background-color: transparent !important;
+}
+
+/* Force white on EVERY child element */
+html body #overlay-nav *,
+html body [data-section-id="overlay-nav"] *,
+body #overlay-nav *,
+body [data-section-id="overlay-nav"] * {
+  background: white !important;
+  background-color: white !important;
+  background-image: none !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Inline style override - this targets elements with style attributes */
+#overlay-nav[style*="background"],
+[data-section-id="overlay-nav"][style*="background"] {
+  background: white !important;
+  background-color: white !important;
+}
+
+/* Override theme background classes */
+#overlay-nav .theme-bg--primary,
+#overlay-nav .theme-bg--secondary,
+#overlay-nav .theme-bg--accent,
+[data-section-id="overlay-nav"] .theme-bg--primary,
+[data-section-id="overlay-nav"] .theme-bg--secondary,
+[data-section-id="overlay-nav"] .theme-bg--accent {
+  background: white !important;
+  background-color: white !important;
+}
+
