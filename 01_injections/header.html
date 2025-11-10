@@ -34,3 +34,32 @@ document.addEventListener("DOMContentLoaded", () => { // once the page is ready
 })
 </script>
 <!-- Dot Cursor by digitalmoves.com.au -->
+
+<1!-- ### DELIVERABLE 4. Breakpoints 10.11.25 -->
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const scope = document.documentElement; // body has class "apreps"
+  if (!scope.classList.contains('apreps')) return;
+
+  const patch = (root=document) => {
+    root.querySelectorAll('[data-fluid-engine="true"].fluid-engine').forEach(el => {
+      el.style.setProperty('grid-template-rows','none','important');
+      el.style.setProperty('grid-auto-rows','minmax(8px,auto)','important');
+      el.style.setProperty('height','auto','important');
+      el.style.setProperty('min-height','0','important');
+      el.style.setProperty('max-height','none','important');
+    });
+    root.querySelectorAll('.page-section, .content-wrapper').forEach(el => {
+      el.style.setProperty('padding-top','0','important');
+      el.style.setProperty('padding-bottom','0','important');
+    });
+  };
+
+  patch();
+  new MutationObserver(m => {
+    for (const rec of m)
+      for (const n of rec.addedNodes)
+        if (n.nodeType === 1) patch(n);
+  }).observe(document.body,{subtree:true,childList:true});
+});
+</script>
