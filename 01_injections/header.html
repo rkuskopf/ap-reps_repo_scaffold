@@ -37,96 +37,28 @@ document.addEventListener("DOMContentLoaded", () => { // once the page is ready
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const mount = document.querySelector('[data-wm-plugin="tabs"]');
-  if (!mount) return;
-
-  const fixHeights = (ctx) => {
-    // Let sections + wrappers size to content
-    ctx.querySelectorAll('.page-section, .content-wrapper').forEach(el => {
-      el.style.height = 'auto';
-      el.style.minHeight = '0';
-      el.style.maxHeight = 'none';
-      el.style.paddingTop = '0';
-      el.style.paddingBottom = '0';
-      el.style.overflow = 'visible';
-    });
-
-    // Nuke inline height/min-height on galleries + their inner wrappers
-    ctx.querySelectorAll('.sqs-block-gallery, .sqs-block-gallery > .sqs-block-content, .sqs-block-gallery-block')
-      .forEach(el => {
-        el.style.height = 'auto';
-        el.style.minHeight = '0';
-        el.style.maxHeight = 'none';
-        el.style.overflow = 'visible';
-      });
-  };
-
-  // Run once now
-  fixHeights(mount);
-
-  // Run whenever tabs load/swap content
-  const mo = new MutationObserver(muts => {
-    for (const m of muts) {
-      m.addedNodes.forEach(n => n.nodeType === 1 && fixHeights(n));
-    }
-  });
-  mo.observe(mount, { childList: true, subtree: true });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const mount = document.querySelector('[data-wm-plugin="tabs"]');
-  if (!mount) return;
-
-  const patch = (root) => {
-    root.querySelectorAll('[data-fluid-engine="true"].fluid-engine').forEach(el => {
-      // kill FE’s fixed row template and let rows size to content
-      el.style.setProperty('grid-template-rows', 'none', 'important');
-      el.style.setProperty('grid-auto-rows', 'minmax(8px, auto)', 'important');
-    });
-    // also clear any hard height the wrapper might carry
-    root.querySelectorAll('.content-wrapper, .page-section').forEach(el => {
-      el.style.setProperty('height', 'auto', 'important');
-      el.style.setProperty('min-height', '0', 'important');
-      el.style.setProperty('max-height', 'none', 'important');
-    });
-  };
-
-  // run once
-  patch(mount);
-
-  // run again whenever tabs load/swap panels
-  new MutationObserver(muts => {
-    muts.forEach(m => m.addedNodes.forEach(n => n.nodeType === 1 && patch(n)));
-  }).observe(mount, { childList: true, subtree: true });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
   const scope = document.documentElement; // body has class "apreps"
   if (!scope.classList.contains('apreps')) return;
 
   const patch = (root=document) => {
     root.querySelectorAll('[data-fluid-engine="true"].fluid-engine').forEach(el => {
-      el.style.setProperty('grid-template-rows', 'none', 'important');
-      el.style.setProperty('grid-auto-rows', 'minmax(8px, auto)', 'important');
-      el.style.setProperty('height', 'auto', 'important');
-      el.style.setProperty('min-height', '0', 'important');
-      el.style.setProperty('max-height', 'none', 'important');
+      el.style.setProperty('grid-template-rows','none','important');
+      el.style.setProperty('grid-auto-rows','minmax(8px,auto)','important');
+      el.style.setProperty('height','auto','important');
+      el.style.setProperty('min-height','0','important');
+      el.style.setProperty('max-height','none','important');
     });
     root.querySelectorAll('.page-section, .content-wrapper').forEach(el => {
-      el.style.setProperty('padding-top', '0', 'important');
-      el.style.setProperty('padding-bottom', '0', 'important');
+      el.style.setProperty('padding-top','0','important');
+      el.style.setProperty('padding-bottom','0','important');
     });
   };
 
   patch();
-
   new MutationObserver(m => {
-    for (const rec of m) for (const n of rec.addedNodes)
-      if (n.nodeType === 1) patch(n);
-  }).observe(document.body, {subtree:true, childList:true});
+    for (const rec of m)
+      for (const n of rec.addedNodes)
+        if (n.nodeType === 1) patch(n);
+  }).observe(document.body,{subtree:true,childList:true});
 });
 </script>
