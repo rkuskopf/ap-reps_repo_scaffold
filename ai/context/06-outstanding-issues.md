@@ -40,11 +40,36 @@ Context: These issues arose directly from the aspect-ratio / flush-top gallery i
 
 ## Group B - Deliverable 2: Blend-mode compatibility
 
-### B1. Mobile menu, are not mix blend and are appearing just white.
-**Status:** 🐞 bug
-**Origin:** Deliverable 2, commit: 'merge from mix-2'
-**Observed:** Mobile hamburger menu is white, and the menu overlay is see through
-**Goal:** hamburger needs to be visible, like the site title on the left. 
-the overlay menu needs to have a solid background so the menu items can be seen
-**Notes:** mix blend is required for the #header nav 'dev copy', but not the hero text below it
+### B1. Mobile menu overlay blend mode inheritance - NEEDS FRESH START
+**Status:** 🐞 critical bug
+**Origin:** Deliverable 2 - header blend mode implementation
+**Observed:** 
+- Mobile hamburger icon not getting white blend mode effect (invisible on dark backgrounds)
+- Mobile menu overlay inheriting blend mode, appearing transparent/black instead of solid white
+- Menu overlay covering header elements instead of positioning below them
+- Menu text unreadable due to blend mode inheritance
 
+**Root Problem:** 
+Header `mix-blend-mode: difference` rules are too broad and affect mobile overlay elements. Attempts to exclude mobile menu from blend mode rules using complex selectors have failed.
+
+**Requirements for Fix:**
+1. **Header elements** (site title "AP—REPS" + hamburger): Must have white blend mode effect on both desktop and mobile
+2. **Mobile overlay**: Must be solid white background with black text, positioned below header
+3. **No coverage**: Header must remain visible and functional when mobile menu is open
+4. **Clean CSS**: Avoid complex conditional logic, state management, or nuclear overrides
+
+**Previous Attempts (all failed):**
+- Complex `:not()` selectors to exclude mobile overlay
+- Body class state management (`body.mobile-menu-open`)
+- Media query separation of desktop/mobile rules  
+- High-specificity "nuclear" overrides
+- Z-index and positioning adjustments
+
+**Next Steps:**
+- Start fresh with minimal, targeted blend mode rules
+- Test header blend mode with simple selectors first
+- Add mobile overlay isolation as separate, independent rules
+- Verify in actual mobile environment (not just desktop dev tools)
+
+**Files Affected:** `02_styles/custom.css` (lines 307-394)
+**Branch:** main (needs cleanup before new implementation)

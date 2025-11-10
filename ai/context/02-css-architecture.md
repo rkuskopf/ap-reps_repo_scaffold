@@ -81,7 +81,89 @@ It is **tab-scoped** (Will-Myers Tabs only) and should not affect standalone gal
 
 ---
 
-**DELIBERABLE 2: MIX BLEND**
+**DELIVERABLE 2: MIX BLEND MODE COMPATIBILITY**
+
+### Problem Context
+The header uses `mix-blend-mode: difference` to create a white-text-on-dark-background effect when overlaying content. However, this creates conflicts with Squarespace's mobile menu overlay, which inherits the blend mode and becomes transparent/unreadable.
+
+### Key Selectors and Their Roles
+
+**Header Elements (require blend mode)**
+| Selector | Purpose | Blend Mode Needed |
+|----------|---------|------------------|
+| `#header` | Main header container | Yes - transparent background |
+| `#header .header-title` | Site title "AP—REPS" | Yes - white text effect |
+| `#header .header-title-text a` | Title link element | Yes - white text effect |
+| `#header .header-burger` | Mobile hamburger button | Yes - white lines |
+| `#header .burger-inner` | Hamburger button container | Yes - affects line visibility |
+| `#header .burger-inner .top-bun` | Hamburger line (top) | Yes - white background |
+| `#header .burger-inner .patty` | Hamburger line (middle) | Yes - white background |
+| `#header .burger-inner .bottom-bun` | Hamburger line (bottom) | Yes - white background |
+
+**Mobile Menu Elements (must NOT inherit blend mode)**
+| Selector | Purpose | Blend Mode | Background |
+|----------|---------|------------|------------|
+| `#overlay-nav` | Primary mobile menu container | Normal | Solid white |
+| `[data-section-id="overlay-nav"]` | Alternative mobile menu selector | Normal | Solid white |
+| `#overlay-nav *` | All menu content | Normal | Transparent |
+| `#overlay-nav a` | Menu links | Normal | Transparent, black text |
+
+**Positioning Requirements**
+- **Header**: `z-index: 100000` (stays visible above overlay)
+- **Mobile overlay**: `z-index: 99999` (below header, above content)
+- **Mobile overlay positioning**: `top: 60px` (starts below header)
+- **Mobile overlay sizing**: `height: calc(100vh - 60px)` (fills remaining space)
+
+### Key Learnings from Implementation Attempts
+
+#### What We Discovered:
+1. **Blend Mode Inheritance**: `mix-blend-mode: difference` on header containers affects all nested elements, including mobile overlays
+2. **Squarespace Mobile Menu Structure**: Uses `#overlay-nav` and `[data-section-id="overlay-nav"]` containers
+3. **Z-index Layering**: Mobile overlay needs to be below header but above content
+4. **Positioning Requirements**: Mobile overlay should start below header rather than covering it
+
+#### Failed Approaches:
+- **Complex `:not()` selectors**: Too fragile and browser-specific
+- **Body class state management**: `body.mobile-menu-open` logic became overly complex
+- **Nuclear overrides**: High-specificity rules (`html body #overlay-nav`) created conflicts
+- **Media query separation**: Desktop/mobile separation didn't solve inheritance issues
+
+#### Root Cause:
+The fundamental issue is that broad blend mode rules for header elements inevitably affect mobile menu overlays. Any solution needs to:
+1. Keep header blend mode effects for desktop AND mobile (when menu closed)
+2. Ensure mobile overlay is completely isolated from blend mode inheritance
+3. Position overlay correctly below header without covering navigation elements
+
+### Recommended Approach for Fresh Start:
+1. **Minimal header blend mode rules** - target only specific text elements, not containers
+2. **Complete mobile overlay isolation** - use `isolation: isolate` and explicit positioning
+3. **Simple selector strategy** - avoid complex state management and conditional logic
+4. **Test in actual mobile environment** - desktop dev tools may not show true mobile behavior
+
+### Target CSS Pattern:
+```css
+/* Header blend mode - keep minimal */
+#header .header-title,
+#header .header-title-text a,
+#header .header-burger,
+#header .burger-inner * {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+}
+
+/* Mobile overlay isolation */
+#overlay-nav,
+[data-section-id="overlay-nav"] {
+  background: white !important;
+  mix-blend-mode: normal !important;
+  isolation: isolate !important;
+  position: fixed !important;
+  top: 60px !important;
+  height: calc(100vh - 60px) !important;
+  z-index: 99999 !important;
+}
+```
+
 
 
   
