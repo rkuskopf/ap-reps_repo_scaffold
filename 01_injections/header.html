@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
       el.style.setProperty('min-height','0','important');
       el.style.setProperty('max-height','none','important');
     });
-    root.querySelectorAll('.page-section, .content-wrapper').forEach(el => {
+    // Only target gallery sections within tabs, not all page sections
+    root.querySelectorAll('.apreps [data-wm-plugin="tabs"] .page-section, .apreps [data-wm-plugin="tabs"] .content-wrapper').forEach(el => {
       el.style.setProperty('padding-top','0','important');
       el.style.setProperty('padding-bottom','0','important');
     });
