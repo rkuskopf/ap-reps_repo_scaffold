@@ -309,199 +309,63 @@ img.thumb-image.crop-top,
 
 /* ### BEGIN DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
-/* MOBILE MENU - COMPLETE ISOLATION FROM BLEND MODES */
-/* Position overlay below header so header remains visible */
-#overlay-nav,
-[data-section-id="overlay-nav"],
-#header [data-section-id="overlay-nav"],
-.header-menu,
-.header-menu-nav {
-  background: white !important;
-  background-color: white !important;
-  mix-blend-mode: normal !important;
-  isolation: isolate !important;
-  position: fixed !important;
-  top: 80px !important; /* Start below header */
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  width: 100% !important;
-  height: calc(100vh - 80px) !important; /* Account for header height */
-  z-index: 99999 !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  opacity: 1 !important;
-}
-
-/* Keep the header visible when mobile menu is open - DON'T apply full overlay styles to header */
-body.mobile-menu-open #header,
-body.mobile-menu-open .header,
-body.mobile-menu-open .site-header {
+/* STEP 1: DEFAULT HEADER BLEND MODE - ALWAYS ON */
+#header,
+#header .header-inner,
+#header .header-display-desktop,
+#header .header-display-mobile {
   background: transparent !important;
   mix-blend-mode: difference !important;
-  position: relative !important;
-  z-index: 100000 !important;
-  height: auto !important;
-  width: auto !important;
-}
-
-/* Everything inside mobile menu - normal blend mode and black text */
-#overlay-nav *,
-[data-section-id="overlay-nav"] *,
-.header-menu *,
-.header-menu-nav * {
-  background-color: transparent !important;
-  mix-blend-mode: normal !important;
-  color: black !important;
-  fill: black !important;
-  text-shadow: none !important;
-  opacity: 1 !important;
-}
-
-/* Mobile menu text links - black on transparent */
-#overlay-nav a,
-[data-section-id="overlay-nav"] a,
-#overlay-nav .header-menu-nav-item a,
-[data-section-id="overlay-nav"] .header-menu-nav-item a,
-.header-menu a,
-.header-menu-nav a {
-  color: black !important;
-  background: transparent !important;
-  mix-blend-mode: normal !important;
-  text-decoration: none !important;
-  opacity: 1 !important;
-}
-
-/* Mobile menu navigation items */
-#overlay-nav .header-menu-nav-item,
-[data-section-id="overlay-nav"] .header-menu-nav-item,
-.header-menu-nav-item {
-  color: black !important;
-  background: transparent !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Mobile menu controls and close button container */
-#overlay-nav .header-menu-controls,
-[data-section-id="overlay-nav"] .header-menu-controls,
-.header-menu-controls,
-body.mobile-menu-open #header .header-burger,
-body.mobile-menu-open #header .header-actions {
-  background: transparent !important;
-  mix-blend-mode: normal !important;
   z-index: 100000 !important;
 }
 
-/* Mobile menu close button (hamburger in X state) - black */
-#overlay-nav .header-burger,
-#overlay-nav .burger-inner,
-[data-section-id="overlay-nav"] .header-burger,
-[data-section-id="overlay-nav"] .burger-inner,
-body.mobile-menu-open .header-burger,
-body.mobile-menu-open .burger-inner {
-  color: black !important;
-  fill: black !important;
-  background: transparent !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Mobile menu close button lines - black */
-#overlay-nav .burger-inner .top-bun,
-#overlay-nav .burger-inner .patty,
-#overlay-nav .burger-inner .bottom-bun,
-[data-section-id="overlay-nav"] .burger-inner .top-bun,
-[data-section-id="overlay-nav"] .burger-inner .patty,
-[data-section-id="overlay-nav"] .burger-inner .bottom-bun,
-body.mobile-menu-open .burger-inner .top-bun,
-body.mobile-menu-open .burger-inner .patty,
-body.mobile-menu-open .burger-inner .bottom-bun {
-  background-color: black !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Force white background on mobile menu regardless of parent blend modes */
-body.mobile-menu-open {
-  background: white !important;
-}
-
-body.mobile-menu-open #overlay-nav,
-body.mobile-menu-open [data-section-id="overlay-nav"] {
-  background: white !important;
-  background-color: white !important;
-}
-
-/* DESKTOP AND MOBILE HEADER - BLEND MODE FOR TITLE AND HAMBURGER */
-/* Apply to all screen sizes, but exclude when mobile overlay is open */
-body:not(.mobile-menu-open) #header,
-body:not(.mobile-menu-open) #header:before,
-body:not(.mobile-menu-open) #header:after,
-body:not(.mobile-menu-open) #header .header-inner,
-body:not(.mobile-menu-open) #header .header-display-desktop,
-body:not(.mobile-menu-open) #header .header-display-mobile {
-  background: transparent !important;
-  box-shadow: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  isolation: auto !important;
-  mix-blend-mode: difference !important;
-  transform: translate3d(0,0,0); /* helps Safari render blend properly */
-}
-
-/* Apply difference blend mode to ALL header elements when menu is closed */
-body:not(.mobile-menu-open) #header .header-title,
-body:not(.mobile-menu-open) #header .header-title-text,
-body:not(.mobile-menu-open) #header .header-title-text a,
-body:not(.mobile-menu-open) #header .header-title-logo,
-body:not(.mobile-menu-open) #header .header-title-logo a,
-body:not(.mobile-menu-open) #header .header-nav a,
-body:not(.mobile-menu-open) #header .header-actions *,
-body:not(.mobile-menu-open) #header .header-actions-action svg,
-body:not(.mobile-menu-open) #header .nav-toggle-label,
-body:not(.mobile-menu-open) #header .header-burger,
-body:not(.mobile-menu-open) #header .header-burger *,
-body:not(.mobile-menu-open) #header .header-burger-btn,
-body:not(.mobile-menu-open) #header .burger-box,
-body:not(.mobile-menu-open) #header .burger-inner,
-body:not(.mobile-menu-open) .header-burger,
-body:not(.mobile-menu-open) .header-burger *,
-body:not(.mobile-menu-open) .burger-box,
-body:not(.mobile-menu-open) .burger-inner {
+/* STEP 2: ALL HEADER TEXT AND ELEMENTS GET BLEND MODE */
+#header .header-title,
+#header .header-title-text,
+#header .header-title-text a,
+#header .header-title-logo a,
+#header .header-nav a,
+#header .header-burger,
+#header .header-burger *,
+#header .burger-inner,
+#header .burger-inner * {
   mix-blend-mode: difference !important;
   color: #fff !important;
-  background: transparent !important;
-  text-shadow: none !important;
   fill: #fff !important;
+  background: transparent !important;
 }
 
-/* Hamburger lines when menu is closed - multiple selectors to catch all cases */
-body:not(.mobile-menu-open) #header .burger-inner .top-bun,
-body:not(.mobile-menu-open) #header .burger-inner .patty,
-body:not(.mobile-menu-open) #header .burger-inner .bottom-bun,
-body:not(.mobile-menu-open) .burger-inner .top-bun,
-body:not(.mobile-menu-open) .burger-inner .patty,
-body:not(.mobile-menu-open) .burger-inner .bottom-bun {
+/* STEP 3: HAMBURGER LINES - WHITE */
+#header .burger-inner .top-bun,
+#header .burger-inner .patty,
+#header .burger-inner .bottom-bun {
   background-color: #fff !important;
   mix-blend-mode: difference !important;
 }
 
-/* Header hover effects when menu is closed */
-body:not(.mobile-menu-open) #header .header-nav a:hover,
-body:not(.mobile-menu-open) #header .header-actions-action:hover {
-  color: #fff !important;
-  mix-blend-mode: difference !important;
+/* STEP 4: MOBILE OVERLAY - POSITIONED BELOW HEADER */
+#overlay-nav,
+[data-section-id="overlay-nav"] {
+  background: white !important;
+  mix-blend-mode: normal !important;
+  isolation: isolate !important;
+  position: fixed !important;
+  top: 60px !important; /* Below header */
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: calc(100vh - 60px) !important;
+  z-index: 99999 !important;
+  opacity: 1 !important;
 }
 
-/* WHEN MOBILE MENU IS OPEN - HEADER STAYS VISIBLE WITH BLEND MODE */
-body.mobile-menu-open #header .header-title,
-body.mobile-menu-open #header .header-title-text,
-body.mobile-menu-open #header .header-title-text a,
-body.mobile-menu-open #header .header-title-logo,
-body.mobile-menu-open #header .header-title-logo a {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
+/* STEP 5: MOBILE OVERLAY CONTENT - BLACK TEXT ON WHITE */
+#overlay-nav *,
+[data-section-id="overlay-nav"] * {
   background: transparent !important;
-  text-shadow: none !important;
-  z-index: 100001 !important;
+  color: black !important;
+  mix-blend-mode: normal !important;
 }
 
 
@@ -526,26 +390,5 @@ body.mobile-menu-open #header .header-title-logo a {
 }
 
 
-
-
-/* ADDITIONAL MOBILE MENU OVERRIDES - Ensure white background */
-html body #overlay-nav,
-html body [data-section-id="overlay-nav"] {
-  background: white !important;
-  background-color: white !important;
-  mix-blend-mode: normal !important;
-  isolation: isolate !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  opacity: 1 !important;
-}
-
-/* Override all children - transparent backgrounds but normal blend mode */
-html body #overlay-nav *,
-html body [data-section-id="overlay-nav"] * {
-  mix-blend-mode: normal !important;
-  background-color: transparent !important;
-  color: black !important;
-}
 
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
