@@ -309,65 +309,59 @@ img.thumb-image.crop-top,
 
 /* ### BEGIN DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
-/* Mobile menu overlay - TARGET THE CORRECT ID: overlay-nav */
+/* SIMPLIFIED MOBILE MENU FIX */
+/* Since the mobile menu still inherits blend modes, style it as BLACK background with WHITE text */
+/* This way it will appear WHITE due to difference blend mode */
 #overlay-nav,
 [data-section-id="overlay-nav"],
 #header [data-section-id="overlay-nav"] {
-  background: white !important;
-  background-color: white !important;
-  mix-blend-mode: normal !important;
-  isolation: isolate !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  background: black !important;
+  background-color: black !important;
+  /* Don't override mix-blend-mode - let it inherit difference */
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
   width: 100% !important;
-  height: 100% !important;
+  height: 100vh !important;
   z-index: 99999 !important;
 }
 
-/* Everything inside overlay-nav gets white background */
+/* Everything inside overlay-nav gets black background */
 #overlay-nav *,
-[data-section-id="overlay-nav"] *,
-#header [data-section-id="overlay-nav"] * {
-  background: white !important;
-  background-color: white !important;
-  mix-blend-mode: normal !important;
+[data-section-id="overlay-nav"] * {
+  background-color: black !important;
+  /* Don't override mix-blend-mode */
 }
 
-/* Links inside overlay-nav should be black */
+/* Links inside overlay-nav should be WHITE (will appear black due to blend) */
 #overlay-nav a,
 [data-section-id="overlay-nav"] a,
 #overlay-nav .header-menu-nav-item a,
 [data-section-id="overlay-nav"] .header-menu-nav-item a {
-  color: black !important;
+  color: white !important;
   background: transparent !important;
-  mix-blend-mode: normal !important;
 }
 
-/* Close button inside overlay-nav should be black */
+/* Close button should be WHITE (will appear black due to blend) */
 #overlay-nav .header-burger,
 #overlay-nav .burger-inner,
 [data-section-id="overlay-nav"] .header-burger,
 [data-section-id="overlay-nav"] .burger-inner {
-  color: black !important;
-  fill: black !important;
+  color: white !important;
+  fill: white !important;
   background: transparent !important;
-  mix-blend-mode: normal !important;
 }
 
-/* Close button lines should be black */
+/* Close button lines should be WHITE (will appear black due to blend) */
 #overlay-nav .burger-inner .top-bun,
 #overlay-nav .burger-inner .patty,
 #overlay-nav .burger-inner .bottom-bun,
 [data-section-id="overlay-nav"] .burger-inner .top-bun,
 [data-section-id="overlay-nav"] .burger-inner .patty,
 [data-section-id="overlay-nav"] .burger-inner .bottom-bun {
-  background-color: black !important;
-  mix-blend-mode: normal !important;
+  background-color: white !important;
 }
 
 /* Header container must be see-through so the text can "see" the page - BUT NOT mobile menu */
@@ -446,113 +440,4 @@ mix-blend-mode: difference !important;
 
 
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
-
-/* Additional mobile menu targeting for better coverage */
-.header-menu--folder-list,
-.header-menu.white,
-[data-section-theme="white"],
-[data-test="header-menu"] {
-  background: white !important;
-  background-color: white !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Target the background div specifically */
-#overlay-nav .header-menu-bg,
-[data-section-id="overlay-nav"] .header-menu-bg,
-.header-menu-bg.theme-bg--primary {
-  background: white !important;
-  background-color: white !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Ensure menu navigation area is white */
-#overlay-nav .header-menu-nav,
-[data-section-id="overlay-nav"] .header-menu-nav,
-#overlay-nav .header-menu-nav-list,
-[data-section-id="overlay-nav"] .header-menu-nav-list {
-  background: white !important;
-  background-color: white !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Container elements should also be white */
-#overlay-nav .container,
-[data-section-id="overlay-nav"] .container,
-#overlay-nav .header-menu-nav-item,
-[data-section-id="overlay-nav"] .header-menu-nav-item {
-  background: white !important;
-  background-color: white !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Ensure any theme classes don't override */
-#overlay-nav.white,
-[data-section-id="overlay-nav"].white,
-#overlay-nav .white,
-[data-section-id="overlay-nav"] .white {
-  background: white !important;
-  background-color: white !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Force override any inline styles */
-#overlay-nav[style],
-[data-section-id="overlay-nav"][style] {
-  background: white !important;
-  background-color: white !important;
-}
-
-/* NUCLEAR OPTION - Force mobile menu background */
-/* Use !important with highest specificity */
-html body #overlay-nav,
-html body [data-section-id="overlay-nav"],
-html body #header [data-section-id="overlay-nav"],
-body #overlay-nav,
-body [data-section-id="overlay-nav"] {
-  background: white !important;
-  background-color: white !important;
-  background-image: none !important;
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-}
-
-/* Override any background gradients or images */
-#overlay-nav::before,
-#overlay-nav::after,
-[data-section-id="overlay-nav"]::before,
-[data-section-id="overlay-nav"]::after {
-  display: none !important;
-  background: none !important;
-  background-color: transparent !important;
-}
-
-/* Force white on EVERY child element */
-html body #overlay-nav *,
-html body [data-section-id="overlay-nav"] *,
-body #overlay-nav *,
-body [data-section-id="overlay-nav"] * {
-  background: white !important;
-  background-color: white !important;
-  background-image: none !important;
-  mix-blend-mode: normal !important;
-}
-
-/* Inline style override - this targets elements with style attributes */
-#overlay-nav[style*="background"],
-[data-section-id="overlay-nav"][style*="background"] {
-  background: white !important;
-  background-color: white !important;
-}
-
-/* Override theme background classes */
-#overlay-nav .theme-bg--primary,
-#overlay-nav .theme-bg--secondary,
-#overlay-nav .theme-bg--accent,
-[data-section-id="overlay-nav"] .theme-bg--primary,
-[data-section-id="overlay-nav"] .theme-bg--secondary,
-[data-section-id="overlay-nav"] .theme-bg--accent {
-  background: white !important;
-  background-color: white !important;
-}
 
