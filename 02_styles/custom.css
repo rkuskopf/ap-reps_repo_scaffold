@@ -497,3 +497,17 @@ min-height: 0 !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+
+/* Add side margins and grid gaps to gallery grid */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
+  margin-left: 30px !important;
+  margin-right: 30px !important;
+  row-gap: 20px !important;    /* vertical space between images */
+  column-gap: 20px !important; /* horizontal space between images */
+  display: grid !important;    /* ensure grid layout for gaps */
+}
+
+/* Remove per-slide right padding to avoid double spacing */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .slide {
+  padding-right: 0 !important;
+}
