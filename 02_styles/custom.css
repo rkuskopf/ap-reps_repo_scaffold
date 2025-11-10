@@ -156,8 +156,8 @@ body, a:hover, button:hover {
   aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
   overflow: hidden;
   position: relative;
-  box-sizing: content-box;
-  padding-bottom: var(--ap-gap, 10px) !important;
+  box-sizing: border-box !important; /* switched from content-box to stop vertical padding stacking */
+  padding-bottom: 0 !important; /* move spacing to row-gap only */
   padding-right: var(--ap-gap-x, 10px) !important;
 }
 
@@ -473,14 +473,27 @@ min-height: 0 !important;
   overflow: visible !important;
 }
 
-/* Inside Will Myers tabs: let FE sections shrink to content */
-.apreps [data-wm-plugin="tabs"] [class^="fe-"]{
-  grid-template-rows: none !important;          /* drop the fixed repeat(...) */
-  grid-auto-rows: minmax(8px, auto) !important; /* implicit rows size to content */
-}
 
 /* Let Fluid Engine shrink-wrap to the gallery content */
 .apreps [data-wm-plugin="tabs"] [class^="fe-"] {
   grid-template-rows: none !important;
   grid-auto-rows: minmax(8px, auto) !important;
+}
+
+/* FINAL — the selector that collapsed the FE rows inside the active tab */
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"])
+  .tab-panel[aria-hidden="false"] .page-section .fluid-engine{
+  grid-template-rows: none !important;
+  grid-auto-rows: minmax(8px, auto) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: block !important; /* belt + braces; mirrors your devtools test */
+}
+
+/* strip the section padding that showed up in your screenshots */
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"])
+  .tab-panel[aria-hidden="false"] .page-section .content-wrapper{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
