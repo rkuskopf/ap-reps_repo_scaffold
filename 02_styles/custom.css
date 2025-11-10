@@ -498,16 +498,36 @@ min-height: 0 !important;
   padding-bottom: 0 !important;
 }
 
-/* Add side margins and grid gaps to gallery grid */
-.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
-  margin-left: 30px !important;
-  margin-right: 30px !important;
-  row-gap: 20px !important;    /* vertical space between images */
-  column-gap: 20px !important; /* horizontal space between images */
-  display: grid !important;    /* ensure grid layout for gaps */
+/* Side padding + consistent gaps for artist tab galleries */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-block.sqs-block-gallery,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-block.sqs-block-gallery > .sqs-block-content {
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  box-sizing: border-box !important;
 }
 
-/* Remove per-slide right padding to avoid double spacing */
+/* No inner gutters between images — keep only outer side padding */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
+  row-gap: 0 !important;
+  column-gap: 0 !important;
+  display: grid !important;
+}
+
+/* Zero internal slide padding/insets inside artist tabs */
+.apreps .wm-tabs .tab-panel > .tab-content {
+  --ap-gap-x: 0px;
+  --ap-gap: 0px;
+}
+
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery.sqs-gallery-design-grid .margin-wrapper {
+  padding-right: 0 !important;
+}
+
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  inset: 0 !important;
+}
+
+/* Prevent double spacing: remove per-slide right padding inside tab galleries */
 .apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .slide {
   padding-right: 0 !important;
 }
