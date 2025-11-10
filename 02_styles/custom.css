@@ -309,15 +309,14 @@ img.thumb-image.crop-top,
 
 /* ### BEGIN DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
-/* SIMPLIFIED MOBILE MENU FIX */
-/* Since the mobile menu still inherits blend modes, style it as BLACK background with WHITE text */
-/* This way it will appear WHITE due to difference blend mode */
+/* MOBILE MENU - EXCLUDE FROM BLEND MODE ENTIRELY */
 #overlay-nav,
 [data-section-id="overlay-nav"],
 #header [data-section-id="overlay-nav"] {
-  background: black !important;
-  background-color: black !important;
-  /* Don't override mix-blend-mode - let it inherit difference */
+  background: white !important;
+  background-color: white !important;
+  mix-blend-mode: normal !important;
+  isolation: isolate !important;
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -328,49 +327,53 @@ img.thumb-image.crop-top,
   z-index: 99999 !important;
 }
 
-/* Everything inside overlay-nav gets black background */
+/* Everything inside mobile menu - normal blend mode */
 #overlay-nav *,
 [data-section-id="overlay-nav"] * {
-  background-color: black !important;
-  /* Don't override mix-blend-mode */
+  background-color: white !important;
+  mix-blend-mode: normal !important;
 }
 
-/* Links inside overlay-nav should be WHITE (will appear black due to blend) */
+/* Mobile menu text - black on white */
 #overlay-nav a,
 [data-section-id="overlay-nav"] a,
 #overlay-nav .header-menu-nav-item a,
 [data-section-id="overlay-nav"] .header-menu-nav-item a {
-  color: white !important;
+  color: black !important;
   background: transparent !important;
+  mix-blend-mode: normal !important;
 }
 
-/* Close button should be WHITE (will appear black due to blend) */
+/* Mobile menu close button - black on white */
 #overlay-nav .header-burger,
 #overlay-nav .burger-inner,
 [data-section-id="overlay-nav"] .header-burger,
 [data-section-id="overlay-nav"] .burger-inner {
-  color: white !important;
-  fill: white !important;
+  color: black !important;
+  fill: black !important;
   background: transparent !important;
+  mix-blend-mode: normal !important;
 }
 
-/* Close button lines should be WHITE (will appear black due to blend) */
+/* Mobile menu close button lines - black */
 #overlay-nav .burger-inner .top-bun,
 #overlay-nav .burger-inner .patty,
 #overlay-nav .burger-inner .bottom-bun,
 [data-section-id="overlay-nav"] .burger-inner .top-bun,
 [data-section-id="overlay-nav"] .burger-inner .patty,
 [data-section-id="overlay-nav"] .burger-inner .bottom-bun {
-  background-color: white !important;
+  background-color: black !important;
+  mix-blend-mode: normal !important;
 }
 
+/* DESKTOP HEADER - EXCLUDE MOBILE MENU FROM BLEND MODE RULES */
 /* Header container must be see-through so the text can "see" the page - BUT NOT mobile menu */
-#header:not(.header-menu):not([class*="header-menu"]),
+#header:not([data-section-id="overlay-nav"]):not(.header-menu):not([class*="header-menu"]),
 #header:before,
 #header:after,
-#header .header-inner,
-#header .header-display-desktop,
-#header .header-display-mobile:not(.header-menu) {
+#header .header-inner:not([data-section-id="overlay-nav"]),
+#header .header-display-desktop:not([data-section-id="overlay-nav"]),
+#header .header-display-mobile:not([data-section-id="overlay-nav"]):not(.header-menu) {
   background: transparent !important;
   box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
@@ -380,39 +383,38 @@ img.thumb-image.crop-top,
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
-/* Apply difference */
-#header .header-title,
-#header .header-title-text,
-#header .header-title-text a,
-#header .header-title-logo a,
-#header .header-nav a,
-#header .header-actions *,
-#header .header-actions-action svg,
-#header .nav-toggle-label,
-#header .header-burger,
-#header .header-burger *,
-#header .header-burger-btn,
-#header .burger-box,
-#header .burger-inner {
-mix-blend-mode: difference !important;
-color: #fff !important;
-background: transparent !important;
-text-shadow: none !important;
-fill: #fff !important;
+/* Apply difference blend mode to desktop header elements - BUT EXCLUDE MOBILE MENU */
+#header .header-title:not([data-section-id="overlay-nav"] *),
+#header .header-title-text:not([data-section-id="overlay-nav"] *),
+#header .header-title-text a:not([data-section-id="overlay-nav"] *),
+#header .header-title-logo a:not([data-section-id="overlay-nav"] *),
+#header .header-nav a:not([data-section-id="overlay-nav"] *),
+#header .header-actions *:not([data-section-id="overlay-nav"] *),
+#header .header-actions-action svg:not([data-section-id="overlay-nav"] *),
+#header .nav-toggle-label:not([data-section-id="overlay-nav"] *),
+#header .header-burger:not([data-section-id="overlay-nav"] *),
+#header .header-burger *:not([data-section-id="overlay-nav"] *),
+#header .header-burger-btn:not([data-section-id="overlay-nav"] *),
+#header .burger-box:not([data-section-id="overlay-nav"] *),
+#header .burger-inner:not([data-section-id="overlay-nav"] *) {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  fill: #fff !important;
 }
 
-/* Hamburger lines */
-#header .burger-inner .top-bun,
-#header .burger-inner .patty,
-#header .burger-inner .bottom-bun {
-background-color: #fff !important;
-mix-blend-mode: difference !important;
+/* Desktop hamburger lines - BUT NOT in mobile menu */
+#header .burger-inner .top-bun:not([data-section-id="overlay-nav"] *),
+#header .burger-inner .patty:not([data-section-id="overlay-nav"] *),
+#header .burger-inner .bottom-bun:not([data-section-id="overlay-nav"] *) {
+  background-color: #fff !important;
+  mix-blend-mode: difference !important;
 }
 
-
-/* Optional: hover */
-#header .header-nav a:hover,
-#header .header-actions-action:hover {
+/* Desktop hover effects - BUT NOT in mobile menu */
+#header .header-nav a:hover:not([data-section-id="overlay-nav"] *),
+#header .header-actions-action:hover:not([data-section-id="overlay-nav"] *) {
   color: #fff !important;
   mix-blend-mode: difference !important;
 }
