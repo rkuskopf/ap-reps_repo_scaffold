@@ -349,8 +349,7 @@ body.mobile-menu-open .site-header {
 #overlay-nav *,
 [data-section-id="overlay-nav"] *,
 .header-menu *,
-.header-menu-nav *,
-body.mobile-menu-open #header *:not(.burger-inner):not(.top-bun):not(.patty):not(.bottom-bun) {
+.header-menu-nav * {
   background-color: transparent !important;
   mix-blend-mode: normal !important;
   color: black !important;
@@ -365,8 +364,7 @@ body.mobile-menu-open #header *:not(.burger-inner):not(.top-bun):not(.patty):not
 #overlay-nav .header-menu-nav-item a,
 [data-section-id="overlay-nav"] .header-menu-nav-item a,
 .header-menu a,
-.header-menu-nav a,
-body.mobile-menu-open #header a {
+.header-menu-nav a {
   color: black !important;
   background: transparent !important;
   mix-blend-mode: normal !important;
@@ -463,7 +461,11 @@ body:not(.mobile-menu-open) #header .header-burger,
 body:not(.mobile-menu-open) #header .header-burger *,
 body:not(.mobile-menu-open) #header .header-burger-btn,
 body:not(.mobile-menu-open) #header .burger-box,
-body:not(.mobile-menu-open) #header .burger-inner {
+body:not(.mobile-menu-open) #header .burger-inner,
+body:not(.mobile-menu-open) .header-burger,
+body:not(.mobile-menu-open) .header-burger *,
+body:not(.mobile-menu-open) .burger-box,
+body:not(.mobile-menu-open) .burger-inner {
   mix-blend-mode: difference !important;
   color: #fff !important;
   background: transparent !important;
@@ -471,10 +473,13 @@ body:not(.mobile-menu-open) #header .burger-inner {
   fill: #fff !important;
 }
 
-/* Hamburger lines when menu is closed */
+/* Hamburger lines when menu is closed - multiple selectors to catch all cases */
 body:not(.mobile-menu-open) #header .burger-inner .top-bun,
 body:not(.mobile-menu-open) #header .burger-inner .patty,
-body:not(.mobile-menu-open) #header .burger-inner .bottom-bun {
+body:not(.mobile-menu-open) #header .burger-inner .bottom-bun,
+body:not(.mobile-menu-open) .burger-inner .top-bun,
+body:not(.mobile-menu-open) .burger-inner .patty,
+body:not(.mobile-menu-open) .burger-inner .bottom-bun {
   background-color: #fff !important;
   mix-blend-mode: difference !important;
 }
@@ -523,7 +528,7 @@ body.mobile-menu-open #header .header-title-logo a {
 
 
 
-/* NUCLEAR OVERRIDE - Mobile Menu Must Be Solid */
+/* ADDITIONAL MOBILE MENU OVERRIDES - Ensure white background */
 html body #overlay-nav,
 html body [data-section-id="overlay-nav"] {
   background: white !important;
@@ -535,11 +540,12 @@ html body [data-section-id="overlay-nav"] {
   opacity: 1 !important;
 }
 
-/* Override all children too */
+/* Override all children - transparent backgrounds but normal blend mode */
 html body #overlay-nav *,
 html body [data-section-id="overlay-nav"] * {
   mix-blend-mode: normal !important;
-  background-color: white !important;
+  background-color: transparent !important;
+  color: black !important;
 }
 
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
