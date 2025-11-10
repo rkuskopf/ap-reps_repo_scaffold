@@ -151,34 +151,7 @@ body, a:hover, button:hover {
 
 /* Infinite auto scroll by Digital Moves */
 
-/* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
-.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
-  aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
-  overflow: hidden;
-  position: relative;
-  box-sizing: border-box !important; /* switched from content-box to stop vertical padding stacking */
-  padding-bottom: 0 !important; /* move spacing to row-gap only */
-  padding-right: var(--ap-gap-x, 10px) !important;
-}
 
-.sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center; /* flush-top */
-  display: block;
-  position: absolute !important;
-  inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
-}
-
-/* Captions left across all grid galleries */
-.sqs-gallery-block-show-meta .image-slide-title,
-.sqs-gallery-block-show-meta .image-meta,
-.sqs-gallery-block-show-meta .sqs-block-caption {
-  text-align: left !important;
-  margin-top: .5rem;
-  line-height: 1.3;
-}
 
 /* Gallery ratios by Rowan */
 
@@ -359,6 +332,35 @@ body, a:hover, button:hover {
   text-shadow: none !important;
 }
 
+
+/* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
+.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
+  aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box !important; /* switched from content-box to stop vertical padding stacking */
+  padding-bottom: 0 !important; /* move spacing to row-gap only */
+  padding-right: var(--ap-gap-x, 10px) !important;
+}
+
+.sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center; /* flush-top */
+  display: block;
+  position: absolute !important;
+  inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
+}
+
+/* Captions left across all grid galleries */
+.sqs-gallery-block-show-meta .image-slide-title,
+.sqs-gallery-block-show-meta .image-meta,
+.sqs-gallery-block-show-meta .sqs-block-caption {
+  text-align: left !important;
+  margin-top: .5rem;
+  line-height: 1.3;
+}
 
 /* Scope to the Will Myers tabs host so only artist tabs are affected */
 .apreps [data-wm-plugin="tabs"] .page-section,
