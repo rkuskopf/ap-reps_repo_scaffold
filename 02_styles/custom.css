@@ -405,3 +405,11 @@ mix-blend-mode: difference !important;
 
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
+
+/* ### BEGIN DELIVERABLE 3. Overscroll 10.11.25 */
+
+html, body {
+  overscroll-behavior: none;
+}
+
+/* ### END DELIVERABLE 3. Overscroll 10.11.25 */
