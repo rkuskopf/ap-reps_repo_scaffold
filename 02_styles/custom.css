@@ -466,14 +466,7 @@ html, body {
   overflow: visible !important;
 }
 
-/* Mobile: nothing sticky so the layout can collapse */
-@media (max-width: 767px){
-  .apreps [data-wm-plugin="tabs"] .sqs-position-sticky{
-    position: static !important;
-    top: auto !important;
-    bottom: auto !important;
-  }
-}
+
 
 
 /* Catch when Squarespace puts height/min-height on the grid itself */
@@ -508,9 +501,6 @@ min-height: 0 !important;
 max-height: none !important;
 padding-bottom: 0 !important; 
 }
-
-/* Let artist name overlay the gallery, not push it down */
-/* CSS for .apreps [data-wm-plugin="tabs"] .artist-name has been deleted to ensure artist names display as normal block elements. */
 
 /* Make sure the gallery section is a positioning context */
 .apreps [data-wm-plugin="tabs"] .page-section:has(.sqs-block-gallery),
