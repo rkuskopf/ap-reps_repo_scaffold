@@ -317,8 +317,8 @@ img.thumb-image.crop-top,
   box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
-  /* Keep the container itself normal so overlay isn't affected */
-  isolation: isolate !important;
+  /* Allow header children to blend with page backdrop */
+  isolation: auto !important;
   mix-blend-mode: normal !important;
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
