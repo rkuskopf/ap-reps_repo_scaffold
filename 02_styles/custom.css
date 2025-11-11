@@ -317,8 +317,9 @@ img.thumb-image.crop-top,
   box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
-  isolation: auto !important;
-  mix-blend-mode: difference !important;
+  /* Keep the container itself normal so overlay isn't affected */
+  isolation: isolate !important;
+  mix-blend-mode: normal !important;
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
@@ -380,6 +381,20 @@ mix-blend-mode: difference !important;
   text-shadow: none !important;
 }
 
+
+/* Ensure PNG logo in header inverts correctly */
+#header .header-title-logo img {
+  mix-blend-mode: difference !important;
+  display: block;
+}
+
+/* Keep the mobile menu overlay layers opaque/independent */
+.header-menu,
+.header-menu-bg,
+.header-menu-nav {
+  mix-blend-mode: normal !important;
+  isolation: isolate !important;
+}
 
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
@@ -582,4 +597,3 @@ min-height: 0 !important;
   padding-right: 0 !important;
 }
 /* ### END DELIVERABLE 4. Breakpoints 10.11.25 */
-
