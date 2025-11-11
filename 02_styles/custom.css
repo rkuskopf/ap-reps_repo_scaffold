@@ -309,7 +309,7 @@ img.thumb-image.crop-top,
 
 /* ### BEGIN DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
-/* Header container must be see-through so the text can "see" the page */
+/* Header container */
 #header,
 #header:before,
 #header:after {
@@ -322,7 +322,7 @@ img.thumb-image.crop-top,
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
-/* Apply difference */
+/* Difference */
 #header .header-title,
 #header .header-title-text,
 #header .header-title-text a,
@@ -359,30 +359,9 @@ mix-blend-mode: difference !important;
   mix-blend-mode: difference !important;
 }
 
-/* Mobile menu overlay needs solid background */
-#header .header-menu,
-#header .header-menu-bg,
-#header .header-menu-nav,
-#header .header-menu-nav-list,
-#header .header-menu-nav-folder {
-  background: #000 !important; /* solid black background */
-  mix-blend-mode: normal !important; /* reset blend mode for overlay */
-  isolation: isolate !important; /* create stacking context */
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-/* Mobile menu items should be white on the black background */
-#header .header-menu .header-menu-nav-item a,
-#header .header-menu-nav-folder a,
-#header .header-menu-nav-list a {
-  color: #fff !important;
-  mix-blend-mode: normal !important;
-  background: transparent !important;
-}
 
 
-/* 1) Stop the sticky wrapper from forcing normal blend */
+/* Artist names */
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
   mix-blend-mode: difference !important;
   background: transparent !important;
@@ -392,7 +371,6 @@ mix-blend-mode: difference !important;
 }
 
 
-/* 3) Force the artist name to blend like the header */
 .apreps .sqs-block.html-block .sqs-html-content h3,
 .apreps .sqs-block.html-block .sqs-html-content h3 *,
 .apreps .sqs-block.html-block .sqsrte-text-color--black {
@@ -406,6 +384,7 @@ mix-blend-mode: difference !important;
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
 
+
 /* ### BEGIN DELIVERABLE 3. Overscroll 10.11.25 */
 
 html, body {
@@ -414,7 +393,7 @@ html, body {
 
 /* ### END DELIVERABLE 3. Overscroll 10.11.25 */
 
-/* ### BEGIN DELIVERABLE 4. Overscroll 10.11.25 */
+/* ### BEGIN DELIVERABLE 4. Breakpoints 10.11.25 */
 
 /* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
 .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
