@@ -106,9 +106,6 @@
   inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
 }
 
-.thumb-image-wrapper {
-padding-bottom: 30px;
-}
 
 .apreps img.thumb-image {
   position: absolute !important;
@@ -120,6 +117,7 @@ padding-bottom: 30px;
   padding-bottom: 30px;         /* use Squarespace focal point */
   
 }
+
 
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
 .apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
