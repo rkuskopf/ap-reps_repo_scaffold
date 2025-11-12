@@ -399,35 +399,73 @@ mix-blend-mode: difference !important;
 
 
 
-/* === HERO: force text to invert with difference (scoped to block + section) === */
+/* HERO SECTION FIXES */
 
+/* Ensure the hero section doesn't isolate blending and background stays normal */
+.page-section[data-section-id="68f6c692fe6b9523c00e5e9d"] {
+  isolation: auto !important;
+  overflow: visible !important;
+}
+.page-section[data-section-id="68f6c692fe6b9523c00e5e9d"] .section-background,
+.page-section[data-section-id="68f6c692fe6b9523c00e5e9d"] .section-background-overlay {
+  mix-blend-mode: normal !important;
+  background: transparent !important;
+}
 
-/* HERO: force text to invert with difference */
-.fe-block-b514275d8e48de28bc89,
-.fe-block-b514275d8e48de28bc89 * {
+/* Optional Safari glyph rendering helper */
+@supports (-webkit-touch-callout: none) {
+  #block-yui_3_17_2_1_1759615106072_8520 h1 { -webkit-font-smoothing: antialiased; }
+}
+
+/* Apply difference to the live hero block */
+.fe-block-yui_3_17_2_1_1759615106072_8520,
+.fe-block-yui_3_17_2_1_1759615106072_8520 * {
   mix-blend-mode: difference !important;
 }
 
-/* Kill the “black” span color coming from Squarespace’s editor */
-.fe-block-b514275d8e48de28bc89 .sqsrte-text-color--black,
-.fe-block-b514275d8e48de28bc89 h1,
-.fe-block-b514275d8e48de28bc89 h1 * {
-  color: #fff !important; /* white + difference = invert the backdrop */
+/* Force the actual glyphs to white (difference needs white, not black) */
+#block-yui_3_17_2_1_1759615106072_8520 .sqsrte-text-color--black,
+#block-yui_3_17_2_1_1759615106072_8520 h1,
+#block-yui_3_17_2_1_1759615106072_8520 h1 * {
+  color: #fff !important;
   background: transparent !important;
 }
 
-/* Make sure the hero section itself doesn’t isolate the blend */
-.page-section[data-section-id="68f6c692fe6b9523c00e5e9d"] .section-background {
+/* --- Safari-safe hero difference adjustments (added below line 402) --- */
+
+/* Apply difference only to hero glyphs (avoid Safari black box) */
+#block-yui_3_17_2_1_1759615106072_8520 .sqs-html-content h1,
+#block-yui_3_17_2_1_1759615106072_8520 .sqs-html-content h1 * {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
   background: transparent !important;
-}
-.page-section[data-section-id="68f6c692fe6b9523c00e5e9d"] {
-  isolation: auto !important; /* not isolate */
-  overflow: visible; /* avoids clipping blended glyph edges */
+  position: relative;
+  z-index: 1;
 }
 
-/* Optional: Safari quirk helper */
+/* Ensure the hero block wrapper itself does NOT blend (Safari fix) */
+.fe-block-yui_3_17_2_1_1759615106072_8520 {
+  mix-blend-mode: normal !important;
+  background: transparent !important;
+}
+
+/* Safari stability helpers: keep ancestors neutral */
+#block-yui_3_17_2_1_1759615106072_8520,
+#block-yui_3_17_2_1_1759615106072_8520 .sqs-block-content,
+#block-yui_3_17_2_1_1759615106072_8520 .sqs-html-content {
+  isolation: auto !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  background: transparent !important;
+}
+
+/* Safari-only: ensure crisp render and prevent box-painting */
 @supports (-webkit-touch-callout: none) {
-  .fe-block-b514275d8e48de28bc89 h1 {
+  #block-yui_3_17_2_1_1759615106072_8520 .sqs-html-content h1,
+  #block-yui_3_17_2_1_1759615106072_8520 .sqs-html-content h1 * {
+    mix-blend-mode: difference !important;
+    -webkit-text-fill-color: #fff;
     -webkit-font-smoothing: antialiased;
   }
 }
