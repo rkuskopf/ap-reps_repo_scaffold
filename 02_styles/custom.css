@@ -216,13 +216,11 @@ body, a:hover, button:hover {
     100% { transform: translateY(-10px); }
   }
 
-  /* Disable hover content on mobile */
-  .auto-scroll-content {
-    display: none !important;
-  }
 }
 
-/* END: MOBILE HERO */ HE
+
+
+/* END: MOBILE HERO */
 
 /* BEGIN D1:GALLERY-RATIOS v1 2025-11-08 */
 
