@@ -501,13 +501,12 @@ max-height: none !important;
 padding-bottom: 0 !important; 
 }
 
-/* Let artist name overlay the gallery, not push it down */
+/* Restore artist name layout so it occupies space above the gallery */
 .apreps [data-wm-plugin="tabs"] .artist-name {
-  position: absolute !important;
-  top: 0;                /* adjust for placement, e.g. 1rem */
-  left: 0;
-  right: 0;              /* if you want full width */
-  z-index: 5;            /* higher than gallery */
+  position: relative !important;
+  display: block;
+  margin-bottom: 1rem;
+  z-index: 5;
   mix-blend-mode: difference;
   pointer-events: none;  /* so clicks go to gallery images */
 }

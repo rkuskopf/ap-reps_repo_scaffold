@@ -50,7 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
       el.style.setProperty('max-height','none','important');
     });
     root.querySelectorAll('.page-section, .content-wrapper').forEach(el => {
-      el.style.setProperty('padding-top','0','important');
+      const hasArtistName = el.querySelector('.artist-name');
+      el.style.setProperty('padding-top', hasArtistName ? '1.5rem' : '0', 'important');
       el.style.setProperty('padding-bottom','0','important');
     });
   };
