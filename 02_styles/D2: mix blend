@@ -350,15 +350,7 @@ background-color: #fff !important;
 mix-blend-mode: difference !important;
 }
 
-/* 2. Desktop header foreground: invert only title and nav links */
-#header .header-inner .header-display-desktop .header-title-nav-wrapper .header-title-text a,
-#header .header-inner .header-display-desktop .header-title-nav-wrapper .header-nav-list a,
-#header .header-inner .header-display-desktop .header-burger .top-bun,
-#header .header-inner .header-display-desktop .header-burger .patty,
-#header .header-inner .header-display-desktop .header-burger .bottom-bun {
-  color: #fff !important;
-  mix-blend-mode: difference !important;
-}
+
 
 /* Mobile header foreground: invert hamburger and nav links */
 #header .header-inner .header-display-mobile .header-title-text a,
