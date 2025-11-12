@@ -1,3 +1,160 @@
+
+////HEADER OVERLAYS OVER SLIDESHOW /////
+        .page-section.gallery-section {
+          padding-top: 0px !important;
+        }
+
+/**
+ * Tabs Plugin
+ * From Will-Myers.com
+ * Equal Width Tabs
+**/
+.wm-tabs[data-navigation-type="horizontal"] {
+  --nav-scrollbar-display: none;
+  --tabs-header-gap: 0px;
+}
+/**
+ * Tabs Plugin
+ * From Will-Myers.com
+ * Tab Underlines
+**/
+div.wm-tabs {
+  --nav-scrollbar-display: none;
+  --tabs-header-border-bottom-width: 0px;
+
+  --tab-button-active-background: transparent;
+  --tab-button-active-color: ~'hsla(var(--wm-accent-hsl), 1)';
+
+  --tab-indicator-track-size: 4px;
+  --tab-indicator-track-background: ~'hsla(var(--wm-text-hsl), 0.15)';
+  --active-indicator-size: 4px;
+  --active-indicator-border-radius: 0px;
+}
+.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button {
+  flex-grow: 1;
+  flex-basis: ~'calc(100% / var(--tabs-count))';
+}
+.wm-tabs,
+.wm-tabs .tabs-header,
+.wm-tabs .tabs-content {
+  background: none !important;
+  background-color: transparent !important;
+}
+
+  /* Only allow sticky inside the active tab panel */
+.wm-tabs, .wm-tabs .tabs-content, .wm-tabs [role="tabpanel"], .wm-tabs [data-tab-panel]
+{
+  	overflow: visible !important;
+	max-height: none !important; 			transform: none !important; 			contain: none !important;
+  	filter: none !important;
+  	perspective: none !important;
+  	will-change: auto !important; 			position: static !important;
+}
+/* Collapse non-active panels so they don't push the layout */
+.wm-tabs [role="tabpanel"][aria-hidden="true"] { display: none !important;
+}
+
+
+/* Dot cursor by digitalmoves.com.au */
+.dot-cursor {
+    /* customise */
+    mix-blend-mode: difference;
+    transition: all 100ms ease-out;
+
+    /* position */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+
+    /* prevent hover issues */
+    pointer-events: none;
+}
+
+.dot-cursor span {
+    /* customise */
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: white;
+    transition: all 150ms ease-out;
+
+    /* sizing */
+    display: block;
+}
+
+.dot-cursor.active span {
+    /* customise - hover effect */
+}
+
+body, a:hover, button:hover {
+    /* hide default cursor */
+    cursor: none!important;
+}
+
+@media (pointer: coarse) {
+
+    /* disable on touch devices */
+    .dot-cursor {
+        display: none !important;
+    }
+
+}
+
+
+/* Dot cursor by digitalmoves.com.au */
+
+/* Infinite auto scroll by Digital Moves */
+.auto-scroll-slide { position: relative }
+
+.auto-scroll-content {
+  position: absolute!important;
+  z-index: 999;
+  top: 0px;
+  left: 0px;
+  width: calc(100%);
+  height: calc(100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  white-space: nowrap;
+  background-color: rgba(255,255,255,.8);
+  border-radius: 0px;
+  opacity: 0;
+  transform: none;
+  transition: all 150ms linear;
+
+  & > div {
+    max-width: 100%;
+    white-space: wrap;
+    padding: 0 10px;
+  }
+
+  .list-item-content__button {
+    margin-top: 10px;
+
+  }
+
+  // any mobile sizing changes
+  @media (max-width: 480px) {
+    h2 { font-size: 24px!important }
+  }
+}
+
+// Hover animation
+.auto-scroll-slide:hover .auto-scroll-content {
+  opacity: 1;
+  transform: scale(1)
+ }
+ /* Hide section button */
+.auto-scroll .list-item-content__button { display: none }
+
+/* Infinite auto scroll by Digital Moves */
+
+
+
+
 /* BEGIN D1:GALLERY-RATIOS v1 2025-11-08 */
 
 /* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
@@ -120,15 +277,6 @@
   display: block !important;
   position: absolute !important;
   inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
-}
-
-/* Utility: restore top-biased crop when needed */
-/* Apply `.crop-top` to a slide/wrapper or directly on the image */
-.crop-top .thumb-image,
-.crop-top img.thumb-image,
-img.thumb-image.crop-top,
-.thumb-image.crop-top {
-  object-position: top center !important;
 }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
