@@ -158,13 +158,14 @@ body, a:hover, button:hover {
 /* BEGIN D1:GALLERY-RATIOS v1 2025-11-08 */
 
 /* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
+/* Tile box: rely on grid gaps; remove internal padding to avoid seams */
 .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
   aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
   overflow: hidden;
   position: relative;
-  box-sizing: content-box;
-  padding-bottom: var(--ap-gap, 10px) !important;
-  padding-right: var(--ap-gap-x, 10px) !important;
+  box-sizing: border-box !important; /* prevent padding from expanding tile */
+  padding-bottom: 0 !important;      /* use row-gap instead */
+  padding-right: 0 !important;       /* use column-gap instead */
 }
 
 /* Ensure inner img fills its tile without internal insets */
@@ -214,6 +215,13 @@ body, a:hover, button:hover {
   transform: scale(var(--ap-scale, 1)) translateZ(0);
   transform-origin: center center;
 }
+
+/* Kill double-gutter: no extra padding on slides inside gallery grid */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .slide,
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide { padding-right: 0 !important; }
+
+/* Sub-pixel seam guard on retina zoom levels */
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image { backface-visibility: hidden; }
 
 
 
@@ -308,5 +316,4 @@ body, a:hover, button:hover {
 }
 
 /* ### BEGIN DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
-
 
