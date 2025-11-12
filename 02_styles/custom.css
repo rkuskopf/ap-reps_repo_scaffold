@@ -141,6 +141,17 @@ body, a:hover, button:hover {
   }
 }
 
+@media (max-width: 767px) {
+  .dm-cursor-collage-image {
+    display: none !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    z-index: -9999 !important;
+  }
+}
+
+
 // Hover animation
 .auto-scroll-slide:hover .auto-scroll-content {
   opacity: 1;
