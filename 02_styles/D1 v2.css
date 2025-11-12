@@ -1,0 +1,84 @@
+/* === D1: Gallery ratios + crop hygiene (clean) === */
+
+/* Scope */
+.apreps {
+
+  /* Tile: fixed frame by aspect-ratio; grid gaps handle spacing */
+  .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper,
+  .sqs-gallery.sqs-gallery-design-grid .slide .image-wrapper,
+  .sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper {
+    aspect-ratio: var(--ap-aspect, 4 / 3) !important; /* 4:3 fallback */
+    position: relative !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    padding: 0 !important; /* no internal gutters */
+  }
+
+  /* Slide chrome: no extra padding (avoid double gutters) */
+  .sqs-gallery-block-grid .sqs-gallery-design-grid-slide,
+  .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
+  .sqs-gallery-block-grid .slide,
+  .sqs-gallery.sqs-gallery-design-grid .slide {
+    box-sizing: border-box !important;
+    padding-right: var(--ap-gap-x, 10px) !important;
+  }
+
+  /* Image: fill tile, use SQS focal point, optional per-item scale */
+  img.thumb-image {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+    object-position: initial !important;         /* ← let SQS focal point apply */
+    transform: scale(var(--ap-scale, 1)) translateZ(0);
+    transform-origin: center center;
+    backface-visibility: hidden;
+  }
+
+  /* Anchors: ensure block-level, full-width click targets */
+  .sqs-gallery-block-grid .image-slide-anchor,
+  .sqs-gallery-block-grid .js-gallery-lightbox-opener,
+  .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
+  .sqs-gallery.sqs-gallery-design-grid .margin-wrapper,
+  .sqs-gallery.sqs-gallery-design-grid .thumb-image-wrapper {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Captions (single source of truth) */
+  .sqs-gallery-block-show-meta .image-slide-title,
+  .sqs-gallery-block-show-meta .image-meta,
+  .sqs-gallery-block-show-meta .sqs-block-caption,
+  .sqs-gallery-block-grid .image-slide-title,
+  .sqs-gallery-block-grid .image-slide-description {
+    text-align: left !important;
+    margin-top: .5rem !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Tab panel hygiene (no top gaps) */
+  .wm-tabs .tab-panel > .tab-content .page-section:first-of-type,
+  .wm-tabs .tab-panel > .tab-content .sqs-block-gallery {
+    --section-padding-top: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* Grid internals + stray margins */
+  .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
+    align-items: start !important;
+    margin-top: 0 !important;
+  }
+  .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid-item,
+  .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid figure,
+  .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .meta {
+    margin-top: 0 !important;
+  }
+
+  /* Remove fetched-section borders inside tabs */
+  .wm-tabs .tab-panel > .tab-content > .page-section .section-border {
+    display: none !important;
+  }
+}
