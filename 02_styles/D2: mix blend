@@ -323,9 +323,11 @@ img.thumb-image.crop-top,
 }
 
 #header .header-title,
+#header .header-title-logo img,
 #header .header-title-text,
 #header .header-title-text a,
 #header .header-title-logo a,
+#header .header-title-logo,
 #header .header-nav a,
 #header .header-actions *,
 #header .header-actions-action svg,
@@ -391,6 +393,8 @@ mix-blend-mode: difference !important;
 #header .header-title-logo img {
   mix-blend-mode: difference !important;
   display: block;
+  -webkit-filter: invert(1) !important; /* fallback when blend-mode is blocked */
+  filter: invert(1) !important;          /* ensures PNG/logo visibly inverts across browsers */
 }
 
 
