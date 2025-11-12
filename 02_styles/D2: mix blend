@@ -350,16 +350,9 @@ background-color: #fff !important;
 mix-blend-mode: difference !important;
 }
 
-
-
-/* Mobile header foreground: invert hamburger and nav links */
-#header .header-inner .header-display-mobile .header-title-text a,
-#header .header-inner .header-display-mobile .header-nav-list a,
-#header .header-inner .header-display-mobile .header-burger .top-bun,
-#header .header-inner .header-display-mobile .header-burger .patty,
-#header .header-inner .header-display-mobile .header-burger .bottom-bun {
-  color: #fff !important;
-  mix-blend-mode: difference !important;
+#header .header-menu-bg {
+  background: #fff !important;
+  opacity: 1 !important;
 }
 
 
