@@ -172,7 +172,7 @@ body, a:hover, button:hover {
 .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
   width: 100% !important;
   height: 100% !important;
-  object-fit: contain !important;  /* CHANGED: shrink image to fit, show more of it */
+  object-fit: cover !important;
   object-position: center center !important; /* default centered crop */
   display: block !important;
   position: absolute !important;
@@ -203,14 +203,15 @@ body, a:hover, button:hover {
 
 /* Grid thumbs: fill tile + optional gentle zoom-out */
 .apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-anchor .thumb-image,
-.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .js-gallery-lightbox-opener .thumb-image {
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .js-gallery-lightbox-opener .thumb-image,
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
   display: block !important;
-  object-fit: contain !important;         /* CHANGED: shrink image to fit, show more of it */
-  object-position: center center !important;
+  object-fit: cover !important;           /* preserves tile aspect */
+  object-position: initial !important; /* SQS will supply focal point */
   transform: scale(var(--ap-scale, 1)) translateZ(0);
   transform-origin: center center;
 }
@@ -277,6 +278,16 @@ body, a:hover, button:hover {
   padding-right: var(--ap-gap-x, 10px) !important;
 }
 
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+    object-position: initial !important; /* SQS will supply focal point */
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+}
+
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
 .apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
@@ -304,6 +315,25 @@ body, a:hover, button:hover {
   padding-right: 10px !important;
 }
 
+/* Globally zoom images out slightly inside their tiles */
+.apreps img.thumb-image {
+  transform: scale(0.9); /* smaller number = more zoomed out */
+  transform-origin: center center;
+}
+
+  /* Image: fill tile, use SQS focal point, optional per-item scale */
+  img.thumb-image {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+    object-position: initial !important;         /* ← let SQS focal point apply */
+    transform: scale(0.75) translateZ(0);        /* CHANGED: 0.75 = 75% size */
+    transform-origin: center center;
+    backface-visibility: hidden;
+  }
 
 /* ### BEGIN DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
