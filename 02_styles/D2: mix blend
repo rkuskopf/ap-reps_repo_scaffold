@@ -371,12 +371,5 @@ img.thumb-image.crop-top,
   display: block;
 }
 
-/* Keep the mobile menu overlay layers opaque/independent */
-.header-menu,
-.header-menu-bg,
-.header-menu-nav {
-  mix-blend-mode: normal !important;
-  isolation: isolate !important;
-}
 
 
