@@ -323,41 +323,26 @@ img.thumb-image.crop-top,
 }
 
 /* Difference */
-#header .header-title,
-#header .header-title-text,
-#header .header-title-text a,
-#header .header-title-logo a,
-#header .header-nav a,
-#header .header-actions *,
-#header .header-actions-action svg,
-#header .nav-toggle-label,
-#header .header-burger,
-#header .header-burger *,
-#header .header-burger-btn,
-#header .burger-box,
-#header .burger-inner {
-mix-blend-mode: difference !important;
-color: #fff !important;
-background: transparent !important;
-text-shadow: none !important;
-fill: #fff !important;
+/* 1. Header background layers: always transparent/removed */
+#header .header-background,
+#header .header-background-solid,
+#header .header-border,
+#header .header-dropshadow {
+  background: transparent !important;
+  opacity: 0 !important;
+  display: none !important;
 }
 
-/* Hamburger lines */
-#header .burger-inner .top-bun,
-#header .burger-inner .patty,
-#header .burger-inner .bottom-bun {
-background-color: #fff !important;
-mix-blend-mode: difference !important;
-}
-
-
-/* Optional: hover */
-#header .header-nav a:hover,
-#header .header-actions-action:hover {
+/* 2. Desktop header foreground: invert only title and nav links */
+#header .header-inner .header-display-desktop .header-title-nav-wrapper .header-title-text a,
+#header .header-inner .header-display-desktop .header-title-nav-wrapper .header-nav-list a,
+#header .header-inner .header-display-desktop .header-burger .top-bun,
+#header .header-inner .header-display-desktop .header-burger .patty,
+#header .header-inner .header-display-desktop .header-burger .bottom-bun {
   color: #fff !important;
   mix-blend-mode: difference !important;
 }
+
 
 
 
