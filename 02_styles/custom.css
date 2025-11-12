@@ -307,94 +307,6 @@ img.thumb-image.crop-top,
   padding-right: 10px !important;
 }
 
-/* ### BEGIN DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
-
-/* Header container */
-#header,
-#header:before,
-#header:after {
-  background: transparent !important;
-  box-shadow: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  isolation: auto !important; 
-  transform: translate3d(0,0,0); /* helps Safari render blend properly */
-}
-
-/* Difference */
-#header .header-title,
-#header .header-title-text,
-#header .header-title-text a,
-#header .header-title-logo a,
-#header .header-nav a,
-#header .header-actions *,
-#header .header-actions-action svg,
-#header .nav-toggle-label,
-#header .header-burger,
-#header .header-burger *,
-#header .header-burger-btn,
-#header .burger-box,
-#header .burger-inner {
-mix-blend-mode: difference !important;
-color: #fff !important;
-background: transparent !important;
-text-shadow: none !important;
-fill: #fff !important;
-}
-
-/* Hamburger lines */
-#header .burger-inner .top-bun,
-#header .burger-inner .patty,
-#header .burger-inner .bottom-bun {
-background-color: #fff !important;
-mix-blend-mode: difference !important;
-}
-
-
-/* Optional: hover */
-#header .header-nav a:hover,
-#header .header-actions-action:hover {
-  color: #fff !important;
-  mix-blend-mode: difference !important;
-}
-
-
-
-/* Artist names */
-.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
-  mix-blend-mode: difference !important;
-  background: transparent !important;
-  isolation: auto !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-
-
-.apreps .sqs-block.html-block .sqs-html-content h3,
-.apreps .sqs-block.html-block .sqs-html-content h3 *,
-.apreps .sqs-block.html-block .sqsrte-text-color--black {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  background: transparent !important;
-  text-shadow: none !important;
-}
-
-/* Ensure PNG logo in header inverts correctly */
-#header .header-title-logo img {
-  mix-blend-mode: difference !important;
-  display: block;
-}
-
-/* Keep the mobile menu overlay layers opaque/independent */
-.header-menu,
-.header-menu-bg,
-.header-menu-nav {
-  mix-blend-mode: normal !important;
-  isolation: isolate !important;
-}
-
-/* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
-
 
 
 /* ### BEGIN DELIVERABLE 3. Overscroll 10.11.25 */
@@ -594,4 +506,54 @@ min-height: 0 !important;
   padding-right: 0 !important;
 }
 /* ### END DELIVERABLE 4. Breakpoints 10.11.25 */
+
+/* CRITICAL: neutralize ALL header background layers */
+#header .header-background,
+#header .header-background.theme-bg--primary,
+#header .header-background-solid,
+#header .header-border,
+#header .header-dropshadow {
+  background: transparent !important;
+  background-color: transparent !important;
+  opacity: 0 !important;
+  display: none; /* nuclear option: removes from paint tree */
+}
+
+/* Desktop foreground: difference */
+#header .header-display-desktop .header-title-text a,
+#header .header-display-desktop .header-nav-list a,
+#header .header-display-desktop .header-burger .burger-inner .top-bun,
+#header .header-display-desktop .header-burger .burger-inner .patty,
+#header .header-display-desktop .header-burger .burger-inner .bottom-bun {
+  color: #fff !important;
+  mix-blend-mode: difference !important;
+}
+
+/* Mobile foreground: difference */
+#header .header-display-mobile .header-title-text a,
+#header .header-display-mobile .header-nav-list a,
+#header .header-display-mobile .header-burger .burger-inner .top-bun,
+#header .header-display-mobile .header-burger .burger-inner .patty,
+#header .header-display-mobile .header-burger .burger-inner .bottom-bun {
+  color: #fff !important;
+  mix-blend-mode: difference !important;
+}
+
+/* Overlay: force normal + solid background */
+#header .header-menu,
+#header .header-menu *,
+#header .header-menu-bg,
+#header .header-menu-bg.theme-bg--primary {
+  mix-blend-mode: normal !important;
+}
+
+#header .header-menu-bg {
+  background: #fff !important;
+  background-color: #fff !important;
+  opacity: 1 !important;
+}
+
+#header .header-menu-nav-list a {
+  color: #000 !important;
+}
 
