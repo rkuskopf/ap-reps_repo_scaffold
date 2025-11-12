@@ -399,3 +399,35 @@ mix-blend-mode: difference !important;
 
 
 
+/* === HERO: force text to invert with difference (scoped to block + section) === */
+
+
+/* HERO: force text to invert with difference */
+.fe-block-b514275d8e48de28bc89,
+.fe-block-b514275d8e48de28bc89 * {
+  mix-blend-mode: difference !important;
+}
+
+/* Kill the “black” span color coming from Squarespace’s editor */
+.fe-block-b514275d8e48de28bc89 .sqsrte-text-color--black,
+.fe-block-b514275d8e48de28bc89 h1,
+.fe-block-b514275d8e48de28bc89 h1 * {
+  color: #fff !important; /* white + difference = invert the backdrop */
+  background: transparent !important;
+}
+
+/* Make sure the hero section itself doesn’t isolate the blend */
+.page-section[data-section-id="68f6c692fe6b9523c00e5e9d"] .section-background {
+  background: transparent !important;
+}
+.page-section[data-section-id="68f6c692fe6b9523c00e5e9d"] {
+  isolation: auto !important; /* not isolate */
+  overflow: visible; /* avoids clipping blended glyph edges */
+}
+
+/* Optional: Safari quirk helper */
+@supports (-webkit-touch-callout: none) {
+  .fe-block-b514275d8e48de28bc89 h1 {
+    -webkit-font-smoothing: antialiased;
+  }
+}
