@@ -141,7 +141,6 @@ body, a:hover, button:hover {
   }
 }
 
-/*
 // Hover animation
 .auto-scroll-slide:hover .auto-scroll-content {
   opacity: 1;
@@ -149,11 +148,45 @@ body, a:hover, button:hover {
  }
  /* Hide section button */
 .auto-scroll .list-item-content__button { display: none }
-*/
 
 /* Infinite auto scroll by Digital Moves */
 
 /* BEGIN: MOBILE HERO */
+
+@media (max-width: 640px) {
+  /* Ensure the content is visible */
+  .auto-scroll-content {
+    opacity: 1 !important;
+    position: relative !important;
+    transform: none !important;
+    background-color: transparent !important;
+    height: auto !important;
+    width: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 24px;
+    animation: scrollMarquee 30s linear infinite;
+    overflow: hidden;
+    padding: 20px 0;
+  }
+
+  .auto-scroll-content > div {
+    flex-shrink: 0;
+    width: auto;
+    height: 400px; /* adjust as needed */
+    animation: floatY 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes scrollMarquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* adjust to match content width */
+  }
+
+  @keyframes floatY {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+  }
+}
 
 @media (max-width: 640px) {
   .auto-scroll-slide {
@@ -189,7 +222,7 @@ body, a:hover, button:hover {
   }
 }
 
-/* END: MOBILE HERO */ 
+/* END: MOBILE HERO */ HE
 
 /* BEGIN D1:GALLERY-RATIOS v1 2025-11-08 */
 
