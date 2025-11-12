@@ -264,7 +264,7 @@ body, a:hover, button:hover {
   padding-right: var(--ap-gap-x, 10px) !important;
 }
 
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+.apreps .sqs-gallery.sqs-gallery-design-grid {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
@@ -274,13 +274,11 @@ body, a:hover, button:hover {
   inset: 0 var(--ap-gap-x, 10px) var(--ap-gap, 10px) 0;
 }
 
-/* Utility: restore top-biased crop when needed */
-/* Apply `.crop-top` to a slide/wrapper or directly on the image */
-.crop-top .thumb-image,
-.crop-top img.thumb-image,
-img.thumb-image.crop-top,
-.thumb-image.crop-top {
-  object-position: top center !important;
+.apreps img.thumb-image {
+  object-fit: contain !important;
+  object-position: center center !important; /* default centered crop */
+  display: block !important;
+  position: absolute !important;
 }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
