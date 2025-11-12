@@ -149,6 +149,17 @@ body, a:hover, button:hover {
  /* Hide section button */
 .auto-scroll .list-item-content__button { display: none }
 
+@media (max-width: 767px) {
+  .dm-cursor-collage-image {
+    display: none !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    z-index: -9999 !important;
+  }
+}
+
+
 /* Infinite auto scroll by Digital Moves */
 
 
@@ -398,6 +409,24 @@ mix-blend-mode: difference !important;
   filter: invert(1) !important;          /* ensures PNG/logo visibly inverts across browsers */
 }
 
+/* HERO SECTION FIXES */
+
+
+/* Apply difference to the live hero block */
+.fe-block-yui_3_17_2_1_1759615106072_8520,
+.fe-block-yui_3_17_2_1_1759615106072_8520 * {
+  mix-blend-mode: difference !important;
+  isolation: isolate !important;
+  transform: translate3d(0,0,0); /* helps Safari render blend properly */
+}
+
+/* Force the actual glyphs to white (difference needs white, not black) */
+#block-yui_3_17_2_1_1759615106072_8520 .sqsrte-text-color--black,
+#block-yui_3_17_2_1_1759615106072_8520 h1,
+#block-yui_3_17_2_1_1759615106072_8520 h1 * {
+  color: #fff !important;
+  filter: invert(1) !important;
+}
 
 
 /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
