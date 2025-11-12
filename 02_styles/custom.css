@@ -412,11 +412,13 @@ mix-blend-mode: difference !important;
 /* HERO SECTION FIXES */
 
 
-/* Apply difference to the live hero block */
+/* live hero block */
 .fe-block-yui_3_17_2_1_1759615106072_8520,
 .fe-block-yui_3_17_2_1_1759615106072_8520 * {
   mix-blend-mode: difference !important;
   isolation: isolate !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
@@ -428,8 +430,7 @@ mix-blend-mode: difference !important;
   filter: invert(1) !important;
 }
 
-
-/* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
+  /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
 
 
