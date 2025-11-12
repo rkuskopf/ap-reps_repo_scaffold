@@ -394,8 +394,4 @@ mix-blend-mode: difference !important;
   isolation: isolate !important;
 }
 
-#header img[elementtiming^="nbf-header-logo-"] {
-  mix-blend-mode: difference !important;
-  background: transparent !important;
-  isolation: auto !important;
-}
+
