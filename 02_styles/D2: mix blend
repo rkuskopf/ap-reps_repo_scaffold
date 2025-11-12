@@ -309,7 +309,7 @@ img.thumb-image.crop-top,
 
 /* ### BEGIN DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
-/* Header container */
+/* ----- Header container ------ */
 #header,
 #header:before,
 #header:after {
@@ -357,8 +357,15 @@ mix-blend-mode: difference !important;
   opacity: 1 !important;
 }
 
+/* Ensure PNG logo in header inverts correctly */
+#header .header-title-logo img {
+  mix-blend-mode: difference !important;
+  display: block;
+  -webkit-filter: invert(1) !important; /* fallback when blend-mode is blocked */
+  filter: invert(1) !important;          /* ensures PNG/logo visibly inverts across browsers */
+}
 
-/* Difference */
+/* Not sure what this is doing */
 /* 1. Header background layers: always transparent/removed */
 #header .header-background,
 #header .header-background-solid,
@@ -370,7 +377,7 @@ mix-blend-mode: difference !important;
 }
 
 
-/* Artist names */
+/* ------ Artist names ------ */
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
   mix-blend-mode: difference !important;
   background: transparent !important;
@@ -389,32 +396,52 @@ mix-blend-mode: difference !important;
   text-shadow: none !important;
 }
 
-/* Ensure PNG logo in header inverts correctly */
-#header .header-title-logo img {
-  mix-blend-mode: difference !important;
-  display: block;
-  -webkit-filter: invert(1) !important; /* fallback when blend-mode is blocked */
-  filter: invert(1) !important;          /* ensures PNG/logo visibly inverts across browsers */
+
+
+
+/* —----- HERO: ----— */
+
+/* 1) Container should NOT blend */
+.fe-block-yui_3_17_2_1_1759615106072_8520 {
+  mix-blend-mode: normal !important;
+  isolation: auto !important;
+  transform: none !important;
+  background: transparent !important;
+  position: relative !important; /* establish positioning context */
 }
 
-
-
-/* HERO SECTION FIXES */
-
-
-/* Apply difference to the live hero block */
-.fe-block-yui_3_17_2_1_1759615106072_8520,
-.fe-block-yui_3_17_2_1_1759615106072_8520 * {
-  mix-blend-mode: difference !important;
-  isolation: isolate !important;
-  transform: translate3d(0,0,0); /* helps Safari render blend properly */
-}
-
-/* Force the actual glyphs to white (difference needs white, not black) */
-#block-yui_3_17_2_1_1759615106072_8520 .sqsrte-text-color--black,
+/* 2) Blend ONLY the glyphs - Safari fix */
 #block-yui_3_17_2_1_1759615106072_8520 h1,
 #block-yui_3_17_2_1_1759615106072_8520 h1 * {
+  mix-blend-mode: difference !important;
   color: #fff !important;
-  filter: invert(1) !important;
+  background: transparent !important;
+  filter: none !important;
+  -webkit-text-fill-color: #fff !important;
+  text-shadow: none !important;
+  
+  /* Force Safari to apply blend mode correctly */
+  position: relative !important;
+  z-index: 1 !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
+
+/* Squarespace text scaler wrapper */
+#block-yui_3_17_2_1_1759615106072_8520 .sqsrte-scaled-text,
+#block-yui_3_17_2_1_1759615106072_8520 .sqsrte-scaled-text * {
+  background: transparent !important;
+  filter: none !important;
+  position: relative !important;
+}
+
+/* Safari-specific fallback using media query hack */
+@supports (-webkit-backdrop-filter: blur(1px)) {
+  #block-yui_3_17_2_1_1759615106072_8520 h1,
+  #block-yui_3_17_2_1_1759615106072_8520 h1 * {
+    will-change: transform !important;
+    transform: translateZ(0) !important; /* force GPU acceleration */
+  }
+}
+
 
