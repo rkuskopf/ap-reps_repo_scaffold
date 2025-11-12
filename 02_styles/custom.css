@@ -380,10 +380,9 @@ mix-blend-mode: difference !important;
 }
 
 
-
-.apreps .fe-block.sqs-position-sticky [class*="sqsrte-text-color--black"],
-.apreps .fe-block.sqs-position-sticky h3,
-.apreps .fe-block.sqs-position-sticky span {
+.apreps .sqs-block.html-block .sqs-html-content h3,
+.apreps .sqs-block.html-block .sqs-html-content h3 *,
+.apreps .sqs-block.html-block .sqsrte-text-color--black {
   mix-blend-mode: difference !important;
   color: #fff !important;
   background: transparent !important;
