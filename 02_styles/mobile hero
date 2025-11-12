@@ -1,0 +1,37 @@
+/* BEGIN: MOBILE HERO */
+
+@media (max-width: 640px) {
+  .auto-scroll-slide {
+    display: flex;
+    gap: 24px;
+    animation: scrollMarquee 30s linear infinite;
+    width: max-content;
+    padding: 20px 0;
+    overflow: hidden;
+  }
+
+  .auto-scroll-slide img {
+    height: 400px; /* Adjust as needed */
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 4px;
+    animation: floatUpDown 5s ease-in-out infinite alternate;
+  }
+
+  @keyframes scrollMarquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Adjust this depending on width of images */
+  }
+
+  @keyframes floatUpDown {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+  }
+
+  /* Disable hover content on mobile */
+  .auto-scroll-content {
+    display: none !important;
+  }
+}
+
+/* END: MOBILE HERO */ 
