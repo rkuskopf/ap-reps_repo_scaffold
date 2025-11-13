@@ -397,24 +397,27 @@ mix-blend-mode: difference !important;
   filter: invert(1) !important;          /* ensures PNG/logo visibly inverts across browsers */
 }
 
-@media screen and (max-width: 640px) {
-  #header .header-menu-bg,
-  #header .header-menu-bg *,
-  #header .Header-nav--mobileOverlay,
-  #header .Header-nav--mobileOverlay * {
+
+/* mobile header + overlay: render normally so the panel stays visible */
+@media (max-width: 640px) {
+  #header,
+  #header * {
     mix-blend-mode: normal !important;
-    isolation: isolate;              /* keep the overlay out of the blend stack */
+  }
+  #header .header-display-mobile,
+  #header .header-display-mobile *,
+  .header-menu,
+  .header-menu *,
+  .header-menu-bg {
+    mix-blend-mode: normal !important;
+    isolation: isolate !important;
     color: #111 !important;
     fill: currentColor !important;
-    background: rgba(255,255,255,0.92) !important;
+    background: rgba(255,255,255,0.94) !important;
   }
 }
 
-
-
 /* HERO SECTION FIXES */
-
-
 /* Apply difference to the live hero block */
 .fe-block-yui_3_17_2_1_1759615106072_8520,
 .fe-block-yui_3_17_2_1_1759615106072_8520 * {
