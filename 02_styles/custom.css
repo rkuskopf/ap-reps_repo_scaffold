@@ -566,7 +566,7 @@ section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
 }
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body { display: contents; }
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper { grid-column: 2; }
-#block-yui_3_17_2_1_1761719139659_4074 > .newsletter-form-button-wrapper { grid-column: 3; align-self: end; justify-self: start; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper { grid-column: 3; align-self: end; justify-self: start; }
 
 /* Error text tone-down */
 #block-yui_3_17_2_1_1761719139659_4074 .field-error { margin-top: .35rem; font-size: .75rem; letter-spacing: .02em; opacity: .7; }
