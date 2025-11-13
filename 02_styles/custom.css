@@ -673,124 +673,185 @@ section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
 
 /* ### END DELIVERABLE 7. unexpected block 13.11.25 */
 
-/* ### BEGIN DELIVERABLE 8. Mailchimp footer newsletter 13.11.25 (rev) */
-/* Scope to the provided footer Newsletter block (id is on the same element as .newsletter-block) */
-#block-yui_3_17_2_1_1761719139659_4074 {
-  --ap-newsletter-divider: currentColor; /* fallback divider color */
+/* ### BEGIN DELIVERABLE 8. Mailchimp footer newsletter 13.11.25 (rev2) */
+.apreps #block-yui_3_17_2_1_1761719139659_4074 {
+  --ap-newsletter-gap: clamp(1rem, 2.8vw, 1.65rem);
+  --ap-newsletter-divider: currentColor;
 }
 
 @supports (color: color-mix(in srgb, currentColor 32%, transparent)) {
-  #block-yui_3_17_2_1_1761719139659_4074 {
+  .apreps #block-yui_3_17_2_1_1761719139659_4074 {
     --ap-newsletter-divider: color-mix(in srgb, currentColor 32%, transparent);
   }
 }
 
-/* Apply grid to the form to lay out header (left) and fields (right) */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
-  display: grid;
-  grid-template-columns: minmax(160px, 220px) minmax(260px, min(38vw, 360px));
-  gap: clamp(1.25rem, 3vw, 2.75rem);
-  align-items: start;
-  margin: 0 0 0 auto;
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ap-newsletter-gap);
+  align-items: stretch;
+  margin: 0;
   padding: 0;
-  background: none;
   border: 0;
-  max-width: none;
+  background: none;
+  max-width: min(620px, 100%);
 }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header { grid-column: 1; text-align: left; display: grid; gap: .75rem; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body { grid-column: 2; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote { grid-column: 1 / -1; margin-top: .5rem; font-size: clamp(.6rem, .95vw, .75rem); letter-spacing: .18em; text-transform: uppercase; opacity: .6; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote a { color: inherit; text-decoration: underline; text-underline-offset: .25em; }
 
-/* Header title (H4-ish) + byline (P3) */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header :is(h2,h3,h4,.newsletter-form-header-title) {
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header {
+  display: grid;
+  gap: .65rem;
+  text-align: left;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header :is(h2,h3,h4,.newsletter-form-header-title) {
   margin: 0;
   text-transform: uppercase;
   letter-spacing: .24em;
-  font-size: clamp(.75rem, 1.5vw, .9rem);
+  font-size: clamp(.85rem, 1.6vw, 1rem);
 }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p { margin: 0; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p + p { font-size: clamp(.85rem, 1.4vw, 1rem); line-height: 1.6; letter-spacing: normal; text-transform: none; }
 
-/* 2) Put input and button on one row inside form body */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body {
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p {
+  margin: 0;
+  font-size: clamp(.95rem, 2vw, 1.15rem);
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p + p {
+  font-size: clamp(1rem, 2.4vw, 1.25rem);
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body {
   display: grid;
-  grid-template-columns: minmax(200px, 1fr) auto; /* input | button */
-  column-gap: 1.5rem;
+  grid-template-columns: minmax(240px, 1fr) auto;
+  column-gap: clamp(.75rem, 2vw, 1.75rem);
   align-items: end;
-}
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper { grid-column: 1; display: block; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper { grid-column: 2; align-self: start; justify-self: start; }
-
-/* 3) Field styles — underline only */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-wrapper { min-width: 0; background: transparent !important; border: 0 !important; padding: 0 !important; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label { display: block; margin-bottom: .35rem; font-size: clamp(.65rem, 1vw, .75rem); letter-spacing: .24em; text-transform: uppercase; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element {
   width: 100%;
-  padding: .35rem 0 !important;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper {
+  grid-column: 1;
+  min-width: 0;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
+  grid-column: 2;
+  align-self: end;
+  justify-self: start;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body > .captcha-container {
+  grid-column: 1 / -1;
+  margin-top: .75rem;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-wrapper {
+  min-width: 0;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label {
+  display: block;
+  margin-bottom: .35rem;
+  font-size: clamp(.65rem, 1vw, .8rem);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element {
+  width: 100%;
+  padding: .35rem 0 .2rem !important;
   border: none !important;
   border-radius: 0 !important;
   border-bottom: 1px solid var(--ap-newsletter-divider) !important;
   background: transparent !important;
   box-shadow: none !important;
-  font: inherit; letter-spacing: inherit; text-transform: none; color: inherit;
+  font: inherit;
+  letter-spacing: .02em;
+  line-height: 1.4;
+  color: inherit;
+  transition: border-color .25s ease;
 }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element::placeholder { color: inherit; opacity: .4; text-transform: none; letter-spacing: normal; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element:focus { outline: none; border-bottom-color: currentColor; }
 
-/* 4) Tertiary button (text only) */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button {
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element::placeholder {
+  color: currentColor;
+  opacity: .4;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element:focus {
+  outline: none;
+  border-bottom-color: currentColor;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button {
   appearance: none;
   background: none !important;
   border: 0 !important;
   box-shadow: none !important;
-  padding: 0 !important;
+  padding: .35rem 0 .2rem !important;
   min-width: 0 !important;
   height: auto !important;
   margin: 0 !important;
   border-radius: 0 !important;
   color: inherit !important;
   text-transform: uppercase;
-  letter-spacing: .24em;
-  font-size: clamp(.65rem, 1.1vw, .8rem);
+  letter-spacing: .2em;
+  font-size: clamp(.72rem, 1.1vw, .85rem);
   line-height: 1;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
 }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:hover,
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:focus { text-decoration: underline; outline: none; }
 
-/* ### D8 inline layout tweak — header | field | button in one row */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
-  grid-template-columns: minmax(160px, 220px) minmax(260px, min(38vw, 360px)) auto; /* header | field | button */
-  column-gap: 1.5rem;
-  align-items: end;
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:hover,
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  outline: none;
 }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body { display: contents; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper { grid-column: 2; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper { grid-column: 3; align-self: end; justify-self: start; }
 
-/* Error text tone-down */
-#block-yui_3_17_2_1_1761719139659_4074 .field-error { margin-top: .35rem; font-size: .75rem; letter-spacing: .02em; opacity: .7; }
-
-/* Generic fallback (applies to any newsletter block) */
-.sqs-block-newsletter .newsletter-form {
-  grid-template-columns: minmax(160px, 220px) minmax(260px, min(38vw, 360px)) auto;
-  column-gap: 1.5rem;
-  align-items: end;
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .field-error {
+  margin-top: .35rem;
+  font-size: .75rem;
+  letter-spacing: .02em;
+  opacity: .7;
 }
-.sqs-block-newsletter .newsletter-form-body { display: contents; }
-.sqs-block-newsletter .newsletter-form-fields-wrapper { grid-column: 2; }
-.sqs-block-newsletter .newsletter-form > .newsletter-form-button-wrapper { grid-column: 3; align-self: end; justify-self: start; }
-.sqs-block-newsletter .field-error { margin-top: .35rem; font-size: .75rem; letter-spacing: .02em; opacity: .7; }
 
-/* Mobile: stack elements and revert display model for safety */
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote {
+  margin-top: calc(var(--ap-newsletter-gap) * .5);
+  font-size: clamp(.75rem, 1.2vw, .9rem);
+  letter-spacing: .02em;
+  text-transform: none;
+  line-height: 1.6;
+  opacity: .85;
+}
+
+.apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
 @media (max-width: 680px) {
-  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form,
-  .sqs-block-newsletter .newsletter-form { grid-template-columns: 1fr; }
-  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body,
-  .sqs-block-newsletter .newsletter-form-body { display: block; }
-  #block-yui_3_17_2_1_1761719139659_4074 > .newsletter-form-button-wrapper,
-  .sqs-block-newsletter .newsletter-form > .newsletter-form-button-wrapper { grid-column: 1; justify-self: start; }
+  .apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
+    max-width: 100%;
+  }
+
+  .apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body {
+    grid-template-columns: 1fr;
+    row-gap: .85rem;
+  }
+
+  .apreps #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
+    grid-column: 1;
+    justify-self: start;
+  }
 }
 
-/* ### END DELIVERABLE 8. Mailchimp footer newsletter 13.11.25 (rev) */
+/* ### END DELIVERABLE 8. Mailchimp footer newsletter 13.11.25 (rev2) */

@@ -1,11 +1,5 @@
 /* ### BEGIN DELIVERABLE 4. Breakpoints 10.11.25 */
 
-
-
-
-
-
-
 /* Galleries inside tabs should never carry hard heights */
 .apreps [data-wm-plugin="tabs"] .sqs-block-gallery,
 .apreps [data-wm-plugin="tabs"] .sqs-block-gallery > .sqs-block-content,
