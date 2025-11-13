@@ -1,0 +1,17 @@
+/* Reserve layout, but hide visually to prevent flash */
+section[data-section-id="68e0ab5faedd22325758b558"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Reveal once the plugin has inserted items */
+section[data-section-id="68e0ab5faedd22325758b558"]:has(.image-hover-list li, .image-hover-list .item) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Keep the native Summary block hidden regardless */
+section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
+  display: none !important;
+}
+
