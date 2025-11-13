@@ -418,4 +418,23 @@ mix-blend-mode: difference !important;
   color: #fff !important;
   filter: invert(1) !important;
 }
+
+
+/* Mobile header and nav */
+@media (max-width: 767px) {
+
+  /* Squarespace overlay section */
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"],
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"] *,
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"] .header-menu-nav a {
+    mix-blend-mode: normal !important;
+    isolation: isolate !important;
+    color: #111 !important;
+    background: rgba(255,255,255,0.95) !important;
+  }
+
+}
+
+
+
 /* END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
