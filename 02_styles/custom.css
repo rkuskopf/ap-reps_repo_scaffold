@@ -440,6 +440,66 @@ mix-blend-mode: difference !important;
   filter: invert(1) !important;
 }
 
+body.header--menu-open header#header {
+        mix-blend-mode: unset !important;
+    }
+
+@media (max-width: 640px) {
+  section[data-section-id="overlay-nav"] .header-menu-nav {
+    display: block !important;        /* stop flex squeezing */
+    min-height: 100vh;                 /* guarantee full-screen panel */
+    padding: clamp(2rem, 6vw, 3.5rem) 0;
+    mix-blend-mode: normal !important;
+    isolation: isolate !important;
+    background: rgba(255,255,255,0.95) !important;
+  }
+
+  section[data-section-id="overlay-nav"] .header-menu-nav-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem;
+  }
+
+  section[data-section-id="overlay-nav"] .header-menu-nav-item a {
+    mix-blend-mode: normal !important;
+    color: #111 !important;
+  }
+
+  section[data-section-id="overlay-nav"] {
+    position: relative;
+    isolation: isolate; /* keep overlay out of the difference stack */
+  }
+
+  section[data-section-id="overlay-nav"] .header-menu-bg {
+    mix-blend-mode: normal !important;
+    background: rgba(255,255,255,0.96) !important;
+    opacity: 1 !important;
+    position: fixed;      /* let it cover the viewport */
+    inset: 0;
+    z-index: 0;
+  }
+
+  section[data-section-id="overlay-nav"] .header-menu-nav {
+    display: block !important;
+    position: relative;
+    z-index: 1;           /* above the bg panel */
+    min-height: calc(100vh - 100px);  /* room for the links */
+    padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  section[data-section-id="overlay-nav"] .header-menu-nav-list {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  section[data-section-id="overlay-nav"] .header-menu-nav-item a {
+    mix-blend-mode: normal !important;
+    color: #111 !important;
+    text-transform: uppercase;
+  }
+}
+
   /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
 
 
