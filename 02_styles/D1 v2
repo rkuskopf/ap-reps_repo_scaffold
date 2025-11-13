@@ -46,8 +46,8 @@
   display: block !important;
 }
 
-.apreps .thumb-image-loaded {
-  height: 50% !important;
+ .thumb-image {
+  max-height: 50% !important;
   transform: scale(0.8);
 }
 
