@@ -397,6 +397,19 @@ mix-blend-mode: difference !important;
   filter: invert(1) !important;          /* ensures PNG/logo visibly inverts across browsers */
 }
 
+@media screen and (max-width: 640px) {
+  #header .header-menu-bg,
+  #header .header-menu-bg *,
+  #header .Header-nav--mobileOverlay,
+  #header .Header-nav--mobileOverlay * {
+    mix-blend-mode: normal !important;
+    isolation: isolate;              /* keep the overlay out of the blend stack */
+    color: #111 !important;
+    fill: currentColor !important;
+    background: rgba(255,255,255,0.92) !important;
+  }
+}
+
 
 
 /* HERO SECTION FIXES */
