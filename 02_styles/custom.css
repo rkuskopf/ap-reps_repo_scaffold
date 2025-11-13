@@ -197,7 +197,22 @@ body, a:hover, button:hover {
   line-height: 1.3;
 }
 
-.apreps { --ap-gap-x: 10px; }
+.apreps {
+  --ap-gap-x: 10px;
+  --ap-artist-sticky-offset: clamp(120px, 16vw, 260px);
+}
+
+/* Restore sticky artist labels without reintroducing tall sections */
+.apreps [data-wm-plugin="tabs"] .tab-panel > .tab-content .fe-block.sqs-position-sticky {
+  position: sticky !important;
+  top: calc(var(--ap-artist-sticky-offset) + var(--header-fixed-top-offset, 0px)) !important;
+  align-self: flex-start !important;
+  z-index: 5;
+}
+
+@media (max-width: 640px) {
+  .apreps { --ap-artist-sticky-offset: clamp(72px, 18vw, 140px); }
+}
 
 /*  anchors  */
 .apreps .wm-tabs .tab-panel > .tab-content 
@@ -668,48 +683,128 @@ section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
 }
 
 /* ### END DELIVERABLE 7. unexpected block 13.11.25 */
-/* --- D8: Newsletter block grid and styling (matches reference image) --- */
+
+/* ### BEGIN DELIVERABLE 8. Mailchimp footer newsletter 13.11.25 (rev) */
+/* Scope to the provided footer Newsletter block (id is on the same element as .newsletter-block) */
+#block-yui_3_17_2_1_1761719139659_4074 {
+  --ap-newsletter-divider: currentColor; /* fallback divider color */
+}
+
+@supports (color: color-mix(in srgb, currentColor 32%, transparent)) {
+  #block-yui_3_17_2_1_1761719139659_4074 {
+    --ap-newsletter-divider: color-mix(in srgb, currentColor 32%, transparent);
+  }
+}
+
+/* Apply grid to the form to lay out header (left) and fields (right) */
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
   display: grid;
-  grid-template-columns: 1fr auto;
-  row-gap: 1.2rem;
-  column-gap: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto;
-  background: none;
-  border: 0;
-  padding: 0;
+  grid-template-columns: 1fr;
+  row-gap: 1.2rem; /* adjust spacing as needed */
 }
+
+email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
+  max-width: 700px; /* or 100% for full width */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header {
-  grid-column: 1 / -1;
-  margin-bottom: 0;
-  text-align: left;
-  display: block;
+  grid-row: 1;
+  grid-column: 1;
 }
+
+
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper {
   grid-column: 1;
-  display: block;
 }
+
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
   grid-column: 2;
   align-self: end;
   justify-self: end;
 }
+
+
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote {
-  grid-column: 1 / -1;
-  margin-top: 1.2rem;
+  grid-row: 3;
+  grid-column: 1;
+  margin-top: .75rem;
   text-align: left;
 }
-@media (max-width: 680px) {
-  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
-    grid-template-columns: 1fr;
-    max-width: 100%;
-  }
-  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper,
-  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper,
-  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header,
-  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote {
-    grid-column: 1;
-    justify-self: start;
-  }
+
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body {
+  grid-row: 2;
+  grid-column: 1;
+  display: grid !important;
+  grid-template-columns: 1fr auto;
+  column-gap: 1.2rem;
+  align-items: end;
 }
+
+
+/* Header title (H4-ish) + byline (P3) */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header :is(h2,h3,h4,.newsletter-form-header-title) {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: .24em;
+  font-size: clamp(.75rem, 1.5vw, .9rem);
+}
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p { margin: 0; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p + p { font-size: clamp(.85rem, 1.4vw, 1rem); line-height: 1.6; letter-spacing: normal; text-transform: none; }
+
+
+
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper { 
+  grid-column: 1; 
+  display: block; 
+}
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
+  grid-column: 2;
+  align-self: start;
+  justify-self: start;
+}
+
+/* 3) Field styles — underline only */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-wrapper { min-width: 0; background: transparent !important; border: 0 !important; padding: 0 !important; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label { display: block; margin-bottom: .35rem; font-size: clamp(.65rem, 1vw, .75rem); letter-spacing: .24em; text-transform: uppercase; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element {
+  width: 100%;
+  padding: .35rem 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid var(--ap-newsletter-divider) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font: inherit; letter-spacing: inherit; text-transform: none; color: inherit;
+}
+
+
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element::placeholder { color: inherit; opacity: .4; text-transform: none; letter-spacing: normal; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element:focus { outline: none; border-bottom-color: currentColor; }
+
+/* 4) Tertiary button (text only) */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button {
+  appearance: none;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+  text-transform: uppercase;
+  letter-spacing: .24em;
+  font-size: clamp(.65rem, 1.1vw, .8rem);
+  line-height: 1;
+  cursor: pointer;
+}
+
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:hover,
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:focus { text-decoration: underline; outline: none; }
+
+/* ### END DELIVERABLE 8. Mailchimp footer newsletter 13.11.25 (rev) */
