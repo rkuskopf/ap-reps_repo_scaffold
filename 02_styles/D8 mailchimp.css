@@ -1,0 +1,39 @@
+/* --- D8: Clean, modern newsletter layout --- */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: 1.2rem;
+  column-gap: 1.2rem;
+  max-width: 540px;
+  margin: 0 auto;
+}
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper {
+  grid-column: 1;
+}
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
+  grid-column: 2;
+  align-self: end;
+  justify-self: end;
+}
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote {
+  grid-column: 1 / -1;
+  margin-top: .75rem;
+  text-align: left;
+}
+@media (max-width: 680px) {
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper,
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper,
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header,
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote {
+    grid-column: 1;
+    justify-self: start;
+  }
+}
