@@ -839,18 +839,26 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   grid-auto-rows: minmax(8px, auto) !important;
 }
 
-/* FINAL — collapse any FE canvas inside the active tab */
+/* FINAL — the selector that collapsed the FE rows inside the active tab */
 .apreps :is(.wm-tabs,[data-wm-plugin="tabs"])
-  .tab-panel[aria-hidden="false"]
-  .page-section :is(.fluid-engine,[data-fluid-engine],[data-fluid-engine="true"]) {
+  .tab-panel[aria-hidden="false"] .page-section .fluid-engine{
   grid-template-rows: none !important;
   grid-auto-rows: minmax(8px, auto) !important;
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
-  display: block !important;
 }
 
+/* Neutralize Fill-Screen heights inside the AP—REPS tabs */
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section[style*="height"],
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section[style*="min-height"],
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section [data-fluid-engine][style*="height"],
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section [data-fluid-engine][style*="min-height"],
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .sqs-gallery-block-grid .gallery-grid[style*="height"],
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .sqs-gallery-block-grid .gallery-grid[style*="min-height"] {
+  height: auto !important;
+  min-height: 0 !important;
+}
 
 
 /* ### END D4:Breakpoints v1 14/08/25 */
