@@ -796,3 +796,58 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:focus { text-decoration: underline; outline: none; }
 
 /* ### END DELIVERABLE 8. Mailchimp footer newsletter 13.11.25 (rev) */
+
+/* ### BEGIN D4:Breakpoints v1 14/08/25 */
+/* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
+.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
+  aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box !important; /* switched from content-box to stop vertical padding stacking */
+  padding-bottom: 0 !important; /* move spacing to row-gap only */
+  padding-right: var(--ap-gap-x, 10px) !important;
+}
+
+/* Catch when Squarespace puts height/min-height on the grid itself */
+.apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="height"],
+.apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="min-height"]{
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+/* Catch FE wrappers that get a min-height inline */
+.apreps [data-wm-plugin="tabs"] .fe-block[style*="min-height"],
+.apreps [data-wm-plugin="tabs"] .sqs-block-content[style*="min-height"]{
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+/* Keep FE from stretching the block anyway */
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-block { 
+  align-self: start !important; 
+}
+
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-row,
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-column { 
+  min-height: 0 !important; 
+}
+
+/* Let Fluid Engine shrink-wrap to the gallery content */
+.apreps [data-wm-plugin="tabs"] [class^="fe-"] {
+  grid-template-rows: none !important;
+  grid-auto-rows: minmax(8px, auto) !important;
+}
+
+/* FINAL — the selector that collapsed the FE rows inside the active tab */
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"])
+  .tab-panel[aria-hidden="false"] .page-section .fluid-engine{
+  grid-template-rows: none !important;
+  grid-auto-rows: minmax(8px, auto) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: block !important; /* belt + braces; mirrors your devtools test */
+}
+
+/* ### END D4:Breakpoints v1 14/08/25 */
