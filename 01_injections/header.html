@@ -63,3 +63,32 @@ document.addEventListener('DOMContentLoaded', () => {
   }).observe(document.body,{subtree:true,childList:true});
 });
 </script>
+
+<!-- Mobile menu hold: keep header in normal mode briefly after Squarespace closes the overlay -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const body = document.body;
+  if (!body) return;
+
+  const HOLD_CLASS = 'ap-menu-hold';
+  const MENU_CLASS = 'header--menu-open';
+  const HOLD_DURATION = 350; // ms
+  let releaseTimer;
+
+  const refreshHold = () => {
+    body.classList.add(HOLD_CLASS);
+    clearTimeout(releaseTimer);
+    releaseTimer = setTimeout(() => body.classList.remove(HOLD_CLASS), HOLD_DURATION);
+  };
+
+  const observer = new MutationObserver(() => {
+    if (body.classList.contains(MENU_CLASS)) {
+      refreshHold(); // keep hold while menu is open
+    } else if (!body.classList.contains(HOLD_CLASS)) {
+      refreshHold(); // add hold right after Squarespace removes the class
+    }
+  });
+
+  observer.observe(body, { attributes: true, attributeFilter: ['class'] });
+});
+</script>
