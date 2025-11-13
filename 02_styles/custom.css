@@ -149,6 +149,7 @@ body, a:hover, button:hover {
  /* Hide section button */
 .auto-scroll .list-item-content__button { display: none }
 
+/* hide digital moves on mobile */
 @media (max-width: 767px) {
   .dm-cursor-collage-image {
     display: none !important;
@@ -158,7 +159,6 @@ body, a:hover, button:hover {
     z-index: -9999 !important;
   }
 }
-
 
 /* Infinite auto scroll by Digital Moves */
 
@@ -395,6 +395,7 @@ mix-blend-mode: difference !important;
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
   mix-blend-mode: difference !important;
   background: transparent !important;
+  color: #fff !important;
   isolation: auto !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
@@ -451,3 +452,22 @@ html, body {
 
 /* ### END DELIVERABLE 3. Overscroll 10.11.25 */
 
+/* Reserve layout, but hide visually to prevent flash */
+section[data-section-id="68e0ab5faedd22325758b558"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ### BEGIN DELIVERABLE 7. unexpected block 13.11.25 */
+/* Reveal once the plugin has inserted items */
+section[data-section-id="68e0ab5faedd22325758b558"]:has(.image-hover-list li, .image-hover-list .item) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Keep the native Summary block hidden regardless */
+section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
+  display: none !important;
+}
+
+/* ### END DELIVERABLE 7. unexpected block 13.11.25 */
