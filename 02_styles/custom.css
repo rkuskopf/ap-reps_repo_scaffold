@@ -440,34 +440,6 @@ mix-blend-mode: difference !important;
   filter: invert(1) !important;
 }
 
-/* When Squarespace marks the menu as open, drop blend so the overlay + header stay visible */
-body.apreps-menu-open #header,
-body.apreps-menu-open #header *,
-body.apreps-menu-open .header-menu,
-body.apreps-menu-open .header-menu * {
-  mix-blend-mode: normal !important;
-  isolation: auto !important;
-}
-
-body.apreps-menu-open #header .header-title,
-body.apreps-menu-open #header .header-title *,
-body.apreps-menu-open #header .header-nav,
-body.apreps-menu-open #header .header-nav *,
-body.apreps-menu-open #header .header-actions *,
-body.apreps-menu-open #header .header-burger,
-body.apreps-menu-open #header .header-burger *,
-body.apreps-menu-open .header-menu,
-body.apreps-menu-open .header-menu * {
-  color: #111 !important;
-  fill: currentColor !important;
-  text-shadow: none !important;
-}
-
-body.apreps-menu-open .header-menu-bg {
-  opacity: 1 !important;
-  background: rgba(255,255,255,0.96) !important;
-}
-
 
 @media (max-width: 640px) {
   section[data-section-id="overlay-nav"] .header-menu-nav {
@@ -679,3 +651,4 @@ section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
   #block-yui_3_17_2_1_1761719139659_4074 > .newsletter-form-button-wrapper,
   .sqs-block-newsletter .newsletter-form > .newsletter-form-button-wrapper { grid-column: 1; justify-self: start; }
 }
+
