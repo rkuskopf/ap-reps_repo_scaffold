@@ -839,17 +839,6 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   grid-auto-rows: minmax(8px, auto) !important;
 }
 
-/* FINAL — the selector that collapsed the FE rows inside the active tab */
-.apreps :is(.wm-tabs,[data-wm-plugin="tabs"])
-  .tab-panel[aria-hidden="false"] .page-section .fluid-engine{
-  grid-template-rows: none !important;
-  grid-auto-rows: minmax(8px, auto) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  display: block !important; /* belt + braces; mirrors your devtools test */
-}
-
 /* FINAL — collapse any FE canvas inside the active tab */
 .apreps :is(.wm-tabs,[data-wm-plugin="tabs"])
   .tab-panel[aria-hidden="false"]
@@ -861,6 +850,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   max-height: none !important;
   display: block !important;
 }
+
 
 
 /* ### END D4:Breakpoints v1 14/08/25 */
