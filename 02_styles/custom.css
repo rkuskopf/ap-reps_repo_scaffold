@@ -826,10 +826,14 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 }
 
 /* Keep FE from stretching the block anyway */
-.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-block{ align-self: start !important; }
-.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-row,
-.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-column{ min-height: 0 !important; }
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-block { 
+  align-self: start !important; 
+}
 
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-row,
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-column { 
+  min-height: 0 !important; 
+}
 
 /* Force Grid Gallery blocks to hug content */
 .apreps .sqs-block.sqs-block-gallery,
@@ -843,18 +847,7 @@ max-height: none !important;
 padding-bottom: 0 !important; 
 }
 
-/* Let artist name overlay the gallery, not push it down */
-.apreps [data-wm-plugin="tabs"] .artist-name {
-  position: absolute !important;
-  top: 0;                /* adjust for placement, e.g. 1rem */
-  left: 0;
-  right: 0;              /* if you want full width */
-  z-index: 5;            /* higher than gallery */
-  mix-blend-mode: difference;
-  pointer-events: none;  /* so clicks go to gallery images */
-}
-
-/* Make sure the gallery section is a positioning context */
+ /* Make sure the gallery section is a positioning context */
 .apreps [data-wm-plugin="tabs"] .page-section:has(.sqs-block-gallery),
 .apreps [data-wm-plugin="tabs"] .sqs-block-gallery > .sqs-block-content {
   position: relative !important;
