@@ -374,6 +374,7 @@ mix-blend-mode: difference !important;
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
   mix-blend-mode: difference !important;
   background: transparent !important;
+  color: #fff !important;
   isolation: auto !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
@@ -397,32 +398,16 @@ mix-blend-mode: difference !important;
   filter: invert(1) !important;          /* ensures PNG/logo visibly inverts across browsers */
 }
 
-
-/* mobile header + overlay: render normally so the panel stays visible */
-@media (max-width: 640px) {
-  #header,
-  #header * {
-    mix-blend-mode: normal !important;
-  }
-  #header .header-display-mobile,
-  #header .header-display-mobile *,
-  .header-menu,
-  .header-menu *,
-  .header-menu-bg {
-    mix-blend-mode: normal !important;
-    isolation: isolate !important;
-    color: #111 !important;
-    fill: currentColor !important;
-    background: rgba(255,255,255,0.94) !important;
-  }
-}
-
 /* HERO SECTION FIXES */
-/* Apply difference to the live hero block */
+
+
+/* live hero block */
 .fe-block-yui_3_17_2_1_1759615106072_8520,
 .fe-block-yui_3_17_2_1_1759615106072_8520 * {
   mix-blend-mode: difference !important;
   isolation: isolate !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
@@ -433,4 +418,4 @@ mix-blend-mode: difference !important;
   color: #fff !important;
   filter: invert(1) !important;
 }
-
+/* END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
