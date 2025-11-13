@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => { // once the page is ready
 <!-- Dot Cursor by digitalmoves.com.au -->
 
 <!-- ### DELIVERABLE 4. Breakpoints 10.11.25 -->
-<script>
+    <script>
 document.addEventListener('DOMContentLoaded', () => {
   const scope = document.documentElement; // body has class "apreps"
   if (!scope.classList.contains('apreps')) return;
@@ -61,31 +61,5 @@ document.addEventListener('DOMContentLoaded', () => {
       for (const n of rec.addedNodes)
         if (n.nodeType === 1) patch(n);
   }).observe(document.body,{subtree:true,childList:true});
-});
-</script>
-
-<!-- Mobile menu blend toggle: adds .apreps-menu-open to <body> whenever the Squarespace menu is active -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const body = document.body;
-  if (!body) return;
-
-  const FLAG_CLASS = 'apreps-menu-open';
-  const MENU_CLASSES = ['header-menu-open', 'nav-open'];
-
-  const updateState = () => {
-    const shouldEnable = MENU_CLASSES.some(cls => body.classList.contains(cls));
-    body.classList.toggle(FLAG_CLASS, shouldEnable);
-  };
-
-  const observer = new MutationObserver(updateState);
-  observer.observe(body, { attributes: true, attributeFilter: ['class'] });
-
-  const burger = document.querySelector('#header .header-burger-btn');
-  if (burger) {
-    burger.addEventListener('click', () => requestAnimationFrame(updateState));
-  }
-
-  updateState();
 });
 </script>
