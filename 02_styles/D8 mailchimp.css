@@ -1,0 +1,212 @@
+diff --git a/02_styles/custom.css b/02_styles/custom.css
+index 18ab47bf3a2dc648062004f3cd328d7afa346e4f..daad918d8342379348f5bb4a3b62f439580e9379 100644
+--- a/02_styles/custom.css
++++ b/02_styles/custom.css
+@@ -177,50 +177,207 @@ body, a:hover, button:hover {
+   padding-bottom: 0 !important;      /* use row-gap instead */
+   padding-right: 0 !important;       /* use column-gap instead */
+ }
+ 
+ /* Ensure inner img fills its tile without internal insets */
+ .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
+   width: 100% !important;
+   height: 100% !important;
+   object-fit: cover !important;
+   display: block !important;
+   position: relative !important;
+   inset: 0 !important; /* remove right/bottom offsets that caused gaps */
+ }
+ 
+ /* Captions left across all grid galleries */
+ .sqs-gallery-block-show-meta .image-slide-title,
+ .sqs-gallery-block-show-meta .image-meta,
+ .sqs-gallery-block-show-meta .sqs-block-caption {
+   text-align: left !important;
+   margin-top: .5rem;
+   line-height: 1.3;
+ }
+ 
+ .apreps { --ap-gap-x: 10px; }
+ 
++/* -------------------------------------------------
++ * Footer newsletter (Mailchimp)
++ * ------------------------------------------------- */
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block {
++  --ap-newsletter-divider: currentColor;
++}
++
++@supports (color: color-mix(in srgb, currentColor 32%, transparent)) {
++  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-block {
++    --ap-newsletter-divider: color-mix(in srgb, currentColor 32%, transparent);
++  }
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-wrapper {
++  display: grid;
++  grid-template-columns: minmax(160px, 220px) minmax(260px, min(38vw, 360px));
++  gap: clamp(1.25rem, 3vw, 2.75rem);
++  justify-content: end;
++  align-items: start;
++  padding: 0;
++  background: none;
++  border: none;
++  max-width: none;
++  margin: 0 0 0 auto;
++  text-align: left;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-header {
++  display: grid;
++  gap: .75rem;
++  text-transform: uppercase;
++  letter-spacing: .24em;
++  font-size: clamp(.75rem, 1.5vw, .9rem);
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-header-description p {
++  margin: 0;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-header-description p + p {
++  font-size: clamp(.85rem, 1.4vw, 1rem);
++  letter-spacing: normal;
++  text-transform: none;
++  line-height: 1.6;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-fields-wrapper {
++  display: grid;
++  grid-template-columns: minmax(200px, 1fr) auto;
++  gap: .75rem 1.5rem;
++  align-items: end;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-field-wrapper {
++  min-width: 0;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-field-label {
++  display: block;
++  margin-bottom: .35rem;
++  font-size: clamp(.65rem, 1vw, .75rem);
++  letter-spacing: .24em;
++  text-transform: uppercase;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-field-element {
++  width: 100%;
++  padding: .35rem 0;
++  border: none;
++  border-radius: 0;
++  border-bottom: 1px solid var(--ap-newsletter-divider);
++  background: transparent;
++  font: inherit;
++  letter-spacing: inherit;
++  text-transform: none;
++  color: inherit;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-field-element::placeholder {
++  color: inherit;
++  opacity: .4;
++  text-transform: none;
++  letter-spacing: normal;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-field-element:focus {
++  outline: none;
++  border-bottom-color: currentColor;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-button-wrapper {
++  align-self: start;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-button {
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++  padding: .65rem 1.75rem;
++  border: 1px solid currentColor;
++  border-radius: 999px;
++  background: transparent;
++  text-transform: uppercase;
++  letter-spacing: .24em;
++  font-size: clamp(.65rem, 1.1vw, .8rem);
++  transition: background-color .2s ease, color .2s ease;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-button:hover,
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-button:focus {
++  background: currentColor;
++  color: var(--sqs-site-background-color, #fff);
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-footnote {
++  grid-column: 1 / -1;
++  margin-top: .5rem;
++  font-size: clamp(.6rem, .95vw, .75rem);
++  letter-spacing: .18em;
++  text-transform: uppercase;
++  opacity: .6;
++}
++
++#block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-footnote a {
++  color: inherit;
++  text-decoration: underline;
++  text-underline-offset: .25em;
++}
++
++@media (max-width: 960px) {
++  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-wrapper {
++    grid-template-columns: minmax(160px, 220px) minmax(240px, 1fr);
++  }
++}
++
++@media (max-width: 680px) {
++  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-wrapper {
++    grid-template-columns: 1fr;
++    justify-content: start;
++    gap: 1.5rem;
++    margin: 0;
++  }
++
++  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-header {
++    text-transform: uppercase;
++    letter-spacing: .18em;
++  }
++
++  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-fields-wrapper {
++    grid-template-columns: 1fr;
++  }
++
++  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-block .newsletter-form-button-wrapper {
++    justify-self: start;
++  }
++}
++
+ /*  anchors  */
+ .apreps .wm-tabs .tab-panel > .tab-content 
+   .sqs-gallery-block-grid .image-slide-anchor,
+ .apreps .wm-tabs .tab-panel > .tab-content 
+   .sqs-gallery-block-grid .js-gallery-lightbox-opener {
+   position: relative !important;
+   display: block !important;
+   overflow: hidden !important;
+   width: 100% !important;
+ }
+ 
+ /* Grid thumbs: fill tile + optional gentle zoom-out */
+ .apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-anchor .thumb-image,
+ .apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .js-gallery-lightbox-opener .thumb-image,
+ .apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+   position: absolute !important;
+   inset: 0 !important;
+   width: 100% !important;
+   height: 100% !important;
+   display: block !important;
+   object-fit: cover !important;           /* preserves tile aspect */
+   object-position: center center !important;
+   transform: scale(var(--ap-scale, 1)) translateZ(0);
+   transform-origin: center center;
+ }
