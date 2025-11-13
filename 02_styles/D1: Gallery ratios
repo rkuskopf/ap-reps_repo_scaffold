@@ -173,9 +173,8 @@ body, a:hover, button:hover {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: center center !important; /* default centered crop */
   display: block !important;
-  position: absolute !important;
+  position: relative !important;
   inset: 0 !important; /* remove right/bottom offsets that caused gaps */
 }
 
