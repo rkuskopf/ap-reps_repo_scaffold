@@ -202,18 +202,6 @@ body, a:hover, button:hover {
   --ap-artist-sticky-offset: clamp(120px, 16vw, 260px);
 }
 
-/* Restore sticky artist labels without reintroducing tall sections */
-.apreps [data-wm-plugin="tabs"] .tab-panel > .tab-content .fe-block.sqs-position-sticky {
-  position: sticky !important;
-  top: calc(var(--ap-artist-sticky-offset) + var(--header-fixed-top-offset, 0px)) !important;
-  align-self: flex-start !important;
-  z-index: 5;
-}
-
-@media (max-width: 640px) {
-  .apreps { --ap-artist-sticky-offset: clamp(72px, 18vw, 140px); }
-}
-
 /*  anchors  */
 .apreps .wm-tabs .tab-panel > .tab-content 
   .sqs-gallery-block-grid .image-slide-anchor,
