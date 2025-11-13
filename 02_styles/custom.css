@@ -810,18 +810,6 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 
 
 
-
-/* Galleries inside tabs should never carry hard heights */
-.apreps [data-wm-plugin="tabs"] .sqs-block-gallery,
-.apreps [data-wm-plugin="tabs"] .sqs-block-gallery > .sqs-block-content,
-.apreps [data-wm-plugin="tabs"] .sqs-block-gallery-block.sqs-block-gallery{
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
-}
-
-
 /* Catch when Squarespace puts height/min-height on the grid itself */
 .apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="height"],
 .apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="min-height"]{
