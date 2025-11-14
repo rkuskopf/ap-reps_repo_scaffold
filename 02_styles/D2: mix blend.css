@@ -377,6 +377,7 @@ mix-blend-mode: difference !important;
   isolation: auto !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
+  transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
 
@@ -387,6 +388,7 @@ mix-blend-mode: difference !important;
   color: #fff !important;
   background: transparent !important;
   text-shadow: none !important;
+  transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
 /* Ensure PNG logo in header inverts correctly */
@@ -899,6 +901,7 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   isolation: auto !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
+  transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
 
@@ -909,6 +912,7 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   color: #fff !important;
   background: transparent !important;
   text-shadow: none !important;
+  transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
 /* Ensure PNG logo in header inverts correctly */
