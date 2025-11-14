@@ -833,6 +833,14 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   min-height: 0 !important; 
 }
 
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] {
+  grid-template-rows: none !important;
+  grid-auto-rows: minmax(8px, auto) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
 /* Let Fluid Engine shrink-wrap to the gallery content */
 .apreps [data-wm-plugin="tabs"] [class^="fe-"] {
   grid-template-rows: none !important;

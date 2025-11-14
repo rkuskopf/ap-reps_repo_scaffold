@@ -114,3 +114,24 @@
 })();
 </script>
 
+<script>
+(function () {
+  function patch(root=document){
+    root.querySelectorAll('[data-fluid-engine="true"].fluid-engine').forEach(fe=>{
+      fe.style.setProperty('grid-template-rows','none','important');
+      fe.style.setProperty('grid-auto-rows','minmax(8px,auto)','important');
+      fe.style.setProperty('height','auto','important');
+      fe.style.setProperty('min-height','0','important');
+      fe.style.setProperty('max-height','none','important');
+    });
+  }
+  window.addEventListener('load', () => {
+    patch();
+    new MutationObserver(muts=>{
+      for (const m of muts)
+        for (const n of m.addedNodes)
+          if (n.nodeType===1) patch(n);
+    }).observe(document.body,{childList:true,subtree:true});
+  });
+})();
+</script>
