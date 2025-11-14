@@ -462,6 +462,7 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
   mix-blend-mode: difference !important;
   background: transparent !important;
+  color: #fff !important;
   isolation: auto !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
@@ -472,10 +473,10 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
 .apreps .sqs-block.html-block .sqs-html-content h3,
 .apreps .sqs-block.html-block .sqs-html-content h3 *,
 .apreps .sqs-block.html-block .sqsrte-text-color--black {
+  mix-blend-mode: normal !important;
   color: #fff !important;
   background: transparent !important;
   text-shadow: none !important;
-    filter: invert(1) !important;
 }
 
 /* Ensure PNG logo in header inverts correctly */
@@ -730,6 +731,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   grid-row: 2;
   grid-column: 1;
   display: grid !important;
+  border-bottom: 1px solid var(--ap-newsletter-divider, #222);
   grid-template-columns: 1fr auto;
   column-gap: 1.2rem;
   align-items: end;
@@ -759,14 +761,20 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 }
 
 /* 3) Field styles — underline only */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-wrapper { min-width: 0; background: transparent !important; border: 0 !important; padding: 0 !important; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-wrapper { 
+  min-width: 0; 
+  background: transparent !important; 
+  border: 0 !important; 
+  padding: 0 !important; 
+}
+
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label { display: block; margin-bottom: .35rem; font-size: clamp(.65rem, 1vw, .75rem); letter-spacing: .24em; text-transform: uppercase; }
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element {
   width: 100%;
   padding: .35rem 0 !important;
   border: none !important;
   border-radius: 0 !important;
-  border-bottom: 1px solid var(--ap-newsletter-divider) !important;
+  border-bottom: none !important;
   background: transparent !important;
   box-shadow: none !important;
   font: inherit; letter-spacing: inherit; text-transform: none; color: inherit;
