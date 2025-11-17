@@ -868,9 +868,9 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 
 /* ### END D4:Breakpoints v1 14/08/25 */
 
-/* ### BEGIN D5: Mobile hero collage – flying images 17.11.25 */
+/* ### BEGIN D5: Mobile hero collage + lanes 17.11.25 */
 
-/* 1. Hide Digital Moves cursor collage on touch (mobile) */
+/* hide digital moves on mobile */
 @media (max-width: 767px) {
   .dm-cursor-collage-image {
     display: none !important;
@@ -881,14 +881,14 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   }
 }
 
-/* 2. Ensure the hero section can host an absolutely-positioned collage */
+/* Ensure hero section can host the collage */
 section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   position: relative;
   min-height: 60vh;
 }
 
 @media (max-width: 767px) {
-  /* Stop the hero and its wrappers from clipping the collage */
+  /* let the hero and its FE wrapper stop clipping the collage */
   section[data-section-id="68e1a8f1e44bd1493a1074d2"],
   section[data-section-id="68e1a8f1e44bd1493a1074d2"] .content-wrapper,
   section[data-section-id="68e1a8f1e44bd1493a1074d2"] [data-fluid-engine="true"].fluid-engine {
@@ -896,71 +896,61 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     overflow: visible !important;
   }
 
-  /* 3. Collage root pinned over the hero (AP—REPS mobile only) */
+  /* collage overlay – sits on top of hero, no scroll interaction */
   .mobile-hero-collage {
     position: absolute !important;
-    inset: 0 !important;
-    z-index: 2;
-
+    inset: 0;
     pointer-events: none;
-    overflow: hidden !important;
+    overflow: hidden;
 
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 2rem 5vw;
+    align-items: flex-start;
+    gap: 0;                 /* lanes can overlap horizontally */
+    padding: 1.5rem 3vw;    /* tighter than before to reduce white space */
+    z-index: 2;
   }
 
-  /* 4. Lanes: horizontal rows that scroll across */
+  /* each lane is a vertical column of images that drifts horizontally */
   .mobile-hero-lane {
     display: flex;
-    gap: 12px;
-    width: max-content; /* let each lane size itself to its contents */
+    flex-direction: column;
+    row-gap: 8px;           /* small gaps between tiles, not 300px */
+    width: 42vw;            /* relatively narrow columns for an organic grid */
 
     animation-name: hero-lane-scroll;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    animation-duration: 50s; /* base speed, overridden per-lane below */
   }
 
-  .lane-1 {
-    margin-top: 5vh;
-  }
+  /* stagger lanes vertically + vary speeds/directions for organic feel */
+  .lane-1 { margin-top: 0vh;  animation-duration: 55s; }
+  .lane-2 { margin-top: 8vh;  animation-duration: 65s; animation-direction: reverse; }
+  .lane-3 { margin-top: 16vh; animation-duration: 60s; }
+  .lane-4 { margin-top: 24vh; animation-duration: 72s; animation-direction: reverse; }
+  .lane-5 { margin-top: 32vh; animation-duration: 68s; }
+  .lane-6 { margin-top: 40vh; animation-duration: 78s; animation-direction: reverse; }
 
-  .lane-2 {
-    margin-top: 25vh;
-    animation-duration: 10s;      /* slightly different speed */
-  }
+  .mobile-hero-lane img.summary-thumbnail-image {
+    display: block !important;
+    width: 100% !important;   /* fill the lane width */
+    height: auto !important;
+    object-fit: cover !important;
 
-  .lane-3 {
-    margin-top: 45vh;
-    animation-duration: 70s;
-  }
-
-  /* 5. Thumbnails inside the collage: fight Squarespace off-screen styles
-     and normalise sizing so we get tall, organic tiles. */
-  .mobile-hero-collage img.summary-thumbnail-image {
+    /* kill any lazy-load / offscreen behaviour */
     position: static !important;
     left: auto !important;
     top: auto !important;
     transform: none !important;
-
-    display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     clip: auto !important;
-
-    height: 40vh;
-    width: auto !important;
-    flex: 0 0 auto;
-    object-fit: cover;
   }
 }
 
-/* 6. Shared keyframes for all lanes */
+/* shared keyframes for all lanes */
 @keyframes hero-lane-scroll {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-120%); }
 }
 
-/* ### END D5: Mobile hero collage – flying images 17.11.25 */
+/* ### END D5: Mobile hero collage + lanes 17.11.25 */
