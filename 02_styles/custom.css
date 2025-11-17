@@ -888,21 +888,43 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   min-height: 60vh;
 }
 
-.mobile-hero-collage {
-  position: absolute;
-  inset: 0;                      /* top:0; right:0; bottom:0; left:0 */
-  pointer-events: none;
+/* ### BEGIN D5:Breakpoints v1 14/08/25 */
+
+/* hide digital moves on mobile */
+@media (max-width: 767px) {
+  .dm-cursor-collage-image {
+    display: none !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    z-index: -9999 !important;
+  }
 }
 
-/* Mobile layout only */
+
+
+/* Mobile hero collage – remove from layout and pin to hero (all viewports) */
+section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
+  position: relative;
+  min-height: 60vh;
+}
+
 @media (max-width: 767px) {
   section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     position: relative;
   }
 
   .mobile-hero-collage {
-    position: absolute;
-    inset: 0;
+    /* HARD OVERRIDE the off-screen inline styles */
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+
     pointer-events: none;
 
     display: flex;
@@ -910,26 +932,23 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     gap: 12px;
     padding: 2rem 5vw;
     overflow: hidden;
-    /* temp debug if you want to see the area: */
-    /* background: rgba(0,0,255,0.05); */
   }
 
-  /* KEY FIX: cloned thumbnails inside the collage */
   .mobile-hero-collage img.summary-thumbnail-image {
-    /* kill plugin / Squarespace positioning + visibility hacks */
     position: static !important;
     left: auto !important;
     top: auto !important;
     transform: none !important;
+
+    /* fight Squarespace lazy-load + offscreen rules */
+    display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    clip: auto !important;
 
-    /* give them a decent size */
     height: 45vh;
     width: auto !important;
     flex: 0 0 auto;
-
-    display: block;
     object-fit: cover;
   }
 }
