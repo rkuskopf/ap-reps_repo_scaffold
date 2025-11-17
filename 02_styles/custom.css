@@ -696,6 +696,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header {
   grid-row: 1;
   grid-column: 1;
+  margin: 0;
 }
 
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description {
@@ -717,7 +718,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote {
   grid-row: 3;
   grid-column: 1;
-  margin-top: 0; /* rely on 16px row-gap above */
+  margin: 0; /* rely on 16px row-gap above */
   text-align: left;
 }
 
@@ -732,20 +733,9 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 }
 
 
-/* Header + byline, both as paragraphs */
+/* Header + byline, both as paragraph-style text */
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p {
   margin: 0;
-}
-
-/* First paragraph acts as the “heading” */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p:first-child {
-  text-transform: uppercase;
-  letter-spacing: .24em;
-  font-size: clamp(.75rem, 1.5vw, .9rem);
-}
-
-/* Second paragraph = byline style */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p + p {
   font-size: clamp(.85rem, 1.4vw, 1rem);
   line-height: 1.6;
   letter-spacing: normal;
