@@ -83,15 +83,19 @@
       return clone;
     }
 
-    // 7) Distribute images across the 3 lanes
-    //    0 -> lane-1, 1 -> lane-2, 2 -> lane-3, 3 -> lane-1, etc.
-    images.forEach((img, index) => {
-      const lane = lanes[index % lanes.length];
-      const clone = cloneThumb(img);
-      lane.appendChild(clone);
-    });
+    // 7) Distribute images across the 3 lanes,
+    //    and repeat the sequence a few times so each
+    //    lane has a long run of thumbnails.
+    const imageList = Array.from(images);
+    const REPEAT_COUNT = 5;
 
-    // (Animation + duplication for seamless looping will be handled in CSS / next step)
+    for (let r = 0; r < REPEAT_COUNT; r++) {
+      imageList.forEach((img, index) => {
+        const lane = lanes[index % lanes.length];
+        const clone = cloneThumb(img);
+        lane.appendChild(clone);
+      });
+    }
   }
 
   // First attempt: DOM ready
