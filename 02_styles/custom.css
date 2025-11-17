@@ -929,8 +929,7 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 
   .lane-2 {
     margin-top: 25vh;
-    animation-duration: 60s;      /* slightly different speed */
-    animation-direction: reverse; /* opposite direction */
+    animation-duration: 10s;      /* slightly different speed */
   }
 
   .lane-3 {
