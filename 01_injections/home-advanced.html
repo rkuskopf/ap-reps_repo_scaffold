@@ -11,7 +11,6 @@
 <!-- Cursor Collage Plugin by digitalmoves.com.au -->
 
 
-
 <!-- BEGIN DELIVERABLE 5 -->
 
 <script>
@@ -44,14 +43,23 @@
     collage.classList.add('mobile-hero-collage');
     heroSection.prepend(collage);
 
-    // 6) Clone each summary thumbnail into the collage
-    images.forEach((img) => {
+    // 6) Create 3 inner lanes inside the collage
+    const lanes = [];
+    for (let i = 1; i <= 3; i++) {
+      const lane = document.createElement('div');
+      lane.classList.add('mobile-hero-lane', `lane-${i}`);
+      collage.appendChild(lane);
+      lanes.push(lane);
+    }
+
+    // Helper: clone + normalise one thumbnail
+    function cloneThumb(img) {
       const clone = img.cloneNode(true);
 
       // Prefer the full image URL from data-image, then fall back
       // to Squarespace's lazy-src or the live img src/currentSrc.
-      const dataImage = clone.getAttribute('data-image');
-      const dataSrc = clone.getAttribute('data-src');
+      const dataImage = img.getAttribute('data-image');
+      const dataSrc = img.getAttribute('data-src');
       const finalSrc = dataImage || dataSrc || img.currentSrc || img.src;
 
       if (finalSrc) {
@@ -64,12 +72,25 @@
       clone.removeAttribute('data-load');
       clone.removeAttribute('data-image-dimensions');
 
+      // Remove any inline transforms/positioning Squarespace added
+      clone.removeAttribute('style');
+
       // Safety: force the clone itself visible
       clone.style.visibility = 'visible';
       clone.style.opacity = '1';
 
-      collage.appendChild(clone);
+      return clone;
+    }
+
+    // 7) Distribute images across the 3 lanes
+    //    0 -> lane-1, 1 -> lane-2, 2 -> lane-3, 3 -> lane-1, etc.
+    images.forEach((img, index) => {
+      const lane = lanes[index % lanes.length];
+      const clone = cloneThumb(img);
+      lane.appendChild(clone);
     });
+
+    // (Animation + duplication for seamless looping will be handled in CSS / next step)
   }
 
   // First attempt: DOM ready
