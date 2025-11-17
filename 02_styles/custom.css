@@ -964,7 +964,33 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     overflow: hidden;
   }
 
-    .mobile-hero-lane img.summary-thumbnail-image {
+  .mobile-hero-lane {
+    display: flex;
+    gap: 12px;
+    width: max-content; /* let lane size itself to its contents */
+
+    /* base horizontal scroll, overridden per-lane below */
+    animation-name: hero-lane-left;
+    animation-duration: 24s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  /* Stagger lanes vertically + slightly vary speed */
+  .lane-1 {
+    margin-top: 5vh;
+    animation-duration: 16s;
+  }
+  .lane-2 {
+    margin-top: 25vh;
+    animation-duration: 18s;
+  }
+  .lane-3 {
+    margin-top: 45vh;
+    animation-duration: 20s;
+  }
+
+  .mobile-hero-lane img.summary-thumbnail-image {
     height: 40vh;
     width: auto;
     object-fit: cover;
@@ -972,31 +998,16 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   }
 }
 
-@media (max-width: 767px) {
-  .mobile-hero-lane {
-    display: flex;
-    gap: 60px;           /* spacing between images */
-    width: max-content;
-    animation-name: hero-lane-left;
-    animation-duration: 14s;  /* base speed – fairly quick */
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-
-  .lane-1 { margin-top: 5vh;  animation-duration: 10s; }
-  .lane-2 { margin-top: 25vh; animation-duration: 12s; }
-  .lane-3 { margin-top: 45vh; animation-duration: 14s; }
-}
-
-/* lane keyframes */
 
 /* lane keyframes */
 @keyframes hero-lane-left {
-  /* start with the whole strip off the RIGHT */
-  0%   { transform: translateX(110%); }
-  /* finish with the whole strip off the LEFT */
-  100% { transform: translateX(-110%); }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-120%); }
 }
 
+@keyframes hero-lane-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
 
 /* ### END D5:Breakpoints v1 14/08/25 */
