@@ -965,12 +965,12 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   }
   
 
-  .lane-1 { margin-top: -10vh;  animation-duration: 36s; }
-  .lane-2 { margin-top: -30vh;  animation-duration: 32s; }
-  .lane-3 { margin-top: -20vh;  animation-duration: 34s; }
-  .lane-4 { margin-top: -20vh;  animation-duration: 38s; }
-  .lane-5 { margin-top: -50vh;  animation-duration: 30s; }
-  .lane-6 { margin-top: -20vh;  animation-duration: 33s; }
+  .lane-1 { margin-top: -10vh;  animation-duration: 36s; animation-delay: -4s; }
+  .lane-2 { margin-top: -30vh;  animation-duration: 32s; animation-delay: -8s; }
+  .lane-3 { margin-top: -20vh;  animation-duration: 34s; animation-delay: -12s; }
+  .lane-4 { margin-top: -20vh;  animation-duration: 38s; animation-delay: -16s; }
+  .lane-5 { margin-top: -50vh;  animation-duration: 30s; animation-delay: -10s; }
+  .lane-6 { margin-top: -20vh;  animation-duration: 33s; animation-delay: -14s; }
 }
 
 
