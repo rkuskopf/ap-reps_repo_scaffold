@@ -875,3 +875,21 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 .video-block .video-player {
   padding-bottom: 120% !important;
 }
+
+/* ### END D4:Breakpoints v1 14/08/25 */
+
+/* ### BEGIN D5:Breakpoints v1 14/08/25 */
+
+
+@media (max-width: 767px) {
+  .apreps section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
+    position: relative;
+  }
+
+  .apreps .mobile-hero-collage {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+}
+

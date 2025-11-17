@@ -1,0 +1,45 @@
+<!-- Cursor Collage Plugin by digitalmoves.com.au -->
+<script type="text/javascript">
+  const cursorCollageConfig = {
+    distance: 100,        // distance between placing new images
+    maxImageSize: 400,     // maximum image width/height in pixels
+    fade: true,            // whether to fade images after they have been placed
+    fadeTime: 2000,        // time to wait before fading out placed images
+  }
+</script>
+<script src="//unpkg.com/@digitalmoves/cursor-collage"></script>
+<!-- Cursor Collage Plugin by digitalmoves.com.au -->
+
+
+
+<!-- BEGIN DELIVERABLE 5 -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // 1) Find the Summary Block that holds the artist images
+  const summaryBlock = document.querySelector('.fe-block-yui_3_17_2_1_1762921605769_3650');
+  if (!summaryBlock) return;
+
+  // 2) Hide the original Summary Block (we'll reuse its content only)
+  summaryBlock.style.display = 'none';
+
+  // 3) Find the HERO section you just inspected
+  const heroSection = document.querySelector('section[data-section-id="68e1a8f1e44bd1493a1074d2"]');
+  if (!heroSection) return;
+
+  // 4) Create the collage container and insert it into the hero section
+  const collage = document.createElement('div');
+  collage.classList.add('mobile-hero-collage');
+  heroSection.prepend(collage); // <- was document.body.prepend(collage)
+
+  // 5) Grab the images inside the Summary Block
+  const images = summaryBlock.querySelectorAll('.summary-thumbnail-image');
+
+  images.forEach((img) => {
+    const clone = img.cloneNode(true);
+    collage.appendChild(clone);
+  });
+});
+</script>
+
+<!-- end DELIVERABLE 5 -->
