@@ -902,7 +902,6 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 }
 
 
-
 /* Mobile hero collage – remove from layout and pin to hero (all viewports) */
 section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   position: relative;
@@ -910,8 +909,11 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 }
 
 @media (max-width: 767px) {
-  section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"],
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"] .content-wrapper,
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"] [data-fluid-engine="true"].fluid-engine {
     position: relative;
+    overflow: visible !important;  /* stop clipping the collage */
   }
 
   .mobile-hero-collage {
@@ -924,6 +926,7 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     transform: none !important;
     opacity: 1 !important;
     visibility: visible !important;
+    z-index: 2;                    /* sit above hero content */
 
     pointer-events: none;
 
@@ -931,7 +934,7 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     align-items: stretch;
     gap: 12px;
     padding: 2rem 5vw;
-    overflow: hidden;
+    overflow: visible !important;
   }
 
   .mobile-hero-collage img.summary-thumbnail-image {
