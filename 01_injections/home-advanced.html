@@ -82,10 +82,18 @@
       return clone;
     }
 
-    images.forEach((img, index) => {
+      images.forEach((img, index) => {
       const lane = lanes[index % lanes.length];
       const clone = cloneThumb(img);
       lane.appendChild(clone);
+    });
+
+    // NEW: duplicate each lane's content so it can scroll seamlessly
+    lanes.forEach((lane) => {
+      const children = Array.from(lane.children);
+      children.forEach((child) => {
+        lane.appendChild(child.cloneNode(true));
+      });
     });
   }
 
