@@ -149,16 +149,6 @@ body, a:hover, button:hover {
  /* Hide section button */
 .auto-scroll .list-item-content__button { display: none }
 
-/* hide digital moves on mobile */
-@media (max-width: 767px) {
-  .dm-cursor-collage-image {
-    display: none !important;
-    pointer-events: none !important;
-    opacity: 0 !important;
-    position: absolute !important;
-    z-index: -9999 !important;
-  }
-}
 
 /* Infinite auto scroll by Digital Moves */
 
@@ -881,20 +871,30 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 /* ### BEGIN D5:Breakpoints v1 14/08/25 */
 
 
-/* Mobile hero collage – remove from layout and pin to hero */
+/* hide digital moves on mobile */
+@media (max-width: 767px) {
+  .dm-cursor-collage-image {
+    display: none !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    z-index: -9999 !important;
+  }
+}
+
+/* Mobile hero collage – remove from layout and pin to hero (all viewports) */
 .apreps section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
-  position: relative; /* ensure hero is a positioning context */
+  position: relative;            /* ensure hero is a positioning context */
   min-height: 60vh;
 }
 
 .apreps .mobile-hero-collage {
   position: absolute;
-  inset: 0;           /* top:0; right:0; bottom:0; left:0 */
+  inset: 0;                      /* top:0; right:0; bottom:0; left:0 */
   pointer-events: none;
-  /* temporary visual debugging: */
-  /* background: rgba(255, 0, 0, 0.1); */
 }
 
+/* Mobile layout only */
 @media (max-width: 767px) {
   .apreps section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     position: relative;
@@ -910,54 +910,28 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
     gap: 12px;
     padding: 2rem 5vw;
     overflow: hidden;
+    /* temp debug if you want to see the area: */
+    /* background: rgba(0,0,255,0.05); */
   }
 
-  /* Each thumbnail becomes a tile in the strip */
-  .apreps .mobile-hero-collage .summary-thumbnail-image {
-    flex: 0 0 45vw;     /* ~2 images across the viewport */
-    height: auto;
-  }
-
-  .apreps .mobile-hero-collage .summary-thumbnail-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-  }
-}
-
-
-@media (max-width: 767px) {
-  .apreps section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
-    position: relative;
-  }
-
-  .apreps .mobile-hero-collage {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-
-    display: flex;
-    align-items: stretch;
-    gap: 12px;
-    padding: 2rem 5vw;
-    overflow: hidden;
-  }
-
-  /* KEY FIX: override inline styles on cloned thumbnails */
+  /* KEY FIX: cloned thumbnails inside the collage */
   .apreps .mobile-hero-collage img.summary-thumbnail-image {
+    /* kill plugin / Squarespace positioning + visibility hacks */
     position: static !important;
     left: auto !important;
     top: auto !important;
-
-    /* Removed width: 100% !important; */
-    /* Removed height: auto !important; */
-
-    flex: 0 0 auto;
-    display: block;
-    object-fit: cover;
     transform: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    /* give them a decent size */
     height: 45vh;
     width: auto !important;
+    flex: 0 0 auto;
+
+    display: block;
+    object-fit: cover;
   }
 }
+
+/* ### END D5:Breakpoints v1 14/08/25 */
