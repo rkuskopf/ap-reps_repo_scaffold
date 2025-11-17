@@ -916,25 +916,29 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     overflow: visible !important;  /* stop clipping the collage */
   }
 
+
   .mobile-hero-collage {
-    /* HARD OVERRIDE the off-screen inline styles */
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    z-index: 2;                    /* sit above hero content */
-
+    position: absolute;
+    inset: 0;
     pointer-events: none;
+    overflow: hidden;
+  }
 
+  .mobile-hero-lane {
     display: flex;
-    align-items: stretch;
     gap: 12px;
-    padding: 2rem 5vw;
-    overflow: hidden !important;
+    width: max-content; /* let lane size itself to its contents */
+  }
+
+  .lane-1 { margin-top: 5vh; }
+  .lane-2 { margin-top: 25vh; }
+  .lane-3 { margin-top: 45vh; }
+
+  .mobile-hero-lane img.summary-thumbnail-image {
+    height: 40vh;
+    width: auto;
+    object-fit: cover;
+    display: block;
   }
 
   .mobile-hero-collage img.summary-thumbnail-image {
