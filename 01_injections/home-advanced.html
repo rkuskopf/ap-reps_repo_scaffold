@@ -15,36 +15,42 @@
 
 <script>
 (function () {
-  function initMobileHero() {
-    // MOBILE ONLY — bail out completely on desktop so we never
-    // touch the desktop hero/plugin or Summary visibility there.
-    if (!window.matchMedia || !window.matchMedia('(max-width: 767px)').matches) {
-      return;
+  const mq = window.matchMedia ? window.matchMedia('(max-width: 767px)') : null;
+  const SUMMARY_SELECTOR = '.fe-block-yui_3_17_2_1_1762921605769_3650';
+  const HERO_SELECTOR = 'section[data-section-id="68e1a8f1e44bd1493a1074d2"]';
+
+  function destroyMobileHero() {
+    const collage = document.querySelector('.mobile-hero-collage');
+    if (collage) {
+      collage.remove();
     }
+    // Let CSS control visibility of the source Summary block on desktop.
+    const summaryBlock = document.querySelector(SUMMARY_SELECTOR);
+    if (summaryBlock) {
+      summaryBlock.style.display = '';
+    }
+  }
+
+  function buildMobileHero() {
     // avoid running twice
     if (document.querySelector('.mobile-hero-collage')) return;
 
-    // 1) Find the Summary Block
-    const summaryBlock = document.querySelector('.fe-block-yui_3_17_2_1_1762921605769_3650');
+    const summaryBlock = document.querySelector(SUMMARY_SELECTOR);
     if (!summaryBlock) return;
 
-    // 2) Make sure images actually exist inside it
     const images = summaryBlock.querySelectorAll('.summary-thumbnail-image');
     if (!images.length) return; // Squarespace not ready yet
 
-    // 3) Hide the original Summary Block
+    // Hide the original Summary Block UI on mobile
     summaryBlock.style.display = 'none';
 
-    // 4) Find the hero section
-    const heroSection = document.querySelector('section[data-section-id="68e1a8f1e44bd1493a1074d2"]');
+    const heroSection = document.querySelector(HERO_SELECTOR);
     if (!heroSection) return;
 
-    // 5) Create the collage container in the hero
     const collage = document.createElement('div');
     collage.classList.add('mobile-hero-collage');
     heroSection.prepend(collage);
 
-    // 6) Create 3 inner lanes inside the collage
     const lanes = [];
     for (let i = 1; i <= 3; i++) {
       const lane = document.createElement('div');
@@ -53,12 +59,9 @@
       lanes.push(lane);
     }
 
-    // Helper: clone + normalise one thumbnail
     function cloneThumb(img) {
       const clone = img.cloneNode(true);
 
-      // Prefer the full image URL from data-image, then fall back
-      // to Squarespace's lazy-src or the live img src/currentSrc.
       const dataImage = img.getAttribute('data-image');
       const dataSrc = img.getAttribute('data-src');
       const finalSrc = dataImage || dataSrc || img.currentSrc || img.src;
@@ -67,40 +70,46 @@
         clone.src = finalSrc;
       }
 
-      // Strip lazy-load attributes/flags that can keep it hidden
       clone.removeAttribute('data-src');
       clone.removeAttribute('data-image');
       clone.removeAttribute('data-load');
       clone.removeAttribute('data-image-dimensions');
-
-      // Remove any inline transforms/positioning Squarespace added
       clone.removeAttribute('style');
 
-      // Safety: force the clone itself visible
       clone.style.visibility = 'visible';
       clone.style.opacity = '1';
 
       return clone;
     }
 
-    // 7) Distribute images across the 3 lanes
-    //    0 -> lane-1, 1 -> lane-2, 2 -> lane-3, 3 -> lane-1, etc.
     images.forEach((img, index) => {
       const lane = lanes[index % lanes.length];
       const clone = cloneThumb(img);
       lane.appendChild(clone);
     });
-
-    // (Animation + duplication for seamless looping will be handled in CSS / next step)
   }
 
-  // First attempt: DOM ready
-  document.addEventListener('DOMContentLoaded', initMobileHero);
+  function handleHeroMode() {
+    if (!mq) return;
+    if (mq.matches) {
+      // Mobile
+      buildMobileHero();
+    } else {
+      // Desktop
+      destroyMobileHero();
+    }
+  }
 
-  // Second chance: when Squarespace finishes loading content
-  document.addEventListener('sqs-content-loaded', function () {
-    initMobileHero();
-  });
+  document.addEventListener('DOMContentLoaded', handleHeroMode);
+  document.addEventListener('sqs-content-loaded', handleHeroMode);
+
+  if (mq) {
+    if (mq.addEventListener) {
+      mq.addEventListener('change', handleHeroMode);
+    } else if (mq.addListener) {
+      mq.addListener(handleHeroMode);
+    }
+  }
 })();
 </script>
 
