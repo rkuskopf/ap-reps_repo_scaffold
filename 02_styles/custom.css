@@ -950,21 +950,25 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 @media (max-width: 767px) {
   .mobile-hero-lane {
     display: flex;
-    gap: 60px;           /* spacing between images */
+    gap: 150px;           /* spacing between images */
     width: max-content;
     animation-name: hero-lane-left;
     animation-duration: 30s;  /* base speed – fairly quick */
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
+
+  .mobile-hero-lane img {
+    align-self: center !important;
+  }
   
 
-  .lane-1 { margin-top: 5vh;  animation-duration: 18s; }
-  .lane-2 { margin-top: 25vh; animation-duration: 12s; }
-  .lane-3 { margin-top: 45vh; animation-duration: 14s; }
-  .lane-4 { margin-top: 36vh; animation-duration: 10s; }
-  .lane-5 { margin-top: 48vh; animation-duration: 22s; }
-  .lane-6 { margin-top: 60vh; animation-duration: 15s; }
+  .lane-1 { margin-top: 0vh;  animation-duration: 18s; }
+  .lane-2 { margin-top: -10vh; animation-duration: 12s; }
+  .lane-3 { margin-top: 7vh; animation-duration: 14s; }
+  .lane-4 { margin-top: 10vh; animation-duration: 10s; }
+  .lane-5 { margin-top: 32vh; animation-duration: 22s; }
+  .lane-6 { margin-top: 55vh; animation-duration: 15s; }
 }
 
 
