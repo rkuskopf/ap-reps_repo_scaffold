@@ -43,6 +43,27 @@
     // 6) Clone each summary thumbnail into the collage
     images.forEach((img) => {
       const clone = img.cloneNode(true);
+
+      // Prefer the full image URL from data-image, then fall back
+      // to Squarespace's lazy-src or the live img src/currentSrc.
+      const dataImage = clone.getAttribute('data-image');
+      const dataSrc = clone.getAttribute('data-src');
+      const finalSrc = dataImage || dataSrc || img.currentSrc || img.src;
+
+      if (finalSrc) {
+        clone.src = finalSrc;
+      }
+
+      // Strip lazy-load attributes/flags that can keep it hidden
+      clone.removeAttribute('data-src');
+      clone.removeAttribute('data-image');
+      clone.removeAttribute('data-load');
+      clone.removeAttribute('data-image-dimensions');
+
+      // Safety: force the clone itself visible
+      clone.style.visibility = 'visible';
+      clone.style.opacity = '1';
+
       collage.appendChild(clone);
     });
   }
