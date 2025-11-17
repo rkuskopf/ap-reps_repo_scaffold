@@ -893,3 +893,35 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   /* temporary visual debugging: */
   /* background: rgba(255, 0, 0, 0.1); */
 }
+
+@media (max-width: 767px) {
+  .apreps section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
+    position: relative;
+  }
+
+  .apreps .mobile-hero-collage {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    /* NEW: basic layout for the collage strip */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 2rem 5vw;
+    overflow: hidden;
+  }
+
+  /* Each thumbnail becomes a tile in the strip */
+  .apreps .mobile-hero-collage .summary-thumbnail-image {
+    flex: 0 0 45vw;     /* ~2 images across the viewport */
+    height: auto;
+  }
+
+  .apreps .mobile-hero-collage .summary-thumbnail-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+}
