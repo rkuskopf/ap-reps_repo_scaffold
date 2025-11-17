@@ -925,3 +925,36 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
     object-fit: cover;
   }
 }
+
+
+@media (max-width: 767px) {
+  .apreps section[data-section-id="68e1a8f275f32945d755e918"] {
+    position: relative;
+  }
+
+  .apreps .mobile-hero-collage {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 2rem 5vw;
+    overflow: hidden;
+  }
+
+  /* KEY FIX: override inline styles on cloned thumbnails */
+  .apreps .mobile-hero-collage img.summary-thumbnail-image {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    flex: 0 0 45vw;
+    display: block;
+    object-fit: cover;
+    transform: none !important;
+  }
+}
