@@ -866,6 +866,23 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   padding-bottom: 120% !important;
 }
 
+@media (max-width: 767px) {
+  /* Jamie gallery: make the FE block span full width on mobile */
+  .fe-68e889ae125ee7a50dae8990d           /* replace with your section's .fe-… */
+  .fe-block-yui_3_17_2_1_1763343820721_1515 {  /* replace with your gallery's .fe-block-… */
+    grid-column: 1 / -1 !important;  /* full width of FE grid */
+  }
+
+  .fe-68e889ae125ee7a50dae8990d
+  .fe-block-yui_3_17_2_1_1763343820721_1515
+  .sqs-gallery-block-grid .gallery-grid {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+
 /* ### END D4:Breakpoints v1 14/08/25 */
 
 /* hide digital moves on mobile */
