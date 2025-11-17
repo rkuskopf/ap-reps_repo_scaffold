@@ -928,7 +928,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 
 
 @media (max-width: 767px) {
-  .apreps section[data-section-id="68e1a8f275f32945d755e918"] {
+  .apreps section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     position: relative;
   }
 
@@ -936,6 +936,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
     position: absolute;
     inset: 0;
     pointer-events: none;
+
     display: flex;
     align-items: center;
     gap: 12px;
@@ -943,18 +944,17 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
     overflow: hidden;
   }
 
-  /* KEY FIX: override inline styles on cloned thumbnails */
+  /* IMPORTANT: undo the plugin's off-screen positioning for our collage only */
   .apreps .mobile-hero-collage img.summary-thumbnail-image {
     position: static !important;
     left: auto !important;
     top: auto !important;
-
-    width: 100% !important;
-    height: auto !important;
+    transform: none !important;
 
     flex: 0 0 45vw;
+    width: 100%;
+    height: auto;
     display: block;
     object-fit: cover;
-    transform: none !important;
   }
 }
