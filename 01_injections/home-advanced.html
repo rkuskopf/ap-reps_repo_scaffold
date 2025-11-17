@@ -17,6 +17,10 @@
 <script>
 (function () {
   function initMobileHero() {
+    // mobile-only: don't touch desktop hero
+    if (window.matchMedia && window.matchMedia('(min-width: 768px)').matches) {
+      return;
+    }
     // avoid running twice
     if (document.querySelector('.mobile-hero-collage')) return;
 
