@@ -149,16 +149,6 @@ body, a:hover, button:hover {
  /* Hide section button */
 .auto-scroll .list-item-content__button { display: none }
 
-/* hide digital moves on mobile */
-@media (max-width: 767px) {
-  .dm-cursor-collage-image {
-    display: none !important;
-    pointer-events: none !important;
-    opacity: 0 !important;
-    position: absolute !important;
-    z-index: -9999 !important;
-  }
-}
 
 /* Infinite auto scroll by Digital Moves */
 
@@ -875,3 +865,127 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 .video-block .video-player {
   padding-bottom: 120% !important;
 }
+
+/* ### END D4:Breakpoints v1 14/08/25 */
+
+/* hide digital moves on mobile */
+@media (max-width: 767px) {
+  .dm-cursor-collage-image {
+    display: none !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    z-index: -9999 !important;
+  }
+}
+
+
+/* Mobile hero collage – remove from layout and pin to hero (all viewports) */
+section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
+  position: relative;
+  min-height: 60vh;
+}
+
+@media (max-width: 767px) {
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"],
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"] .content-wrapper,
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"] [data-fluid-engine="true"].fluid-engine {
+    position: relative;
+    overflow: visible !important;  /* stop clipping the collage */
+  }
+
+  .mobile-hero-collage {
+    /* HARD OVERRIDE the off-screen inline styles */
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 2;                    /* sit above hero content */
+
+    pointer-events: none;
+
+  /* stack lanes vertically */
+  display: block;
+  padding: 2rem 5vw;
+  overflow: hidden !important;
+}
+
+  .mobile-hero-collage img.summary-thumbnail-image {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+
+    /* fight Squarespace lazy-load + offscreen rules */
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    clip: auto !important;
+
+    height: 45vh;
+    width: auto !important;
+    flex: 0 0 auto;
+    object-fit: cover;
+  }
+
+  /* randomised sizes */
+.mobile-hero-lane img.size-sm {
+  height: 26vh;
+}
+
+.mobile-hero-lane img.size-md {
+  height: 36vh;
+}
+
+.mobile-hero-lane img.size-lg {
+  height: 46vh;
+}
+}
+
+
+@media (max-width: 767px) {
+  .mobile-hero-lane {
+    display: flex;
+    gap: 600px;           /* spacing between images */
+    width: max-content;
+    will-change: transform;
+    transform: translate3d(0,0,0);
+    animation-name: hero-lane-left;
+    animation-duration: 50s;  /* base speed – fairly quick */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .mobile-hero-lane img {
+    align-self: center !important;
+  }
+  
+
+  .lane-1 { margin-top: -10vh;  animation-duration: 36s; animation-delay: -4s; }
+  .lane-2 { margin-top: -30vh;  animation-duration: 32s; animation-delay: -8s; }
+  .lane-3 { margin-top: -20vh;  animation-duration: 34s; animation-delay: -12s; }
+  .lane-4 { margin-top: -20vh;  animation-duration: 38s; animation-delay: -16s; }
+  .lane-5 { margin-top: -50vh;  animation-duration: 30s; animation-delay: -10s; }
+  .lane-6 { margin-top: -20vh;  animation-duration: 33s; animation-delay: -14s; }
+}
+
+
+/* lane keyframes */
+@keyframes hero-lane-left {
+  /* start with the whole strip off the RIGHT */
+  0% {
+    transform: translateX(100vw);
+  }
+  /* finish with the whole strip completely past the LEFT edge,
+     regardless of the lane's own width */
+  100% {
+    transform: translateX(calc(-100% - 100vw));
+  }
+}
+
+
+/* ### END D5:Breakpoints v1 14/08/25 */

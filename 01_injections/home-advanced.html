@@ -1,0 +1,120 @@
+<!-- Cursor Collage Plugin by digitalmoves.com.au -->
+<script type="text/javascript">
+  const cursorCollageConfig = {
+    distance: 100,        // distance between placing new images
+    maxImageSize: 400,     // maximum image width/height in pixels
+    fade: true,            // whether to fade images after they have been placed
+    fadeTime: 2000,        // time to wait before fading out placed images
+  }
+</script>
+<script src="//unpkg.com/@digitalmoves/cursor-collage"></script>
+<!-- Cursor Collage Plugin by digitalmoves.com.au -->
+
+
+<!-- BEGIN DELIVERABLE 5 -->
+
+<script>
+(function () {
+  function initMobileHero() {
+    // MOBILE ONLY — bail out completely on desktop so we never
+    // touch the desktop hero/plugin or Summary visibility there.
+    if (!window.matchMedia || !window.matchMedia('(max-width: 767px)').matches) {
+      return;
+    }
+    // avoid running twice
+    if (document.querySelector('.mobile-hero-collage')) return;
+
+    // 1) Find the Summary Block
+    const summaryBlock = document.querySelector('.fe-block-yui_3_17_2_1_1762921605769_3650');
+    if (!summaryBlock) return;
+
+    // 2) Make sure images actually exist inside it
+    const images = summaryBlock.querySelectorAll('.summary-thumbnail-image');
+    if (!images.length) return; // Squarespace not ready yet
+
+    // 3) Hide the original Summary Block
+    summaryBlock.style.display = 'none';
+
+    // 4) Find the hero section
+    const heroSection = document.querySelector('section[data-section-id="68e1a8f1e44bd1493a1074d2"]');
+    if (!heroSection) return;
+
+    // 5) Create the collage container in the hero
+    const collage = document.createElement('div');
+    collage.classList.add('mobile-hero-collage');
+    heroSection.prepend(collage);
+
+    // 6) Create 6 inner lanes inside the collage
+    const lanes = [];
+    for (let i = 1; i <= 6; i++) {
+      const lane = document.createElement('div');
+      lane.classList.add('mobile-hero-lane', `lane-${i}`);
+      collage.appendChild(lane);
+      lanes.push(lane);
+    }
+
+    // Helper: clone + normalise one thumbnail
+    function cloneThumb(img) {
+      const clone = img.cloneNode(true);
+
+      const dataImage = img.getAttribute('data-image');
+      const dataSrc   = img.getAttribute('data-src');
+      const finalSrc  = dataImage || dataSrc || img.currentSrc || img.src;
+
+      if (finalSrc) {
+        clone.src = finalSrc;
+      }
+
+      // Strip lazy-load attributes/flags that can keep it hidden
+      clone.removeAttribute('data-src');
+      clone.removeAttribute('data-image');
+      clone.removeAttribute('data-load');
+      clone.removeAttribute('data-image-dimensions');
+
+      // Remove any inline transforms/positioning Squarespace added
+      clone.removeAttribute('style');
+
+      // Safety: force the clone itself visible
+      clone.style.visibility = 'visible';
+      clone.style.opacity = '1';
+
+      return clone;
+    }
+
+    // 7) Build long, varied lanes – use the full pool, no identical strips per lane
+    const sourceImages = Array.from(images);
+    if (!sourceImages.length) return;
+
+    // Shuffle once so we don't always start from the same few images
+    const shuffled = sourceImages.slice().sort(() => Math.random() - 0.5);
+
+    // How many images per lane (tweak 4–8 to taste)
+    const IMAGES_PER_LANE = Math.min(7, shuffled.length);
+
+    lanes.forEach((lane, laneIndex) => {
+      // Offset where each lane starts in the shuffled list,
+      // so lanes don't all show the same run in the same order.
+      const start = Math.floor((shuffled.length / lanes.length) * laneIndex);
+
+      for (let i = 0; i < IMAGES_PER_LANE; i++) {
+        const srcIndex = (start + i) % shuffled.length;
+        const clone = cloneThumb(shuffled[srcIndex]);
+        // random size for variation
+const sizes = ['size-sm', 'size-md', 'size-lg'];
+const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+clone.classList.add(randomSize);
+
+lane.appendChild(clone);
+      }
+    });
+  }
+
+  // First attempt: DOM ready
+  document.addEventListener('DOMContentLoaded', initMobileHero);
+
+  // Second chance: when Squarespace finishes loading content
+  document.addEventListener('sqs-content-loaded', function () {
+    initMobileHero();
+  });
+})();
+</script>
