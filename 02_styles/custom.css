@@ -682,7 +682,7 @@ section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 1.2rem; /* adjust spacing as needed */
+  row-gap: 16px; /* 16px between header, input row, privacy */
 }
 
 email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
@@ -698,6 +698,10 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   grid-column: 1;
 }
 
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description {
+  display: grid;
+  row-gap: 10px; /* 10px between first line and byline */
+}
 
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper {
   grid-column: 1;
@@ -713,7 +717,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote {
   grid-row: 3;
   grid-column: 1;
-  margin-top: .75rem;
+  margin-top: 0; /* rely on 16px row-gap above */
   text-align: left;
 }
 
@@ -728,16 +732,25 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 }
 
 
-/* Header title (H4-ish) + byline (P3) */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header :is(h2,h3,h4,.newsletter-form-header-title) {
+/* Header + byline, both as paragraphs */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p {
   margin: 0;
+}
+
+/* First paragraph acts as the “heading” */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p:first-child {
   text-transform: uppercase;
   letter-spacing: .24em;
   font-size: clamp(.75rem, 1.5vw, .9rem);
 }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p { margin: 0; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p + p { font-size: clamp(.85rem, 1.4vw, 1rem); line-height: 1.6; letter-spacing: normal; text-transform: none; }
 
+/* Second paragraph = byline style */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p + p {
+  font-size: clamp(.85rem, 1.4vw, 1rem);
+  line-height: 1.6;
+  letter-spacing: normal;
+  text-transform: none;
+}
 
 
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper { 
@@ -793,6 +806,20 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   cursor: pointer;
 }
 
+/* D8: hide visual EMAIL ADDRESS label, keep it screen‑reader only */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:hover,
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:focus { text-decoration: underline; outline: none; }
 
@@ -800,14 +827,16 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 
 /* ### BEGIN D4:Breakpoints v1 14/08/25 */
 /* ——— AP–REPS gallery: lock per-slide aspect +  ——— */
-.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
-  aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
+/* D4 – scoped only to AP–REPS tab galleries */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
+  aspect-ratio: var(--ap-aspect, 4 / 3);
   overflow: hidden;
   position: relative;
-  box-sizing: border-box !important; /* switched from content-box to stop vertical padding stacking */
-  padding-bottom: 0 !important; /* move spacing to row-gap only */
+  box-sizing: border-box !important;
+  padding-bottom: 0 !important;
   padding-right: var(--ap-gap-x, 10px) !important;
 }
+
 
 /* Catch when Squarespace puts height/min-height on the grid itself */
 .apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="height"],
@@ -867,23 +896,16 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 }
 
 @media (max-width: 767px) {
-  /* Jamie gallery: make the FE block span full width on mobile */
-  .fe-68e889ae125ee7a50dae8990d           /* replace with your section's .fe-… */
-  .fe-block-yui_3_17_2_1_1763343820721_1515 {  /* replace with your gallery's .fe-block-… */
-    grid-column: 1 / -1 !important;  /* full width of FE grid */
-  }
-
-  .fe-68e889ae125ee7a50dae8990d
-  .fe-block-yui_3_17_2_1_1763343820721_1515
-  .sqs-gallery-block-grid .gallery-grid {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+  .apreps .wm-tabs .tab-panel > .tab-content .sqs-block.sqs-block-gallery,
+  .apreps .wm-tabs .tab-panel > .tab-content .sqs-block.sqs-block-gallery > .sqs-block-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
 
-
 /* ### END D4:Breakpoints v1 14/08/25 */
+
+
 
 /* hide digital moves on mobile */
 @media (max-width: 767px) {
