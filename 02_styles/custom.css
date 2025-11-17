@@ -884,6 +884,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 /* Mobile hero collage – remove from layout and pin to hero */
 .apreps section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   position: relative; /* ensure hero is a positioning context */
+  min-height: 60vh;
 }
 
 .apreps .mobile-hero-collage {
@@ -904,9 +905,8 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
     inset: 0;
     pointer-events: none;
 
-    /* NEW: basic layout for the collage strip */
     display: flex;
-    align-items: center;
+    align-items: stretch;
     gap: 12px;
     padding: 2rem 5vw;
     overflow: hidden;
@@ -938,7 +938,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
     pointer-events: none;
 
     display: flex;
-    align-items: center;
+    align-items: stretch;
     gap: 12px;
     padding: 2rem 5vw;
     overflow: hidden;
@@ -950,12 +950,14 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
     left: auto !important;
     top: auto !important;
 
-    width: 100% !important;
-    height: auto !important;
+    /* Removed width: 100% !important; */
+    /* Removed height: auto !important; */
 
-    flex: 0 0 45vw;
+    flex: 0 0 auto;
     display: block;
     object-fit: cover;
     transform: none !important;
+    height: 45vh;
+    width: auto !important;
   }
 }
