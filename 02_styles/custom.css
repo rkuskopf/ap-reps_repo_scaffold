@@ -963,17 +963,24 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     pointer-events: none;
     overflow: hidden;
   }
+}
 
 @media (max-width: 767px) {
   .mobile-hero-lane {
     display: flex;
     gap: 60px;
     width: max-content;
+    transform: translateX(100%);
+  }
+
+/* when this class is added, the lane animates */
+  .mobile-hero-lane.--run {
     animation-name: hero-lane-left;
-    animation-duration: 22s;    /* base duration */
+    animation-duration: 25s;      /* keep your length */
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
+
 
   /* stagger speeds slightly, but all long enough for a ~10s gap */
   .lane-1 { margin-top: 0vh;   animation-duration: 20s; }  /* ~10s moving, 10s off */
@@ -983,14 +990,12 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   .lane-5 { margin-top: 48vh;  animation-duration: 28s; }
   .lane-6 { margin-top: 60vh;  animation-duration: 30s; }
 }
-}
 
 
 /* lane keyframes – cross once, then wait off-screen */
 @keyframes hero-lane-left {
   0%   { transform: translateX(100%); }    /* strip fully off right */
-  50%  { transform: translateX(-100%); }   /* strip fully off left */
-  100% { transform: translateX(-100%); }   /* stay off left (gap before loop) */
+  100%  { transform: translateX(-280%); }   /* strip fully off left */
 }
 
 
