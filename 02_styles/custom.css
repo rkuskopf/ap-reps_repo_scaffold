@@ -944,17 +944,18 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
     overflow: hidden;
   }
 
-  /* IMPORTANT: undo the plugin's off-screen positioning for our collage only */
+  /* KEY FIX: override inline styles on cloned thumbnails */
   .apreps .mobile-hero-collage img.summary-thumbnail-image {
     position: static !important;
     left: auto !important;
     top: auto !important;
-    transform: none !important;
+
+    width: 100% !important;
+    height: auto !important;
 
     flex: 0 0 45vw;
-    width: 100%;
-    height: auto;
     display: block;
     object-fit: cover;
+    transform: none !important;
   }
 }
