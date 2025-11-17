@@ -883,12 +883,12 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 }
 
 /* Mobile hero collage – remove from layout and pin to hero (all viewports) */
-.apreps section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
+section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   position: relative;            /* ensure hero is a positioning context */
   min-height: 60vh;
 }
 
-.apreps .mobile-hero-collage {
+.mobile-hero-collage {
   position: absolute;
   inset: 0;                      /* top:0; right:0; bottom:0; left:0 */
   pointer-events: none;
@@ -896,11 +896,11 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 
 /* Mobile layout only */
 @media (max-width: 767px) {
-  .apreps section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     position: relative;
   }
 
-  .apreps .mobile-hero-collage {
+  .mobile-hero-collage {
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -915,7 +915,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   }
 
   /* KEY FIX: cloned thumbnails inside the collage */
-  .apreps .mobile-hero-collage img.summary-thumbnail-image {
+  .mobile-hero-collage img.summary-thumbnail-image {
     /* kill plugin / Squarespace positioning + visibility hacks */
     position: static !important;
     left: auto !important;
