@@ -964,50 +964,34 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     overflow: hidden;
   }
 
+@media (max-width: 767px) {
   .mobile-hero-lane {
     display: flex;
     gap: 60px;
     width: max-content;
     animation-name: hero-lane-left;
-    animation-duration: 25s;           /* same for ALL lanes */
+    animation-duration: 22s;    /* base duration */
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
 
-  /* only vertical offsets now – no per-lane durations */
-  .lane-1 { 
-    margin-top: 0vh; 
-    animation-duration: 20s; 
-  }
-  .lane-2 { 
-    margin-top: 12vh; 
-    animation-duration: 12s; 
-  }
-  .lane-3 { 
-    margin-top: 24vh; 
-    animation-duration: 16s; 
-  }
-  .lane-4 { 
-    margin-top: 36vh;
-    animation-duration: 8s; 
-  }
-  .lane-5 { 
-    margin-top: 48vh;  
-    animation-duration: 14s; 
-  }
-  .lane-6 { 
-    margin-top: 60vh; 
-   animation-duration: 10s;
+  /* stagger speeds slightly, but all long enough for a ~10s gap */
+  .lane-1 { margin-top: 0vh;   animation-duration: 20s; }  /* ~10s moving, 10s off */
+  .lane-2 { margin-top: 12vh;  animation-duration: 22s; }  /* ~11s moving, 11s off */
+  .lane-3 { margin-top: 24vh;  animation-duration: 24s; }  /* ~12s moving, 12s off */
+  .lane-4 { margin-top: 36vh;  animation-duration: 26s; }
+  .lane-5 { margin-top: 48vh;  animation-duration: 28s; }
+  .lane-6 { margin-top: 60vh;  animation-duration: 30s; }
+}
 }
 
 
 /* lane keyframes – cross once, then wait off-screen */
-/* one continuous path, no on-screen pause */
 @keyframes hero-lane-left {
-  0%   { transform: translateX(120%); }   /* strip fully off RIGHT */
-  100% { transform: translateX(-280%); }  /* strip fully off LEFT */
+  0%   { transform: translateX(100%); }    /* strip fully off right */
+  50%  { transform: translateX(-100%); }   /* strip fully off left */
+  100% { transform: translateX(-100%); }   /* stay off left (gap before loop) */
 }
-
 
 
 @keyframes hero-lane-right {
