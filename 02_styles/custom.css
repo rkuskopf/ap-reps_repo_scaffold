@@ -950,10 +950,12 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 @media (max-width: 767px) {
   .mobile-hero-lane {
     display: flex;
-    gap: 150px;           /* spacing between images */
+    gap: 600px;           /* spacing between images */
     width: max-content;
+    will-change: transform;
+    transform: translate3d(0,0,0);
     animation-name: hero-lane-left;
-    animation-duration: 30s;  /* base speed – fairly quick */
+    animation-duration: 50s;  /* base speed – fairly quick */
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
@@ -963,21 +965,26 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   }
   
 
-  .lane-1 { margin-top: 0vh;  animation-duration: 18s; }
-  .lane-2 { margin-top: -10vh; animation-duration: 12s; }
-  .lane-3 { margin-top: 7vh; animation-duration: 14s; }
-  .lane-4 { margin-top: 10vh; animation-duration: 10s; }
-  .lane-5 { margin-top: 32vh; animation-duration: 22s; }
-  .lane-6 { margin-top: 55vh; animation-duration: 15s; }
+  .lane-1 { margin-top: -10vh;  animation-duration: 36s; }
+  .lane-2 { margin-top: -30vh;  animation-duration: 32s; }
+  .lane-3 { margin-top: -20vh;  animation-duration: 34s; }
+  .lane-4 { margin-top: -20vh;  animation-duration: 38s; }
+  .lane-5 { margin-top: -50vh;  animation-duration: 30s; }
+  .lane-6 { margin-top: -20vh;  animation-duration: 33s; }
 }
 
 
 /* lane keyframes */
 @keyframes hero-lane-left {
   /* start with the whole strip off the RIGHT */
-  0%   { transform: translateX(110vw); }
-  /* finish with the whole strip off the LEFT */
-  100% { transform: translateX(-280vw); }
+  0% {
+    transform: translateX(100vw);
+  }
+  /* finish with the whole strip completely past the LEFT edge,
+     regardless of the lane's own width */
+  100% {
+    transform: translateX(calc(-100% - 100vw));
+  }
 }
 
 
