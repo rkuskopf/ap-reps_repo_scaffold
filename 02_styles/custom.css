@@ -914,7 +914,6 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   .mobile-hero-lane {
     display: flex;
     flex-direction: column;
-    row-gap: 8px;           /* small gaps between tiles, not 300px */
     width: 42vw;            /* relatively narrow columns for an organic grid */
 
     animation-name: hero-lane-scroll;
@@ -923,9 +922,9 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   }
 
   /* stagger lanes vertically + vary speeds/directions for organic feel */
-  .lane-1 { margin-top: 0vh;  animation-duration: 55s; }
-  .lane-2 { margin-top: 8vh;  animation-duration: 65s; animation-direction: reverse; }
-  .lane-3 { margin-top: 16vh; animation-duration: 60s; }
+  .lane-1 { margin-top: 0vh;  animation-duration: 10s; animation-direction: reverse; }
+  .lane-2 { margin-top: 8vh;  animation-duration: 5s; animation-direction: reverse; }
+  .lane-3 { margin-top: 16vh; animation-duration: 9s; animation-direction: reverse;}
   .lane-4 { margin-top: 24vh; animation-duration: 72s; animation-direction: reverse; }
   .lane-5 { margin-top: 32vh; animation-duration: 68s; }
   .lane-6 { margin-top: 40vh; animation-duration: 78s; animation-direction: reverse; }
@@ -946,6 +945,7 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     clip: auto !important;
   }
 }
+
 
 /* shared keyframes for all lanes */
 @keyframes hero-lane-scroll {
