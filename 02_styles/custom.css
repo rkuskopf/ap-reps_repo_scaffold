@@ -881,127 +881,61 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
     z-index: -9999 !important;
   }
 }
-
-/* Mobile hero collage – remove from layout and pin to hero (all viewports) */
-section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
-  position: relative;            /* ensure hero is a positioning context */
-  min-height: 60vh;
-}
-
-/* ### BEGIN D5:Breakpoints v1 14/08/25 */
-
-/* hide digital moves on mobile */
-@media (max-width: 767px) {
-  .dm-cursor-collage-image {
-    display: none !important;
-    pointer-events: none !important;
-    opacity: 0 !important;
-    position: absolute !important;
-    z-index: -9999 !important;
-  }
-}
-
-
-/* Mobile hero collage – remove from layout and pin to hero (all viewports) */
-section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
-  position: relative;
-  min-height: 60vh;
-}
+/* ### BEGIN D5: Mobile hero lanes 14/08/25 */
 
 @media (max-width: 767px) {
-  section[data-section-id="68e1a8f1e44bd1493a1074d2"],
-  section[data-section-id="68e1a8f1e44bd1493a1074d2"] .content-wrapper,
-  section[data-section-id="68e1a8f1e44bd1493a1074d2"] [data-fluid-engine="true"].fluid-engine {
+  /* Pin collage over mobile hero */
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     position: relative;
-    overflow: visible !important;  /* stop clipping the collage */
+    min-height: 60vh;
   }
 
-  .mobile-hero-collage {
-    /* HARD OVERRIDE the off-screen inline styles */
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    z-index: 2;                    /* sit above hero content */
-
-    pointer-events: none;
-
-    display: flex;
-    align-items: stretch;
-    gap: 12px;
-    padding: 2rem 5vw;
-    overflow: hidden !important;
-  }
-
-  .mobile-hero-collage img.summary-thumbnail-image {
-    position: static !important;
-    left: auto !important;
-    top: auto !important;
-    transform: none !important;
-
-    /* fight Squarespace lazy-load + offscreen rules */
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    clip: auto !important;
-
-    height: 45vh;
-    width: auto !important;
-    flex: 0 0 auto;
-    object-fit: cover;
-  }
-}
-
-@media (max-width: 767px) {
   .mobile-hero-collage {
     position: absolute;
     inset: 0;
     pointer-events: none;
     overflow: hidden;
+    padding: 2rem 5vw;
+    display: flex;
+    align-items: stretch;
   }
-}
 
-@media (max-width: 767px) {
+  /* All lanes share the SAME path.
+     They all START fully off the right edge. */
   .mobile-hero-lane {
     display: flex;
     gap: 60px;
     width: max-content;
-    transform: translateX(100%);
-  }
-
-/* when this class is added, the lane animates */
-  .mobile-hero-lane.--run {
+    transform: translateX(100%);          /* start just off RIGHT */
     animation-name: hero-lane-left;
-    animation-duration: 25s;      /* keep your length */
     animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 1;         /* NOT infinite */
+    animation-fill-mode: forwards;        /* stay where they end */
+    animation-duration: 22s;              /* base length */
   }
 
+  /* Different speeds (shorter duration = faster),
+     but SAME from→to path for every lane. */
+  .lane-1 { margin-top:  0vh; animation-duration: 14s; }
+  .lane-2 { margin-top: 12vh; animation-duration: 16s; }
+  .lane-3 { margin-top: 24vh; animation-duration: 18s; }
+  .lane-4 { margin-top: 36vh; animation-duration: 20s; }
+  .lane-5 { margin-top: 48vh; animation-duration: 22s; }
+  .lane-6 { margin-top: 60vh; animation-duration: 24s; }
 
-  /* stagger speeds slightly, but all long enough for a ~10s gap */
-  .lane-1 { margin-top: 0vh;   animation-duration: 20s; }  /* ~10s moving, 10s off */
-  .lane-2 { margin-top: 12vh;  animation-duration: 22s; }  /* ~11s moving, 11s off */
-  .lane-3 { margin-top: 24vh;  animation-duration: 24s; }  /* ~12s moving, 12s off */
-  .lane-4 { margin-top: 36vh;  animation-duration: 26s; }
-  .lane-5 { margin-top: 48vh;  animation-duration: 28s; }
-  .lane-6 { margin-top: 60vh;  animation-duration: 30s; }
+  .mobile-hero-lane img.summary-thumbnail-image {
+    height: 45vh;
+    width: auto;
+    object-fit: cover;
+    display: block;
+  }
 }
 
-
-/* lane keyframes – cross once, then wait off-screen */
+/* One simple path used by EVERY lane:
+   fully off RIGHT → fully off LEFT, constant speed. */
 @keyframes hero-lane-left {
-  0%   { transform: translateX(100%); }    /* strip fully off right */
-  100%  { transform: translateX(-280%); }   /* strip fully off left */
+  0%   { transform: translateX(100%); }   /* strip fully off RIGHT */
+  100% { transform: translateX(-100%); }  /* strip fully off LEFT */
 }
 
-
-@keyframes hero-lane-right {
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
-
-/* ### END D5:Breakpoints v1 14/08/25 */
+/* ### END D5: Mobile hero lanes 14/08/25 */
