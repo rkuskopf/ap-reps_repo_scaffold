@@ -15,31 +15,46 @@
 <!-- BEGIN DELIVERABLE 5 -->
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  // 1) Find the Summary Block that holds the artist images
-  const summaryBlock = document.querySelector('.fe-block-yui_3_17_2_1_1762921605769_3650');
-  if (!summaryBlock) return;
+(function () {
+  function initMobileHero() {
+    // avoid running twice
+    if (document.querySelector('.mobile-hero-collage')) return;
 
-  // 2) Hide the original Summary Block (we'll reuse its content only)
-  summaryBlock.style.display = 'none';
+    // 1) Find the Summary Block
+    const summaryBlock = document.querySelector('.fe-block-yui_3_17_2_1_1762921605769_3650');
+    if (!summaryBlock) return;
 
-  // 3) Find the HERO section you just inspected
-  const heroSection = document.querySelector('section[data-section-id="68e1a8f1e44bd1493a1074d2"]');
-  if (!heroSection) return;
+    // 2) Make sure images actually exist inside it
+    const images = summaryBlock.querySelectorAll('.summary-thumbnail-image');
+    if (!images.length) return; // Squarespace not ready yet
 
-  // 4) Create the collage container and insert it into the hero section
-  const collage = document.createElement('div');
-  collage.classList.add('mobile-hero-collage');
-  heroSection.prepend(collage); // <- was document.body.prepend(collage)
+    // 3) Hide the original Summary Block
+    summaryBlock.style.display = 'none';
 
-  // 5) Grab the images inside the Summary Block
-  const images = summaryBlock.querySelectorAll('.summary-thumbnail-image');
+    // 4) Find the hero section
+    const heroSection = document.querySelector('section[data-section-id="68e1a8f1e44bd1493a1074d2"]');
+    if (!heroSection) return;
 
-  images.forEach((img) => {
-    const clone = img.cloneNode(true);
-    collage.appendChild(clone);
+    // 5) Create the collage container in the hero
+    const collage = document.createElement('div');
+    collage.classList.add('mobile-hero-collage');
+    heroSection.prepend(collage);
+
+    // 6) Clone each summary thumbnail into the collage
+    images.forEach((img) => {
+      const clone = img.cloneNode(true);
+      collage.appendChild(clone);
+    });
+  }
+
+  // First attempt: DOM ready
+  document.addEventListener('DOMContentLoaded', initMobileHero);
+
+  // Second chance: when Squarespace finishes loading content
+  document.addEventListener('sqs-content-loaded', function () {
+    initMobileHero();
   });
-});
+})();
 </script>
 
 <!-- end DELIVERABLE 5 -->
