@@ -868,10 +868,9 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 
 /* ### END D4:Breakpoints v1 14/08/25 */
 
-/* ### BEGIN D5:Breakpoints v1 14/08/25 */
+/* ### BEGIN D5: Mobile hero collage – flying images 17.11.25 */
 
-
-/* hide digital moves on mobile */
+/* 1. Hide Digital Moves cursor collage on touch (mobile) */
 @media (max-width: 767px) {
   .dm-cursor-collage-image {
     display: none !important;
@@ -882,148 +881,87 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   }
 }
 
-/* Mobile hero collage – remove from layout and pin to hero (all viewports) */
-section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
-  position: relative;            /* ensure hero is a positioning context */
-  min-height: 60vh;
-}
-
-/* ### BEGIN D5:Breakpoints v1 14/08/25 */
-
-/* hide digital moves on mobile */
-@media (max-width: 767px) {
-  .dm-cursor-collage-image {
-    display: none !important;
-    pointer-events: none !important;
-    opacity: 0 !important;
-    position: absolute !important;
-    z-index: -9999 !important;
-  }
-}
-
-
-/* Mobile hero collage – remove from layout and pin to hero (all viewports) */
+/* 2. Ensure the hero section can host an absolutely-positioned collage */
 section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   position: relative;
   min-height: 60vh;
 }
 
 @media (max-width: 767px) {
+  /* Stop the hero and its wrappers from clipping the collage */
   section[data-section-id="68e1a8f1e44bd1493a1074d2"],
   section[data-section-id="68e1a8f1e44bd1493a1074d2"] .content-wrapper,
   section[data-section-id="68e1a8f1e44bd1493a1074d2"] [data-fluid-engine="true"].fluid-engine {
     position: relative;
-    overflow: visible !important;  /* stop clipping the collage */
+    overflow: visible !important;
   }
 
+  /* 3. Collage root pinned over the hero (AP—REPS mobile only) */
   .mobile-hero-collage {
-    /* HARD OVERRIDE the off-screen inline styles */
     position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    z-index: 2;                    /* sit above hero content */
+    inset: 0 !important;
+    z-index: 2;
 
     pointer-events: none;
+    overflow: hidden !important;
 
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
     gap: 12px;
     padding: 2rem 5vw;
-    overflow: hidden !important;
   }
 
+  /* 4. Lanes: horizontal rows that scroll across */
+  .mobile-hero-lane {
+    display: flex;
+    gap: 12px;
+    width: max-content; /* let each lane size itself to its contents */
+
+    animation-name: hero-lane-scroll;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 50s; /* base speed, overridden per-lane below */
+  }
+
+  .lane-1 {
+    margin-top: 5vh;
+  }
+
+  .lane-2 {
+    margin-top: 25vh;
+    animation-duration: 60s;      /* slightly different speed */
+    animation-direction: reverse; /* opposite direction */
+  }
+
+  .lane-3 {
+    margin-top: 45vh;
+    animation-duration: 70s;
+  }
+
+  /* 5. Thumbnails inside the collage: fight Squarespace off-screen styles
+     and normalise sizing so we get tall, organic tiles. */
   .mobile-hero-collage img.summary-thumbnail-image {
     position: static !important;
     left: auto !important;
     top: auto !important;
     transform: none !important;
 
-    /* fight Squarespace lazy-load + offscreen rules */
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     clip: auto !important;
 
-    height: 45vh;
+    height: 40vh;
     width: auto !important;
     flex: 0 0 auto;
     object-fit: cover;
   }
 }
 
-@media (max-width: 767px) {
-  .mobile-hero-collage {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .mobile-hero-lane {
-    display: flex;
-    gap: 12px;
-    width: max-content; /* let lane size itself to its contents */
-  }
-
-  .lane-1 { margin-top: 5vh; }
-  .lane-2 { margin-top: 25vh; }
-  .lane-3 { margin-top: 45vh; }
-
-  .mobile-hero-lane img.summary-thumbnail-image {
-    height: 40vh;
-    width: auto;
-    object-fit: cover;
-    display: block;
-  }
-}
-
-@media (max-width: 767px) {
-  .mobile-hero-collage {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    padding: 2rem 5vw;
-  }
-
-  .mobile-hero-lane {
-    display: flex;
-    gap: 12px;
-    width: max-content; /* let lane size itself to its contents */
-
-    /* make each lane scroll */
-    animation-name: hero-lane-scroll;
-    animation-duration: 50s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-
-  .lane-1 { margin-top: 5vh; }
-  .lane-2 {
-    margin-top: 25vh;
-    animation-duration: 60s;      /* slightly different speed */
-    animation-direction: reverse; /* opposite direction */
-  }
-  .lane-3 {
-    margin-top: 45vh;
-    animation-duration: 70s;
-  }
-
-  .mobile-hero-lane img.summary-thumbnail-image {
-    height: 40vh;
-    width: auto;
-    object-fit: cover;
-    display: block;
-  }
-}
-
-/* shared keyframes for all lanes */
+/* 6. Shared keyframes for all lanes */
 @keyframes hero-lane-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* ### END D5: Mobile hero collage – flying images 17.11.25 */
