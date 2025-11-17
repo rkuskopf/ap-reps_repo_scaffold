@@ -57,11 +57,9 @@
     function cloneThumb(img) {
       const clone = img.cloneNode(true);
 
-      // Prefer the full image URL from data-image, then fall back
-      // to Squarespace's lazy-src or the live img src/currentSrc.
       const dataImage = img.getAttribute('data-image');
-      const dataSrc = img.getAttribute('data-src');
-      const finalSrc = dataImage || dataSrc || img.currentSrc || img.src;
+      const dataSrc   = img.getAttribute('data-src');
+      const finalSrc  = dataImage || dataSrc || img.currentSrc || img.src;
 
       if (finalSrc) {
         clone.src = finalSrc;
@@ -83,18 +81,32 @@
       return clone;
     }
 
-    // 7) Distribute up to 6 images across 6 lanes
-    //    Each lane gets one unique thumbnail so you never see
-    //    the same image twice in a single lane pass.
-    const uniqueImages = Array.from(images).slice(0, lanes.length);
-    uniqueImages.forEach((img, index) => {
-      const lane = lanes[index];
-      if (!lane) return;
-      const clone = cloneThumb(img);
-      lane.appendChild(clone);
-    });
+    // 7) Build long, varied lanes – use the full pool, no identical strips per lane
+    const sourceImages = Array.from(images);
+    if (!sourceImages.length) return;
 
-    // (Animation + duplication for seamless looping will be handled in CSS / next step)
+    // Shuffle once so we don't always start from the same few images
+    const shuffled = sourceImages.slice().sort(() => Math.random() - 0.5);
+
+    // How many images per lane (tweak 4–8 to taste)
+    const IMAGES_PER_LANE = Math.min(7, shuffled.length);
+
+    lanes.forEach((lane, laneIndex) => {
+      // Offset where each lane starts in the shuffled list,
+      // so lanes don't all show the same run in the same order.
+      const start = Math.floor((shuffled.length / lanes.length) * laneIndex);
+
+      for (let i = 0; i < IMAGES_PER_LANE; i++) {
+        const srcIndex = (start + i) % shuffled.length;
+        const clone = cloneThumb(shuffled[srcIndex]);
+        // random size for variation
+const sizes = ['size-sm', 'size-md', 'size-lg'];
+const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+clone.classList.add(randomSize);
+
+lane.appendChild(clone);
+      }
+    });
   }
 
   // First attempt: DOM ready
@@ -106,5 +118,3 @@
   });
 })();
 </script>
-
-<!-- end DELIVERABLE 5 -->

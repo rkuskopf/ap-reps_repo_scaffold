@@ -908,12 +908,11 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 
     pointer-events: none;
 
-    display: flex;
-    align-items: stretch;
-    gap: 12px;
-    padding: 2rem 5vw;
-    overflow: hidden !important;
-  }
+  /* stack lanes vertically */
+  display: block;
+  padding: 2rem 5vw;
+  overflow: hidden !important;
+}
 
   .mobile-hero-collage img.summary-thumbnail-image {
     position: static !important;
@@ -932,6 +931,19 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     flex: 0 0 auto;
     object-fit: cover;
   }
+
+  /* randomised sizes */
+.mobile-hero-lane img.size-sm {
+  height: 26vh;
+}
+
+.mobile-hero-lane img.size-md {
+  height: 36vh;
+}
+
+.mobile-hero-lane img.size-lg {
+  height: 46vh;
+}
 }
 
 
@@ -954,6 +966,7 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   .lane-5 { margin-top: 48vh; animation-duration: 22s; }
   .lane-6 { margin-top: 60vh; animation-duration: 15s; }
 }
+
 
 /* lane keyframes */
 @keyframes hero-lane-left {
