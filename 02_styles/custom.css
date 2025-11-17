@@ -934,7 +934,7 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     align-items: stretch;
     gap: 12px;
     padding: 2rem 5vw;
-    overflow: visible !important;
+    overflow: hidden !important;
   }
 
   .mobile-hero-collage img.summary-thumbnail-image {
