@@ -964,46 +964,35 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     overflow: hidden;
   }
 
+@media (max-width: 767px) {
   .mobile-hero-lane {
     display: flex;
-    gap: 12px;
-    width: max-content; /* let lane size itself to its contents */
-
-    /* base horizontal scroll, overridden per-lane below */
+    gap: 60px;
+    width: max-content;
     animation-name: hero-lane-left;
-    animation-duration: 24s;
+    animation-duration: 22s;    /* base duration */
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
 
-  /* Stagger lanes vertically + slightly vary speed */
-  .lane-1 {
-    margin-top: 5vh;
-    animation-duration: 16s;
-  }
-  .lane-2 {
-    margin-top: 25vh;
-    animation-duration: 18s;
-  }
-  .lane-3 {
-    margin-top: 45vh;
-    animation-duration: 20s;
-  }
-
-  .mobile-hero-lane img.summary-thumbnail-image {
-    height: 40vh;
-    width: auto;
-    object-fit: cover;
-    display: block;
-  }
+  /* stagger speeds slightly, but all long enough for a ~10s gap */
+  .lane-1 { margin-top: 0vh;   animation-duration: 20s; }  /* ~10s moving, 10s off */
+  .lane-2 { margin-top: 12vh;  animation-duration: 22s; }  /* ~11s moving, 11s off */
+  .lane-3 { margin-top: 24vh;  animation-duration: 24s; }  /* ~12s moving, 12s off */
+  .lane-4 { margin-top: 36vh;  animation-duration: 26s; }
+  .lane-5 { margin-top: 48vh;  animation-duration: 28s; }
+  .lane-6 { margin-top: 60vh;  animation-duration: 30s; }
+}
 }
 
 
-/* lane keyframes */
+/* lane keyframes – cross once, then wait off-screen */
 @keyframes hero-lane-left {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-120%); }
+  0%   { transform: translateX(100%); }    /* strip fully off right */
+  50%  { transform: translateX(-100%); }   /* strip fully off left */
+  100% { transform: translateX(-100%); }   /* stay off left (gap before loop) */
 }
+
 
 @keyframes hero-lane-right {
   0%   { transform: translateX(-50%); }

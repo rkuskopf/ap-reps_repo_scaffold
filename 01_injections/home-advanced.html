@@ -44,9 +44,9 @@
     collage.classList.add('mobile-hero-collage');
     heroSection.prepend(collage);
 
-    // 6) Create 3 inner lanes inside the collage
+    // 6) Create 6 inner lanes inside the collage
     const lanes = [];
-    for (let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 6; i++) {
       const lane = document.createElement('div');
       lane.classList.add('mobile-hero-lane', `lane-${i}`);
       collage.appendChild(lane);
@@ -83,10 +83,13 @@
       return clone;
     }
 
-    // 7) Distribute images across the 3 lanes
-    //    0 -> lane-1, 1 -> lane-2, 2 -> lane-3, 3 -> lane-1, etc.
-    images.forEach((img, index) => {
-      const lane = lanes[index % lanes.length];
+    // 7) Distribute up to 6 images across 6 lanes
+    //    Each lane gets one unique thumbnail so you never see
+    //    the same image twice in a single lane pass.
+    const uniqueImages = Array.from(images).slice(0, lanes.length);
+    uniqueImages.forEach((img, index) => {
+      const lane = lanes[index];
+      if (!lane) return;
       const clone = cloneThumb(img);
       lane.appendChild(clone);
     });
