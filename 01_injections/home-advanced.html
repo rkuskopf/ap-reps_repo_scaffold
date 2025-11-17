@@ -16,8 +16,9 @@
 <script>
 (function () {
   function initMobileHero() {
-    // mobile-only: don't touch desktop hero
-    if (window.matchMedia && window.matchMedia('(min-width: 768px)').matches) {
+    // MOBILE ONLY — bail out completely on desktop so we never
+    // touch the desktop hero/plugin or Summary visibility there.
+    if (!window.matchMedia || !window.matchMedia('(max-width: 767px)').matches) {
       return;
     }
     // avoid running twice

@@ -982,4 +982,16 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   }
 }
 
+
+/* lane keyframes */
+@keyframes hero-lane-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes hero-lane-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
 /* ### END D5:Breakpoints v1 14/08/25 */
