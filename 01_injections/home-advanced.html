@@ -89,6 +89,22 @@
         const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
         clone.classList.add(randomSize);
 
+        // Set per-image CSS variables for independent animation
+        // Base duration: 40s, with ±20% variation (32s - 48s)
+        const baseDuration = 40;
+        const variation = 0.2; // 20% variation
+        const randomDuration = baseDuration * (1 - variation + Math.random() * variation * 2);
+        
+        // Random delay: 0-20s for staggered starts
+        const randomDelay = Math.random() * 20;
+        
+        // Alternate direction: some images drift left, some right
+        const direction = (laneIndex + i) % 2 === 0 ? 'hero-drift-left' : 'hero-drift-right';
+        
+        clone.style.setProperty('--img-duration', `${randomDuration.toFixed(1)}s`);
+        clone.style.setProperty('--img-delay', `${randomDelay.toFixed(1)}s`);
+        clone.style.setProperty('--img-animation', direction);
+
         lane.appendChild(clone);
       }
     });
