@@ -705,7 +705,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 
 /* Make the visual "heading" behave exactly like paragraph text */
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-title {
-  margin: 0 !important;
+  margin: 0 0 10px 0 !important;
   padding: 0 !important;
   font: inherit !important;
   line-height: inherit !important;
