@@ -918,6 +918,13 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   }
 }
 
+@media (max-width: 767px) {
+  /* Push AP–REPS hero heading down on mobile */
+  #block-yui_3_17_2_1_1759615106072_8520 .sqs-block-content {
+    padding-top: 18vh;   /* tweak 14–22vh until it looks right */
+  }
+}
+
 
 /* Mobile hero collage – remove from layout and pin to hero (all viewports) */
 section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
