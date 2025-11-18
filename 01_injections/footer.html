@@ -43,10 +43,19 @@
     }
     if (!(w && h)) return;
 
-    const isLandscape = w >= h;
-    slide.style.setProperty('--ap-aspect', isLandscape ? '4 / 3' : '3 / 4');
-    slide.setAttribute('data-ap-aspect', isLandscape ? '4/3' : '3/4');
+    const ratio = w / h;
+
+    // IMPORTANT: do not touch --ap-aspect or data-ap-aspect here.
+    // The container/row height comes from Squarespace + CSS.
+    // We only tag strong landscapes so CSS can zoom them out
+    // slightly inside the SAME tile using --ap-scale.
+    if (ratio >= 1.3) {
+      img.classList.add('ap-landscape-thumb');
+    } else {
+      img.classList.remove('ap-landscape-thumb');
+    }
   }
+
 
   function enforceGaps(root) {
     const scope = root || document;

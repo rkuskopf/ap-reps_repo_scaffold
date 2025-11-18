@@ -1152,14 +1152,15 @@ body, a, button, * {
 /* ### END ISSUE: Artist gallery landscape thumbnail fix 18/11/25 */
 /* ### BEGIN ISSUE: Artist gallery landscape thumbnail fix 18/11/25 */
 
-.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide.ap-aspect-landscape {
-  /* Landscape thumbs: wider tile */
-  --ap-aspect: 4 / 3;
+/**
+ * Landscape thumbs are slightly over‑cropped inside the existing 4:3 tiles.
+ * Tiles/rows are already correct; we only want to zoom the photo out a bit.
+ * 
+ * We already use --ap-scale in the generic thumb rule:
+ *   transform: scale(var(--ap-scale, 1)) translateZ(0);
+ * So here we only set --ap-scale for landscape thumbs.
+ */
+/* uses existing transform: scale(var(--ap-scale, 1)) ... */
+.apreps img.thumb-image.ap-landscape-thumb {
+  --ap-scale: .9; /* adjust 0.85–0.95 as needed */
 }
-
-.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide.ap-aspect-portrait {
-  /* Portrait thumbs: taller tile */
-  --ap-aspect: 3 / 4;
-}
-
-/* ### END ISSUE: Artist gallery landscape thumbnail fix 18/11/25 */
