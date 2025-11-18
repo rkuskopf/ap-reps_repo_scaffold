@@ -459,7 +459,7 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
 
 
 /* Artist names */
-.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
+.apreps .fe-block.sqs-position-sticky {
   mix-blend-mode: difference !important;
   background: transparent !important;
   color: #fff !important;
