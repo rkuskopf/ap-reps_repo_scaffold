@@ -1035,3 +1035,67 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 body, a, button, * {
   cursor: none !important;
 }
+
+/* ### END D6: Cursor and hover 18/08/25 */
+
+
+/* ### BEGIN ISSUE 3: Mobile image-hover-list positioning 18/11/25 */
+
+/**
+ * Fix for Digital Moves image-hover-list on mobile
+ * 
+ * Issue: On mobile, hover images appear at the bottom of the viewport 
+ * instead of being centered over the tapped list item.
+ * 
+ * Root cause: The plugin's JS calculates positions based on desktop 
+ * hover logic, which doesn't translate well to mobile tap interactions.
+ * 
+ * Solution: Override inline positioning on mobile to center images 
+ * in the viewport, providing a consistent and expected behavior.
+ */
+
+/* Mobile devices (phones) */
+@media (max-width: 480px) {
+  /* Force image containers to center horizontally, positioned higher on mobile */
+  .image-hover-list.portfolio-list .image-positioner .image-container {
+    /* Override inline left/top - center horizontally, position at upper area */
+    left: 50% !important;
+    top: 30% !important;
+    /* The existing translate(-50%, -50%) will center the image */
+  }
+  
+  /* Reduce image size for better mobile experience */
+  .image-hover-list.portfolio-list .image-positioner .image-container img {
+    max-width: 45vw;
+    max-height: 45vh;
+    width: auto !important;
+    height: auto !important;
+  }
+}
+
+/* Tablets in portrait mode */
+@media (min-width: 481px) and (max-width: 768px) {
+  /* Similar fix for tablets, positioned slightly higher */
+  .image-hover-list.portfolio-list .image-positioner .image-container {
+    left: 50% !important;
+    top: 40% !important;
+  }
+  
+  .image-hover-list.portfolio-list .image-positioner .image-container img {
+    max-width: 60vw;
+    max-height: 45vh;
+    width: auto !important;
+    height: auto !important;
+  }
+}
+
+/* Prevent mobile images from overlapping other sections */
+@media (max-width: 768px) {
+  /* Ensure the image positioner doesn't interfere with scrolling */
+  .image-hover-list.portfolio-list .image-positioner {
+    /* Keep pointer-events: none to allow interaction with elements below */
+    pointer-events: none !important;
+  }
+}
+
+/* ### END ISSUE 3: Mobile image-hover-list positioning 18/11/25 */
