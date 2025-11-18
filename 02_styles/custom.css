@@ -1142,3 +1142,52 @@ body, a, button, * {
 }
 
 /* ### END ISSUE 3: Mobile image-hover-list positioning 18/11/25 */
+
+
+/* ### BEGIN ISSUE: Artist gallery landscape thumbnail fix 18/11/25 */
+
+/**
+ * Fix for landscape images in Artist gallery (campaign section)
+ * 
+ * Issue: Landscape images in section 68e11345c03be95a4deeb967 are being 
+ * over-cropped because Squarespace configured the gallery with a 3:4 
+ * (portrait) aspect ratio, but many images are landscape (~3:2).
+ * 
+ * Solution: Override the aspect ratio for this specific section to use
+ * 4:3 (landscape) instead, and ensure Squarespace's inline absolute 
+ * positioning doesn't interfere with the object-fit: cover behavior.
+ */
+
+/* Override aspect ratio for the Artist campaign gallery section */
+section[data-section-id="68e11345c03be95a4deeb967"] .slide {
+  --ap-aspect: 4 / 3 !important; /* Landscape aspect ratio */
+}
+
+section[data-section-id="68e11345c03be95a4deeb967"] .slide .margin-wrapper {
+  aspect-ratio: 4 / 3 !important; /* Force landscape tile ratio */
+}
+
+/* Neutralize Squarespace's inline absolute positioning on images */
+section[data-section-id="68e11345c03be95a4deeb967"] img.thumb-image {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  transform: none !important;
+}
+
+/* Ensure wrapper containers support the new aspect ratio */
+section[data-section-id="68e11345c03be95a4deeb967"] .image-slide-anchor,
+section[data-section-id="68e11345c03be95a4deeb967"] .js-gallery-lightbox-opener,
+section[data-section-id="68e11345c03be95a4deeb967"] .image-wrapper,
+section[data-section-id="68e11345c03be95a4deeb967"] .thumb-image-wrapper {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ### END ISSUE: Artist gallery landscape thumbnail fix 18/11/25 */
