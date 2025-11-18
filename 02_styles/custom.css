@@ -1047,12 +1047,12 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
   }
   
 
-  .lane-1 { margin-top: -10vh;  animation-duration: 36s; animation-delay: -4s; }
-  .lane-2 { margin-top: -30vh;  animation-duration: 32s; animation-delay: -8s; }
-  .lane-3 { margin-top: -20vh;  animation-duration: 34s; animation-delay: -12s; }
-  .lane-4 { margin-top: -20vh;  animation-duration: 38s; animation-delay: -16s; }
-  .lane-5 { margin-top: -50vh;  animation-duration: 30s; animation-delay: -10s; }
-  .lane-6 { margin-top: -20vh;  animation-duration: 33s; animation-delay: -14s; }
+  .lane-1 { margin-top: -15vh;  animation-duration: 36s; animation-delay: 0s; }
+  .lane-2 { margin-top: -35vh;  animation-duration: 32s; animation-delay: 3s; }
+  .lane-3 { margin-top: -25vh;  animation-duration: 34s; animation-delay: 6s; }
+  .lane-4 { margin-top: -45vh;  animation-duration: 38s; animation-delay: 9s; }
+  .lane-5 { margin-top: -20vh;  animation-duration: 30s; animation-delay: 12s; }
+  .lane-6 { margin-top: -40vh;  animation-duration: 33s; animation-delay: 15s; }
 }
 
 
