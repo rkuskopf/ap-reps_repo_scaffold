@@ -1,328 +1,36 @@
-////HEADER OVERLAYS OVER SLIDESHOW /////
-        .page-section.gallery-section {
-          padding-top: 0px !important;
-        }
-
 /**
- * Tabs Plugin
- * From Will-Myers.com
- * Equal Width Tabs
-**/
-.wm-tabs[data-navigation-type="horizontal"] {
-  --nav-scrollbar-display: none;
-  --tabs-header-gap: 0px;
-}
-/**
- * Tabs Plugin
- * From Will-Myers.com
- * Tab Underlines
-**/
-div.wm-tabs {
-  --nav-scrollbar-display: none;
-  --tabs-header-border-bottom-width: 0px;
+ * AP-REPS Custom CSS
+ * Refactored and organized for maintainability
+ * 
+ * Table of Contents:
+ * 1. Header & Navigation (blend-mode, mobile menu)
+ * 2. Will Myers Tabs Plugin (layout, sticky behavior)
+ * 3. Gallery Ratios & Layout (consolidated)
+ * 4. Mobile Hero Collage
+ * 5. Digital Moves Plugins (cursor, auto-scroll, image-hover-list)
+ * 6. Footer Newsletter
+ * 7. Utilities (overscroll, misc fixes)
+ */
 
-  --tab-button-active-background: transparent;
-  --tab-button-active-color: ~'hsla(var(--wm-accent-hsl), 1)';
+/* ============================================================================
+   1. HEADER & NAVIGATION
+   ============================================================================
+   
+   Header uses mix-blend-mode: difference for white text over imagery.
+   Mobile menu overlay requires special handling to avoid transparency.
+   
+   Key requirements:
+   - Header transparent with white blended text
+   - Mobile menu solid white background with dark text
+   - Safari compatibility (transform: translate3d for blend-mode)
+============================================================================ */
 
-  --tab-indicator-track-size: 4px;
-  --tab-indicator-track-background: ~'hsla(var(--wm-text-hsl), 0.15)';
-  --active-indicator-size: 4px;
-  --active-indicator-border-radius: 0px;
-}
-.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button {
-  flex-grow: 1;
-  flex-basis: ~'calc(100% / var(--tabs-count))';
-}
-.wm-tabs,
-.wm-tabs .tabs-header,
-.wm-tabs .tabs-content {
-  background: none !important;
-  background-color: transparent !important;
+/* 1.1 Base header styling - always above gallery sections */
+.page-section.gallery-section {
+  padding-top: 0px !important;
 }
 
-  /* Only allow sticky inside the active tab panel */
-.wm-tabs, .wm-tabs .tabs-content, .wm-tabs [role="tabpanel"], .wm-tabs [data-tab-panel]
-{
-  	overflow: visible !important;
-	max-height: none !important; 			transform: none !important; 			contain: none !important;
-  	filter: none !important;
-  	perspective: none !important;
-  	will-change: auto !important; 			position: static !important;
-}
-/* Collapse non-active panels so they don't push the layout */
-.wm-tabs [role="tabpanel"][aria-hidden="true"] { display: none !important;
-}
-
-
-/* Dot cursor by digitalmoves.com.au */
-.dot-cursor {
-    /* customise */
-    mix-blend-mode: difference;
-    transition: all 100ms ease-out;
-
-    /* position */
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99999;
-
-    /* prevent hover issues */
-    pointer-events: none;
-}
-
-.dot-cursor span {
-    /* customise */
-    width: 16px;
-    height: 16px;
-    border-radius: 8px;
-    background-color: white;
-    transition: all 150ms ease-out;
-
-    /* sizing */
-    display: block;
-}
-
-.dot-cursor.active span {
-    /* customise - hover effect */
-}
-
-body, a:hover, button:hover {
-    /* hide default cursor */
-    cursor: none!important;
-}
-
-@media (pointer: coarse) {
-
-    /* disable on touch devices */
-    .dot-cursor {
-        display: none !important;
-    }
-
-}
-
-
-/* Dot cursor by digitalmoves.com.au */
-
-/* Infinite auto scroll by Digital Moves */
-.auto-scroll-slide { position: relative }
-
-.auto-scroll-content {
-  position: absolute!important;
-  z-index: 999;
-  top: 0px;
-  left: 0px;
-  width: calc(100%);
-  height: calc(100%);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  white-space: nowrap;
-  background-color: rgba(255,255,255,.8);
-  border-radius: 0px;
-  opacity: 0;
-  transform: none;
-  transition: all 150ms linear;
-
-  & > div {
-    max-width: 100%;
-    white-space: wrap;
-    padding: 0 10px;
-  }
-
-  .list-item-content__button {
-    margin-top: 10px;
-
-  }
-
-  // any mobile sizing changes
-  @media (max-width: 480px) {
-    h2 { font-size: 24px!important }
-  }
-}
-
-// Hover animation
-.auto-scroll-slide:hover .auto-scroll-content {
-  opacity: 1;
-  transform: scale(1)
- }
- /* Hide section button */
-.auto-scroll .list-item-content__button { display: none }
-
-
-/* Infinite auto scroll by Digital Moves */
-
- 
-
-/* BEGIN D1:GALLERY-RATIOS v1 2025-11-08 */
-
-/* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
-/* Tile box: rely on grid gaps; remove internal padding to avoid seams */
-.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
-  aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
-  overflow: hidden;
-  position: relative;
-  box-sizing: border-box !important; /* prevent padding from expanding tile */
-  padding-bottom: 0 !important;      /* use row-gap instead */
-  padding-right: 0 !important;       /* use column-gap instead */
-}
-
-/* Ensure inner img fills its tile without internal insets */
-.sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
-  position: relative !important;
-  inset: 0 !important; /* remove right/bottom offsets that caused gaps */
-}
-
-/* Captions left across all grid galleries */
-.sqs-gallery-block-show-meta .image-slide-title,
-.sqs-gallery-block-show-meta .image-meta,
-.sqs-gallery-block-show-meta .sqs-block-caption {
-  text-align: left !important;
-  margin-top: .5rem;
-  line-height: 1.3;
-}
-
-.apreps {
-  --ap-gap-x: 10px;
-  --ap-artist-sticky-offset: clamp(120px, 16vw, 260px);
-}
-
-/*  anchors  */
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .image-slide-anchor,
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .js-gallery-lightbox-opener {
-  position: relative !important;
-  display: block !important;
-  overflow: hidden !important;
-  width: 100% !important;
-}
-
-/* Grid thumbs: fill tile + optional gentle zoom-out */
-.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-anchor .thumb-image,
-.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .js-gallery-lightbox-opener .thumb-image,
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  display: block !important;
-  object-fit: cover !important;           /* preserves tile aspect */
-  object-position: center center !important;
-  transform: scale(var(--ap-scale, 1)) translateZ(0);
-  transform-origin: center center;
-}
-
-/* Kill double-gutter: no extra padding on slides inside gallery grid */
-.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .slide,
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide { padding-right: 0 !important; }
-
-/* Sub-pixel seam guard on retina zoom levels */
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image { backface-visibility: hidden; }
-
-
-
-/* top alignment */
-.apreps .wm-tabs .tab-panel > .tab-content .page-section:first-of-type {
-  --section-padding-top: 0 !important;
-  padding-top: 0 !important;
-  margin-top: 0 !important;
-}
-
-.apreps .wm-tabs .tab-panel > .tab-content .page-section .sqs-block-gallery {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* normalize grid internals */
-.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
-  align-items: start !important;
-  margin-top: 0 !important;
-}
-
-/* stray margins */
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .gallery-grid-item,
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid figure,
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .meta {
-  margin-top: 0 !important;
-}
-
-/* captions left */
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .image-slide-title,
-.apreps .wm-tabs .tab-panel > .tab-content 
-  .sqs-gallery-block-grid .image-slide-description {
-  margin-top: 0.5rem;
-  line-height: 1.2;
-  text-align: left !important;
-}
-
-/* tidy fetched-section chrome inside tabs */
-.apreps .wm-tabs .tab-panel > .tab-content > .page-section .section-border {
-  display: none !important;
-}
-
-/* ratios */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .image-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper {
-  aspect-ratio: var(--ap-aspect, 4 / 3) !important;
-  overflow: hidden;
-  position: relative;
-  padding-right: var(--ap-gap-x, 10px) !important;
-}
-
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center center !important; /* default centered crop */
-  display: block !important;
-  position: absolute !important;
-  inset: 0 !important;
-}
-
-.apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
-.apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
-.apreps .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .thumb-image-wrapper {
-  display: block !important;
-  width: 100% !important;
-}
-
-/* Left-align captions */
-.apreps .sqs-gallery-block-show-meta .image-slide-title,
-.apreps .sqs-gallery-block-show-meta .image-meta,
-.apreps .sqs-gallery-block-show-meta .sqs-block-caption {
-  text-align: left !important;
-  margin-top: .5rem;
-  line-height: 1.3;
-}
-
-/* AP—REPS: side gutter on the floated slide itself (float-safe) */
-.apreps .sqs-gallery-block-grid .sqs-gallery-design-grid-slide,
-.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
-.apreps .sqs-gallery-block-grid .slide,
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide {
-  box-sizing: border-box !important;
-  padding-right: 10px !important;
-}
-
-/* ### END DELIVERABLE 1. Gallery ratios 10.11.25 */
-
-
-
-/* ### BEGIN DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
-
-/* Header container */
+/* 1.2 Header container - transparent with blend mode */
 #header,
 #header:before,
 #header:after {
@@ -332,9 +40,10 @@ body, a:hover, button:hover {
   backdrop-filter: none !important;
   isolation: auto !important;
   mix-blend-mode: difference !important;
-  transform: translate3d(0,0,0); /* helps Safari render blend properly */
+  transform: translate3d(0,0,0); /* Safari blend-mode fix */
 }
 
+/* 1.3 Header elements - white text with difference blend */
 #header .header-title,
 #header .header-title-logo img,
 #header .header-title-text,
@@ -350,14 +59,40 @@ body, a:hover, button:hover {
 #header .header-burger-btn,
 #header .burger-box,
 #header .burger-inner {
-mix-blend-mode: difference !important;
-color: #fff !important;
-background: transparent !important;
-text-shadow: none !important;
-fill: #fff !important;
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  fill: #fff !important;
 }
 
+/* 1.4 Hamburger lines - white with blend */
+#header .burger-inner .top-bun,
+#header .burger-inner .patty,
+#header .burger-inner .bottom-bun {
+  background-color: #fff !important;
+  mix-blend-mode: difference !important;
+}
 
+/* 1.5 Header background layers - always hidden */
+#header .header-background,
+#header .header-background-solid,
+#header .header-border,
+#header .header-dropshadow {
+  background: transparent !important;
+  opacity: 0 !important;
+  display: none !important;
+}
+
+/* 1.6 Logo inversion for visibility */
+#header .header-title-logo img {
+  mix-blend-mode: difference !important;
+  display: block;
+  -webkit-filter: invert(1) !important;
+  filter: invert(1) !important;
+}
+
+/* 1.7 Mobile menu open - reset blend mode, solid white background */
 body.header--menu-open #header,
 body.header--menu-open #header:before,
 body.header--menu-open #header:after,
@@ -370,6 +105,7 @@ body.ap-menu-hold #header:after {
   isolation: auto !important;
 }
 
+/* 1.8 Mobile menu content - dark text, normal blend */
 body.header--menu-open #header .header-title,
 body.header--menu-open #header .header-title-logo img,
 body.header--menu-open #header .header-title-text,
@@ -409,33 +145,7 @@ body.ap-menu-hold #header .burger-inner {
   fill: currentColor !important;
 }
 
-
-/* Hamburger lines */
-#header .burger-inner .top-bun,
-#header .burger-inner .patty,
-#header .burger-inner .bottom-bun {
-background-color: #fff !important;
-mix-blend-mode: difference !important;
-}
-
-
-#header .header-menu-bg {
-  background: #fff !important;
-  opacity: 1 !important;
-}
-
-
-/* Difference */
-/* 1. Header background layers: always transparent/removed */
-#header .header-background,
-#header .header-background-solid,
-#header .header-border,
-#header .header-dropshadow {
-  background: transparent !important;
-  opacity: 0 !important;
-  display: none !important;
-}
-
+/* 1.9 Mobile menu burger lines - dark */
 body.header--menu-open #header .burger-inner .top-bun,
 body.header--menu-open #header .burger-inner .patty,
 body.header--menu-open #header .burger-inner .bottom-bun,
@@ -446,108 +156,21 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   mix-blend-mode: normal !important;
 }
 
-/* Artist names – sticky wrapper */
-.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
-  mix-blend-mode: difference !important;
-  background: transparent !important;
-  isolation: auto !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  transform: translate3d(0,0,0); /* helps Safari render blend properly */
-}
-
-/* Artist names – actual text (ONLY inside sticky artist block) */
-.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3,
-.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3 *,
-.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqsrte-text-color--black {
-  mix-blend-mode: difference !important;
-  color: #fff !important;
-  background: transparent !important;
-  text-shadow: none !important;
-}
-
-
-/* AP–REPS: make gallery + gaps a true white backdrop for blend-mode text */
-.apreps .wm-tabs .tab-panel > .tab-content,
-.apreps .wm-tabs .tab-panel > .tab-content,
-.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
-  background-color: #ffffff !important;
-}
-
-/* Make sure individual tiles don’t reintroduce backgrounds */
-.apreps .sqs-gallery-block-grid .slide,
-.apreps .sqs-gallery-block-grid .sqs-gallery-design-grid-slide {
-  background: transparent !important;
-}
-
-/* Contact page: reset blend + color for block-85f3ea5586bbbcb4af7b */
-#block-85f3ea5586bbbcb4af7b h3,
-#block-85f3ea5586bbbcb4af7b h3 *,
-#block-85f3ea5586bbbcb4af7b .sqsrte-text-color--black {
-  mix-blend-mode: normal !important;
-  color: inherit !important;      /* let Typography panel control it */
-  background: transparent !important;
-  text-shadow: none !important;
-}
-
-/* AP–REPS: fix white bio/footer slice on artist pages */
-.apreps .wm-tabs .tab-panel > .tab-content .fe-68e8ff90b8c8d26cc4ad65d9 {
-  background-color: #000 !important;
-  color: #fff !important;
-}
-
-/* Keep inner blocks transparent so they sit on the black */
-.apreps .wm-tabs .tab-panel > .tab-content .fe-68e8ff90b8c8d26cc4ad65d9 .sqs-block,
-.apreps .wm-tabs .tab-panel > .tab-content .fe-68e8ff90b8c8d26cc4ad65d9 .sqs-block-content {
-  background: transparent !important;
-}
-
-
-
-/* Ensure PNG logo in header inverts correctly */
-#header .header-title-logo img {
-  mix-blend-mode: difference !important;
-  display: block;
-  -webkit-filter: invert(1) !important; /* fallback when blend-mode is blocked */
-  filter: invert(1) !important;          /* ensures PNG/logo visibly inverts across browsers */
-}
-
-body.header--menu-open #header .header-title-logo img {
-  mix-blend-mode: normal !important;
-  -webkit-filter: none !important;
-  filter: none !important;
-}
-
+/* 1.10 Mobile menu logo - no inversion */
+body.header--menu-open #header .header-title-logo img,
 body.ap-menu-hold #header .header-title-logo img {
   mix-blend-mode: normal !important;
   -webkit-filter: none !important;
   filter: none !important;
 }
 
-
-
-/* HERO SECTION FIXES */
-
-
-/* live hero block */
-.fe-block-yui_3_17_2_1_1759615106072_8520,
-.fe-block-yui_3_17_2_1_1759615106072_8520 * {
-  mix-blend-mode: difference !important;
-  isolation: isolate !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  transform: translate3d(0,0,0); /* helps Safari render blend properly */
+/* 1.11 Mobile menu background */
+#header .header-menu-bg {
+  background: #fff !important;
+  opacity: 1 !important;
 }
 
-/* Force the actual glyphs to white (difference needs white, not black) */
-#block-yui_3_17_2_1_1759615106072_8520 .sqsrte-text-color--black,
-#block-yui_3_17_2_1_1759615106072_8520 h1,
-#block-yui_3_17_2_1_1759615106072_8520 h1 * {
-  color: #fff !important;
-  filter: invert(1) !important;
-}
-
-/* ---- Mobile menu open overides ----- */
+/* 1.12 Mobile menu layout (< 799px) */
 @media (max-width: 799px) {
   body.header--menu-open .header-menu.header-menu--folder-list .header-menu-nav-item,
   body.header--menu-open .header-menu.header-menu--folder-list .header-menu-nav-item a,
@@ -562,22 +185,22 @@ body.ap-menu-hold #header .header-title-logo img {
     visibility: visible !important;
   }
 
-    body.header--menu-open .header-menu-nav-item,
-    body.header--menu-open .header-menu-nav-item--external,
-    body.header--menu-open .header-menu-nav-item a,
-    body.header--menu-open .header-menu-nav-item--external a,
-    body.ap-menu-hold .header-menu-nav-item,
-    body.ap-menu-hold .header-menu-nav-item--external,
-    body.ap-menu-hold .header-menu-nav-item a,
-    body.ap-menu-hold .header-menu-nav-item--external a {
-  color: #111 !important;
-  mix-blend-mode: normal !important;
-}
+  body.header--menu-open .header-menu-nav-item,
+  body.header--menu-open .header-menu-nav-item--external,
+  body.header--menu-open .header-menu-nav-item a,
+  body.header--menu-open .header-menu-nav-item--external a,
+  body.ap-menu-hold .header-menu-nav-item,
+  body.ap-menu-hold .header-menu-nav-item--external,
+  body.ap-menu-hold .header-menu-nav-item a,
+  body.ap-menu-hold .header-menu-nav-item--external a {
+    color: #111 !important;
+    mix-blend-mode: normal !important;
+  }
 
-body.header--menu-open #header,
-body.header--menu-open #header *,
-body.ap-menu-hold #header,
-body.ap-menu-hold #header * {
+  body.header--menu-open #header,
+  body.header--menu-open #header *,
+  body.ap-menu-hold #header,
+  body.ap-menu-hold #header * {
     mix-blend-mode: unset !important;
     -webkit-filter: none !important;
     filter: none !important;
@@ -585,126 +208,710 @@ body.ap-menu-hold #header * {
     visibility: visible !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
-    }
-
+  }
 
   body.header--menu-open .header-menu.header-menu--folder-list,
   body.ap-menu-hold .header-menu.header-menu--folder-list {
-  position: relative;
-  isolation: isolate;
-  color: #000 !important;
+    position: relative;
+    isolation: isolate;
+    color: #000 !important;
+  }
+
+  body.header--menu-open .header-menu-bg,
+  body.ap-menu-hold .header-menu-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: rgba(255,255,255,0.96) !important;
+    opacity: 1 !important;
+  }
+
+  body.header--menu-open .header-menu.header-menu--folder-list .header-menu-nav,
+  body.ap-menu-hold .header-menu.header-menu--folder-list .header-menu-nav {
+    display: block !important;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  body.header--menu-open .header-menu.header-menu--folder-list .header-menu-nav-list,
+  body.ap-menu-hold .header-menu.header-menu--folder-list .header-menu-nav-list {
+    display: flex !important;
+    flex-direction: column;
+    color: #000 !important;
+    gap: 1.25rem;
+  }
+
+  body.header--menu-open .header-menu-nav-item,
+  body.header--menu-open .header-menu-nav-item a,
+  body.ap-menu-hold .header-menu-nav-item,
+  body.ap-menu-hold .header-menu-nav-item a {
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: #111 !important;
+    mix-blend-mode: normal !important;
+  }
+
+  body.header--menu-open .header-menu-nav-folder,
+  body.header--menu-open .header-menu-nav-folder-content,
+  body.header--menu-open .header-menu-nav-wrapper,
+  body.ap-menu-hold .header-menu-nav-folder,
+  body.ap-menu-hold .header-menu-nav-folder-content,
+  body.ap-menu-hold .header-menu-nav-wrapper {
+    display: block !important;
+    height: auto !important;
+    min-height: 100% !important;
+    flex: none !important;
+  }
+
+  body.header--menu-open .header-menu-nav-item,
+  body.ap-menu-hold .header-menu-nav-item {
+    display: block !important;
+    margin: 0 0 1.25rem;
+    color: #000;
+  }
+
+  body.header--menu-open .header-menu-nav-folder,
+  body.header--menu-open .header-menu-nav-folder--active,
+  body.header--menu-open .header-menu-nav-folder-content,
+  body.ap-menu-hold .header-menu-nav-folder,
+  body.ap-menu-hold .header-menu-nav-folder--active,
+  body.ap-menu-hold .header-menu-nav-folder-content {
+    display: block !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+    flex: none !important;
+  }
 }
 
-body.header--menu-open .header-menu-bg,
-body.ap-menu-hold .header-menu-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background: rgba(255,255,255,0.96) !important;
-  opacity: 1 !important;
+
+/* ============================================================================
+   2. WILL MYERS TABS PLUGIN
+   ============================================================================
+   
+   Configures equal-width horizontal tabs and enables sticky content inside
+   active tab panels by removing overflow constraints.
+============================================================================ */
+
+/* 2.1 Horizontal tabs - equal width distribution */
+.wm-tabs[data-navigation-type="horizontal"] {
+  --nav-scrollbar-display: none;
+  --tabs-header-gap: 0px;
 }
 
-body.header--menu-open .header-menu.header-menu--folder-list .header-menu-nav,
-body.ap-menu-hold .header-menu.header-menu--folder-list .header-menu-nav {
-  display: block !important;             /* stop the flex collapse */
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;                     /* or calc(100vh - headerHeight) */
-  padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 5vw, 2.5rem);
+.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button {
+  flex-grow: 1;
+  flex-basis: ~'calc(100% / var(--tabs-count))';
 }
 
-body.header--menu-open .header-menu.header-menu--folder-list .header-menu-nav-list,
-body.ap-menu-hold .header-menu.header-menu--folder-list .header-menu-nav-list {
-  display: flex !important;
-  flex-direction: column;
-  color: #000 !important;
-  gap: 1.25rem;
+/* 2.2 Tab styling */
+div.wm-tabs {
+  --nav-scrollbar-display: none;
+  --tabs-header-border-bottom-width: 0px;
+  --tab-button-active-background: transparent;
+  --tab-button-active-color: ~'hsla(var(--wm-accent-hsl), 1)';
+  --tab-indicator-track-size: 4px;
+  --tab-indicator-track-background: ~'hsla(var(--wm-text-hsl), 0.15)';
+  --active-indicator-size: 4px;
+  --active-indicator-border-radius: 0px;
 }
 
-header-menu-nav-folder header-menu-nav-folder--active {
-  height: 100% !important;
+/* 2.3 Transparent backgrounds */
+.wm-tabs,
+.wm-tabs .tabs-header,
+.wm-tabs .tabs-content {
+  background: none !important;
+  background-color: transparent !important;
 }
 
-body.header--menu-open .header-menu-nav-item,
-body.header--menu-open .header-menu-nav-item a,
-body.ap-menu-hold .header-menu-nav-item,
-body.ap-menu-hold .header-menu-nav-item a {
-  opacity: 1 !important;
-  visibility: visible !important;
-  color: #111 !important;
-  mix-blend-mode: normal !important;
-}
-
-body.header--menu-open .header-menu-nav-folder,
-body.header--menu-open .header-menu-nav-folder-content,
-body.header--menu-open .header-menu-nav-wrapper,
-body.ap-menu-hold .header-menu-nav-folder,
-body.ap-menu-hold .header-menu-nav-folder-content,
-body.ap-menu-hold .header-menu-nav-wrapper {
-  display: block !important;
-  height: auto !important;
-  min-height: 100% !important;
-  flex: none !important;
-}
-
-
-body.header--menu-open .header-menu-nav-item,
-body.ap-menu-hold .header-menu-nav-item {
-  display: block !important;
-  margin: 0 0 1.25rem;
-  color: #000;
-}
-body.header--menu-open .header-menu-nav-folder,
-body.header--menu-open .header-menu-nav-folder--active,
-body.header--menu-open .header-menu-nav-folder-content,
-body.ap-menu-hold .header-menu-nav-folder,
-body.ap-menu-hold .header-menu-nav-folder--active,
-body.ap-menu-hold .header-menu-nav-folder-content {
-  display: block !important;
-  height: auto !important;
-  min-height: 100% !important;
+/* 2.4 Enable sticky positioning inside active tabs - remove all overflow/transform constraints */
+.wm-tabs, 
+.wm-tabs .tabs-content, 
+.wm-tabs [role="tabpanel"], 
+.wm-tabs [data-tab-panel] {
   overflow: visible !important;
-  flex: none !important;
-}
-}
-
-  /* ### END DELIVERABLE 2. Blend-mode compatibility 10.11.25 */
-
-
-  /* ### BEGIN DELIVERABLE 3. Overscroll 10.11.25 */
-
-html, body {
-  overscroll-behavior: none;
+  max-height: none !important;
+  transform: none !important;
+  contain: none !important;
+  filter: none !important;
+  perspective: none !important;
+  will-change: auto !important;
+  position: static !important;
 }
 
-/* ### END DELIVERABLE 3. Overscroll 10.11.25 */
+/* 2.5 Hide non-active tab panels to prevent layout interference */
+.wm-tabs [role="tabpanel"][aria-hidden="true"] {
+  display: none !important;
+}
 
 
-/* ### BEGIN DELIVERABLE 7. unexpected block 13.11.25 */
+/* ============================================================================
+   3. GALLERY RATIOS & LAYOUT (CONSOLIDATED)
+   ============================================================================
+   
+   Single source of truth for gallery aspect ratios and image cropping.
+   Removes duplicate rules and conflicts from original custom.css.
+   
+   Key features:
+   - Consistent 4:3 aspect ratio (customizable via --ap-aspect)
+   - object-fit: cover for all gallery images
+   - Left-aligned captions
+   - Proper spacing (via --ap-gap-x)
+============================================================================ */
 
-/* Reserve layout, but hide visually to prevent flash */
+/* 3.1 AP-REPS namespace and variables */
+.apreps {
+  --ap-gap-x: 10px;
+  --ap-artist-sticky-offset: clamp(120px, 16vw, 260px);
+}
+
+/* 3.2 Global gallery tile container - aspect ratio control */
+.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
+  aspect-ratio: var(--ap-aspect, 4 / 3);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box !important;
+  padding-bottom: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 3.3 Global gallery images - fill tile with cover */
+.sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  position: relative !important;
+  inset: 0 !important;
+}
+
+/* 3.4 AP-REPS scoped galleries - aspect ratio on all wrappers */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper,
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .image-wrapper,
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper {
+  aspect-ratio: var(--ap-aspect, 4 / 3) !important;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box !important;
+  padding-bottom: 0 !important;
+}
+
+/* 3.5 AP-REPS gallery images - absolute positioning with cover */
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  backface-visibility: hidden; /* Sub-pixel seam guard */
+}
+
+/* 3.6 AP-REPS gallery anchors and wrappers - full width */
+.apreps .sqs-gallery.sqs-gallery-design-grid .image-slide-anchor,
+.apreps .sqs-gallery.sqs-gallery-design-grid .js-gallery-lightbox-opener,
+.apreps .sqs-gallery.sqs-gallery-design-grid .image-wrapper,
+.apreps .sqs-gallery.sqs-gallery-design-grid .margin-wrapper,
+.apreps .sqs-gallery.sqs-gallery-design-grid .thumb-image-wrapper {
+  display: block !important;
+  width: 100% !important;
+}
+
+/* 3.7 AP-REPS tabs gallery anchors - block layout */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-anchor,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .js-gallery-lightbox-opener {
+  position: relative !important;
+  display: block !important;
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+/* 3.8 AP-REPS tabs gallery images - cover with optional scale */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-anchor .thumb-image,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .js-gallery-lightbox-opener .thumb-image {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  transform: scale(var(--ap-scale, 1)) translateZ(0);
+  transform-origin: center center;
+}
+
+/* 3.9 Gallery slide spacing - right padding */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .slide,
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide,
+.apreps .sqs-gallery-block-grid .sqs-gallery-design-grid-slide,
+.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide {
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* 3.10 Global gallery captions - left aligned */
+.sqs-gallery-block-show-meta .image-slide-title,
+.sqs-gallery-block-show-meta .image-meta,
+.sqs-gallery-block-show-meta .sqs-block-caption,
+.apreps .sqs-gallery-block-show-meta .image-slide-title,
+.apreps .sqs-gallery-block-show-meta .image-meta,
+.apreps .sqs-gallery-block-show-meta .sqs-block-caption {
+  text-align: left !important;
+  margin-top: .5rem;
+  line-height: 1.3;
+}
+
+/* 3.11 AP-REPS tabs gallery captions */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-title,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .image-slide-description {
+  margin-top: 0.5rem;
+  line-height: 1.2;
+  text-align: left !important;
+}
+
+/* 3.12 AP-REPS tabs - remove top padding from first section */
+.apreps .wm-tabs .tab-panel > .tab-content .page-section:first-of-type {
+  --section-padding-top: 0 !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.apreps .wm-tabs .tab-panel > .tab-content .page-section .sqs-block-gallery {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 3.13 AP-REPS tabs - normalize grid internals */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
+  align-items: start !important;
+  margin-top: 0 !important;
+}
+
+/* 3.14 AP-REPS tabs - remove stray margins */
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid-item,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid figure,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .meta {
+  margin-top: 0 !important;
+}
+
+/* 3.15 AP-REPS tabs - hide section borders */
+.apreps .wm-tabs .tab-panel > .tab-content > .page-section .section-border {
+  display: none !important;
+}
+
+/* 3.16 AP-REPS tabs - white background for blend-mode text */
+.apreps .wm-tabs .tab-panel > .tab-content,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
+  background-color: #ffffff !important;
+}
+
+/* 3.17 AP-REPS tabs - transparent tile backgrounds */
+.apreps .sqs-gallery-block-grid .slide,
+.apreps .sqs-gallery-block-grid .sqs-gallery-design-grid-slide {
+  background: transparent !important;
+}
+
+/* 3.18 Fluid Engine height fixes - allow content to shrink-wrap */
+.apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="height"],
+.apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="min-height"] {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+.apreps [data-wm-plugin="tabs"] .fe-block[style*="min-height"],
+.apreps [data-wm-plugin="tabs"] .sqs-block-content[style*="min-height"] {
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-block {
+  align-self: start !important;
+}
+
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-row,
+.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-column {
+  min-height: 0 !important;
+}
+
+.apreps [data-wm-plugin="tabs"] [class^="fe-"] {
+  grid-template-rows: none !important;
+  grid-auto-rows: minmax(8px, auto) !important;
+}
+
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .tab-panel[aria-hidden="false"] .page-section .fluid-engine {
+  grid-template-rows: none !important;
+  grid-auto-rows: minmax(8px, auto) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+/* 3.19 Neutralize Fill-Screen heights inside AP-REPS tabs */
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section[style*="height"],
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section[style*="min-height"],
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section [data-fluid-engine][style*="height"],
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section [data-fluid-engine][style*="min-height"],
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .sqs-gallery-block-grid .gallery-grid[style*="height"],
+.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .sqs-gallery-block-grid .gallery-grid[style*="min-height"] {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* 3.20 Video block aspect ratio */
+.video-block .video-player {
+  padding-bottom: 120% !important;
+}
+
+/* 3.21 Mobile - remove gallery padding */
+@media (max-width: 767px) {
+  .apreps .wm-tabs .tab-panel > .tab-content .sqs-block.sqs-block-gallery,
+  .apreps .wm-tabs .tab-panel > .tab-content .sqs-block.sqs-block-gallery > .sqs-block-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+
+/* ============================================================================
+   4. STICKY ARTIST NAMES (BLEND MODE)
+   ============================================================================
+   
+   Artist names sticky blocks use mix-blend-mode: difference for visibility
+   over gallery imagery. Special handling for Contact page.
+============================================================================ */
+
+/* 4.1 Artist names sticky wrapper - blend mode */
+.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
+  mix-blend-mode: difference !important;
+  background: transparent !important;
+  isolation: auto !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  transform: translate3d(0,0,0);
+}
+
+/* 4.2 Artist names text - white with blend */
+.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3,
+.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3 *,
+.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqsrte-text-color--black {
+  mix-blend-mode: difference !important;
+  color: #fff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+/* 4.3 Contact page - reset blend mode for specific block */
+#block-85f3ea5586bbbcb4af7b h3,
+#block-85f3ea5586bbbcb4af7b h3 *,
+#block-85f3ea5586bbbcb4af7b .sqsrte-text-color--black {
+  mix-blend-mode: normal !important;
+  color: inherit !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+/* 4.4 AP-REPS bio/footer section - black background */
+.apreps .wm-tabs .tab-panel > .tab-content .fe-68e8ff90b8c8d26cc4ad65d9 {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.apreps .wm-tabs .tab-panel > .tab-content .fe-68e8ff90b8c8d26cc4ad65d9 .sqs-block,
+.apreps .wm-tabs .tab-panel > .tab-content .fe-68e8ff90b8c8d26cc4ad65d9 .sqs-block-content {
+  background: transparent !important;
+}
+
+
+/* ============================================================================
+   5. MOBILE HERO COLLAGE
+   ============================================================================
+   
+   Custom mobile hero using Summary Block images in animated horizontal lanes.
+   Replaces desktop Cursor Collage plugin on mobile.
+   
+   Key features:
+   - Pinned to hero section
+   - Multiple lanes with different speeds
+   - Randomized image heights
+   - Sits behind hero text (z-index: 2)
+============================================================================ */
+
+/* 5.1 Hero section - positioned container */
+section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
+  position: relative;
+  min-height: 60vh;
+}
+
+/* 5.2 Hero heading text - blend mode */
+.fe-block-yui_3_17_2_1_1759615106072_8520,
+.fe-block-yui_3_17_2_1_1759615106072_8520 * {
+  mix-blend-mode: difference !important;
+  isolation: isolate !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  transform: translate3d(0,0,0);
+}
+
+#block-yui_3_17_2_1_1759615106072_8520 .sqsrte-text-color--black,
+#block-yui_3_17_2_1_1759615106072_8520 h1,
+#block-yui_3_17_2_1_1759615106072_8520 h1 * {
+  color: #fff !important;
+  filter: invert(1) !important;
+}
+
+/* 5.3 Mobile hero collage - only on mobile */
+@media (max-width: 767px) {
+  /* Allow hero section to show collage overflow */
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"],
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"] .content-wrapper,
+  section[data-section-id="68e1a8f1e44bd1493a1074d2"] [data-fluid-engine="true"].fluid-engine {
+    position: relative;
+    overflow: visible !important;
+  }
+
+  /* Collage container - pinned to hero section */
+  .mobile-hero-collage {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 2;
+    pointer-events: none;
+    display: block;
+    padding: 2rem 5vw;
+    overflow: hidden !important;
+  }
+
+  /* Collage images - force visible, fixed heights */
+  .mobile-hero-collage img.summary-thumbnail-image {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    clip: auto !important;
+    height: 45vh;
+    width: auto !important;
+    flex: 0 0 auto;
+    object-fit: cover;
+  }
+
+  /* Image size variants */
+  .mobile-hero-lane img.size-sm { height: 26vh; }
+  .mobile-hero-lane img.size-md { height: 36vh; }
+  .mobile-hero-lane img.size-lg { height: 46vh; }
+
+  /* Animated lanes - horizontal scroll */
+  .mobile-hero-lane {
+    display: flex;
+    gap: 600px;
+    width: max-content;
+    will-change: transform;
+    transform: translate3d(0,0,0);
+    animation-name: hero-lane-left;
+    animation-duration: 50s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .mobile-hero-lane img {
+    align-self: center !important;
+  }
+
+  /* Lane variations - different offsets and speeds */
+  .lane-1 { margin-top: -10vh; animation-duration: 36s; animation-delay: -4s; }
+  .lane-2 { margin-top: -30vh; animation-duration: 32s; animation-delay: -8s; }
+  .lane-3 { margin-top: -20vh; animation-duration: 34s; animation-delay: -12s; }
+  .lane-4 { margin-top: -20vh; animation-duration: 38s; animation-delay: -16s; }
+  .lane-5 { margin-top: -50vh; animation-duration: 30s; animation-delay: -10s; }
+  .lane-6 { margin-top: -20vh; animation-duration: 33s; animation-delay: -14s; }
+
+  /* Hero heading offset - push down on mobile */
+  #block-yui_3_17_2_1_1759615106072_8520 .sqs-block-content {
+    padding-top: 18vh;
+  }
+}
+
+/* 5.4 Lane animation keyframes */
+@keyframes hero-lane-left {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(calc(-100% - 100vw)); }
+}
+
+
+/* ============================================================================
+   6. DIGITAL MOVES PLUGINS
+   ============================================================================
+   
+   Custom cursor, infinite auto-scroll, and image-hover-list integrations.
+============================================================================ */
+
+/* 6.1 Dot cursor - desktop only */
+.dot-cursor {
+  mix-blend-mode: difference;
+  transition: all 100ms ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.dot-cursor span {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background-color: white;
+  transition: all 150ms ease-out;
+  display: block;
+}
+
+/* 6.2 Cursor override - scoped to hero and gallery contexts only */
+section[data-section-id="68e1a8f1e44bd1493a1074d2"],
+section[data-section-id="68e1a8f1e44bd1493a1074d2"] *,
+.apreps .wm-tabs,
+.apreps .wm-tabs * {
+  cursor: none !important;
+}
+
+/* 6.3 Disable dot cursor on touch devices */
+@media (pointer: coarse) {
+  .dot-cursor {
+    display: none !important;
+  }
+}
+
+/* 6.4 Infinite auto-scroll slider */
+.auto-scroll-slide {
+  position: relative;
+}
+
+.auto-scroll-content {
+  position: absolute!important;
+  z-index: 999;
+  top: 0px;
+  left: 0px;
+  width: calc(100%);
+  height: calc(100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  white-space: nowrap;
+  background-color: rgba(255,255,255,.8);
+  border-radius: 0px;
+  opacity: 0;
+  transform: none;
+  transition: all 150ms linear;
+}
+
+.auto-scroll-content > div {
+  max-width: 100%;
+  white-space: wrap;
+  padding: 0 10px;
+}
+
+.auto-scroll-content .list-item-content__button {
+  margin-top: 10px;
+}
+
+@media (max-width: 480px) {
+  .auto-scroll-content h2 {
+    font-size: 24px!important;
+  }
+}
+
+.auto-scroll-slide:hover .auto-scroll-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.auto-scroll .list-item-content__button {
+  display: none;
+}
+
+/* 6.5 Disable Digital Moves cursor collage on mobile */
+@media (max-width: 767px) {
+  .dm-cursor-collage-image {
+    display: none !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    z-index: -9999 !important;
+  }
+}
+
+/* 6.6 Image-hover-list positioning fix for mobile */
+@media (max-width: 480px) {
+  .image-hover-list.portfolio-list .image-positioner .image-container {
+    left: 50% !important;
+    top: 30% !important;
+  }
+  
+  .image-hover-list.portfolio-list .image-positioner .image-container img {
+    max-width: 45vw;
+    max-height: 45vh;
+    width: auto !important;
+    height: auto !important;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .image-hover-list.portfolio-list .image-positioner .image-container {
+    left: 50% !important;
+    top: 40% !important;
+  }
+  
+  .image-hover-list.portfolio-list .image-positioner .image-container img {
+    max-width: 60vw;
+    max-height: 45vh;
+    width: auto !important;
+    height: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .image-hover-list.portfolio-list .image-positioner {
+    pointer-events: none !important;
+  }
+}
+
+/* 6.7 Unexpected block for image-hover-list */
 section[data-section-id="68e0ab5faedd22325758b558"] {
   opacity: 0;
   pointer-events: none;
 }
 
-/* Reveal once the plugin has inserted items */
 section[data-section-id="68e0ab5faedd22325758b558"]:has(.image-hover-list li, .image-hover-list .item) {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Keep the native Summary block hidden regardless */
 section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
   display: none !important;
 }
 
-/* ### END DELIVERABLE 7. unexpected block 13.11.25 */
 
-/* ### BEGIN DELIVERABLE 8. Mailchimp footer newsletter 13.11.25 (rev) */
-/* Scope to the provided footer Newsletter block (id is on the same element as .newsletter-block) */
+/* ============================================================================
+   7. FOOTER NEWSLETTER
+   ============================================================================
+   
+   Custom styling for Mailchimp newsletter block with underlined input
+   and tertiary button. Block ID: #block-yui_3_17_2_1_1761719139659_4074
+============================================================================ */
+
 #block-yui_3_17_2_1_1761719139659_4074 {
-  --ap-newsletter-divider: currentColor; /* fallback divider color */
+  --ap-newsletter-divider: currentColor;
 }
 
 @supports (color: color-mix(in srgb, currentColor 32%, transparent)) {
@@ -713,20 +920,12 @@ section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
   }
 }
 
-/* Apply grid to the form to lay out header (left) and fields (right) */
+/* 7.1 Newsletter form grid layout */
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 0px; /* 16px between header, input row, privacy */
+  row-gap: 0px;
 }
-
-email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
-  max-width: 700px; /* or 100% for full width */
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header {
   grid-row: 1;
@@ -735,10 +934,10 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description {
   display: grid;
-  row-gap: 0px; /* 10px between first line and byline */
+  row-gap: 0px;
 }
 
-/* Make the visual "heading" behave exactly like paragraph text */
+/* 7.2 Header title - paragraph styling */
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-title {
   margin: 0 0 10px 0 !important;
   padding: 0 !important;
@@ -748,24 +947,17 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   letter-spacing: normal !important;
 }
 
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper {
-  grid-column: 1;
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p {
+  margin: 0;
 }
 
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
-  grid-column: 2;
-  align-self: end;
-  justify-self: end;
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p + p {
+  font-size: clamp(.85rem, 1.4vw, 1rem);
+  line-height: 1.6;
+  text-transform: none;
 }
 
-
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote {
-  grid-row: 3;
-  grid-column: 1;
-  margin-top: 0; /* rely on 16px row-gap above */
-  text-align: left;
-}
-
+/* 7.3 Form body - underlined input with button */
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body {
   grid-row: 2;
   grid-column: 1;
@@ -776,39 +968,39 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   align-items: end;
 }
 
-
-/* Header + byline, both as paragraphs */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p {
-  margin: 0;
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper {
+  grid-column: 1;
+  display: block;
 }
 
-/* Second paragraph = byline style */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p + p {
-  font-size: clamp(.85rem, 1.4vw, 1rem);
-  line-height: 1.6;
-  text-transform: none;
-}
-
-
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper { 
-  grid-column: 1; 
-  display: block; 
-}
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
   grid-column: 2;
   align-self: start;
   justify-self: start;
 }
 
-/* 3) Field styles — underline only */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-wrapper { 
-  min-width: 0; 
-  background: transparent !important; 
-  border: 0 !important; 
-  padding: 0 !important; 
+/* 7.4 Field styling - transparent with no border */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-wrapper {
+  min-width: 0;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
 }
 
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label { display: block; margin-bottom: .35rem; font-size: clamp(.65rem, 1vw, .75rem); text-transform: uppercase; }
+/* 7.5 Field label - visually hidden, screen-reader only */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 7.6 Field input element */
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element {
   width: 100%;
   padding: .35rem 0 !important;
@@ -817,14 +1009,23 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   border-bottom: none !important;
   background: transparent !important;
   box-shadow: none !important;
-  font: inherit; text-transform: none; color: inherit;
+  font: inherit;
+  text-transform: none;
+  color: inherit;
 }
 
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element::placeholder {
+  color: inherit;
+  opacity: .4;
+  text-transform: none;
+}
 
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element::placeholder { color: inherit; opacity: .4; text-transform: none; }
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element:focus { outline: none; border-bottom-color: currentColor; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element:focus {
+  outline: none;
+  border-bottom-color: currentColor;
+}
 
-/* 4) Tertiary button (text only) */
+/* 7.7 Tertiary button - text only */
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button {
   appearance: none;
   background: none !important;
@@ -842,303 +1043,29 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   cursor: pointer;
 }
 
-/* D8: hide visual EMAIL ADDRESS label, keep it screen‑reader only */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:hover,
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:focus { text-decoration: underline; outline: none; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:focus {
+  text-decoration: underline;
+  outline: none;
+}
 
-/* ### END DELIVERABLE 8. Mailchimp footer newsletter 13.11.25 (rev) */
-
-/* ### BEGIN D4:Breakpoints v1 14/08/25 */
-/* ——— AP–REPS gallery: lock per-slide aspect +  ——— */
-/* D4 – scoped only to AP–REPS tab galleries */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
-  aspect-ratio: var(--ap-aspect, 4 / 3);
-  overflow: hidden;
-  position: relative;
-  box-sizing: border-box !important;
-  padding-bottom: 0 !important;
-  padding-right: var(--ap-gap-x, 10px) !important;
+/* 7.8 Footnote */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote {
+  grid-row: 3;
+  grid-column: 1;
+  margin-top: 0;
+  text-align: left;
 }
 
 
-/* Catch when Squarespace puts height/min-height on the grid itself */
-.apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="height"],
-.apreps [data-wm-plugin="tabs"] .sqs-gallery-block-grid .gallery-grid[style*="min-height"]{
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
+/* ============================================================================
+   8. UTILITIES & MISC FIXES
+   ============================================================================
+   
+   Global utilities: overscroll behavior, etc.
+============================================================================ */
+
+/* 8.1 Prevent iOS overscroll bounce */
+html, body {
+  overscroll-behavior: none;
 }
-
-/* Catch FE wrappers that get a min-height inline */
-.apreps [data-wm-plugin="tabs"] .fe-block[style*="min-height"],
-.apreps [data-wm-plugin="tabs"] .sqs-block-content[style*="min-height"]{
-  min-height: 0 !important;
-  height: auto !important;
-}
-
-/* Keep FE from stretching the block anyway */
-.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-block { 
-  align-self: start !important; 
-}
-
-.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-row,
-.apreps [data-wm-plugin="tabs"] [data-fluid-engine] .fe-column { 
-  min-height: 0 !important; 
-}
-
-/* Let Fluid Engine shrink-wrap to the gallery content */
-.apreps [data-wm-plugin="tabs"] [class^="fe-"] {
-  grid-template-rows: none !important;
-  grid-auto-rows: minmax(8px, auto) !important;
-}
-
-/* FINAL — the selector that collapsed the FE rows inside the active tab */
-.apreps :is(.wm-tabs,[data-wm-plugin="tabs"])
-  .tab-panel[aria-hidden="false"] .page-section .fluid-engine{
-  grid-template-rows: none !important;
-  grid-auto-rows: minmax(8px, auto) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-}
-
-
-/* Neutralize Fill-Screen heights inside the AP—REPS tabs */
-.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section[style*="height"],
-.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section[style*="min-height"],
-.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section [data-fluid-engine][style*="height"],
-.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .page-section [data-fluid-engine][style*="min-height"],
-.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .sqs-gallery-block-grid .gallery-grid[style*="height"],
-.apreps :is(.wm-tabs,[data-wm-plugin="tabs"]) .sqs-gallery-block-grid .gallery-grid[style*="min-height"] {
-  height: auto !important;
-  min-height: 0 !important;
-}
-
-.video-block .video-player {
-  padding-bottom: 120% !important;
-}
-
-@media (max-width: 767px) {
-  .apreps .wm-tabs .tab-panel > .tab-content .sqs-block.sqs-block-gallery,
-  .apreps .wm-tabs .tab-panel > .tab-content .sqs-block.sqs-block-gallery > .sqs-block-content {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-}
-
-/* ### END D4:Breakpoints v1 14/08/25 */
-
-
-
-/* hide digital moves on mobile */
-@media (max-width: 767px) {
-  .dm-cursor-collage-image {
-    display: none !important;
-    pointer-events: none !important;
-    opacity: 0 !important;
-    position: absolute !important;
-    z-index: -9999 !important;
-  }
-}
-
-@media (max-width: 767px) {
-  /* Push AP–REPS hero heading down on mobile */
-  #block-yui_3_17_2_1_1759615106072_8520 .sqs-block-content {
-    padding-top: 18vh;   /* tweak 14–22vh until it looks right */
-  }
-}
-
-
-/* Mobile hero collage – remove from layout and pin to hero (all viewports) */
-section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
-  position: relative;
-  min-height: 60vh;
-}
-
-@media (max-width: 767px) {
-  section[data-section-id="68e1a8f1e44bd1493a1074d2"],
-  section[data-section-id="68e1a8f1e44bd1493a1074d2"] .content-wrapper,
-  section[data-section-id="68e1a8f1e44bd1493a1074d2"] [data-fluid-engine="true"].fluid-engine {
-    position: relative;
-    overflow: visible !important;  /* stop clipping the collage */
-  }
-
-  .mobile-hero-collage {
-    /* HARD OVERRIDE the off-screen inline styles */
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    z-index: 2;                    /* sit above hero content */
-
-    pointer-events: none;
-
-  /* stack lanes vertically */
-  display: block;
-  padding: 2rem 5vw;
-  overflow: hidden !important;
-}
-
-  .mobile-hero-collage img.summary-thumbnail-image {
-    position: static !important;
-    left: auto !important;
-    top: auto !important;
-    transform: none !important;
-
-    /* fight Squarespace lazy-load + offscreen rules */
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    clip: auto !important;
-
-    height: 45vh;
-    width: auto !important;
-    flex: 0 0 auto;
-    object-fit: cover;
-  }
-
-  /* randomised sizes */
-.mobile-hero-lane img.size-sm {
-  height: 26vh;
-}
-
-.mobile-hero-lane img.size-md {
-  height: 36vh;
-}
-
-.mobile-hero-lane img.size-lg {
-  height: 46vh;
-}
-}
-
-
-@media (max-width: 767px) {
-  .mobile-hero-lane {
-    display: flex;
-    gap: 600px;           /* spacing between images */
-    width: max-content;
-    will-change: transform;
-    transform: translate3d(0,0,0);
-    animation-name: hero-lane-left;
-    animation-duration: 50s;  /* base speed – fairly quick */
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-
-  .mobile-hero-lane img {
-    align-self: center !important;
-  }
-  
-
-  .lane-1 { margin-top: -10vh;  animation-duration: 36s; animation-delay: -4s; }
-  .lane-2 { margin-top: -30vh;  animation-duration: 32s; animation-delay: -8s; }
-  .lane-3 { margin-top: -20vh;  animation-duration: 34s; animation-delay: -12s; }
-  .lane-4 { margin-top: -20vh;  animation-duration: 38s; animation-delay: -16s; }
-  .lane-5 { margin-top: -50vh;  animation-duration: 30s; animation-delay: -10s; }
-  .lane-6 { margin-top: -20vh;  animation-duration: 33s; animation-delay: -14s; }
-}
-
-
-/* lane keyframes */
-@keyframes hero-lane-left {
-  /* start with the whole strip off the RIGHT */
-  0% {
-    transform: translateX(100vw);
-  }
-  /* finish with the whole strip completely past the LEFT edge,
-     regardless of the lane's own width */
-  100% {
-    transform: translateX(calc(-100% - 100vw));
-  }
-}
-
-
-/* ### END D5:Breakpoints v1 14/08/25 */
-
-
-/* ### BEGIN D6: Cursor and hover 18/08/25 */
-
-body, a, button, * {
-  cursor: none !important;
-}
-
-/* ### END D6: Cursor and hover 18/08/25 */
-
-
-/* ### BEGIN ISSUE 3: Mobile image-hover-list positioning 18/11/25 */
-
-/**
- * Fix for Digital Moves image-hover-list on mobile
- * 
- * Issue: On mobile, hover images appear at the bottom of the viewport 
- * instead of being centered over the tapped list item.
- * 
- * Root cause: The plugin's JS calculates positions based on desktop 
- * hover logic, which doesn't translate well to mobile tap interactions.
- * 
- * Solution: Override inline positioning on mobile to center images 
- * in the viewport, providing a consistent and expected behavior.
- */
-
-/* Mobile devices (phones) */
-@media (max-width: 480px) {
-  /* Force image containers to center horizontally, positioned higher on mobile */
-  .image-hover-list.portfolio-list .image-positioner .image-container {
-    /* Override inline left/top - center horizontally, position at upper area */
-    left: 50% !important;
-    top: 30% !important;
-    /* The existing translate(-50%, -50%) will center the image */
-  }
-  
-  /* Reduce image size for better mobile experience */
-  .image-hover-list.portfolio-list .image-positioner .image-container img {
-    max-width: 45vw;
-    max-height: 45vh;
-    width: auto !important;
-    height: auto !important;
-  }
-}
-
-/* Tablets in portrait mode */
-@media (min-width: 481px) and (max-width: 768px) {
-  /* Similar fix for tablets, positioned slightly higher */
-  .image-hover-list.portfolio-list .image-positioner .image-container {
-    left: 50% !important;
-    top: 40% !important;
-  }
-  
-  .image-hover-list.portfolio-list .image-positioner .image-container img {
-    max-width: 60vw;
-    max-height: 45vh;
-    width: auto !important;
-    height: auto !important;
-  }
-}
-
-/* Prevent mobile images from overlapping other sections */
-@media (max-width: 768px) {
-  /* Ensure the image positioner doesn't interfere with scrolling */
-  .image-hover-list.portfolio-list .image-positioner {
-    /* Keep pointer-events: none to allow interaction with elements below */
-    pointer-events: none !important;
-  }
-}
-
-/* ### END ISSUE 3: Mobile image-hover-list positioning 18/11/25 */
