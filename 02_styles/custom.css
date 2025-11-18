@@ -1056,18 +1056,18 @@ body, a, button, * {
 
 /* Mobile devices (phones) */
 @media (max-width: 480px) {
-  /* Force image containers to center in the viewport on mobile */
+  /* Force image containers to center horizontally, but position higher on mobile */
   .image-hover-list.portfolio-list .image-positioner .image-container {
-    /* Override inline left/top to center in viewport */
+    /* Override inline left/top - center horizontally, position at upper-third */
     left: 50% !important;
-    top: 50% !important;
+    top: 35% !important;
     /* The existing translate(-50%, -50%) will center the image */
   }
   
-  /* Ensure images stay within safe viewport bounds */
+  /* Reduce image size for better mobile experience */
   .image-hover-list.portfolio-list .image-positioner .image-container img {
-    max-width: 80vw;
-    max-height: 60vh;
+    max-width: 65vw;
+    max-height: 45vh;
     width: auto !important;
     height: auto !important;
   }
@@ -1075,15 +1075,15 @@ body, a, button, * {
 
 /* Tablets in portrait mode */
 @media (min-width: 481px) and (max-width: 768px) {
-  /* Similar fix for tablets, with slightly less aggressive constraints */
+  /* Similar fix for tablets, positioned slightly higher */
   .image-hover-list.portfolio-list .image-positioner .image-container {
     left: 50% !important;
-    top: 50% !important;
+    top: 40% !important;
   }
   
   .image-hover-list.portfolio-list .image-positioner .image-container img {
-    max-width: 70vw;
-    max-height: 50vh;
+    max-width: 60vw;
+    max-height: 45vh;
     width: auto !important;
     height: auto !important;
   }
