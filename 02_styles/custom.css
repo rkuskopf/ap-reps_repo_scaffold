@@ -316,6 +316,23 @@ body, a:hover, button:hover {
   padding-right: 10px !important;
 }
 
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+    position: static !important; /* overrides Squarespace absolute px positioning */
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    inset: 0 !important;
+}
+
+.apreps .sqs-gallery .image-wrapper,
+.apreps .sqs-gallery .thumb-image-wrapper {
+    position: static !important;
+    height: 100% !important;
+    width: 100% !important;
+    aspect-ratio: inherit !important;
+}
+
 /* ### END DELIVERABLE 1. Gallery ratios 10.11.25 */
 
 
