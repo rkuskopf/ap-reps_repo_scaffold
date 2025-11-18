@@ -1066,7 +1066,7 @@ body, a, button, * {
   
   /* Reduce image size for better mobile experience */
   .image-hover-list.portfolio-list .image-positioner .image-container img {
-    max-width: 65vw;
+    max-width: 45vw;
     max-height: 45vh;
     width: auto !important;
     height: auto !important;
