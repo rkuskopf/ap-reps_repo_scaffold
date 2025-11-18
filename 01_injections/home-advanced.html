@@ -95,8 +95,9 @@
         const variation = 0.2; // 20% variation
         const randomDuration = baseDuration * (1 - variation + Math.random() * variation * 2);
         
-        // Random delay: 0-20s for staggered starts
-        const randomDelay = Math.random() * 20;
+        // Use NEGATIVE delay: -20s to 0s for staggered mid-cycle starts
+        // This makes animations start immediately at different points in their cycle
+        const randomDelay = -(Math.random() * 20);
         
         // Alternate direction: some images drift left, some right
         const direction = (laneIndex + i) % 2 === 0 ? 'hero-drift-left' : 'hero-drift-right';

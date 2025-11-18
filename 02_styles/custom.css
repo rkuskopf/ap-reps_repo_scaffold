@@ -1000,7 +1000,7 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     position: static !important;
     left: auto !important;
     top: auto !important;
-    transform: none !important;
+    /* Removed transform: none to allow animations to work */
 
     /* fight Squarespace lazy-load + offscreen rules */
     display: block !important;
