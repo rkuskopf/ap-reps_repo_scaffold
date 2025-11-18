@@ -682,7 +682,7 @@ section[data-section-id="68e0ab5faedd22325758b558"] .sqs-block-summary {
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 16px; /* 16px between header, input row, privacy */
+  row-gap: 0px; /* 16px between header, input row, privacy */
 }
 
 email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
@@ -700,7 +700,17 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description {
   display: grid;
-  row-gap: 10px; /* 10px between first line and byline */
+  row-gap: 0px; /* 10px between first line and byline */
+}
+
+/* Make the visual "heading" behave exactly like paragraph text */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-title {
+  margin: 0 !important;
+  padding: 0 !important;
+  font: inherit !important;
+  line-height: inherit !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
 }
 
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper {
@@ -737,18 +747,10 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   margin: 0;
 }
 
-/* First paragraph acts as the “heading” */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p:first-child {
-  text-transform: uppercase;
-  letter-spacing: .24em;
-  font-size: clamp(.75rem, 1.5vw, .9rem);
-}
-
 /* Second paragraph = byline style */
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p + p {
   font-size: clamp(.85rem, 1.4vw, 1rem);
   line-height: 1.6;
-  letter-spacing: normal;
   text-transform: none;
 }
 
@@ -771,7 +773,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   padding: 0 !important; 
 }
 
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label { display: block; margin-bottom: .35rem; font-size: clamp(.65rem, 1vw, .75rem); letter-spacing: .24em; text-transform: uppercase; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label { display: block; margin-bottom: .35rem; font-size: clamp(.65rem, 1vw, .75rem); text-transform: uppercase; }
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element {
   width: 100%;
   padding: .35rem 0 !important;
@@ -780,11 +782,11 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   border-bottom: none !important;
   background: transparent !important;
   box-shadow: none !important;
-  font: inherit; letter-spacing: inherit; text-transform: none; color: inherit;
+  font: inherit; text-transform: none; color: inherit;
 }
 
 
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element::placeholder { color: inherit; opacity: .4; text-transform: none; letter-spacing: normal; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element::placeholder { color: inherit; opacity: .4; text-transform: none; }
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element:focus { outline: none; border-bottom-color: currentColor; }
 
 /* 4) Tertiary button (text only) */
@@ -800,7 +802,6 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   border-radius: 0 !important;
   color: inherit !important;
   text-transform: uppercase;
-  letter-spacing: .24em;
   font-size: clamp(.65rem, 1.1vw, .8rem);
   line-height: 1;
   cursor: pointer;
