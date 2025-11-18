@@ -448,7 +448,7 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
 
 
 /* Artist names */
-.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
+.apreps .fe-block.sqs-position-sticky {
   mix-blend-mode: difference !important;
   background: transparent !important;
   color: #fff !important;
@@ -462,7 +462,7 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
 .apreps .sqs-block.html-block .sqs-html-content h3,
 .apreps .sqs-block.html-block .sqs-html-content h3 *,
 .apreps .sqs-block.html-block .sqsrte-text-color--black {
-  mix-blend-mode: normal !important;
+  mix-blend-mode: difference !important;
   color: #fff !important;
   background: transparent !important;
   text-shadow: none !important;
