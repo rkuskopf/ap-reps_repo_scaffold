@@ -1056,32 +1056,12 @@ body, a, button, * {
 
 /* Mobile devices (phones) */
 @media (max-width: 480px) {
-  /* Force image containers to center horizontally, with responsive vertical positioning */
+  /* Force image containers to center horizontally, positioned higher on mobile */
   .image-hover-list.portfolio-list .image-positioner .image-container {
-    /* Override inline left/top - center horizontally */
+    /* Override inline left/top - center horizontally, position at upper area */
     left: 50% !important;
-    /* Default middle position */
-    top: 50% !important;
+    top: 30% !important;
     /* The existing translate(-50%, -50%) will center the image */
-  }
-  
-  /* Position images higher for links near the top of the list */
-  .image-hover-list.portfolio-list li:nth-child(1) .image-positioner .image-container,
-  .image-hover-list.portfolio-list li:nth-child(2) .image-positioner .image-container,
-  .image-hover-list.portfolio-list li:nth-child(3) .image-positioner .image-container {
-    top: 25% !important;
-  }
-  
-  .image-hover-list.portfolio-list li:nth-child(4) .image-positioner .image-container,
-  .image-hover-list.portfolio-list li:nth-child(5) .image-positioner .image-container,
-  .image-hover-list.portfolio-list li:nth-child(6) .image-positioner .image-container {
-    top: 35% !important;
-  }
-  
-  .image-hover-list.portfolio-list li:nth-child(7) .image-positioner .image-container,
-  .image-hover-list.portfolio-list li:nth-child(8) .image-positioner .image-container,
-  .image-hover-list.portfolio-list li:nth-child(9) .image-positioner .image-container {
-    top: 45% !important;
   }
   
   /* Reduce image size for better mobile experience */
