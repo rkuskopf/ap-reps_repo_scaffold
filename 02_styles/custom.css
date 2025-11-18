@@ -446,27 +446,63 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   mix-blend-mode: normal !important;
 }
 
-
-/* Artist names */
+/* Artist names – sticky wrapper */
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
   mix-blend-mode: difference !important;
   background: transparent !important;
-  color: #fff !important;
   isolation: auto !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
-
-.apreps .sqs-block.html-block .sqs-html-content h3,
-.apreps .sqs-block.html-block .sqs-html-content h3 *,
-.apreps .sqs-block.html-block .sqsrte-text-color--black {
-  mix-blend-mode: normal !important;
+/* Artist names – actual text (ONLY inside sticky artist block) */
+.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3,
+.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3 *,
+.apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqsrte-text-color--black {
+  mix-blend-mode: difference !important;
   color: #fff !important;
   background: transparent !important;
   text-shadow: none !important;
 }
+
+
+/* AP–REPS: make gallery + gaps a true white backdrop for blend-mode text */
+.apreps .wm-tabs .tab-panel > .tab-content,
+.apreps .wm-tabs .tab-panel > .tab-content,
+.apreps .wm-tabs .tab-panel > .tab-content .sqs-gallery-block-grid .gallery-grid {
+  background-color: #ffffff !important;
+}
+
+/* Make sure individual tiles don’t reintroduce backgrounds */
+.apreps .sqs-gallery-block-grid .slide,
+.apreps .sqs-gallery-block-grid .sqs-gallery-design-grid-slide {
+  background: transparent !important;
+}
+
+/* Contact page: reset blend + color for block-85f3ea5586bbbcb4af7b */
+#block-85f3ea5586bbbcb4af7b h3,
+#block-85f3ea5586bbbcb4af7b h3 *,
+#block-85f3ea5586bbbcb4af7b .sqsrte-text-color--black {
+  mix-blend-mode: normal !important;
+  color: inherit !important;      /* let Typography panel control it */
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+/* AP–REPS: fix white bio/footer slice on artist pages */
+.apreps .wm-tabs .tab-panel > .tab-content .fe-68e8ff90b8c8d26cc4ad65d9 {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+/* Keep inner blocks transparent so they sit on the black */
+.apreps .wm-tabs .tab-panel > .tab-content .fe-68e8ff90b8c8d26cc4ad65d9 .sqs-block,
+.apreps .wm-tabs .tab-panel > .tab-content .fe-68e8ff90b8c8d26cc4ad65d9 .sqs-block-content {
+  background: transparent !important;
+}
+
+
 
 /* Ensure PNG logo in header inverts correctly */
 #header .header-title-logo img {
