@@ -1000,7 +1000,7 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     position: static !important;
     left: auto !important;
     top: auto !important;
-    transform: none !important;
+    /* Removed transform: none to allow animations to work */
 
     /* fight Squarespace lazy-load + offscreen rules */
     display: block !important;
@@ -1034,38 +1034,46 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     display: flex;
     gap: 600px;           /* spacing between images */
     width: max-content;
-    will-change: transform;
-    transform: translate3d(0,0,0);
-    animation-name: hero-lane-left;
-    animation-duration: 50s;  /* base speed – fairly quick */
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    /* Remove lane-level animation */
   }
 
   .mobile-hero-lane img {
     align-self: center !important;
+    /* Per-image animation using CSS variables set via JS */
+    will-change: transform;
+    animation-name: var(--img-animation, hero-drift-left);
+    animation-duration: var(--img-duration, 40s);
+    animation-delay: var(--img-delay, 0s);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
   }
   
 
-  .lane-1 { margin-top: -10vh;  animation-duration: 36s; animation-delay: -4s; }
-  .lane-2 { margin-top: -30vh;  animation-duration: 32s; animation-delay: -8s; }
-  .lane-3 { margin-top: -20vh;  animation-duration: 34s; animation-delay: -12s; }
-  .lane-4 { margin-top: -20vh;  animation-duration: 38s; animation-delay: -16s; }
-  .lane-5 { margin-top: -50vh;  animation-duration: 30s; animation-delay: -10s; }
-  .lane-6 { margin-top: -20vh;  animation-duration: 33s; animation-delay: -14s; }
+  .lane-1 { margin-top: -10vh; }
+  .lane-2 { margin-top: -30vh; }
+  .lane-3 { margin-top: -20vh; }
+  .lane-4 { margin-top: -20vh; }
+  .lane-5 { margin-top: -50vh; }
+  .lane-6 { margin-top: -20vh; }
 }
 
 
-/* lane keyframes */
-@keyframes hero-lane-left {
-  /* start with the whole strip off the RIGHT */
+/* Per-image keyframes for continuous drift */
+@keyframes hero-drift-left {
   0% {
     transform: translateX(100vw);
   }
-  /* finish with the whole strip completely past the LEFT edge,
-     regardless of the lane's own width */
   100% {
-    transform: translateX(calc(-100% - 100vw));
+    transform: translateX(-150vw);
+  }
+}
+
+@keyframes hero-drift-right {
+  0% {
+    transform: translateX(-150vw);
+  }
+  100% {
+    transform: translateX(100vw);
   }
 }
 
