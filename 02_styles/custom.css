@@ -1162,5 +1162,5 @@ body, a, button, * {
  */
 /* uses existing transform: scale(var(--ap-scale, 1)) ... */
 .apreps img.thumb-image.ap-landscape-thumb {
-  --ap-scale: .9; /* adjust 0.85–0.95 as needed */
+  --ap-scale: .8; /* zoom out more for landscapes */
 }
