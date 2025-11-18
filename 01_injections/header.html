@@ -37,28 +37,76 @@ document.addEventListener("DOMContentLoaded", () => { // once the page is ready
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const scope = document.documentElement; // body has class "apreps"
-  if (!scope.classList.contains('apreps')) return;
+  const html = document.documentElement;
+  if (!html.classList.contains('apreps')) return;
 
-  const patch = (root=document) => {
-    root.querySelectorAll('[data-fluid-engine="true"].fluid-engine').forEach(el => {
-      el.style.setProperty('grid-template-rows','none','important');
-      el.style.setProperty('grid-auto-rows','minmax(8px,auto)','important');
-      el.style.setProperty('height','auto','important');
-      el.style.setProperty('min-height','0','important');
-      el.style.setProperty('max-height','none','important');
+  const applyFluidEngineFixes = (root = document) => {
+    root.querySelectorAll('[data-fluid-engine="true"].fluid-engine').forEach(element => {
+      element.style.setProperty('grid-template-rows', 'none', 'important');
+      element.style.setProperty('grid-auto-rows', 'minmax(8px,auto)', 'important');
+      element.style.setProperty('height', 'auto', 'important');
+      element.style.setProperty('min-height', '0', 'important');
+      element.style.setProperty('max-height', 'none', 'important');
     });
-    root.querySelectorAll('.page-section, .content-wrapper').forEach(el => {
-      el.style.setProperty('padding-top','0','important');
-      el.style.setProperty('padding-bottom','0','important');
+
+    root.querySelectorAll('.page-section, .content-wrapper').forEach(element => {
+      element.style.setProperty('padding-top', '0', 'important');
+      element.style.setProperty('padding-bottom', '0', 'important');
     });
   };
 
+  /**
+   * Per-slide gallery aspect ratios
+   *
+   * Goal: inside .apreps, let portrait images stay vertical and
+   * landscape images read as landscape, even when the Squarespace
+   * gallery is configured with a single "aspect ratio" setting.
+   *
+   * Approach: use each thumb's data-image-dimensions to set a
+   * per-slide --ap-aspect variable, which the CSS already uses
+   * for aspect-ratio: var(--ap-aspect, 4 / 3).
+   */
+  const applyGalleryAspectRatios = (root = document) => {
+    root
+      .querySelectorAll('.apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide')
+      .forEach(slide => {
+        const image = slide.querySelector('img.thumb-image[data-image-dimensions]');
+        if (!image) return;
+
+        const dimensions = image.getAttribute('data-image-dimensions');
+        const match = dimensions && dimensions.match(/^(\d+)x(\d+)$/);
+        if (!match) return;
+
+        const width = parseInt(match[1], 10);
+        const height = parseInt(match[2], 10);
+        if (!width || !height) return;
+
+        const ratio = width / height;
+        const isLandscape = ratio >= 1.1; // treat near-square as portrait
+
+        const aspectValue = isLandscape ? '4 / 3' : '3 / 4';
+        slide.style.setProperty('--ap-aspect', aspectValue);
+
+        slide.classList.toggle('ap-aspect-landscape', isLandscape);
+        slide.classList.toggle('ap-aspect-portrait', !isLandscape);
+      });
+  };
+
+  const patch = (root = document) => {
+    applyFluidEngineFixes(root);
+    applyGalleryAspectRatios(root);
+  };
+
   patch();
-  new MutationObserver(m => {
-    for (const rec of m)
-      for (const n of rec.addedNodes)
-        if (n.nodeType === 1) patch(n);
-  }).observe(document.body,{subtree:true,childList:true});
+
+  new MutationObserver(mutations => {
+    for (const mutation of mutations) {
+      for (const node of mutation.addedNodes) {
+        if (node.nodeType === 1) {
+          patch(node);
+        }
+      }
+    }
+  }).observe(document.body, { subtree: true, childList: true });
 });
 </script>

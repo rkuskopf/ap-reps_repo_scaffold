@@ -177,6 +177,8 @@ body, a:hover, button:hover {
   inset: 0 !important; /* remove right/bottom offsets that caused gaps */
 }
 
+
+
 /* Captions left across all grid galleries */
 .sqs-gallery-block-show-meta .image-slide-title,
 .sqs-gallery-block-show-meta .image-meta,
@@ -1142,3 +1144,23 @@ body, a, button, * {
 }
 
 /* ### END ISSUE 3: Mobile image-hover-list positioning 18/11/25 */
+
+
+/* ### BEGIN ISSUE: Artist gallery landscape thumbnail fix 18/11/25 */
+
+
+/* ### END ISSUE: Artist gallery landscape thumbnail fix 18/11/25 */
+/* ### BEGIN ISSUE: Artist gallery landscape thumbnail fix 18/11/25 */
+
+/**
+ * Landscape thumbs are slightly over‑cropped inside the existing 4:3 tiles.
+ * Tiles/rows are already correct; we only want to zoom the photo out a bit.
+ * 
+ * We already use --ap-scale in the generic thumb rule:
+ *   transform: scale(var(--ap-scale, 1)) translateZ(0);
+ * So here we only set --ap-scale for landscape thumbs.
+ */
+/* uses existing transform: scale(var(--ap-scale, 1)) ... */
+.apreps img.thumb-image.ap-landscape-thumb {
+  --ap-scale: .8; /* zoom out more for landscapes */
+}
