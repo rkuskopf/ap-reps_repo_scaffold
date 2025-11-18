@@ -857,7 +857,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   color: inherit !important;
   text-transform: none !important;
   font-weight: normal !important;
-  font-size: clamp(.65rem, 1.1vw, .8rem);
+  font-size: inherit !important;
   line-height: 1;
   cursor: pointer;
 }
