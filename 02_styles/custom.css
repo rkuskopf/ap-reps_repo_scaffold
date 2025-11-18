@@ -774,6 +774,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   grid-template-columns: 1fr auto;
   column-gap: 1.2rem;
   align-items: end;
+  padding: 0 !important;
 }
 
 
@@ -812,6 +813,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element {
   width: 100%;
   padding: .35rem 0 !important;
+  padding-bottom: 8px !important;
   border: none !important;
   border-radius: 0 !important;
   border-bottom: none !important;
@@ -836,7 +838,8 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   margin: 0 !important;
   border-radius: 0 !important;
   color: inherit !important;
-  text-transform: uppercase;
+  text-transform: none !important;
+  font-weight: normal !important;
   font-size: clamp(.65rem, 1.1vw, .8rem);
   line-height: 1;
   cursor: pointer;
