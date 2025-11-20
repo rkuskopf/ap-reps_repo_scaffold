@@ -1062,7 +1062,7 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 /* Per-image keyframes for continuous drift */
 @keyframes hero-drift-left {
   0% {
-    transform: translateX(120vw);
+    transform: translateX(140vw);
   }
   100% {
     transform: translateX(-200vw);
@@ -1071,10 +1071,10 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 
 @keyframes hero-drift-right {
   0% {
-    transform: translateX(120vw);
+    transform: translateX(-200vw);
   }
   100% {
-    transform: translateX(-200vw);
+    transform: translateX(140vw);
   }
 }
 
