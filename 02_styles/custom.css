@@ -1041,8 +1041,8 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     align-self: center !important;
     /* Per-image animation using CSS variables set via JS */
     will-change: transform;
-    animation-name: var(--img-animation, hero-drift-left);
-    animation-duration: var(--img-duration, 40s);
+    animation-name: hero-drift-left !important;
+    animation-duration: var(--img-duration, 20s);
     animation-delay: var(--img-delay, 0s);
     animation-timing-function: linear;
     animation-iteration-count: infinite;
