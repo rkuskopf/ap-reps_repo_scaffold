@@ -947,8 +947,10 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   min-height: 0 !important;
 }
 
+@media (max-width: 767px) {
 .video-block .video-player {
-  padding-bottom: 120% !important;
+  margin-bottom: 30px !important;
+}
 }
 
 @media (max-width: 767px) {
