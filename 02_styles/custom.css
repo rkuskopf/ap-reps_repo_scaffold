@@ -1046,6 +1046,7 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
     animation-delay: var(--img-delay, 0s);
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    animation-fill-mode: both;
   }
   
 
@@ -1061,19 +1062,19 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 /* Per-image keyframes for continuous drift */
 @keyframes hero-drift-left {
   0% {
-    transform: translateX(100vw);
+    transform: translateX(140vw);
   }
   100% {
-    transform: translateX(-150vw);
+    transform: translateX(-200vw);
   }
 }
 
 @keyframes hero-drift-right {
   0% {
-    transform: translateX(-150vw);
+    transform: translateX(-200vw);
   }
   100% {
-    transform: translateX(100vw);
+    transform: translateX(140vw);
   }
 }
 
