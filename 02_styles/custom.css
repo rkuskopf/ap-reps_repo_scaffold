@@ -948,10 +948,21 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 }
 
 @media (max-width: 767px) {
-.video-block .video-player {
-  margin-bottom: 30px !important;
+
+  /* the box that works: control height + spacing */
+  .apreps .video-block .video-player {
+    display: block !important;
+    width: 100% !important;
+    padding-bottom: 30% !important; 
+    margin: 0 0 18px !important;      
+  }
+
+
+.fe-block.fe-block-27698649457a4936b952 {
+  padding-top: 30%;
 }
 }
+
 
 @media (max-width: 767px) {
   .apreps .wm-tabs .tab-panel > .tab-content .sqs-block.sqs-block-gallery,
