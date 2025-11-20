@@ -90,17 +90,17 @@
         clone.classList.add(randomSize);
 
         // Set per-image CSS variables for independent animation
-        // Base duration: 40s, with ±20% variation (32s - 48s)
-        const baseDuration = 40;
-        const variation = 0.2; // 20% variation
+        // Base duration: 20s, with ±10% variation (18s - 22s) - much faster!
+        const baseDuration = 20;
+        const variation = 0.1; // 10% variation
         const randomDuration = baseDuration * (1 - variation + Math.random() * variation * 2);
         
         // Use NEGATIVE delay: -20s to 0s for staggered mid-cycle starts
         // This makes animations start immediately at different points in their cycle
         const randomDelay = -(Math.random() * 20);
         
-        // Alternate direction: some images drift left, some right
-        const direction = (laneIndex + i) % 2 === 0 ? 'hero-drift-left' : 'hero-drift-right';
+        // All images drift in the same direction (left to right)
+        const direction = 'hero-drift-left';
         
         clone.style.setProperty('--img-duration', `${randomDuration.toFixed(1)}s`);
         clone.style.setProperty('--img-delay', `${randomDelay.toFixed(1)}s`);
