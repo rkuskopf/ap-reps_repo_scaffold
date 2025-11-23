@@ -53,6 +53,14 @@ div.wm-tabs {
 .wm-tabs [role="tabpanel"][aria-hidden="true"] { display: none !important;
 }
 
+/* ISSUE 5: tabs header adjustments */
+/* Hide arrows */
+@media (max-width: 767px) {
+  .apreps .wm-tabs .scroll-indicator-container {
+    display: none !important;
+  }
+}
+
 
 /* Dot cursor by digitalmoves.com.au */
 .dot-cursor {
