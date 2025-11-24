@@ -53,6 +53,11 @@ div.wm-tabs {
 .wm-tabs [role="tabpanel"][aria-hidden="true"] { display: none !important;
 }
 
+/* ISSUE 1.5: Ensure consistent sticky positioning across tabs with varying content heights */
+.apreps .wm-tabs .tab-panel > .tab-content {
+  min-height: 100vh; /* Ensure minimum height to provide consistent scrolling context */
+}
+
 /* ISSUE 5: tabs header adjustments */
 .wm-tabs[data-navigation-type="horizontal"][data-navigation-indicators="none"]
   .tabs-header .scroll-indicator.indicator-start,
@@ -474,6 +479,8 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
 
 /* Artist names – sticky wrapper */
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] {
+  position: sticky !important;
+  top: var(--ap-artist-sticky-offset, 140px) !important;
   mix-blend-mode: difference !important;
   background: transparent !important;
   isolation: auto !important;
