@@ -201,6 +201,11 @@ body, a:hover, button:hover {
   --ap-artist-sticky-offset: clamp(120px, 16vw, 260px);
 }
 
+.apreps .fe-block.sqs-position-sticky {
+  position: sticky !important;
+  top: var(--ap-artist-sticky-offset);
+}
+
 /*  anchors  */
 .apreps .wm-tabs .tab-panel > .tab-content 
   .sqs-gallery-block-grid .image-slide-anchor,
@@ -481,6 +486,7 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
+  top: var(--ap-artist-sticky-offset);
 }
 
 /* Artist names – actual text (ONLY inside sticky artist block) */
