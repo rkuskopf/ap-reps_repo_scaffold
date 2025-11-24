@@ -54,12 +54,13 @@ div.wm-tabs {
 }
 
 /* ISSUE 5: tabs header adjustments */
-/* Hide arrows */
-@media (max-width: 767px) {
-  .apreps .wm-tabs .scroll-indicator-container {
-    display: none !important;
-  }
+.wm-tabs[data-navigation-type="horizontal"][data-navigation-indicators="none"]
+  .tabs-header .scroll-indicator.indicator-start,
+.wm-tabs[data-navigation-type="horizontal"][data-navigation-indicators="none"]
+  .tabs-header .scroll-indicator.indicator-end {
+  display: none !important;
 }
+
 
 
 /* Dot cursor by digitalmoves.com.au */
@@ -1178,3 +1179,13 @@ body, a, button, * {
 }
 }
 /* ### END ISSUE 4: Video sizes overlapping */
+
+
+/* Nov 24 Fix 1: Nav links right aligned on mobiled */
+@media (max-width: 799px) {
+.header-menu-nav .header-menu-nav-item a {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+}
+
