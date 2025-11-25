@@ -503,8 +503,16 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
     pointer-events: auto;
   }
 
-  /* Discipline block - identified by h3 with text-align:right - align to right site gutter */
+  /* Discipline block - align to right site gutter */
+  /* Note: :has() requires Chrome 105+, Safari 15.4+, Firefox 121+ */
+  /* This targets h3 elements with inline text-align:right style set in Squarespace editor */
   .apreps .wm-tabs .tab-panel .fe-block.sqs-position-sticky:has(h3[style*="text-align: right"]) {
+    right: var(--sqs-site-gutter, 4vw);
+    left: auto;
+  }
+
+  /* Fallback: also target blocks with .ap-discipline class if added via Squarespace */
+  .apreps .wm-tabs .tab-panel .fe-block.sqs-position-sticky.ap-discipline {
     right: var(--sqs-site-gutter, 4vw);
     left: auto;
   }
