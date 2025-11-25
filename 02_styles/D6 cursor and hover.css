@@ -1,0 +1,15 @@
+/* ### D6: Cursor and Hover Styles for AP-REPS */
+/* 
+ * This file documents D6 deliverables for cursor and hover functionality.
+ * Full implementations are in custom.css to avoid duplication.
+ * 
+ * D6.1: Custom cursor (hide default cursor)
+ *       - See custom.css lines 1104-1110
+ * 
+ * D6.2: Mobile image-hover-list positioning
+ *       - See custom.css lines 1113-1163
+ * 
+ * D6.3: Hover image list - Consistent layout alignment (Issue #52)
+ *       - See custom.css lines 1166-1219
+ *       - Fixes inconsistent alignment of list items across breakpoints
+ */

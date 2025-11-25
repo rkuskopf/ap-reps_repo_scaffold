@@ -1163,6 +1163,62 @@ body, a, button, * {
 /* ### END D6.2: Mobile image-hover-list positioning 18/11/25 */
 
 
+/* ### BEGIN D6.3: Hover image list - Consistent layout alignment (Issue #52) 25/11/25 */
+
+/**
+ * Fix for Digital Moves image-hover-list layout consistency
+ * 
+ * Issue: List items (especially "Artist category" excerpt) have inconsistent 
+ * alignment across breakpoints - appearing right-aligned on some sizes.
+ * 
+ * Solution: Ensure consistent left-alignment and flex properties across all 
+ * breakpoints so list items maintain uniform layout on all devices.
+ */
+
+/* Base list item layout - ensure consistent flex behavior */
+.image-hover-list.portfolio-list li {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+/* List item links/spans - maintain left-aligned flex layout */
+.image-hover-list.portfolio-list li a,
+.image-hover-list.portfolio-list li > span {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  text-align: left !important;
+}
+
+/* Artist category (excerpt) - consistent positioning across all breakpoints */
+.image-hover-list.portfolio-list li span.excerpt {
+  margin-left: auto !important;
+  text-align: left !important;
+  flex-shrink: 0 !important;
+}
+
+/* Mobile overrides - ensure alignment remains consistent */
+@media (max-width: 480px) {
+  .image-hover-list.portfolio-list li span.excerpt {
+    margin-left: auto !important;
+    text-align: left !important;
+  }
+}
+
+/* Tablet overrides - maintain layout consistency */
+@media (min-width: 481px) and (max-width: 768px) {
+  .image-hover-list.portfolio-list li span.excerpt {
+    margin-left: auto !important;
+    text-align: left !important;
+  }
+}
+
+/* ### END D6.3: Hover image list - Consistent layout alignment (Issue #52) 25/11/25 */
+
+
 /* ### BEGIN ISSUE 4: Video sizes overlapping */
 @media (max-width: 767px) {
   /* the box that works: control height + spacing */
