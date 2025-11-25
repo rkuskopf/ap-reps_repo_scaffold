@@ -316,6 +316,26 @@ body, a:hover, button:hover {
   line-height: 1.3;
 }
 
+/* ### BEGIN ISSUE 1.6: Gallery caption fixes 25/11/25 */
+/* Remove height constraints from caption containers to prevent clipping */
+.apreps .sqs-gallery-block-grid .meta,
+.apreps .sqs-gallery-block-grid .image-meta,
+.apreps .sqs-gallery-block-grid .image-slide-meta,
+.apreps .sqs-gallery-block-grid .gallery-caption-wrapper {
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* Caption typography to match footer style */
+.apreps .sqs-gallery-block-grid .image-slide-title,
+.apreps .sqs-gallery-block-grid .image-slide-description {
+  font-size: .9rem;
+  letter-spacing: .05em;
+  line-height: 1.3;
+}
+/* ### END ISSUE 1.6: Gallery caption fixes 25/11/25 */
+
 /* AP—REPS: side gutter on the floated slide itself (float-safe) */
 .apreps .sqs-gallery-block-grid .sqs-gallery-design-grid-slide,
 .apreps .sqs-gallery.sqs-gallery-design-grid .sqs-gallery-design-grid-slide,
