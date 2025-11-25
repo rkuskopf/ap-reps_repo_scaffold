@@ -146,8 +146,22 @@ body, a:hover, button:hover {
   opacity: 1;
   transform: scale(1)
  }
- /* Hide section button */
-.auto-scroll .list-item-content__button { display: none }
+ /* Make button visually hidden but keep it clickable for tile links */
+.auto-scroll .list-item-content__button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+/* Hide button text/content visually */
+.auto-scroll .list-item-content__button * {
+  visibility: hidden;
+}
 
 /* Infinite auto scroll by Digital Moves */
 
@@ -582,8 +596,22 @@ body, a:hover, button:hover {
   opacity: 1;
   transform: scale(1)
  }
- /* Hide section button */
-.auto-scroll .list-item-content__button { display: none }
+ /* Make button visually hidden but keep it clickable for tile links */
+.auto-scroll .list-item-content__button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+/* Hide button text/content visually */
+.auto-scroll .list-item-content__button * {
+  visibility: hidden;
+}
 
 /* hide digital moves on mobile */
 @media (max-width: 767px) {
