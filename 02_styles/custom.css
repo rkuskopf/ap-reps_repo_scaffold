@@ -51,7 +51,7 @@ div.wm-tabs {
 }
 /* Collapse non-active panels so they don't push the layout */
 .wm-tabs [role="tabpanel"][aria-hidden="true"] { display: none !important;
-}
+} /*???*/
 
 /* ISSUE 5: tabs header adjustments */
 .wm-tabs[data-navigation-type="horizontal"][data-navigation-indicators="none"]
