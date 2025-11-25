@@ -1193,11 +1193,13 @@ body, a, button, * {
 /* On mobile, the indicator track should respect the page content margins */
 @media (max-width: 767px) {
   .wm-tabs .tabs-header nav .indicator-track {
+    /* 17px matches the standard mobile content margin */
     margin-left: 17px !important;
     margin-right: 17px !important;
   }
   
   .wm-tabs .tabs-header nav .indicator-track .active-indicator {
+    /* 34px = 17px left margin + 17px right margin */
     --tab-button-active-width: calc(100% - 34px);
   }
 }
