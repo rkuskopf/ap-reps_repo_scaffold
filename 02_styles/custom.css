@@ -1168,51 +1168,71 @@ body, a, button, * {
 /**
  * Fix for Digital Moves image-hover-list layout consistency
  * 
- * Issue: List items (especially "Artist category" excerpt) have inconsistent 
- * alignment across breakpoints - appearing right-aligned on some sizes.
+ * Issue: Category names (e.g., "makeup") in the excerpt span are not consistently
+ * right-aligned and flush with the right margin across all breakpoints.
  * 
- * Solution: Ensure consistent left-alignment and flex properties across all 
- * breakpoints so list items maintain uniform layout on all devices.
+ * Root cause: Mobile CSS uses `margin-left: 1em` instead of `margin-left: auto`,
+ * which doesn't push the excerpt flush right.
+ * 
+ * Solution: Ensure the excerpt (category name) is consistently right-aligned
+ * and flush with the right margin on all breakpoints using `margin-left: auto`.
+ * 
+ * HTML Structure (from Digital Moves image-hover-list plugin):
+ * ┌─────────────────────────────────────────────────────────────┐
+ * │ <div class="image-hover-list portfolio-list">              │
+ * │   <ul>                                                      │
+ * │     <li>                                                    │
+ * │       <a href="...">                                        │
+ * │         Artist Name                                         │
+ * │         <span class="excerpt">Category Name</span>          │
+ * │       </a>                                                  │
+ * │     </li>                                                   │
+ * │   </ul>                                                     │
+ * │   <div class="image-positioner">...</div>                   │
+ * │ </div>                                                      │
+ * └─────────────────────────────────────────────────────────────┘
+ * 
+ * Target selectors:
+ * - .image-hover-list.portfolio-list li          → list item (flex container)
+ * - .image-hover-list.portfolio-list li a        → link wrapper (flex container)
+ * - .image-hover-list.portfolio-list li span.excerpt → category name (right side)
  */
 
 /* Base list item layout - ensure consistent flex behavior */
 .image-hover-list.portfolio-list li {
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
-  text-align: left !important;
 }
 
-/* List item links/spans - maintain left-aligned flex layout */
+/* Ensure list item links use flex with space-between for proper alignment */
 .image-hover-list.portfolio-list li a,
 .image-hover-list.portfolio-list li > span {
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
+  justify-content: space-between !important;
   width: 100% !important;
-  text-align: left !important;
 }
 
-/* Artist category (excerpt) - consistent positioning across all breakpoints */
+/* Category name (excerpt) - right-aligned, flush with right margin across all breakpoints */
 .image-hover-list.portfolio-list li span.excerpt {
   margin-left: auto !important;
-  text-align: left !important;
+  text-align: right !important;
   flex-shrink: 0 !important;
 }
 
-/* Mobile overrides - ensure alignment remains consistent */
+/* Mobile overrides - maintain right alignment flush with margin */
 @media (max-width: 480px) {
   .image-hover-list.portfolio-list li span.excerpt {
     margin-left: auto !important;
-    text-align: left !important;
+    text-align: right !important;
   }
 }
 
-/* Tablet overrides - maintain layout consistency */
+/* Tablet overrides - maintain right alignment flush with margin */
 @media (min-width: 481px) and (max-width: 768px) {
   .image-hover-list.portfolio-list li span.excerpt {
     margin-left: auto !important;
-    text-align: left !important;
+    text-align: right !important;
   }
 }
 

@@ -10,6 +10,26 @@
  *       - See custom.css lines 1113-1163
  * 
  * D6.3: Hover image list - Consistent layout alignment (Issue #52)
- *       - See custom.css lines 1166-1219
- *       - Fixes inconsistent alignment of list items across breakpoints
+ *       - See custom.css lines 1166-1231
+ *       - Ensures category name (excerpt) is right-aligned and flush with 
+ *         right margin consistently across all breakpoints
+ *       
+ *       HTML Structure targeted:
+ *       ┌─────────────────────────────────────────────────────────────┐
+ *       │ <div class="image-hover-list portfolio-list">              │
+ *       │   <ul>                                                      │
+ *       │     <li>                                                    │
+ *       │       <a href="...">                                        │
+ *       │         Artist Name                                         │
+ *       │         <span class="excerpt">Category Name</span>          │
+ *       │       </a>                                                  │
+ *       │     </li>                                                   │
+ *       │   </ul>                                                     │
+ *       │   <div class="image-positioner">...</div>                   │
+ *       │ </div>                                                      │
+ *       └─────────────────────────────────────────────────────────────┘
+ *       
+ *       Key selectors:
+ *       - .image-hover-list.portfolio-list li a
+ *       - .image-hover-list.portfolio-list li span.excerpt
  */
