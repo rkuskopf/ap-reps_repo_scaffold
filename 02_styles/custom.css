@@ -1189,3 +1189,17 @@ body, a, button, * {
 }
 }
 
+/* ### BEGIN ISSUE 1: Secondary Nav - Underline width should match content margin */
+/* On mobile, the indicator track should respect the page content margins */
+@media (max-width: 767px) {
+  .wm-tabs .tabs-header nav .indicator-track {
+    margin-left: 17px !important;
+    margin-right: 17px !important;
+  }
+  
+  .wm-tabs .tabs-header nav .indicator-track .active-indicator {
+    --tab-button-active-width: calc(100% - 34px);
+  }
+}
+/* ### END ISSUE 1: Secondary Nav - Underline width should match content margin */
+
