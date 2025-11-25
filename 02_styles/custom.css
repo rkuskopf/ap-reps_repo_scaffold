@@ -482,6 +482,34 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
+/* ISSUE 6: Fix artist name position to stay consistent across tab switches */
+/* Convert sticky to fixed positioning so artist name remains at exact same viewport position */
+/* Only on desktop - mobile uses static positioning via separate rules in dev.css */
+@media (min-width: 768px) {
+  .apreps .wm-tabs .tab-panel .fe-block.sqs-position-sticky {
+    position: fixed !important;
+    top: var(--ap-artist-sticky-offset) !important;
+    z-index: 10;
+    pointer-events: none; /* allow clicks to pass through to gallery below */
+    /* Default to left alignment for artist name */
+    left: var(--sqs-site-gutter, 4vw);
+    right: auto;
+    /* Reset transform to allow fixed positioning to work relative to viewport */
+    transform: none !important;
+  }
+
+  /* Re-enable pointer events on the text itself so it remains selectable */
+  .apreps .wm-tabs .tab-panel .fe-block.sqs-position-sticky .sqs-block-content {
+    pointer-events: auto;
+  }
+
+  /* Discipline block - identified by h3 with text-align:right - align to right site gutter */
+  .apreps .wm-tabs .tab-panel .fe-block.sqs-position-sticky:has(h3[style*="text-align: right"]) {
+    right: var(--sqs-site-gutter, 4vw);
+    left: auto;
+  }
+}
+
 /* Artist names – actual text (ONLY inside sticky artist block) */
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3,
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3 *,
