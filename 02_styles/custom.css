@@ -1250,14 +1250,24 @@ body, a, button, * {
  * Solution: Apply consistent left and right margins on desktop/tablet while 
  * preserving the mobile layout which is already correctly inset.
  * 
- * This applies to all .apreps .image-hover-list components for consistency.
+ * Value rationale:
+ * - Base: 1.7vw (matches original issue suggestion, aligns with header/footer insets)
+ * - Min: 17px (prevents too-small margins on narrow tablet screens ~768-1000px)
+ * - Max: 44px (caps margin on ultra-wide screens >2560px to prevent excess whitespace)
+ * 
+ * This rule applies to all .apreps .image-hover-list.portfolio-list components.
+ * If the component is reused in other contexts, extend selectors or create a 
+ * more general utility class.
+ * 
+ * Revisit if: site-wide container padding changes, or component is used in 
+ * different layout contexts requiring different alignment.
  */
 
 @media screen and (min-width: 768px) {
   .apreps .image-hover-list.portfolio-list li a,
   .apreps .image-hover-list.portfolio-list li > span {
-    margin-left: 1.7vw;
-    margin-right: 1.7vw;
+    margin-left: clamp(17px, 1.7vw, 44px);
+    margin-right: clamp(17px, 1.7vw, 44px);
   }
 }
 
