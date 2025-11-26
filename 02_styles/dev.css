@@ -1188,7 +1188,7 @@ min-height: 0 !important;
 
 /* Ensure fe-blocks containing accordion and social content align at top */
 .apreps .fe-block:has(.sqs-block.accordion-block),
-.apreps .fe-block:has(.sqs-block.html-block .sqsrte-small a[href*="instagram"]) {
+.apreps .fe-block:has(.sqs-block.html-block .sqsrte-small) {
   align-self: flex-start !important;
 }
 
