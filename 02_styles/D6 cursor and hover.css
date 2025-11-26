@@ -34,9 +34,10 @@
  *       - .image-hover-list.portfolio-list li span.excerpt
  * 
  * D6.4: Artist Menu - Consistent margins on Desktop & Tablet
- *       - See custom.css lines 1241-1266
+ *       - See custom.css lines 1241-1262
  *       - Adds consistent left/right inset margins (1.7vw) on desktop/tablet
  *         viewports (min-width: 768px) for artist menu items
- *       - Applies to sections: 68e0ab5faedd22325758b558 (home) and 
- *         68e1ab8391417c498c5d3f05 (artist page)
+ *       - Uses simple selector pattern for site-wide consistency:
+ *         .image-hover-list.portfolio-list li a
+ *         .image-hover-list.portfolio-list li > span
  */
