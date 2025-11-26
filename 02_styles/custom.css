@@ -1196,6 +1196,9 @@ body, a, button, * {
     /* 17px matches the standard mobile content margin */
     margin-left: 17px !important;
     margin-right: 17px !important;
+    /* Constrain indicator track width so it doesn't trail off the right edge */
+    /* 34px = 17px left margin + 17px right margin */
+    max-width: calc(100vw - 34px) !important;
   }
   
   .wm-tabs .tabs-header nav .indicator-track .active-indicator {
