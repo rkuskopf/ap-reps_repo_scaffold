@@ -135,3 +135,23 @@
   });
 })();
 </script>
+
+<!-- Issue B: Prevent Flash/Layout Shift on Page Load -->
+<script>
+(function () {
+  function revealBioSocial() {
+    document.body.classList.add("apreps-loaded");
+  }
+
+  // Listen for gallery-ready event (dispatched by gallery plugins or custom code)
+  window.addEventListener("apreps-gallery-ready", revealBioSocial);
+
+  // Also listen for Will-Myers tabs initialization as gallery loads inside tabs
+  document.addEventListener("wmTabs:afterInit", revealBioSocial);
+
+  // Fallback timeout if no event fires (e.g., plugin has no event).
+  // 1200ms provides enough time for gallery images to load and render,
+  // preventing bio/social flash while ensuring content always appears.
+  setTimeout(revealBioSocial, 1200);
+})();
+</script>
