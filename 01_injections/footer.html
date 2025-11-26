@@ -149,7 +149,9 @@
   // Also listen for Will-Myers tabs initialization as gallery loads inside tabs
   document.addEventListener("wmTabs:afterInit", revealBioSocial);
 
-  // Fallback timeout if no event fires (e.g., plugin has no event)
+  // Fallback timeout if no event fires (e.g., plugin has no event).
+  // 1200ms provides enough time for gallery images to load and render,
+  // preventing bio/social flash while ensuring content always appears.
   setTimeout(revealBioSocial, 1200);
 })();
 </script>
