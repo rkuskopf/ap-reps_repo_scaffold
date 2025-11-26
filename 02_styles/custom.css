@@ -1162,6 +1162,82 @@ body, a, button, * {
 /* ### END D6.2: Mobile image-hover-list positioning 18/11/25 */
 
 
+/* ### BEGIN D6.3: Hover image list - Consistent layout alignment (Issue #52) 25/11/25 */
+
+/**
+ * Fix for Digital Moves image-hover-list layout consistency
+ * 
+ * Issue: Category names (e.g., "makeup") in the excerpt span are not consistently
+ * right-aligned and flush with the right margin across all breakpoints.
+ * 
+ * Root cause: Mobile CSS uses `margin-left: 1em` instead of `margin-left: auto`,
+ * which doesn't push the excerpt flush right.
+ * 
+ * Solution: Ensure the excerpt (category name) is consistently right-aligned
+ * and flush with the right margin on all breakpoints using `margin-left: auto`.
+ * 
+ * HTML Structure (from Digital Moves image-hover-list plugin):
+ * ┌─────────────────────────────────────────────────────────────┐
+ * │ <div class="image-hover-list portfolio-list">              │
+ * │   <ul>                                                      │
+ * │     <li>                                                    │
+ * │       <a href="...">                                        │
+ * │         Artist Name                                         │
+ * │         <span class="excerpt">Category Name</span>          │
+ * │       </a>                                                  │
+ * │     </li>                                                   │
+ * │   </ul>                                                     │
+ * │   <div class="image-positioner">...</div>                   │
+ * │ </div>                                                      │
+ * └─────────────────────────────────────────────────────────────┘
+ * 
+ * Target selectors:
+ * - .image-hover-list.portfolio-list li          → list item (flex container)
+ * - .image-hover-list.portfolio-list li a        → link wrapper (flex container)
+ * - .image-hover-list.portfolio-list li span.excerpt → category name (right side)
+ */
+
+/* Base list item layout - ensure consistent flex behavior */
+.image-hover-list.portfolio-list li {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Ensure list item links use flex with space-between for proper alignment */
+.image-hover-list.portfolio-list li a,
+.image-hover-list.portfolio-list li > span {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+/* Category name (excerpt) - right-aligned, flush with right margin across all breakpoints */
+.image-hover-list.portfolio-list li span.excerpt {
+  margin-left: auto !important;
+  text-align: right !important;
+  flex-shrink: 0 !important;
+}
+
+/* Mobile overrides - maintain right alignment flush with margin */
+@media (max-width: 480px) {
+  .image-hover-list.portfolio-list li span.excerpt {
+    margin-left: auto !important;
+    text-align: right !important;
+  }
+}
+
+/* Tablet overrides - maintain right alignment flush with margin */
+@media (min-width: 481px) and (max-width: 768px) {
+  .image-hover-list.portfolio-list li span.excerpt {
+    margin-left: auto !important;
+    text-align: right !important;
+  }
+}
+
+/* ### END D6.3: Hover image list - Consistent layout alignment (Issue #52) 25/11/25 */
+
+
 /* ### BEGIN ISSUE 4: Video sizes overlapping */
 @media (max-width: 767px) {
   /* the box that works: control height + spacing */
