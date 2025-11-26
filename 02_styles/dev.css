@@ -147,6 +147,7 @@ body, a:hover, button:hover {
   transform: scale(1)
  }
  /* Make button wrapper fill the entire tile and stay invisible but clickable */
+/* pointer-events: none on wrapper/container allows hover to pass through to tile */
 .auto-scroll-slide .list-item-content__button-wrapper {
   position: absolute !important;
   top: 0 !important;
@@ -156,6 +157,7 @@ body, a:hover, button:hover {
   margin: 0 !important;
   padding: 0 !important;
   z-index: 1000 !important;
+  pointer-events: none !important;
 }
 
 .auto-scroll-slide .list-item-content__button-container {
@@ -167,8 +169,10 @@ body, a:hover, button:hover {
   margin: 0 !important;
   padding: 0 !important;
   max-width: none !important;
+  pointer-events: none !important;
 }
 
+/* The actual link gets pointer-events: auto so clicks work, but hover passes through */
 .auto-scroll-slide .list-item-content__button {
   position: absolute !important;
   top: 0 !important;
