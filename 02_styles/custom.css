@@ -1238,6 +1238,32 @@ body, a, button, * {
 /* ### END D6.3: Hover image list - Consistent layout alignment (Issue #52) 25/11/25 */
 
 
+/* ### BEGIN Issue 3: Artist Hover List - Desktop/Tablet Horizontal Margins 26/11/25 */
+
+/**
+ * Fix for image-hover-list horizontal alignment on desktop/tablet
+ * 
+ * Issue: On desktop/tablet, the hover list (text + horizontal lines) sits flush 
+ * with the viewport edge, causing visual misalignment with other site elements 
+ * like the logo and footer newsletter module.
+ * 
+ * Solution: Apply consistent left and right margins on desktop/tablet while 
+ * preserving the mobile layout which is already correctly inset.
+ * 
+ * This applies to all .apreps .image-hover-list components for consistency.
+ */
+
+@media screen and (min-width: 768px) {
+  .apreps .image-hover-list.portfolio-list li a,
+  .apreps .image-hover-list.portfolio-list li > span {
+    margin-left: 1.7vw;
+    margin-right: 1.7vw;
+  }
+}
+
+/* ### END Issue 3: Artist Hover List - Desktop/Tablet Horizontal Margins 26/11/25 */
+
+
 /* ### BEGIN ISSUE 4: Video sizes overlapping */
 @media (max-width: 767px) {
   /* the box that works: control height + spacing */
