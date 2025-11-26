@@ -54,12 +54,13 @@ div.wm-tabs {
 } /*???*/
 
 /* ISSUE 5: tabs header adjustments */
-.wm-tabs[data-navigation-type="horizontal"][data-navigation-indicators="none"]
-  .tabs-header .scroll-indicator.indicator-start,
-.wm-tabs[data-navigation-type="horizontal"][data-navigation-indicators="none"]
-  .tabs-header .scroll-indicator.indicator-end {
-  display: none !important;
+/* Completely hide Will-Myers tabs scroll arrows */
+.wm-tabs[data-navigation-type="horizontal"] .tabs-header .scroll-indicator {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
+
 
 
 
@@ -197,6 +198,11 @@ body, a:hover, button:hover {
 .apreps {
   --ap-gap-x: 10px;
   --ap-artist-sticky-offset: clamp(120px, 16vw, 260px);
+}
+
+.apreps .fe-block.sqs-position-sticky {
+  position: sticky !important;
+  top: var(--ap-artist-sticky-offset);
 }
 
 /*  anchors  */
@@ -479,6 +485,7 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
+  top: var(--ap-artist-sticky-offset);
 }
 
 /* Artist names – actual text (ONLY inside sticky artist block) */
