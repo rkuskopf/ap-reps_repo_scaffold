@@ -106,9 +106,6 @@ The Will-Myers Tabs plugin generates this DOM structure:
   .wm-tabs .tabs-header nav .indicator-track {
     margin-left: 17px !important;
     margin-right: 17px !important;
-    /* Constrain indicator track width so it doesn't trail off the right edge */
-    /* 34px = 17px left margin + 17px right margin */
-    max-width: calc(100vw - 34px) !important;
   }
   
   /* Adjust the active indicator width variable */
@@ -120,6 +117,6 @@ The Will-Myers Tabs plugin generates this DOM structure:
 
 ### Before/After
 
-**Before:** The `.indicator-track` extended edge-to-edge (0px margins), causing the underline to appear misaligned with the content grid. The underline could also trail off the right side of the screen when tabs scroll.
+**Before:** The `.indicator-track` extended edge-to-edge (0px margins), causing the underline to appear misaligned with the content grid.
 
-**After:** The `.indicator-track` has 17px left/right margins AND a max-width constraint of `calc(100vw - 34px)`, ensuring the underline aligns flush with the image grid edges and never trails off the screen on either side. The tab headings can still scroll horizontally beyond the viewport, but the underline remains contained within the content area.
+**After:** The `.indicator-track` has 17px left/right margins, matching the standard mobile content padding, so the underline aligns flush with the image grid edges
