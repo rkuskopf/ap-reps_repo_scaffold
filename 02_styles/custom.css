@@ -1181,7 +1181,12 @@ body, a, button, * {
 /* ### END ISSUE 4: Video sizes overlapping */
 
 
-/* Nov 24 Fix 1: Nav links right aligned on mobiled */
+
+
+/* ### BEGIN Nov 24 Issues */
+
+
+/* Nov 24 Issue 7: Nav links right aligned on mobile */
 @media (max-width: 799px) {
 .header-menu-nav .header-menu-nav-item a {
   margin-left: 0 !important;
@@ -1189,7 +1194,17 @@ body, a, button, * {
 }
 }
 
-/* ### BEGIN ISSUE 1: Secondary Nav - Underline width should match content margin */
+/* Issue 8: tabs header adjustments */
+/* Completely hide Will-Myers tabs scroll arrows */
+.wm-tabs[data-navigation-type="horizontal"] .tabs-header .scroll-indicator {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+
+
+/* ### BEGIN ISSUE 1.1: Secondary Nav - Underline width should match content margin */
 /* On mobile, the indicator track should respect the page content margins */
 @media (max-width: 767px) {
   .wm-tabs .tabs-header nav .indicator-track {
@@ -1203,5 +1218,5 @@ body, a, button, * {
     --tab-button-active-width: calc(100% - 34px);
   }
 }
-/* ### END ISSUE 1: Secondary Nav - Underline width should match content margin */
 
+/* ### END ISSUE 1.1: Secondary Nav - Underline width should match content margin */
