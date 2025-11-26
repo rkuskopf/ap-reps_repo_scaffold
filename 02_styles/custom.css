@@ -1313,3 +1313,21 @@ body, a, button, * {
 }
 
 /* ## END ISSUE 4: Infinite scroll */
+
+
+/* ### BEGIN ISSUE B: Prevent Flash/Layout Shift on Page Load */
+
+/* Step 1: Hide bio and social blocks until gallery renders */
+.accordion-bio-block,
+.social-media-link-block {
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+/* Step 2: Reveal bio and social blocks when layout is stable */
+.apreps-loaded .accordion-bio-block,
+.apreps-loaded .social-media-link-block {
+  opacity: 1;
+}
+
+/* ### END ISSUE B: Prevent Flash/Layout Shift on Page Load */
