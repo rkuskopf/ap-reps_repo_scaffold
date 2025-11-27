@@ -1377,9 +1377,8 @@ body, a, button, * {
 }
 
 /* Bio section accordion and social handle blocks - prevent layout shifts */
-.apreps section[data-section-id="6927d95a74947532d0c9fbf2"],
-.apreps .page-section:has(.accordion-block) + .page-section,
-.apreps .page-section:has(.sqs-block-gallery) ~ .page-section:has(.accordion-block) {
+.apreps .page-section:has(.accordion-block),
+.apreps .page-section:has(.sqs-block-accordion) {
   contain: layout;
 }
 
