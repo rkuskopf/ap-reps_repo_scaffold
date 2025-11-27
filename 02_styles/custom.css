@@ -1360,12 +1360,12 @@ body, a, button, * {
  * and set overflow:visible to prevent any future clipping.
  */
 
-/* Caption typography improvements - inherit from body/footer for consistency */
+/* Caption typography improvements - match footer text styling */
 .apreps .image-slide-title {
-  font-size: inherit;
-  font-family: inherit;
-  line-height: inherit;
-  letter-spacing: normal;
+  font-size: 10.5px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
   text-transform: none;
   overflow: visible;
 }
