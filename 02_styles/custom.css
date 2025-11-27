@@ -1344,3 +1344,65 @@ body, a, button, * {
 }
 
 /* ### END ISSUE 1.1: Gallery Captions Appear Visually Cut Off Due to Typography 26/11/25 */
+
+
+/* ### BEGIN ISSUE B: Establish Stable Vertical Offset Between Accordion & Social Block 27/11/25 */
+
+/**
+ * Fix vertical alignment between accordion (BIO) block and social handle block
+ * 
+ * Problem: The accordion block has built-in internal spacing that the social block 
+ * doesn't have. Since they're now in separate grid columns within the same row,
+ * the social block appears visually misaligned (too close to the gallery above).
+ * 
+ * Solution: Apply a stable vertical offset (padding-top) to the social block to 
+ * visually align its baseline with the accordion title baseline. This offset 
+ * remains fixed regardless of accordion expansion.
+ *
+ * Acceptance Criteria:
+ * - Social handle's baseline visually aligns with accordion title baseline
+ * - Alignment stays fixed regardless of accordion expansion
+ * - Alignment holds across desktop, tablet, and mobile
+ * - No unintended interaction with gallery spacing above
+ */
+
+/* Social block vertical offset - aligns with accordion title baseline */
+.apreps .wm-tabs .tab-panel > .tab-content .page-section .fe-block.sqs-position-sticky[style*="mix-blend-mode"]:last-of-type,
+.apreps .wm-tabs .tab-panel > .tab-content .page-section [class*="fe-block"]:has(h3[style*="text-align: right"]) {
+  padding-top: 0.35em;
+  align-self: start !important;
+}
+
+/* Ensure the social block aligns at the top of its grid cell */
+.apreps .wm-tabs .tab-panel > .tab-content [data-fluid-engine] .fe-block.sqs-position-sticky:has(.sqs-html-content h3[style*="text-align: right"]) {
+  padding-top: 0.35em;
+  margin-top: 0 !important;
+}
+
+/* Alternative selector for social handle blocks positioned on the right side of grid */
+.apreps .wm-tabs .tab-panel > .tab-content .fluid-engine .fe-block.sqs-position-sticky .sqs-html-content h3[style*="text-align: right"] {
+  margin-top: 0 !important;
+}
+
+/* Desktop breakpoint: maintain alignment */
+@media (min-width: 768px) {
+  .apreps .wm-tabs .tab-panel > .tab-content .page-section .fe-block.sqs-position-sticky[style*="mix-blend-mode"]:last-of-type {
+    padding-top: 0.35em;
+  }
+}
+
+/* Tablet breakpoint: adjust offset if needed */
+@media (min-width: 481px) and (max-width: 767px) {
+  .apreps .wm-tabs .tab-panel > .tab-content .page-section .fe-block.sqs-position-sticky[style*="mix-blend-mode"]:last-of-type {
+    padding-top: 0.3em;
+  }
+}
+
+/* Mobile breakpoint: maintain consistent alignment */
+@media (max-width: 480px) {
+  .apreps .wm-tabs .tab-panel > .tab-content .page-section .fe-block.sqs-position-sticky[style*="mix-blend-mode"]:last-of-type {
+    padding-top: 0.25em;
+  }
+}
+
+/* ### END ISSUE B: Establish Stable Vertical Offset Between Accordion & Social Block 27/11/25 */
