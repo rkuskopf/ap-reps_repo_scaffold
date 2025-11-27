@@ -1143,3 +1143,47 @@ min-height: 0 !important;
 }
 
 /* ### END ISSUE 3: Mobile image-hover-list positioning 18/11/25 */
+
+
+/* ### BEGIN ISSUE B: Bio/Social Flash & Layout Shift on Page Load 27/11/25 */
+
+/**
+ * Fix for Bio accordion and Social blocks flashing at top of page
+ * before gallery loads on Artist pages.
+ * 
+ * Problem: Bio accordion and Social media blocks render instantly while
+ * the gallery section below loads more slowly. This causes a visible flash
+ * and layout shift as the blocks appear at the top then jump down.
+ * 
+ * Solution: Hide accordion and bio/social blocks in artist tab panels initially,
+ * then reveal them once the gallery images have loaded using CSS :has() selector.
+ * This ensures a stable layout from initial render.
+ */
+
+/* Hide accordion blocks inside artist tab panels until gallery is ready */
+.apreps .wm-tabs .tab-panel .sqs-block.accordion-block {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Hide social/bio HTML blocks with small text inside artist tab panels */
+.apreps .wm-tabs .tab-panel .page-section:has(.sqs-block-gallery) .sqs-block.html-block:has(.sqsrte-small) {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Reveal accordion blocks once gallery has loaded images */
+.apreps .wm-tabs .tab-panel:has(.sqs-gallery .thumb-image.loaded) .sqs-block.accordion-block {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Reveal social/bio HTML blocks once gallery has loaded images */
+.apreps .wm-tabs .tab-panel:has(.sqs-gallery .thumb-image.loaded) .page-section:has(.sqs-block-gallery) .sqs-block.html-block:has(.sqsrte-small) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ### END ISSUE B: Bio/Social Flash & Layout Shift on Page Load 27/11/25 */
