@@ -1363,7 +1363,6 @@ body, a, button, * {
 /* Caption typography improvements - match footer text styling */
 .apreps .image-slide-title {
   font-size: 10.5px;
-  font-family: "Helvetica Neue", Arial, sans-serif;
   line-height: 1.4;
   letter-spacing: 0.02em;
   text-transform: none;
