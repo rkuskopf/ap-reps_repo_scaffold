@@ -1326,6 +1326,23 @@ body, a, button, * {
  * Solution: Target the Fluid Engine container that holds both blocks and apply
  * flexbox with align-items: flex-start to align them at the top baseline.
  * The accordion expansion should NOT move the social block vertically.
+ *
+ * Accordion HTML structure:
+ * <div class="sqs-block accordion-block sqs-block-accordion">
+ *   <div class="sqs-block-content">
+ *     <ul class="accordion-items-container">
+ *       <li class="accordion-item">
+ *         <p class="accordion-item__title-wrapper">
+ *           <button class="accordion-item__click-target">
+ *             <span class="accordion-item__title">BIO</span>
+ *             <div class="accordion-icon-container">...</div>
+ *           </button>
+ *         </p>
+ *         <div class="accordion-item__dropdown">...</div>
+ *       </li>
+ *     </ul>
+ *   </div>
+ * </div>
  */
 
 /* 
@@ -1350,7 +1367,8 @@ body, a, button, * {
  */
 
 /* Fluid Engine container for bio + social alignment */
-.apreps .fluid-engine:has(.sqs-block.accordion-block):has(.sqs-block.html-block) {
+.apreps .fluid-engine:has(.sqs-block.accordion-block):has(.sqs-block.html-block),
+.apreps .fluid-engine:has(.sqs-block.sqs-block-accordion):has(.sqs-block.html-block) {
   display: flex !important;
   align-items: flex-start !important;
   gap: 2rem;
@@ -1358,22 +1376,26 @@ body, a, button, * {
 
 /* Ensure fe-blocks containing accordion and social content align at top */
 .apreps .fe-block:has(.sqs-block.accordion-block),
+.apreps .fe-block:has(.sqs-block.sqs-block-accordion),
 .apreps .fe-block:has(.sqs-block.html-block .sqsrte-small) {
   align-self: flex-start !important;
 }
 
-/* Target blocks within the same row */
+/* Target blocks within the same row - both class variations */
 .apreps .fluid-engine .fe-block .sqs-block.accordion-block,
+.apreps .fluid-engine .fe-block .sqs-block.sqs-block-accordion,
 .apreps .fluid-engine .fe-block .sqs-block.html-block {
   align-self: flex-start !important;
 }
 
 /* Ensure accordion expansion doesn't affect sibling blocks */
+.apreps .sqs-block-accordion .accordion-item__dropdown,
 .apreps .accordion-block .accordion-item__dropdown {
   position: relative !important;
 }
 
 /* Prevent accordion content from pushing siblings when expanded */
+.apreps .sqs-block-accordion .accordion-items-container,
 .apreps .accordion-block .accordion-items-container {
   display: block !important;
 }
@@ -1389,7 +1411,8 @@ body, a, button, * {
 @media (max-width: 767px) {
   /* On mobile, stack blocks vertically but maintain alignment */
   .bio-social-container,
-  .apreps .fluid-engine:has(.sqs-block.accordion-block):has(.sqs-block.html-block) {
+  .apreps .fluid-engine:has(.sqs-block.accordion-block):has(.sqs-block.html-block),
+  .apreps .fluid-engine:has(.sqs-block.sqs-block-accordion):has(.sqs-block.html-block) {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 1rem;
@@ -1399,7 +1422,8 @@ body, a, button, * {
 @media (min-width: 768px) and (max-width: 1024px) {
   /* Tablet: maintain horizontal layout with adjusted gap */
   .bio-social-container,
-  .apreps .fluid-engine:has(.sqs-block.accordion-block):has(.sqs-block.html-block) {
+  .apreps .fluid-engine:has(.sqs-block.accordion-block):has(.sqs-block.html-block),
+  .apreps .fluid-engine:has(.sqs-block.sqs-block-accordion):has(.sqs-block.html-block) {
     gap: 1.5rem;
   }
 }
