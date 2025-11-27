@@ -1158,30 +1158,32 @@ min-height: 0 !important;
  * Solution: Hide accordion and bio/social blocks in artist tab panels initially,
  * then reveal them once the gallery images have loaded using CSS :has() selector.
  * This ensures a stable layout from initial render.
+ * 
+ * Uses shared transition variable for consistent reveal timing.
  */
 
-/* Hide accordion blocks inside artist tab panels until gallery is ready */
-.apreps .wm-tabs .tab-panel .sqs-block.accordion-block {
+/* Shared variable for bio/social block reveal transition */
+.apreps .wm-tabs .tab-panel {
+  --bio-social-reveal-transition: opacity 0.3s ease;
+}
+
+/* 
+ * Initially hide bio/social blocks in artist tabs 
+ * Uses opacity:0 to reserve layout space while hidden
+ */
+.apreps .wm-tabs .tab-panel .sqs-block.accordion-block,
+.apreps .wm-tabs .tab-panel .sqs-block.html-block:has(.sqsrte-small) {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: var(--bio-social-reveal-transition);
 }
 
-/* Hide social/bio HTML blocks with small text inside artist tab panels */
-.apreps .wm-tabs .tab-panel .page-section:has(.sqs-block-gallery) .sqs-block.html-block:has(.sqsrte-small) {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-/* Reveal accordion blocks once gallery has loaded images */
-.apreps .wm-tabs .tab-panel:has(.sqs-gallery .thumb-image.loaded) .sqs-block.accordion-block {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Reveal social/bio HTML blocks once gallery has loaded images */
-.apreps .wm-tabs .tab-panel:has(.sqs-gallery .thumb-image.loaded) .page-section:has(.sqs-block-gallery) .sqs-block.html-block:has(.sqsrte-small) {
+/* 
+ * Reveal blocks once gallery has loaded images
+ * The .thumb-image.loaded class indicates Squarespace has finished loading
+ */
+.apreps .wm-tabs .tab-panel:has(.thumb-image.loaded) .sqs-block.accordion-block,
+.apreps .wm-tabs .tab-panel:has(.thumb-image.loaded) .sqs-block.html-block:has(.sqsrte-small) {
   opacity: 1;
   pointer-events: auto;
 }
