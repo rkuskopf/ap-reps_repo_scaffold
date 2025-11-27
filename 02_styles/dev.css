@@ -1154,26 +1154,36 @@ min-height: 0 !important;
  * its final height. The Bio section initially appears higher on the page and 
  * jumps down once the gallery finishes rendering.
  *
- * Solution: Ensure the margin-wrapper maintains its aspect-ratio height even 
- * before images load by setting min-height: 1px. This forces the browser to 
- * calculate the aspect-ratio based height immediately.
+ * Solution: Hide the Bio section initially, then reveal it once the gallery
+ * above has loaded its images (JS adds .ap-bio-ready class to body).
  */
 
-/* Ensure the margin-wrapper maintains its aspect-ratio height even with empty content */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
-  min-height: 1px; /* Forces aspect-ratio to apply even before image loads */
-}
-
-/* Ensure images don't cause reflow when they load - use opacity transition instead */
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-
-/* Hide images that haven't loaded yet without affecting layout */
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image:not([src]),
-.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image[src=""] {
+/* Hide Bio section initially to prevent visible jump */
+.apreps section:has(.sqs-block-accordion),
+.apreps section:has(.accordion-block) {
   opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+/* Reveal Bio section once gallery images are loaded (JS adds this class) */
+.apreps.ap-bio-ready section:has(.sqs-block-accordion),
+.apreps.ap-bio-ready section:has(.accordion-block) {
+  opacity: 1;
+  transform: none;
+}
+
+/* Fallback: If JS fails to add class after 3s, show the section anyway */
+@keyframes ap-bio-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.apreps section:has(.sqs-block-accordion),
+.apreps section:has(.accordion-block) {
+  animation: ap-bio-fallback 0s 3s forwards;
 }
 
 /* ### END BIO SECTION LAYOUT SHIFT FIX 27/11/25 */
