@@ -1344,3 +1344,42 @@ body, a, button, * {
 }
 
 /* ### END ISSUE 1.1: Gallery Captions Appear Visually Cut Off Due to Typography 26/11/25 */
+
+
+/* ### BEGIN ISSUE A 1: Accordion and Instagram section - padding and height 27/11/25 */
+
+/* Push text block (e.g. @catsmithmakeup handle) down to align with accordion top */
+.apreps .page-section.gallery-section + .page-section .sqs-block-html {
+  padding-top: 32px;   /* aligns text block top with accordion header */
+}
+
+/* Mobile: smaller offset for tighter layout */
+@media (max-width: 768px) {
+  .apreps .page-section.gallery-section + .page-section .sqs-block-html {
+    padding-top: 16px;
+  }
+}
+
+/* Make the section after gallery wrap around content (like D4) */
+.apreps .page-section.gallery-section + .page-section,
+.apreps .page-section.gallery-section + .page-section .content-wrapper,
+.apreps .page-section.gallery-section + .page-section [data-fluid-engine],
+.apreps .page-section.gallery-section + .page-section .fluid-engine {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+/* Let Fluid Engine shrink-wrap to content in the accordion section */
+.apreps .page-section.gallery-section + .page-section [class^="fe-"] {
+  grid-template-rows: none !important;
+  grid-auto-rows: minmax(8px, auto) !important;
+}
+
+/* Remove extra section padding that causes excessive height */
+.apreps .page-section.gallery-section + .page-section .content-wrapper {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* ### END ISSUE A 1: Accordion and Instagram section - padding and height 27/11/25 */
