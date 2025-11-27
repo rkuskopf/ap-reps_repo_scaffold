@@ -1154,25 +1154,14 @@ min-height: 0 !important;
  * its final height. The Bio section initially appears higher on the page and 
  * jumps down once the gallery finishes rendering.
  *
- * Solution: Force the gallery slides to reserve their full height immediately
- * using min-height based on aspect-ratio calculation, so the layout is stable
- * from first paint.
+ * Solution: Ensure the margin-wrapper maintains its aspect-ratio height even 
+ * before images load by setting min-height: 1px. This forces the browser to 
+ * calculate the aspect-ratio based height immediately.
  */
-
-/* Force gallery slides to reserve height before images load */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide {
-  min-height: 0;
-  /* Use container query or calc to estimate height based on width */
-}
 
 /* Ensure the margin-wrapper maintains its aspect-ratio height even with empty content */
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
   min-height: 1px; /* Forces aspect-ratio to apply even before image loads */
-}
-
-/* Prevent gallery grid from collapsing before images load */
-.apreps .sqs-gallery-block-grid .gallery-grid {
-  min-height: auto;
 }
 
 /* Ensure images don't cause reflow when they load - use opacity transition instead */
