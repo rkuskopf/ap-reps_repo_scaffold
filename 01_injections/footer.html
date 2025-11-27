@@ -140,8 +140,8 @@
 <script>
 (function () {
   window.addEventListener('load', function () {
-    if (document && document.body) {
-      document.body.classList.add('ap-bio-ready');
+    if (document && document.documentElement) {
+      document.documentElement.classList.add('ap-bio-ready');
     }
   });
 })();
