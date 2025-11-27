@@ -1344,3 +1344,34 @@ body, a, button, * {
 }
 
 /* ### END ISSUE 1.1: Gallery Captions Appear Visually Cut Off Due to Typography 26/11/25 */
+
+
+/* ### BEGIN ISSUE B: Bio/Social Flash & Layout Shift on Page Load 27/11/25 */
+
+/**
+ * Fix for Bio accordion and Social blocks flashing at top of page
+ * before gallery loads on Artist pages.
+ * 
+ * Problem: Bio accordion and Social media blocks render instantly while
+ * the gallery section below loads more slowly. This causes a visible flash
+ * and layout shift as the blocks appear at the top then jump down.
+ * 
+ * Solution: Initially hide the entire tab content until Will-Myers tabs
+ * plugin has finished initializing (indicated by data-loading-state="loaded").
+ * This prevents any flash/shift as the entire layout renders together.
+ */
+
+/* Hide tab content until tabs plugin signals loading complete */
+.apreps .wm-tabs:not([data-loading-state="loaded"]) .tabs-content {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Reveal with smooth transition once loaded */
+.apreps .wm-tabs[data-loading-state="loaded"] .tabs-content {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+/* ### END ISSUE B: Bio/Social Flash & Layout Shift on Page Load 27/11/25 */
