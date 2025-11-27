@@ -1231,12 +1231,12 @@ body, a, button, * {
  * different layout contexts requiring different alignment.
  */
 
-@media screen and (min-width: 768px) {
+
   .apreps .image-hover-list.portfolio-list li {
     margin-left: clamp(17px, 1.7vw, 44px);
     margin-right: clamp(17px, 1.7vw, 44px);
   }
-}
+
 
 /* ### END Issue 3: Artist Hover List - Desktop/Tablet Horizontal Margins 26/11/25 */
 
