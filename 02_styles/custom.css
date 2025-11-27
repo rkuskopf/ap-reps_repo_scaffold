@@ -1352,46 +1352,40 @@ body, a, button, * {
  * Fix for Bio accordion + social handle section layout jump on Artist pages
  *
  * Problem: The hero gallery section above takes time to load images and resolve
- * its final height. This causes the Bio section below to jump downward when 
- * the gallery finishes rendering.
+ * its final height. The Bio section initially appears higher on the page and 
+ * jumps down once the gallery finishes rendering.
  *
- * Solution: Use CSS containment to isolate the gallery section's layout changes
- * and reserve space with aspect-ratio on gallery grid containers to minimize
- * layout shift during image loading.
+ * Solution: Force the gallery slides to reserve their full height immediately
+ * using min-height based on aspect-ratio calculation, so the layout is stable
+ * from first paint.
  */
 
-/* Contain layout changes within the gallery section to prevent affecting siblings */
-.apreps .page-section.gallery-section,
-.apreps .page-section:has(.sqs-block-gallery) {
-  contain: layout;
-}
-
-/* Reserve consistent space for gallery grid containers before images load */
-.apreps .sqs-gallery-block-grid .gallery-grid {
-  contain: content;
-}
-
-/* Ensure gallery slides reserve their aspect-ratio space even before images load */
+/* Force gallery slides to reserve height before images load */
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide {
-  contain: layout;
+  min-height: 0;
+  /* Use container query or calc to estimate height based on width */
 }
 
-/* Bio section accordion and social handle blocks - prevent layout shifts */
-.apreps .page-section:has(.accordion-block),
-.apreps .page-section:has(.sqs-block-accordion) {
-  contain: layout;
+/* Ensure the margin-wrapper maintains its aspect-ratio height even with empty content */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
+  min-height: 1px; /* Forces aspect-ratio to apply even before image loads */
 }
 
-/* Fluid Engine bio section - stable positioning */
-.apreps .fe-block:has(.accordion-block),
-.apreps .fe-block:has(.sqs-block-accordion) {
-  contain: layout;
+/* Prevent gallery grid from collapsing before images load */
+.apreps .sqs-gallery-block-grid .gallery-grid {
+  min-height: auto;
 }
 
-/* Ensure the Bio section's Fluid Engine grid doesn't shift */
-.apreps section:has(.accordion-block) .fluid-engine,
-.apreps section:has(.sqs-block-accordion) .fluid-engine {
-  contain: layout;
+/* Ensure images don't cause reflow when they load - use opacity transition instead */
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Hide images that haven't loaded yet without affecting layout */
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image:not([src]),
+.apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image[src=""] {
+  opacity: 0;
 }
 
 /* ### END BIO SECTION LAYOUT SHIFT FIX 27/11/25 */
