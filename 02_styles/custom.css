@@ -481,6 +481,23 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
+.fe-block.sqs-position-sticky {
+   top: clamp(300px, 45vh, 900px) !important;
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+.fe-block.sqs-position-sticky {
+   top: clamp(300px, 45vh, 900px) !important;
+  }
+}
+
+@media (max-width: 640px) {
+.fe-block.sqs-position-sticky {
+    --ap-artist-sticky-offset: clamp(120px, 16vw, 260px);
+  }
+}
+
 /* Artist names – actual text (ONLY inside sticky artist block) */
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3,
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3 *,
@@ -489,7 +506,6 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   color: #fff !important;
   background: transparent !important;
   text-shadow: none !important;
-  padding-top: 150px;
 }
 
 
