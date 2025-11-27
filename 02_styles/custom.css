@@ -1356,40 +1356,22 @@ body, a, button, * {
  * the gallery section below loads more slowly. This causes a visible flash
  * and layout shift as the blocks appear at the top then jump down.
  * 
- * Solution: Hide accordion and bio/social blocks in artist tab panels initially,
- * then reveal them once the gallery images have loaded using CSS :has() selector.
- * This ensures a stable layout from initial render.
- * 
- * Uses shared transition variable for consistent reveal timing.
+ * Solution: Initially hide the entire tab content until Will-Myers tabs
+ * plugin has finished initializing (indicated by data-loading-state="loaded").
+ * This prevents any flash/shift as the entire layout renders together.
  */
 
-/* Shared variable for bio/social block reveal transition */
-.apreps .wm-tabs .tab-panel {
-  --bio-social-reveal-transition: opacity 0.3s ease;
-}
-
-/* 
- * Initially hide bio/social blocks in artist tabs 
- * Uses opacity:0 to reserve layout space while hidden
- * 
- * Note: .sqsrte-small is Squarespace's Rich Text Editor class for small text formatting,
- * commonly used in bio descriptions and social link blocks on artist pages.
- */
-.apreps .wm-tabs .tab-panel .sqs-block.accordion-block,
-.apreps .wm-tabs .tab-panel .sqs-block.html-block:has(.sqsrte-small) {
+/* Hide tab content until tabs plugin signals loading complete */
+.apreps .wm-tabs:not([data-loading-state="loaded"]) .tabs-content {
   opacity: 0;
   pointer-events: none;
-  transition: var(--bio-social-reveal-transition);
 }
 
-/* 
- * Reveal blocks once gallery has loaded images
- * The .thumb-image.loaded class indicates Squarespace has finished loading
- */
-.apreps .wm-tabs .tab-panel:has(.thumb-image.loaded) .sqs-block.accordion-block,
-.apreps .wm-tabs .tab-panel:has(.thumb-image.loaded) .sqs-block.html-block:has(.sqsrte-small) {
+/* Reveal with smooth transition once loaded */
+.apreps .wm-tabs[data-loading-state="loaded"] .tabs-content {
   opacity: 1;
   pointer-events: auto;
+  transition: opacity 0.3s ease;
 }
 
 /* ### END ISSUE B: Bio/Social Flash & Layout Shift on Page Load 27/11/25 */
