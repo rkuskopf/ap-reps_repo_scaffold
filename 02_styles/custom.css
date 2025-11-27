@@ -197,6 +197,7 @@ body, a:hover, button:hover {
 .apreps {
   --ap-gap-x: 10px;
   --ap-artist-sticky-offset: clamp(120px, 16vw, 260px);
+  --ap-accordion-baseline-offset: 15px; /* Used for accordion/social handle alignment */
 }
 
 /*  anchors  */
@@ -1344,3 +1345,85 @@ body, a, button, * {
 }
 
 /* ### END ISSUE 1.1: Gallery Captions Appear Visually Cut Off Due to Typography 26/11/25 */
+
+
+/* ### BEGIN ISSUE A: Horizontal Alignment - Accordion & Social Handle 27/11/25 */
+
+/**
+ * Fix for horizontal alignment between accordion block (Bio/+) and social handle
+ * 
+ * Problem: The social media handle appears lower than the Bio/+ toggle button,
+ * causing misalignment when viewed side-by-side.
+ * 
+ * Solution: 
+ * 1. Align both blocks to the top of their container (flex-start)
+ * 2. Match the padding/margins so text baselines align
+ * 3. Ensure accordion expansion doesn't move the adjacent social block
+ */
+
+/* Parent container: align items to the top so accordion expansion doesn't push siblings */
+.apreps .accordion-block,
+.apreps .sqs-block.accordion-block {
+  align-self: flex-start !important;
+}
+
+/* Adjacent social handle block should also align to top */
+.apreps .accordion-block ~ .html-block,
+.apreps .accordion-block ~ .sqs-block.html-block,
+.apreps .sqs-block.accordion-block ~ .sqs-block.html-block {
+  align-self: flex-start !important;
+}
+
+/* Fluid Engine row containing accordion + social: align items to start */
+.apreps .fe-block:has(.accordion-block) {
+  align-self: flex-start !important;
+}
+
+.apreps .fe-block:has(.html-block):has(a[href*="instagram"]) {
+  align-self: flex-start !important;
+}
+
+/* Match vertical alignment - social handle paragraph needs matching top spacing for baseline alignment */
+.apreps .accordion-block + .fe-block .sqs-block.html-block .sqsrte-small,
+.apreps .accordion-block ~ .html-block .sqsrte-small,
+.apreps .fe-block:has(.accordion-block) ~ .fe-block .sqs-block.html-block .sqsrte-small {
+  margin-top: 0 !important;
+  padding-top: var(--ap-accordion-baseline-offset) !important;
+}
+
+/* Ensure the accordion items container aligns properly */
+.apreps .accordion-items-container {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.apreps .accordion-item {
+  margin: 0 !important;
+}
+
+/* Accordion title wrapper should not add extra spacing */
+.apreps .accordion-item__title-wrapper {
+  margin: 0 !important;
+}
+
+/* Fluid Engine grid row alignment - all cells in same row align to top */
+.apreps [data-fluid-engine] .fe-block {
+  align-self: start !important;
+}
+
+/* Specifically for blocks that contain accordion next to social links */
+.apreps [data-fluid-engine] .fe-block:has(.accordion-block),
+.apreps [data-fluid-engine] .fe-block:has([href*="instagram"]) {
+  align-self: start !important;
+}
+
+/* Mobile/Tablet responsive consistency (consolidated media query) */
+@media (max-width: 1024px) {
+  .apreps .accordion-block ~ .html-block .sqsrte-small,
+  .apreps .fe-block:has(.accordion-block) ~ .fe-block .html-block .sqsrte-small {
+    padding-top: var(--ap-accordion-baseline-offset) !important;
+  }
+}
+
+/* ### END ISSUE A: Horizontal Alignment - Accordion & Social Handle 27/11/25 */
