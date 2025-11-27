@@ -1359,9 +1359,10 @@ body, a, button, * {
  */
 
 /* Fe-block containers containing HTML blocks with social media links - pin to top */
-.apreps .fe-block:has(.html-block .sqs-html-content a[href*="instagram"]),
-.apreps .fe-block:has(.html-block .sqs-html-content a[href*="twitter"]),
-.apreps .fe-block:has(.html-block .sqs-html-content a[href*="tiktok"]) {
+.apreps .fe-block:has(.html-block .sqs-html-content a[href*="instagram.com"]),
+.apreps .fe-block:has(.html-block .sqs-html-content a[href*="twitter.com"]),
+.apreps .fe-block:has(.html-block .sqs-html-content a[href*="tiktok.com"]),
+.apreps .fe-block:has(.html-block .sqs-html-content a[href*="x.com"]) {
   align-self: start !important;
 }
 
@@ -1371,14 +1372,16 @@ body, a, button, * {
   align-self: start !important;
 }
 
-/* General fix: All fe-blocks in same grid row should align to top */
-.apreps [data-fluid-engine] .fe-block:has(.sqs-block-accordion) ~ .fe-block {
+/* Fe-blocks in same grid row as accordion that contain social media links - align to top */
+.apreps [data-fluid-engine] .fe-block:has(.sqs-block-accordion) ~ .fe-block:has(.html-block .sqs-html-content a[href*="instagram.com"]),
+.apreps [data-fluid-engine] .fe-block:has(.sqs-block-accordion) ~ .fe-block:has(.html-block .sqs-html-content a[href*="twitter.com"]),
+.apreps [data-fluid-engine] .fe-block:has(.sqs-block-accordion) ~ .fe-block:has(.html-block .sqs-html-content a[href*="tiktok.com"]),
+.apreps [data-fluid-engine] .fe-block:has(.sqs-block-accordion) ~ .fe-block:has(.html-block .sqs-html-content a[href*="x.com"]) {
   align-self: start !important;
 }
 
 /* Ensure accordion block and adjacent text blocks in Fluid Engine align to top */
-.apreps [data-fluid-engine] .sqs-block-accordion,
-.apreps [data-fluid-engine] .sqs-block.html-block {
+.apreps [data-fluid-engine] .sqs-block-accordion {
   align-self: start !important;
 }
 
