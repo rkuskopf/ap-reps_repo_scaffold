@@ -1344,3 +1344,87 @@ body, a, button, * {
 }
 
 /* ### END ISSUE 1.1: Gallery Captions Appear Visually Cut Off Due to Typography 26/11/25 */
+
+
+/* ### BEGIN ISSUE A: Horizontal Alignment Across Both Blocks 27/11/25 */
+/**
+ * Fix for Bio accordion and social media handle horizontal alignment
+ * 
+ * Problem: The social media handle appears lower than the Bio/accordion title,
+ * causing misalignment when viewed side-by-side.
+ * 
+ * Solution: 
+ * 1. Align both blocks to the top of their grid row
+ * 2. Remove default margins/padding that cause offset
+ * 3. Ensure social block stays fixed when accordion expands
+ */
+
+.apreps {
+  /* Accordion button top padding - used to align adjacent elements */
+  --ap-accordion-baseline-offset: 15px;
+}
+
+/* Parent row container - align items to top */
+.apreps .fe-block:has(.accordion-block),
+.apreps .fe-block:has(.accordion-block) + .fe-block {
+  align-self: start !important;
+}
+
+/* Accordion block - align to top and remove extra spacing */
+.apreps .sqs-block.accordion-block {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Accordion items container - remove default margins */
+.apreps .accordion-block .accordion-items-container {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Accordion item title wrapper - align to top baseline */
+.apreps .accordion-block .accordion-item__title-wrapper {
+  margin: 0 !important;
+}
+
+/* Social media handle block - align to top baseline of accordion 
+   Uses generic selector to support any external link in sqsrte-small format */
+.apreps .fe-block:has(.html-block .sqsrte-small a[target="_blank"]) {
+  align-self: start !important;
+}
+
+/* Social block paragraph - remove margins to align with accordion title */
+.apreps .html-block .sqsrte-small {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  /* Match accordion button padding-top for baseline alignment */
+  padding-top: var(--ap-accordion-baseline-offset, 15px) !important;
+}
+
+/* Accordion dropdown - ensure it doesn't push adjacent elements */
+.apreps .accordion-block .accordion-item__dropdown {
+  position: relative !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  /* Mobile: maintain top alignment */
+  .apreps .fe-block:has(.accordion-block),
+  .apreps .fe-block:has(.html-block .sqsrte-small) {
+    align-self: start !important;
+  }
+  
+  .apreps .html-block .sqsrte-small {
+    padding-top: var(--ap-accordion-baseline-offset, 15px) !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Tablet: maintain top alignment */
+  .apreps .fe-block:has(.accordion-block),
+  .apreps .fe-block:has(.html-block .sqsrte-small) {
+    align-self: start !important;
+  }
+}
+
+/* ### END ISSUE A: Horizontal Alignment Across Both Blocks 27/11/25 */
