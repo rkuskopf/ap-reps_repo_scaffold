@@ -1313,3 +1313,34 @@ body, a, button, * {
 }
 
 /* ## END ISSUE 4: Infinite scroll */
+
+
+/* ### BEGIN ISSUE 1.1: Gallery Captions Appear Visually Cut Off Due to Typography 26/11/25 */
+
+/**
+ * Fix for grid-gallery caption legibility
+ * 
+ * Problem: Caption text uses tight typography (14px font, 16.8px line-height, 
+ * 0.53px letter-spacing) making text difficult to read and appear cramped.
+ * 
+ * Solution: Update typography to match footer/body rhythm for visual balance
+ * and set overflow:visible to prevent any future clipping.
+ */
+
+/* Caption typography improvements - match footer text styling */
+.apreps .image-slide-title {
+  font-size: 10.5px;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  overflow: visible;
+}
+
+/* Caption container - allow content to flow naturally without clipping */
+.apreps .margin-wrapper {
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* ### END ISSUE 1.1: Gallery Captions Appear Visually Cut Off Due to Typography 26/11/25 */
