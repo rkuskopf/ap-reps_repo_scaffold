@@ -135,3 +135,14 @@
   });
 })();
 </script>
+
+<!-- AP—REPS: Prevent Bio accordion + social handle section from flashing/jumping on load -->
+<script>
+(function () {
+  window.addEventListener('load', function () {
+    if (document && document.body) {
+      document.body.classList.add('ap-bio-ready');
+    }
+  });
+})();
+</script>
