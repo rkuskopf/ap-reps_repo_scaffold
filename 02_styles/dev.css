@@ -1145,7 +1145,7 @@ min-height: 0 !important;
 /* ### END ISSUE 3: Mobile image-hover-list positioning 18/11/25 */
 
 
-/* ### BEGIN ISSUE A: Horizontal Alignment Across Bio + Social Blocks 26/11/25 */
+/* ### BEGIN ISSUE A: Horizontal Alignment Across Bio + Social Blocks 27/11/25 */
 
 /**
  * Fix for aligning the Bio accordion block and Social media handle horizontally.
@@ -1153,30 +1153,17 @@ min-height: 0 !important;
  * Problem: The social media handle appears lower than the Bio/+ toggle button,
  * causing misalignment when viewed side-by-side.
  * 
- * Solution: Target the Fluid Engine container that holds both blocks and apply
- * flexbox with align-items: flex-start to align them at the top baseline.
- * The accordion expansion should NOT move the social block vertically.
+ * Solution: Apply a custom .bio-social-container class to the parent container
+ * (the row/section that holds both the Bio accordion and Social handle blocks)
+ * in Squarespace's editor. This CSS will then ensure proper alignment.
  *
- * Accordion HTML structure:
- * <div class="sqs-block accordion-block sqs-block-accordion">
- *   <div class="sqs-block-content">
- *     <ul class="accordion-items-container">
- *       <li class="accordion-item">
- *         <p class="accordion-item__title-wrapper">
- *           <button class="accordion-item__click-target">
- *             <span class="accordion-item__title">BIO</span>
- *             <div class="accordion-icon-container">...</div>
- *           </button>
- *         </p>
- *         <div class="accordion-item__dropdown">...</div>
- *       </li>
- *     </ul>
- *   </div>
- * </div>
+ * IMPORTANT: This fix requires adding the class "bio-social-container" to the
+ * parent element that contains both the Bio accordion and the Social handle
+ * in Squarespace's Advanced section settings.
  */
 
 /* 
- * Primary approach: Custom .bio-social-container class
+ * Custom .bio-social-container class
  * Apply this class to the Squarespace row/container that holds both Bio and Social blocks
  */
 .bio-social-container {
@@ -1191,58 +1178,10 @@ min-height: 0 !important;
   flex-shrink: 0 !important;
 }
 
-/* 
- * Alternative approach: Target Fluid Engine rows that contain both accordion and html blocks.
- * In Squarespace's Fluid Engine, blocks are in .fe-block elements within a .fluid-engine grid.
- */
-
-/* Fluid Engine container for bio + social alignment */
-.apreps .fluid-engine:has(.sqs-block.accordion-block):has(.sqs-block.html-block),
-.apreps .fluid-engine:has(.sqs-block.sqs-block-accordion):has(.sqs-block.html-block) {
-  display: flex !important;
-  align-items: flex-start !important;
-  gap: 2rem;
-}
-
-/* Ensure fe-blocks containing accordion and social content align at top */
-.apreps .fe-block:has(.sqs-block.accordion-block),
-.apreps .fe-block:has(.sqs-block.sqs-block-accordion),
-.apreps .fe-block:has(.sqs-block.html-block .sqsrte-small) {
-  align-self: flex-start !important;
-}
-
-/* Target blocks within the same row - both class variations */
-.apreps .fluid-engine .fe-block .sqs-block.accordion-block,
-.apreps .fluid-engine .fe-block .sqs-block.sqs-block-accordion,
-.apreps .fluid-engine .fe-block .sqs-block.html-block {
-  align-self: flex-start !important;
-}
-
-/* Ensure accordion expansion doesn't affect sibling blocks */
-.apreps .sqs-block-accordion .accordion-item__dropdown,
-.apreps .accordion-block .accordion-item__dropdown {
-  position: relative !important;
-}
-
-/* Prevent accordion content from pushing siblings when expanded */
-.apreps .sqs-block-accordion .accordion-items-container,
-.apreps .accordion-block .accordion-items-container {
-  display: block !important;
-}
-
-/* Keep social link block fixed at top even when accordion expands */
-.apreps .fe-block:has(.sqs-block.html-block .sqsrte-small) {
-  position: relative !important;
-  align-self: flex-start !important;
-  flex-shrink: 0 !important;
-}
-
-/* Responsive support for mobile/tablet/desktop */
+/* Responsive support for mobile */
 @media (max-width: 767px) {
   /* On mobile, stack blocks vertically but maintain alignment */
-  .bio-social-container,
-  .apreps .fluid-engine:has(.sqs-block.accordion-block):has(.sqs-block.html-block),
-  .apreps .fluid-engine:has(.sqs-block.sqs-block-accordion):has(.sqs-block.html-block) {
+  .bio-social-container {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 1rem;
@@ -1251,11 +1190,9 @@ min-height: 0 !important;
 
 @media (min-width: 768px) and (max-width: 1024px) {
   /* Tablet: maintain horizontal layout with adjusted gap */
-  .bio-social-container,
-  .apreps .fluid-engine:has(.sqs-block.accordion-block):has(.sqs-block.html-block),
-  .apreps .fluid-engine:has(.sqs-block.sqs-block-accordion):has(.sqs-block.html-block) {
+  .bio-social-container {
     gap: 1.5rem;
   }
 }
 
-/* ### END ISSUE A: Horizontal Alignment Across Bio + Social Blocks 26/11/25 */
+/* ### END ISSUE A: Horizontal Alignment Across Bio + Social Blocks 27/11/25 */
