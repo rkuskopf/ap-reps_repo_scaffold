@@ -1371,6 +1371,9 @@ body, a, button, * {
 /* 
  * Initially hide bio/social blocks in artist tabs 
  * Uses opacity:0 to reserve layout space while hidden
+ * 
+ * Note: .sqsrte-small is Squarespace's Rich Text Editor class for small text formatting,
+ * commonly used in bio descriptions and social link blocks on artist pages.
  */
 .apreps .wm-tabs .tab-panel .sqs-block.accordion-block,
 .apreps .wm-tabs .tab-panel .sqs-block.html-block:has(.sqsrte-small) {
