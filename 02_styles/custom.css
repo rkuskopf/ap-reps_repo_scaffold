@@ -1379,11 +1379,6 @@ body, a, button, * {
   margin-top: 0 !important;
 }
 
-/* Alternative selector for social handle blocks positioned on the right side of grid */
-.apreps .wm-tabs .tab-panel > .tab-content .fluid-engine .fe-block.sqs-position-sticky .sqs-html-content h3[style*="text-align: right"] {
-  margin-top: 0 !important;
-}
-
 /* Desktop breakpoint: maintain alignment */
 @media (min-width: 768px) {
   .apreps .wm-tabs .tab-panel > .tab-content .page-section .fe-block.sqs-position-sticky[style*="mix-blend-mode"]:last-of-type {
