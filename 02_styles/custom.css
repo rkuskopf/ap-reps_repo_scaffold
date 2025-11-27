@@ -1247,8 +1247,8 @@ body, a, button, * {
  * with the viewport edge, causing visual misalignment with other site elements 
  * like the logo and footer newsletter module.
  * 
- * Solution: Apply horizontal padding to the entire list container so both the 
- * text AND the border lines (on li elements) are inset from the viewport edge.
+ * Solution: Apply horizontal margins to the li elements (which have the borders)
+ * so both the text AND the border lines are inset from the viewport edge.
  * Mobile layout is preserved as it already has correct insets.
  * 
  * Value rationale:
@@ -1265,9 +1265,9 @@ body, a, button, * {
  */
 
 @media screen and (min-width: 768px) {
-  .apreps .image-hover-list.portfolio-list {
-    padding-left: clamp(17px, 1.7vw, 44px);
-    padding-right: clamp(17px, 1.7vw, 44px);
+  .apreps .image-hover-list.portfolio-list li {
+    margin-left: clamp(17px, 1.7vw, 44px);
+    margin-right: clamp(17px, 1.7vw, 44px);
   }
 }
 
