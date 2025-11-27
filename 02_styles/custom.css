@@ -1344,3 +1344,45 @@ body, a, button, * {
 }
 
 /* ### END ISSUE 1.1: Gallery Captions Appear Visually Cut Off Due to Typography 26/11/25 */
+
+
+/* ### BEGIN ISSUE: Accordion & Social Block Alignment 27/11/25 */
+/**
+ * Fix for social media block alignment with accordion block
+ * 
+ * Problem: The social media handle (@username) appears lower than the Bio / "+" toggle button,
+ * causing misalignment when viewed side-by-side. When the accordion expands, the social block
+ * moves downward because they share the same vertical flow space.
+ * 
+ * Solution: Pin the social block to the top of its container using align-self: start.
+ * The container can flex/adjust in height, but the social handle text stays anchored at the top.
+ */
+
+/* Fe-block containers containing HTML blocks with social media links - pin to top */
+.apreps .fe-block:has(.html-block .sqs-html-content a[href*="instagram.com"]),
+.apreps .fe-block:has(.html-block .sqs-html-content a[href*="twitter.com"]),
+.apreps .fe-block:has(.html-block .sqs-html-content a[href*="tiktok.com"]),
+.apreps .fe-block:has(.html-block .sqs-html-content a[href*="x.com"]) {
+  align-self: start !important;
+}
+
+/* Fe-block containers containing accordion blocks - ensure top alignment */
+.apreps .fe-block:has(.sqs-block-accordion),
+.apreps .fe-block:has(.accordion-item) {
+  align-self: start !important;
+}
+
+/* Fe-blocks in same grid row as accordion that contain social media links - align to top */
+.apreps [data-fluid-engine] .fe-block:has(.sqs-block-accordion) ~ .fe-block:has(.html-block .sqs-html-content a[href*="instagram.com"]),
+.apreps [data-fluid-engine] .fe-block:has(.sqs-block-accordion) ~ .fe-block:has(.html-block .sqs-html-content a[href*="twitter.com"]),
+.apreps [data-fluid-engine] .fe-block:has(.sqs-block-accordion) ~ .fe-block:has(.html-block .sqs-html-content a[href*="tiktok.com"]),
+.apreps [data-fluid-engine] .fe-block:has(.sqs-block-accordion) ~ .fe-block:has(.html-block .sqs-html-content a[href*="x.com"]) {
+  align-self: start !important;
+}
+
+/* Ensure accordion block and adjacent text blocks in Fluid Engine align to top */
+.apreps [data-fluid-engine] .sqs-block-accordion {
+  align-self: start !important;
+}
+
+/* ### END ISSUE: Accordion & Social Block Alignment 27/11/25 */
