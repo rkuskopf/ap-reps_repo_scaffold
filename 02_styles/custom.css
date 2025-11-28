@@ -1089,7 +1089,11 @@ section[data-section-id="68e1a8f1e44bd1493a1074d2"] {
 }
 
 .mobile-hero-lane img.size-lg {
-  height: 46vh;
+  height: 50vh;
+}
+
+.mobile-hero-lane img.size-xl {
+  height: 64vh;
 }
 }
 

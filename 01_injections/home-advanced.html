@@ -77,18 +77,30 @@
 
     const shuffled = sourceImages.slice().sort(() => Math.random() - 0.5);
     const IMAGES_PER_LANE = Math.min(7, shuffled.length);
-    const sizes = ['size-sm', 'size-md', 'size-lg'];
+    const sizes = ['size-sm', 'size-md', 'size-lg', 'size-xl'];
+    const largeSizes = ['size-lg', 'size-xl'];
 
     lanes.forEach((lane, laneIndex) => {
       const start = Math.floor((shuffled.length / lanes.length) * laneIndex);
+      let hasLargeImage = false;
 
       for (let i = 0; i < IMAGES_PER_LANE; i++) {
         const srcIndex = (start + i) % shuffled.length;
         const clone = cloneThumb(shuffled[srcIndex]);
 
-        const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
-        clone.classList.add(randomSize);
+        let randomSize;
+        // Ensure at least one large or xl image per lane
+        if (i === IMAGES_PER_LANE - 1 && !hasLargeImage) {
+          // If this is the last image and we haven't added a large one yet, force it
+          randomSize = largeSizes[Math.floor(Math.random() * largeSizes.length)];
+        } else {
+          randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+          if (largeSizes.includes(randomSize)) {
+            hasLargeImage = true;
+          }
+        }
 
+        clone.classList.add(randomSize);
         lane.appendChild(clone);
       }
     });
