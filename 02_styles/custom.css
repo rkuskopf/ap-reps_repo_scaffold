@@ -481,16 +481,24 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
-.fe-block.sqs-position-sticky {
-   top: clamp(300px, 45vh, 900px) !important;
+
+.apreps {
+  --ap-artist-label-extra-offset: clamp(80px, 6vh, 180px); /* how much lower */
 }
 
-/* Tablets */
-@media (max-width: 900px) {
 .fe-block.sqs-position-sticky {
-   top: clamp(300px, 45vh, 900px) !important;
+  top: calc(
+    var(--ap-artist-sticky-offset) + var(--ap-artist-label-extra-offset)
+  ) !important;
+}
+
+
+@media (max-width: 1024px) {
+  .apreps {
+    --ap-artist-sticky-offset: clamp(220px, 45vh, 700px);
   }
 }
+
 
 @media (max-width: 640px) {
 .fe-block.sqs-position-sticky {
