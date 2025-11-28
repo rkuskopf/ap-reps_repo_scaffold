@@ -211,7 +211,7 @@ h4.tab-title {
 /* Sticky artist names - new */
 /* 1. Wrapper: controls WHEN it sticks */
 .fe-block.sqs-position-sticky {
-  top: 80px !important;          /* ≈ header height – tweak */
+  top: 5px !important;          /* ≈ header height – tweak */
   /* no padding-top here */
     pointer-events: none;   
 }
@@ -1522,5 +1522,27 @@ body, a, button, * {
     .sqs-block-html:has(.sqs-html-content a)
     .sqs-html-content * {
       text-align: left !important;
+  }
+}
+
+/* AP–REPS: any text block using Paragraph 3 style – right on desktop, left on mobile */
+/* AP–REPS: P3 text blocks – right on desktop, left on mobile */
+
+/* Desktop / tablet: flush right */
+@media (min-width: 768px) {
+  .apreps .sqs-block-html .sqs-html-content p.p3 {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    text-align: right !important;
+  }
+}
+
+/* Mobile: back to normal left */
+@media (max-width: 767px) {
+  .apreps .sqs-block-html .sqs-html-content p.p3 {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: left !important;
   }
 }
