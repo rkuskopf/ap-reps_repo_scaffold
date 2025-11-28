@@ -1303,16 +1303,18 @@ body, a, button, * {
 
 /* ### BEGIN Nov 24 Issues */
 
-
-/* Nov 24 Issue 7: Nav links right aligned on mobile */
+/* ### Begin Issue 0: Nav links */
 @media (max-width: 799px) {
 .header-menu-nav .header-menu-nav-item a {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 }
+/* ### End Issue 0: Nav links */
 
-/* Issue 8: tabs header adjustments */
+
+/* ### BEGIN ISSUE 1.1: Secondary Nav  */
+
 /* Completely hide Will-Myers tabs scroll arrows */
 .wm-tabs[data-navigation-type="horizontal"] .tabs-header .scroll-indicator {
   opacity: 0 !important;
@@ -1320,10 +1322,7 @@ body, a, button, * {
   pointer-events: none !important;
 }
 
-
-
-/* ### BEGIN ISSUE 1.1: Secondary Nav - Underline width should match content margin */
-/* On mobile, the indicator track should respect the page content margins */
+/* Underline width adjustments */
 @media (max-width: 767px) {
   .wm-tabs .tabs-header nav .indicator-track {
     /* 17px matches the standard mobile content margin */
@@ -1337,7 +1336,7 @@ body, a, button, * {
   }
 }
 
-/* ### END ISSUE 1.1: Secondary Nav - Underline width should match content margin */
+/* ### END ISSUE 1.1: Secondary Nav */
 
 /* ## BEGIN ISSUE 4: Infinite scroll */
 
@@ -1497,12 +1496,36 @@ body, a, button, * {
   .ap-bio-section .sqs-block-html .sqs-html-content a {
     text-align: left !important;
   }
+}
+/* ≥ 768px: P3 right on desktop */
+@media (min-width: 768px) {
+  .ap-bio-section .sqs-html-content p.sqsrte-small {
+    text-align: right !important;
+  }
+}
 
-  /* Cat Smith IG handle block: force left-align on mobile even if the
-     paragraph has inline text-align:right from the editor */
-  #block-1de2e53107a290b9c166 .sqs-html-content,
-  #block-1de2e53107a290b9c166 .sqs-html-content p,
-  #block-1de2e53107a290b9c166 .sqs-html-content a {
+/* ≤ 767px: P3 left on mobile */
+@media (max-width: 767px) {
+  .ap-bio-section .sqs-html-content p.sqsrte-small {
+    text-align: left !important;
+  }
+}
+
+/* AP–REPS artist Bio – social handle alignment
+   Desktop: right aligned
+   Mobile: left aligned */
+.apreps .ap-bio-section .ap-bio-social .sqs-block-content {
+  text-align: right; /* desktop & tablet */
+}
+
+/* Make sure the link itself behaves nicely as a block */
+.apreps .ap-bio-section .ap-bio-social .sqs-html-content a[href*="instagram.com"] {
+  display: inline-block;
+}
+
+/* Mobile override: left-align the handle text */
+@media (max-width: 767px) {
+  .apreps .ap-bio-section .ap-bio-social .sqs-block-content {
     text-align: left !important;
   }
 }
