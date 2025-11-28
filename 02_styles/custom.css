@@ -1424,3 +1424,9 @@ body, a, button, * {
 }
 
 /* ### END BIO SECTION LAYOUT SHIFT FIX 27/11/25 */
+
+
+/* AP–REPS: Right-align social link text box in Bio section */
+.ap-bio-section .sqs-block-html .sqs-html-content {
+  text-align: right;
+}
