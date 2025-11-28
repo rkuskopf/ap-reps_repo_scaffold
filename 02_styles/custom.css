@@ -1481,51 +1481,46 @@ body, a, button, * {
   }
 }
 
+/* AP–REPS Bio social: right on desktop, left on mobile, any link in the text block */
+
+/* ≥ 768px: push the social HTML block to the right, text right-aligned */
+@media (min-width: 768px) {
+  .apreps section:has(.sqs-block-accordion)
+    .sqs-block-html:has(.sqs-html-content a) {
+      display: flex !important;
+      justify-content: flex-end !important;   /* push block to right */
+      margin-left: auto !important;           /* hug right edge of content */
+      margin-right: 0 !important;
+      max-width: max-content !important;
+  }
+
+  .apreps section:has(.sqs-block-accordion)
+    .sqs-block-html:has(.sqs-html-content a)
+    .sqs-html-content,
+  .apreps section:has(.sqs-block-accordion)
+    .sqs-block-html:has(.sqs-html-content a)
+    .sqs-html-content * {
+      text-align: right !important;           /* text flush right inside box */
+  }
+}
+
 /* ≤ 767px: bring it back to the left on mobile */
 @media (max-width: 767px) {
-  .ap-bio-section .sqs-block-html {
-    display: block !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    max-width: 100% !important;
-    justify-content: flex-start !important;
+  .apreps section:has(.sqs-block-accordion)
+    .sqs-block-html:has(.sqs-html-content a) {
+      display: block !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      max-width: 100% !important;
+      justify-content: flex-start !important;
   }
 
-  .ap-bio-section .sqs-block-html .sqs-html-content,
-  .ap-bio-section .sqs-block-html .sqs-html-content p,
-  .ap-bio-section .sqs-block-html .sqs-html-content a {
-    text-align: left !important;
-  }
-}
-/* ≥ 768px: P3 right on desktop */
-@media (min-width: 768px) {
-  .ap-bio-section .sqs-html-content p.sqsrte-small {
-    text-align: right !important;
-  }
-}
-
-/* ≤ 767px: P3 left on mobile */
-@media (max-width: 767px) {
-  .ap-bio-section .sqs-html-content p.sqsrte-small {
-    text-align: left !important;
-  }
-}
-
-/* AP–REPS artist Bio – social handle alignment
-   Desktop: right aligned
-   Mobile: left aligned */
-.apreps .ap-bio-section .ap-bio-social .sqs-block-content {
-  text-align: right; /* desktop & tablet */
-}
-
-/* Make sure the link itself behaves nicely as a block */
-.apreps .ap-bio-section .ap-bio-social .sqs-html-content a[href*="instagram.com"] {
-  display: inline-block;
-}
-
-/* Mobile override: left-align the handle text */
-@media (max-width: 767px) {
-  .apreps .ap-bio-section .ap-bio-social .sqs-block-content {
-    text-align: left !important;
+  .apreps section:has(.sqs-block-accordion)
+    .sqs-block-html:has(.sqs-html-content a)
+    .sqs-html-content,
+  .apreps section:has(.sqs-block-accordion)
+    .sqs-block-html:has(.sqs-html-content a)
+    .sqs-html-content * {
+      text-align: left !important;
   }
 }
