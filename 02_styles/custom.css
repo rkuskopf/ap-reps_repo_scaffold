@@ -820,7 +820,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   border-bottom: 1px solid var(--ap-newsletter-divider, #222);
   grid-template-columns: 1fr auto;
   column-gap: 1.2rem;
-  align-items: end;
+  align-items: start;
   padding: 0 !important;
 }
 
@@ -842,6 +842,13 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   grid-column: 1; 
   display: block; 
 }
+
+/* Kill default top spacing on Squarespace .form-fields wrapper so
+   the email input aligns with the top of the newsletter body */
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper.form-fields {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
   grid-column: 2;
   align-self: start;
@@ -854,6 +861,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   background: transparent !important; 
   border: 0 !important; 
   padding: 0 !important; 
+  margin: 0 !important;
 }
 
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label { display: block; margin-bottom: .35rem; font-size: clamp(.65rem, 1vw, .75rem); text-transform: uppercase; }
