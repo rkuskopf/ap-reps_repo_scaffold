@@ -909,6 +909,54 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:hover,
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button:focus { text-decoration: underline; outline: none; }
 
+/* Desktop: 3‑column layout — [NEWSLETTER] [input] [button] */
+@media (min-width: 768px) {
+  /* Overall form grid: 3 columns */
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: 1.5rem;
+    row-gap: 0;
+    align-items: end;
+  }
+
+  /* Header ("NEWSLETTER") in column 1 */
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  /* Input + button row spanning columns 2–3 */
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-body {
+    grid-row: 1;
+    grid-column: 2 / span 2;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 1.2rem;
+    align-items: end;
+    padding: 0 !important;
+  }
+
+  /* Email field wrapper in middle column */
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper {
+    grid-column: 1;
+  }
+
+  /* Submit button in right column */
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
+    grid-column: 2;
+    align-self: end;
+    justify-self: start;
+  }
+
+  /* Footnote spans all 3 columns on second row */
+  #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-footnote {
+    grid-row: 2;
+    grid-column: 1 / span 3;
+    margin-top: 0;
+    text-align: left;
+  }
+}
 /* ### END DELIVERABLE 8. Mailchimp footer newsletter 13.11.25 (rev) */
 
 /* ### BEGIN D4:Breakpoints v1 14/08/25 */
