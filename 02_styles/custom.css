@@ -1415,4 +1415,12 @@ body, a, button, * {
   animation: none; /* Cancel fallback animation once JS has added the class */
 }
 
+/* Fallback keyframes: If JS fails to add class after 3s, show the section anyway */
+@keyframes ap-bio-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ### END BIO SECTION LAYOUT SHIFT FIX 27/11/25 */
