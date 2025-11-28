@@ -208,11 +208,12 @@ h4.tab-title {
   letter-spacing: 0.05em !important;
 }
 
-
+/* Sticky artist names - new */
 /* 1. Wrapper: controls WHEN it sticks */
 .fe-block.sqs-position-sticky {
   top: 80px !important;          /* ≈ header height – tweak */
   /* no padding-top here */
+    pointer-events: none;   
 }
 
 /* 2. Inner content: controls WHERE the text sits over the image */
@@ -801,8 +802,10 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
   grid-column: 2;
-  align-self: end;
-  justify-self: end;
+  align-self: start;
+  justify-self: start;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 
@@ -824,6 +827,11 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   padding: 0 !important;
 }
 
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper.form-fields {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
 
 /* Header + byline, both as paragraphs */
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-header-description p {
@@ -842,17 +850,12 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   grid-column: 1; 
   display: block; 
 }
-
-/* Kill default top spacing on Squarespace .form-fields wrapper so
-   the email input aligns with the top of the newsletter body */
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-fields-wrapper.form-fields {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-button-wrapper {
   grid-column: 2;
   align-self: start;
   justify-self: start;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* 3) Field styles — underline only */
@@ -861,7 +864,7 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   background: transparent !important; 
   border: 0 !important; 
   padding: 0 !important; 
-  margin: 0 !important;
+  margin-top: 0 !important;
 }
 
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-label { display: block; margin-bottom: .35rem; font-size: clamp(.65rem, 1vw, .75rem); text-transform: uppercase; }
@@ -874,11 +877,17 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
   border-bottom: none !important;
   background: transparent !important;
   box-shadow: none !important;
-  font: inherit; text-transform: none; color: inherit;
+  font: inherit;
+  text-transform: uppercase;
+  color: inherit;
 }
 
 
-#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element::placeholder { color: inherit; opacity: .4; text-transform: none; }
+#block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element::placeholder {
+  color: inherit;
+  opacity: .4;
+  text-transform: uppercase;
+}
 #block-yui_3_17_2_1_1761719139659_4074 .newsletter-form-field-element:focus { outline: none; border-bottom-color: currentColor; }
 
 /* 4) Tertiary button (text only) */
@@ -1486,6 +1495,14 @@ body, a, button, * {
   .ap-bio-section .sqs-block-html .sqs-html-content,
   .ap-bio-section .sqs-block-html .sqs-html-content p,
   .ap-bio-section .sqs-block-html .sqs-html-content a {
+    text-align: left !important;
+  }
+
+  /* Cat Smith IG handle block: force left-align on mobile even if the
+     paragraph has inline text-align:right from the editor */
+  #block-1de2e53107a290b9c166 .sqs-html-content,
+  #block-1de2e53107a290b9c166 .sqs-html-content p,
+  #block-1de2e53107a290b9c166 .sqs-html-content a {
     text-align: left !important;
   }
 }
