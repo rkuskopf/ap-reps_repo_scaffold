@@ -136,13 +136,20 @@
 })();
 </script>
 
-<!-- AP—REPS: Prevent Bio accordion + social handle section from flashing/jumping on load -->
 <script>
-(function () {
-  window.addEventListener('load', function () {
-    if (document && document.documentElement) {
-      document.documentElement.classList.add('ap-bio-ready');
-    }
+document.addEventListener('DOMContentLoaded', function () {
+  // Scope to AP–REPS pages only (body already has .apreps in your CSS)
+  var root = document.querySelector('body.apreps');
+  if (!root) return;
+
+  // Find any accordion blocks inside AP–REPS
+  var accordionBlocks = root.querySelectorAll('.sqs-block-accordion, .accordion-block');
+  accordionBlocks.forEach(function (block) {
+    var section = block.closest('section');
+    if (!section) return;
+
+    // Add a stable class you can target in CSS
+    section.classList.add('ap-bio-section');
   });
-})();
+});
 </script>

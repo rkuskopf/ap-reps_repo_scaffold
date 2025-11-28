@@ -1348,16 +1348,6 @@ body, a, button, * {
 
 /* ### BEGIN BIO SECTION LAYOUT SHIFT FIX 27/11/25 */
 
-/**
- * Fix for Bio accordion + social handle section layout jump on Artist pages
- *
- * Problem: The hero gallery section above takes time to load images and resolve
- * its final height. The Bio section initially appears higher on the page and 
- * jumps down once the gallery finishes rendering.
- *
- * Solution: Hide the Bio section initially, then reveal it once the gallery
- * above has loaded its images (JS adds .ap-bio-ready class to html element).
- */
 
 /* Hide Bio section initially to prevent visible jump, with fallback animation */
 .apreps section:has(.sqs-block-accordion),
@@ -1374,14 +1364,6 @@ body, a, button, * {
   opacity: 1;
   transform: none;
   animation: none; /* Cancel fallback animation once JS has added the class */
-}
-
-/* Fallback keyframes: If JS fails to add class after 3s, show the section anyway */
-@keyframes ap-bio-fallback {
-  to {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 /* ### END BIO SECTION LAYOUT SHIFT FIX 27/11/25 */
