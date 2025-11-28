@@ -199,6 +199,18 @@ body, a:hover, button:hover {
   --ap-artist-sticky-offset: clamp(120px, 16vw, 260px);
 }
 
+
+/* 1. Wrapper: controls WHEN it sticks */
+.fe-block.sqs-position-sticky {
+  top: 80px !important;          /* ≈ header height – tweak */
+  /* no padding-top here */
+}
+
+/* 2. Inner content: controls WHERE the text sits over the image */
+.fe-block.sqs-position-sticky .sqs-html-content {
+  padding-top: 50vh;            /* or translateY(220px); tweak to taste */
+}
+
 /*  anchors  */
 .apreps .wm-tabs .tab-panel > .tab-content 
   .sqs-gallery-block-grid .image-slide-anchor,
@@ -481,30 +493,6 @@ body.ap-menu-hold #header .burger-inner .bottom-bun {
   transform: translate3d(0,0,0); /* helps Safari render blend properly */
 }
 
-
-.apreps {
-  --ap-artist-label-extra-offset: clamp(80px, 6vh, 180px); /* how much lower */
-}
-
-.fe-block.sqs-position-sticky {
-  top: calc(
-    var(--ap-artist-sticky-offset) + var(--ap-artist-label-extra-offset)
-  ) !important;
-}
-
-
-@media (max-width: 1024px) {
-  .apreps {
-    --ap-artist-sticky-offset: clamp(220px, 45vh, 700px);
-  }
-}
-
-
-@media (max-width: 640px) {
-.fe-block.sqs-position-sticky {
-    --ap-artist-sticky-offset: clamp(120px, 16vw, 260px);
-  }
-}
 
 /* Artist names – actual text (ONLY inside sticky artist block) */
 .apreps .fe-block.sqs-position-sticky[style*="mix-blend-mode"] .sqs-block.html-block .sqs-html-content h3,
