@@ -1393,3 +1393,26 @@ body, a, button, * {
 }
 
 /* ### END ISSUE 1.1: Gallery Captions Appear Visually Cut Off Due to Typography 26/11/25 */
+
+
+/* ### BEGIN BIO SECTION LAYOUT SHIFT FIX 27/11/25 */
+
+
+/* Hide Bio section initially to prevent visible jump, with fallback animation */
+.apreps section:has(.sqs-block-accordion),
+.apreps section:has(.accordion-block) {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 250ms ease, transform 250ms ease;
+  animation: ap-bio-fallback 0s 3s forwards; /* Fallback if JS fails */
+}
+
+/* Reveal Bio section once gallery images are loaded (JS adds this class to html) */
+.apreps.ap-bio-ready section:has(.sqs-block-accordion),
+.apreps.ap-bio-ready section:has(.accordion-block) {
+  opacity: 1;
+  transform: none;
+  animation: none; /* Cancel fallback animation once JS has added the class */
+}
+
+/* ### END BIO SECTION LAYOUT SHIFT FIX 27/11/25 */

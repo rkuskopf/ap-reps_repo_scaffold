@@ -1145,37 +1145,42 @@ min-height: 0 !important;
 /* ### END ISSUE 3: Mobile image-hover-list positioning 18/11/25 */
 
 
-/* ### BEGIN Issue 3: Artist Hover List - Desktop/Tablet Horizontal Margins 26/11/25 */
+/* ### BEGIN BIO SECTION LAYOUT SHIFT FIX 27/11/25 */
 
 /**
- * Fix for image-hover-list horizontal alignment on desktop/tablet
- * 
- * Issue: On desktop/tablet, the hover list (text + horizontal lines) sits flush 
- * with the viewport edge, causing visual misalignment with other site elements 
- * like the logo and footer newsletter module.
- * 
- * Solution: Apply horizontal margins to the li elements (which have the borders)
- * so both the text AND the border lines are inset from the viewport edge.
- * Mobile layout is preserved as it already has correct insets.
- * 
- * Value rationale:
- * - Base: 1.7vw (matches original issue suggestion, aligns with header/footer insets)
- * - Min: 17px (prevents too-small margins on narrow tablet screens ~768-1000px)
- * - Max: 44px (caps margin on ultra-wide screens >2560px to prevent excess whitespace)
- * 
- * This rule applies to all .apreps .image-hover-list.portfolio-list components.
- * If the component is reused in other contexts, extend selectors or create a 
- * more general utility class.
- * 
- * Revisit if: site-wide container padding changes, or component is used in 
- * different layout contexts requiring different alignment.
+ * Fix for Bio accordion + social handle section layout jump on Artist pages
+ *
+ * Problem: The hero gallery section above takes time to load images and resolve
+ * its final height. The Bio section initially appears higher on the page and 
+ * jumps down once the gallery finishes rendering.
+ *
+ * Solution: Hide the Bio section initially, then reveal it once the gallery
+ * above has loaded its images (JS adds .ap-bio-ready class to html element).
  */
 
-@media screen and (min-width: 768px) {
-  .apreps .image-hover-list.portfolio-list li {
-    margin-left: clamp(17px, 1.7vw, 44px);
-    margin-right: clamp(17px, 1.7vw, 44px);
+/* Hide Bio section initially to prevent visible jump, with fallback animation */
+.apreps section:has(.sqs-block-accordion),
+.apreps section:has(.accordion-block) {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 250ms ease, transform 250ms ease;
+  animation: ap-bio-fallback 0s 3s forwards; /* Fallback if JS fails */
+}
+
+/* Reveal Bio section once gallery images are loaded (JS adds this class to html) */
+.apreps.ap-bio-ready section:has(.sqs-block-accordion),
+.apreps.ap-bio-ready section:has(.accordion-block) {
+  opacity: 1;
+  transform: none;
+  animation: none; /* Cancel fallback animation once JS has added the class */
+}
+
+/* Fallback keyframes: If JS fails to add class after 3s, show the section anyway */
+@keyframes ap-bio-fallback {
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
-/* ### END Issue 3: Artist Hover List - Desktop/Tablet Horizontal Margins 26/11/25 */
+/* ### END BIO SECTION LAYOUT SHIFT FIX 27/11/25 */

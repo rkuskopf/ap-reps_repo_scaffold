@@ -62,3 +62,60 @@ document.addEventListener('DOMContentLoaded', () => {
   }).observe(document.body,{subtree:true,childList:true});
 });
 </script>
+
+<!-- AP-REPS: Reveal Bio section after gallery images load to prevent layout shift -->
+<script>
+(function() {
+  function revealBioSection() {
+    document.documentElement.classList.add('ap-bio-ready');
+  }
+  
+  // Wait for gallery images to load, then reveal Bio section
+  function checkGalleryImages() {
+    var gallery = document.querySelector('.sqs-gallery.sqs-gallery-design-grid');
+    if (!gallery) {
+      // No gallery found, reveal immediately
+      revealBioSection();
+      return;
+    }
+    
+    var images = gallery.querySelectorAll('img.thumb-image');
+    if (images.length === 0) {
+      // No images in gallery, reveal immediately
+      revealBioSection();
+      return;
+    }
+    
+    // Count loaded images
+    var loadedCount = 0;
+    var totalImages = images.length;
+    
+    function onImageLoad() {
+      loadedCount++;
+      // Reveal once first row is loaded (3 images) or all images
+      if (loadedCount >= Math.min(3, totalImages)) {
+        revealBioSection();
+      }
+    }
+    
+    images.forEach(function(img) {
+      if (img.complete && img.naturalHeight > 0) {
+        onImageLoad();
+      } else {
+        img.addEventListener('load', onImageLoad);
+        img.addEventListener('error', onImageLoad); // Count errors too to prevent stuck state
+      }
+    });
+  }
+  
+  // Run when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkGalleryImages);
+  } else {
+    checkGalleryImages();
+  }
+  
+  // Fallback: reveal after 2 seconds no matter what
+  setTimeout(revealBioSection, 2000);
+})();
+</script>
