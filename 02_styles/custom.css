@@ -1424,9 +1424,16 @@ body, a, button, * {
 }
 
 /* ### END BIO SECTION LAYOUT SHIFT FIX 27/11/25 */
-
-
-/* AP–REPS: Right-align social link text box in Bio section */
-.ap-bio-section .sqs-block-html .sqs-html-content {
-  text-align: right;
+@media (min-width: 768px) { 
+/* Bio section – move the whole social link container to the right */
+.ap-bio-section .fe-block:has(.sqs-block-html) .sqs-block,
+.ap-bio-section .fe-block:has(.sqs-block-html) .sqs-block-alignment-wrapper {
+  justify-content: flex-end !important;
+  align-items: flex-end !important;
+}
+/* Make the text inside that block right-aligned (h4, links, etc.) */
+.ap-bio-section .fe-block:has(.sqs-block-html) .sqs-html-content,
+.ap-bio-section .fe-block:has(.sqs-block-html) .sqs-html-content * {
+  text-align: right !important;
+}
 }
