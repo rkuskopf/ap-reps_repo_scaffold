@@ -1309,38 +1309,23 @@ body, a, button, * {
   pointer-events: none !important;
 }
 
-/* Mobile: underline cannot extend past the visible tabs */
 @media (max-width: 767px) {
-  /* Header is the clip box and owns the side gutter */
   .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header {
-    position: relative;
-    padding: 0 50px;       /* match your page gutter */
-    overflow: hidden;      /* anything wider (nav/track) is clipped */
-  }
-
-  .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header {
-    position: relative;
-    overflow: hidden;        /* clip anything wider than the header */
-    padding: 0 17px;         /* your desired gutter */
-  }
-
-  /* Nav scrolls inside; no extra side padding */
-  .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav {
-    padding: 0 !important;
-  }
-
-  /* Track is an overlay, exactly header-width */
-  .apreps .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav .indicator-track {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0 !important;
-    width: auto;
-    pointer-events: none;
+     padding-inline: var(--sqs-mobile-site-gutter, 10vw);  /* overrides the 12px from tabs.min.css */
   }
 }
 
+
+/* Underline width adjustments */
+@media (max-width: 767px) {
+  .wm-tabs .tabs-header nav .indicator-track {
+    /* 17px matches the standard mobile content margin */
+    margin-left: 17px !important;
+    margin-right: 17px !important;
+  }
+  
+
+}
 @media (max-width: 767px) {
 /* Base underline track: gradient that scrolls with the tabs */
 .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav .indicator-track {
