@@ -1467,64 +1467,7 @@ body, a, button, * {
   }
 }
 
-/* AP–REPS Bio social: right on desktop, left on mobile, any link in the text block */
 
-/* ≥ 768px: push the social HTML block to the right, text right-aligned */
-@media (min-width: 768px) {
-  .apreps section:has(.sqs-block-accordion)
-    .sqs-block-html:has(.sqs-html-content a) {
-      display: flex !important;
-      justify-content: flex-end !important;   /* push block to right */
-      margin-left: auto !important;           /* hug right edge of content */
-      margin-right: 0 !important;
-      max-width: max-content !important;
-  }
-
-  .apreps section:has(.sqs-block-accordion)
-    .sqs-block-html:has(.sqs-html-content a)
-    .sqs-html-content,
-  .apreps section:has(.sqs-block-accordion)
-    .sqs-block-html:has(.sqs-html-content a)
-    .sqs-html-content * {
-      text-align: right !important;           /* text flush right inside box */
-  }
-}
-
-/* ≤ 767px: bring it back to the left on mobile */
-@media (max-width: 767px) {
-  .apreps section:has(.sqs-block-accordion)
-    .sqs-block-html:has(.sqs-html-content a) {
-      display: block !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-      max-width: 100% !important;
-      justify-content: flex-start !important;
-  }
-
-  .apreps section:has(.sqs-block-accordion)
-    .sqs-block-html:has(.sqs-html-content a)
-    .sqs-html-content,
-  .apreps section:has(.sqs-block-accordion)
-    .sqs-block-html:has(.sqs-html-content a)
-    .sqs-html-content * {
-      text-align: left !important;
-  }
-}
-/* AP–REPS: social handle block – right on desktop, left on mobile */
-
-/* Desktop / tablet */
-@media (min-width: 768px) {
-  /* wrapper: full-width but align its contents to the right */
-  .apreps [data-fluid-engine="true"].fluid-engine .sqs-block-html .sqs-block-content {
-    text-align: right !important;
-  }
-
-  /* P3 inside text blocks: shrink-wrap to text and sit on the right edge */
-  .apreps [data-fluid-engine="true"].fluid-engine .sqs-block-html .sqs-html-content p.p3 {
-    display: inline-block !important;
-    text-align: right !important;
-  }
-}
 
 /* Mobile: flip everything back to left */
 @media (max-width: 767px) {
