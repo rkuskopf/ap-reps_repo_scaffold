@@ -142,7 +142,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var root = document.querySelector('body.apreps');
   if (!root) return;
 
-  // Find any accordion blocks inside AP–REPS
+  // 1. Primary: pages that have a bio accordion
+  var hasAccordion = false;
   var accordionBlocks = root.querySelectorAll('.sqs-block-accordion, .accordion-block');
   accordionBlocks.forEach(function (block) {
     var section = block.closest('section');
@@ -150,6 +151,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add a stable class you can target in CSS
     section.classList.add('ap-bio-section');
+    hasAccordion = true;
   });
+
+  // 2. Fallback: AP–REPS artist pages without an accordion.
+  // On these pages, the social handle lives in the gallery section.
+  if (!hasAccordion) {
+    var socialLink = root.querySelector('p.sqsrte-small.preFade.fadeIn a[href*="instagram.com"]');
+    if (socialLink) {
+      var socialSection = socialLink.closest('section');
+      if (socialSection) {
+        socialSection.classList.add('ap-bio-section');
+      }
+    }
+  }
 });
 </script>
