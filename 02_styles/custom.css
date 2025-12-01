@@ -29,15 +29,16 @@ div.wm-tabs {
   --active-indicator-size: 4px;
   --active-indicator-border-radius: 0px;
 }
-
+.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button {
+  flex-grow: 1;
+  flex-basis: ~'calc(100% / var(--tabs-count))';
+}
 .wm-tabs,
 .wm-tabs .tabs-header,
 .wm-tabs .tabs-content {
   background: none !important;
   background-color: transparent !important;
 }
-
-
 
   /* Only allow sticky inside the active tab panel */
 .wm-tabs, .wm-tabs .tabs-content, .wm-tabs [role="tabpanel"], .wm-tabs [data-tab-panel]
@@ -1307,30 +1308,12 @@ body, a, button, * {
   visibility: hidden !important;
   pointer-events: none !important;
 }
-@media (max-width: 767px) {
-/* Base underline track: gradient that scrolls with the tabs */
-.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav .indicator-track {
-  background: linear-gradient(
-    to right,
-    transparent 0,
-    var(--tab-indicator-track-background, currentColor) 15%,
-    var(--tab-indicator-track-background, currentColor) 85%,
-    transparent 100%
-  );
-}
-}
-
 
 /* Underline width adjustments */
 @media (max-width: 767px) {
-  /* Add a little extra breathing room on the right side of the tab bar */
-  .wm-tabs .tabs-header nav {
-    padding-right: 17px !important;
-  }
-
   .wm-tabs .tabs-header nav .indicator-track {
     /* 17px matches the standard mobile content margin */
-    margin-left: 18px !important;
+    margin-left: 17px !important;
     margin-right: 17px !important;
   }
   
@@ -1340,34 +1323,7 @@ body, a, button, * {
   }
 }
 
-@media (max-width: 767px) {
-  /* header = visible width + clipping box */
-  .wm-tabs[data-navigation-type="horizontal"] .tabs-header {
-    position: relative;
-    overflow: hidden;                  /* nothing can stick out left/right */
-  }
-
-  /* nav scrolls inside the clipped header */
-  .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav {
-    display: flex;
-    min-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* track matches header width, with equal insets */
-  .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav .indicator-track {
-    position: absolute;
-    left: 17px;
-    right: 17px;                       /* SAME inset on both sides */
-    margin: 0 !important;
-  }
-}
-
-
 /* ### END ISSUE 1.1: Secondary Nav */
-
-
 
 /* ## BEGIN ISSUE 4: Infinite scroll */
 
