@@ -1488,6 +1488,15 @@ body, a, button, * {
 
 /* Mobile: flip everything back to left */
 @media (max-width: 767px) {
+  /* Bio / social section: force left-align on small screens, including accordion pages */
+  .ap-bio-section .sqs-block-html .sqs-html-content,
+  .ap-bio-section .sqs-block-html .sqs-html-content p,
+  .ap-bio-section .sqs-block-html .sqs-html-content a {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
   .apreps [data-fluid-engine="true"].fluid-engine .sqs-block-html .sqs-block-content {
     text-align: left !important;
   }
