@@ -175,10 +175,6 @@
 
       lanes[i % lanes.length].appendChild(clone);
     }
-
-    // If we know Squarespace is still injecting, do a gentle follow-up rebuild
-    // to catch late `data-src` swaps.
-    setTimeout(() => enableMobileHero({ force: true }), 600);
   }
 
   function disableMobileHero() {
@@ -203,7 +199,7 @@
     if (!window.matchMedia) return;
     const mq = window.matchMedia(MOBILE_QUERY);
     const handler = (e) => {
-      if (e.matches) enableMobileHero({ force: true });
+      if (e.matches) enableMobileHero();
       else disableMobileHero();
     };
 
@@ -216,10 +212,10 @@
     if (!summaryBlock || !window.MutationObserver) return;
 
     const obs = new MutationObserver(() => {
-      // If the collage exists, force a rebuild when summary thumbnails update
+      // If the collage exists and we're on mobile, ensure it's initialised
       const collage = document.querySelector('.' + COLLAGE_CLASS);
       if (collage && window.matchMedia && window.matchMedia(MOBILE_QUERY).matches) {
-        enableMobileHero({ force: true });
+        enableMobileHero();
       }
     });
 
