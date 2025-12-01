@@ -29,9 +29,22 @@ div.wm-tabs {
   --active-indicator-size: 4px;
   --active-indicator-border-radius: 0px;
 }
+/* Tabs: spread out across the row, but allow horizontal scroll when they overflow */
+.wm-tabs[data-navigation-type="horizontal"] .tabs-header {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav {
+  display: flex;
+  min-width: 100%;           /* fill the viewport, can grow wider than it */
+}
+
 .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button {
-  flex-grow: 1;
-  flex-basis: ~'calc(100% / var(--tabs-count))';
+  flex-grow: 1;              /* spread out to fill the row */
+  flex-shrink: 0;            /* don't shrink smaller than their text */
+  flex-basis: auto;
+  min-width: max-content;    /* at least as wide as the label */
 }
 .wm-tabs,
 .wm-tabs .tabs-header,
@@ -1304,8 +1317,6 @@ body, a, button, * {
 
 /* ### BEGIN ISSUE 1.1: Secondary Nav  */
 
-/* ### BEGIN ISSUE 1.1: Secondary Nav  */
-
 /* Completely hide Will-Myers tabs scroll arrows */
 .wm-tabs[data-navigation-type="horizontal"] .tabs-header .scroll-indicator {
   opacity: 0 !important;
@@ -1313,8 +1324,35 @@ body, a, button, * {
   pointer-events: none !important;
 }
 
+/* Base underline track: gradient that scrolls with the tabs */
+.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav .indicator-track {
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    var(--tab-indicator-track-background, currentColor) 15%,
+    var(--tab-indicator-track-background, currentColor) 85%,
+    transparent 100%
+  );
+}
+
+/* Active underline: gradient across the active tab width */
+.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav .indicator-track .active-indicator {
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    currentColor 15%,
+    currentColor 85%,
+    transparent 100%
+  );
+}
+
 /* Underline width adjustments */
 @media (max-width: 767px) {
+  /* Add a little extra breathing room on the right side of the tab bar */
+  .wm-tabs .tabs-header nav {
+    padding-right: 17px !important;
+  }
+
   .wm-tabs .tabs-header nav .indicator-track {
     /* 17px matches the standard mobile content margin */
     margin-left: 17px !important;
@@ -1325,18 +1363,11 @@ body, a, button, * {
     /* 34px = 17px left margin + 17px right margin */
     --tab-button-active-width: calc(100% - 34px);
   }
-
-  /* On mobile, trim right padding on the last tab label so the underline visually stops at that edge */
-  .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button:last-of-type {
-    padding-right: 0 !important;
-    margin-right: 0 !important;
-  }
 }
 
 /* ### END ISSUE 1.1: Secondary Nav */
 
 
-/* ### END ISSUE 1.1: Secondary Nav */
 
 /* ## BEGIN ISSUE 4: Infinite scroll */
 
