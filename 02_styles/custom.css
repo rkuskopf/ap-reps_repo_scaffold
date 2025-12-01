@@ -61,6 +61,19 @@ div.wm-tabs {
   display: none !important;
 }
 
+/* SUB-ISSUE 3: Gradient should be contained in underline only */
+.wm-tabs .tabs-header nav .indicator-track .active-indicator {
+  overflow: hidden;
+  background-clip: padding-box;
+}
+
+/* ISSUE 4: Secondary Nav - Add spacing below header on mobile */
+@media (max-width: 767px) {
+  .wm-tabs .tabs-header {
+    margin-top: 1rem;
+  }
+}
+
 
 
 /* Dot cursor by digitalmoves.com.au */
