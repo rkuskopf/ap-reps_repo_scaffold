@@ -1423,6 +1423,8 @@ body, a, button, * {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 250ms ease, transform 250ms ease;
+  /* Fallback if JS never adds .ap-bio-ready */
+  animation: ap-bio-fallback 0s 3s forwards;
 }
 
 /* Reveal footer + social link once .ap-bio-ready is set */
@@ -1432,6 +1434,7 @@ body, a, button, * {
 .apreps.ap-bio-ready [data-fluid-engine="true"].fluid-engine .sqs-block-html .sqs-html-content p.p3 {
   opacity: 1;
   transform: none;
+  animation: none;
 }
 
 /* Fallback keyframes (shared) */
