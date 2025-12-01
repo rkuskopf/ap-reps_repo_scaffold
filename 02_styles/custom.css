@@ -29,23 +29,7 @@ div.wm-tabs {
   --active-indicator-size: 4px;
   --active-indicator-border-radius: 0px;
 }
-/* Tabs: spread out across the row, but allow horizontal scroll when they overflow */
-.wm-tabs[data-navigation-type="horizontal"] .tabs-header {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
 
-.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav {
-  display: flex;
-  min-width: 100%;           /* fill the viewport, can grow wider than it */
-}
-
-.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav button {
-  flex-grow: 1;              /* spread out to fill the row */
-  flex-shrink: 0;            /* don't shrink smaller than their text */
-  flex-basis: auto;
-  min-width: max-content;    /* at least as wide as the label */
-}
 .wm-tabs,
 .wm-tabs .tabs-header,
 .wm-tabs .tabs-content {
@@ -1323,7 +1307,7 @@ body, a, button, * {
   visibility: hidden !important;
   pointer-events: none !important;
 }
-
+@media (max-width: 767px) {
 /* Base underline track: gradient that scrolls with the tabs */
 .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav .indicator-track {
   background: linear-gradient(
@@ -1334,17 +1318,8 @@ body, a, button, * {
     transparent 100%
   );
 }
-
-/* Active underline: gradient across the active tab width */
-.wm-tabs[data-navigation-type="horizontal"] .tabs-header nav .indicator-track .active-indicator {
-  background: linear-gradient(
-    to right,
-    transparent 0,
-    currentColor 15%,
-    currentColor 85%,
-    transparent 100%
-  );
 }
+
 
 /* Underline width adjustments */
 @media (max-width: 767px) {
@@ -1355,7 +1330,7 @@ body, a, button, * {
 
   .wm-tabs .tabs-header nav .indicator-track {
     /* 17px matches the standard mobile content margin */
-    margin-left: 17px !important;
+    margin-left: 18px !important;
     margin-right: 17px !important;
   }
   
@@ -1364,6 +1339,31 @@ body, a, button, * {
     --tab-button-active-width: calc(100% - 34px);
   }
 }
+
+@media (max-width: 767px) {
+  /* header = visible width + clipping box */
+  .wm-tabs[data-navigation-type="horizontal"] .tabs-header {
+    position: relative;
+    overflow: hidden;                  /* nothing can stick out left/right */
+  }
+
+  /* nav scrolls inside the clipped header */
+  .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav {
+    display: flex;
+    min-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* track matches header width, with equal insets */
+  .wm-tabs[data-navigation-type="horizontal"] .tabs-header nav .indicator-track {
+    position: absolute;
+    left: 17px;
+    right: 17px;                       /* SAME inset on both sides */
+    margin: 0 !important;
+  }
+}
+
 
 /* ### END ISSUE 1.1: Secondary Nav */
 
