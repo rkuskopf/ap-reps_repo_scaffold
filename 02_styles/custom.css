@@ -215,10 +215,17 @@ h4.tab-title {
   /* no padding-top here */
     pointer-events: none;   
 }
-
+@media (min-width: 799px) {
 /* 2. Inner content: controls WHERE the text sits over the image */
 .fe-block.sqs-position-sticky .sqs-html-content {
   padding-top: 50vh;            /* or translateY(220px); tweak to taste */
+}
+}
+
+@media (max-width: 799px) {
+.fe-block.sqs-position-sticky .sqs-html-content {
+  padding-top: 40vh;            /* or translateY(220px); tweak to taste */
+}
 }
 
 /*  anchors  */
