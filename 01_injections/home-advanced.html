@@ -17,21 +17,50 @@
   const MOBILE_QUERY = '(max-width: 767px)';
   const SUMMARY_SELECTOR = '.fe-block-yui_3_17_2_1_1762921605769_3650';
   const HERO_SELECTOR = 'section[data-section-id="68e1a8f1e44bd1493a1074d2"]';
+  const COLLAGE_CLASS = 'mobile-hero-collage';
+  const LANES = 6;
+
+  function canonicalKeyFromUrl(url) {
+    if (!url) return '';
+    try {
+      // Strip query params so the same image dedupes even if Squarespace sizes differ
+      return String(url).split('?')[0];
+    } catch (e) {
+      return String(url);
+    }
+  }
+
+  function getBestSrc(img) {
+    if (!img) return '';
+    // Squarespace often uses a tiny placeholder in `src` and the real asset in `data-src`/`data-image`.
+    return (
+      img.getAttribute('data-image') ||
+      img.getAttribute('data-src') ||
+      img.currentSrc ||
+      img.src ||
+      ''
+    );
+  }
 
   function cloneThumb(img) {
     const clone = img.cloneNode(true);
 
-    const dataImage = img.getAttribute('data-image');
-    const dataSrc   = img.getAttribute('data-src');
-    const finalSrc  = dataImage || dataSrc || img.currentSrc || img.src;
-
+    const finalSrc = getBestSrc(img);
     if (finalSrc) clone.src = finalSrc;
 
+    // Remove lazy-load attributes that can keep clones invisible
     clone.removeAttribute('data-src');
     clone.removeAttribute('data-image');
     clone.removeAttribute('data-load');
     clone.removeAttribute('data-image-dimensions');
+    clone.removeAttribute('data-srcset');
+    clone.removeAttribute('data-image-focal-point');
+    clone.removeAttribute('srcset');
+    clone.removeAttribute('sizes');
     clone.removeAttribute('style');
+
+    clone.loading = 'eager';
+    clone.decoding = 'async';
 
     clone.style.visibility = 'visible';
     clone.style.opacity = '1';
@@ -39,112 +68,175 @@
     return clone;
   }
 
-  function enableMobileHero() {
-    if (!window.matchMedia || !window.matchMedia(MOBILE_QUERY).matches) return;
+  function fisherYatesShuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
 
-    // Avoid duplicating the collage
-    if (document.querySelector('.mobile-hero-collage')) return;
+  function ensureCollage(heroSection) {
+    let collage = heroSection.querySelector('.' + COLLAGE_CLASS);
+    if (!collage) {
+      collage = document.createElement('div');
+      collage.classList.add(COLLAGE_CLASS);
+      heroSection.prepend(collage);
 
-    const summaryBlock = document.querySelector(SUMMARY_SELECTOR);
+      for (let i = 1; i <= LANES; i++) {
+        const lane = document.createElement('div');
+        lane.classList.add('mobile-hero-lane', `lane-${i}`);
+        collage.appendChild(lane);
+      }
+    }
+    return collage;
+  }
+
+  function clearLanes(collage) {
+    collage.querySelectorAll('.mobile-hero-lane').forEach(l => (l.innerHTML = ''));
+  }
+
+  function buildUniqueSourceImages(summaryBlock) {
+    const imgs = Array.from(summaryBlock.querySelectorAll('.summary-thumbnail-image'));
+    if (!imgs.length) return [];
+
+    const seen = new Set();
+    const unique = [];
+
+    for (const img of imgs) {
+      const src = getBestSrc(img);
+      const key = canonicalKeyFromUrl(src);
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      unique.push(img);
+    }
+
+    return unique;
+  }
+
+  function hideSummary(summaryBlock) {
     if (!summaryBlock) return;
-
-    const images = summaryBlock.querySelectorAll('.summary-thumbnail-image');
-    if (!images.length) return;
-
-    const heroSection = document.querySelector(HERO_SELECTOR);
-    if (!heroSection) return;
-
-    // Remember original display so we can restore on desktop
     if (!summaryBlock.dataset.apOriginalDisplay) {
       summaryBlock.dataset.apOriginalDisplay = summaryBlock.style.display || '';
     }
     summaryBlock.style.display = 'none';
+  }
 
-    const collage = document.createElement('div');
-    collage.classList.add('mobile-hero-collage');
-    heroSection.prepend(collage);
-
-    const lanes = [];
-    for (let i = 1; i <= 6; i++) {
-      const lane = document.createElement('div');
-      lane.classList.add('mobile-hero-lane', `lane-${i}`);
-      collage.appendChild(lane);
-      lanes.push(lane);
+  function restoreSummary(summaryBlock) {
+    if (!summaryBlock) return;
+    const original = summaryBlock.dataset.apOriginalDisplay;
+    if (typeof original === 'string') {
+      summaryBlock.style.display = original;
+    } else {
+      summaryBlock.style.removeProperty('display');
     }
+  }
 
-    const sourceImages = Array.from(images);
+  function enableMobileHero(opts = {}) {
+    if (!window.matchMedia || !window.matchMedia(MOBILE_QUERY).matches) return;
+
+    const summaryBlock = document.querySelector(SUMMARY_SELECTOR);
+    const heroSection = document.querySelector(HERO_SELECTOR);
+    if (!summaryBlock || !heroSection) return;
+
+    const sourceImages = buildUniqueSourceImages(summaryBlock);
     if (!sourceImages.length) return;
 
-    const shuffled = sourceImages.slice().sort(() => Math.random() - 0.5);
-    const IMAGES_PER_LANE = Math.min(7, shuffled.length);
+    hideSummary(summaryBlock);
+
+    const collage = ensureCollage(heroSection);
+
+    // Idempotency: skip rebuild if the underlying set of images hasn't changed
+    const keys = sourceImages.map(img => canonicalKeyFromUrl(getBestSrc(img))).join('|');
+    if (!opts.force && collage.dataset.apLastKeys === keys) return;
+    collage.dataset.apLastKeys = keys;
+
+    const lanes = Array.from(collage.querySelectorAll('.mobile-hero-lane'));
+    if (!lanes.length) return;
+
+    clearLanes(collage);
+
+    const shuffled = fisherYatesShuffle(sourceImages);
     const sizes = ['size-sm', 'size-md', 'size-lg'];
 
-    lanes.forEach((lane, laneIndex) => {
-      const start = Math.floor((shuffled.length / lanes.length) * laneIndex);
+    // Fill lanes preferring unique images first; if not enough, repeat
+    const IMAGES_PER_LANE = Math.min(7, shuffled.length);
+    const totalNeeded = lanes.length * IMAGES_PER_LANE;
 
-      for (let i = 0; i < IMAGES_PER_LANE; i++) {
-        const srcIndex = (start + i) % shuffled.length;
-        const clone = cloneThumb(shuffled[srcIndex]);
+    let cursor = 0;
+    for (let i = 0; i < totalNeeded; i++) {
+      const srcImg = shuffled[cursor];
+      cursor = (cursor + 1) % shuffled.length;
 
-        const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
-        clone.classList.add(randomSize);
+      const clone = cloneThumb(srcImg);
+      const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+      clone.classList.add(randomSize);
 
-        lane.appendChild(clone);
-      }
-    });
+      lanes[i % lanes.length].appendChild(clone);
+    }
+
+    // If we know Squarespace is still injecting, do a gentle follow-up rebuild
+    // to catch late `data-src` swaps.
+    setTimeout(() => enableMobileHero({ force: true }), 600);
   }
 
   function disableMobileHero() {
     const summaryBlock = document.querySelector(SUMMARY_SELECTOR);
-    const collage = document.querySelector('.mobile-hero-collage');
+    const collage = document.querySelector('.' + COLLAGE_CLASS);
 
-    // Remove the collage entirely on desktop
     if (collage && collage.parentNode) {
       collage.parentNode.removeChild(collage);
     }
 
-    // Restore the Summary Block visibility
-    if (summaryBlock) {
-      const original = summaryBlock.dataset.apOriginalDisplay;
-      if (typeof original === 'string') {
-        summaryBlock.style.display = original;
-      } else {
-        summaryBlock.style.removeProperty('display');
-      }
-    }
+    restoreSummary(summaryBlock);
   }
 
   function syncHeroToViewport() {
     if (!window.matchMedia) return;
     const mq = window.matchMedia(MOBILE_QUERY);
-    if (mq.matches) {
-      enableMobileHero();
-    } else {
-      disableMobileHero();
-    }
+    if (mq.matches) enableMobileHero();
+    else disableMobileHero();
   }
 
   function setupMediaListener() {
     if (!window.matchMedia) return;
     const mq = window.matchMedia(MOBILE_QUERY);
     const handler = (e) => {
-      if (e.matches) {
-        enableMobileHero();
-      } else {
-        disableMobileHero();
-      }
+      if (e.matches) enableMobileHero({ force: true });
+      else disableMobileHero();
     };
 
-    if (mq.addEventListener) {
-      mq.addEventListener('change', handler);
-    } else if (mq.addListener) {
-      mq.addListener(handler);
-    }
+    if (mq.addEventListener) mq.addEventListener('change', handler);
+    else if (mq.addListener) mq.addListener(handler);
   }
 
-  document.addEventListener('DOMContentLoaded', syncHeroToViewport);
-  document.addEventListener('sqs-content-loaded', syncHeroToViewport);
+  function observeSummaryForLateImages() {
+    const summaryBlock = document.querySelector(SUMMARY_SELECTOR);
+    if (!summaryBlock || !window.MutationObserver) return;
+
+    const obs = new MutationObserver(() => {
+      // If the collage exists, force a rebuild when summary thumbnails update
+      const collage = document.querySelector('.' + COLLAGE_CLASS);
+      if (collage && window.matchMedia && window.matchMedia(MOBILE_QUERY).matches) {
+        enableMobileHero({ force: true });
+      }
+    });
+
+    obs.observe(summaryBlock, { childList: true, subtree: true, attributes: true });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    syncHeroToViewport();
+    observeSummaryForLateImages();
+  });
+  document.addEventListener('sqs-content-loaded', () => {
+    syncHeroToViewport();
+    observeSummaryForLateImages();
+  });
+
   setupMediaListener();
   syncHeroToViewport();
 })();
 </script>
+<!-- END DELIVERABLE 5 -->

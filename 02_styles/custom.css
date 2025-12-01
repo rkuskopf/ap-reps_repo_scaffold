@@ -1416,6 +1416,8 @@ body, a, button, * {
 /* Hide footer + social link paragraph on all AP‑REPS pages */
 .apreps footer,
 .apreps section[data-section-id="68d08085fe774859ef5dece7"],
+/* treat second section with an IG link as the social section on artist pages */
+.apreps .page-section:nth-of-type(2):has(a[href*="instagram.com"]),
 /* primary social link paragraph (desktop) */
 .apreps p.sqsrte-small.preFade.fadeIn:has(a[href*="instagram.com"]),
 /* social link paragraph variant used in FE text blocks (mobile/alt) */
@@ -1430,6 +1432,7 @@ body, a, button, * {
 /* Reveal footer + social link once .ap-bio-ready is set */
 .apreps.ap-bio-ready footer,
 .apreps.ap-bio-ready section[data-section-id="68d08085fe774859ef5dece7"],
+.apreps.ap-bio-ready .page-section:nth-of-type(2):has(a[href*=\"instagram.com\"]),
 .apreps.ap-bio-ready p.sqsrte-small.preFade.fadeIn:has(a[href*=\"instagram.com\"]),
 .apreps.ap-bio-ready [data-fluid-engine="true"].fluid-engine .sqs-block-html .sqs-html-content p.p3 {
   opacity: 1;
