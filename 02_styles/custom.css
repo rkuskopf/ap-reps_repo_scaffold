@@ -1268,6 +1268,31 @@ body, a, button, * {
 /* ### END Issue 3: Artist Hover List - Desktop/Tablet Horizontal Margins 26/11/25 */
 
 
+/* ### BEGIN D6.4: Artist Menu - Consistent margins on Desktop & Tablet 26/11/25 */
+
+/**
+ * Fix for Artist Menu (Image Hover List) margins on desktop and tablet
+ * 
+ * Issue: The artist menu component (.image-hover-list.portfolio-list) appears correctly
+ * spaced on mobile but lacks appropriate side margins on desktop and tablet.
+ * This results in the text and underline lines sitting flush against browser edges.
+ * 
+ * Solution: Add matching left/right inset margins for desktop/tablet viewports
+ * to align with the logo and footer/newsletter padding.
+ * 
+ * Uses same simple selector pattern as D6.3 for site-wide consistency.
+ */
+
+@media (min-width: 768px) {
+  .image-hover-list.portfolio-list li a,
+  .image-hover-list.portfolio-list li > span {
+    margin-inline: 1.7vw;
+  }
+}
+
+/* ### END D6.4: Artist Menu - Consistent margins on Desktop & Tablet 26/11/25 */
+
+
 /* ### BEGIN ISSUE 4: Video sizes overlapping */
 @media (max-width: 767px) {
   /* the box that works: control height + spacing */
