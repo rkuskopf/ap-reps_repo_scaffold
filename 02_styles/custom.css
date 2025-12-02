@@ -165,14 +165,22 @@ body, a:hover, button:hover {
 /* BEGIN D1:GALLERY-RATIOS v1 2025-11-08 */   
 
 /* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
-/* Tile box: rely on grid gaps; remove internal padding to avoid seams */
+/* Tile container: rely on grid gaps; do not crop here so captions can extend */
 .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
-  aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
-  overflow: hidden;
   position: relative;
   box-sizing: border-box !important; /* prevent padding from expanding tile */
   padding-bottom: 0 !important;      /* use row-gap instead */
   padding-right: 0 !important;       /* use column-gap instead */
+}
+
+/* Actual crop box: the anchor inside the margin wrapper */
+.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper > .image-slide-anchor,
+.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper > .js-gallery-lightbox-opener {
+  aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
+  overflow: hidden;
+  position: relative;
+  display: block;
+  width: 100% !important;
 }
 
 /* Ensure inner img fills its tile without internal insets */
@@ -305,13 +313,20 @@ h4.tab-title {
 }
 
 /* ratios */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .image-wrapper,
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper {
+/* AP–REPS: margin wrapper carries the horizontal gap only */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
+  position: relative;
+  padding-right: var(--ap-gap-x, 10px) !important;
+}
+
+/* Crop the anchor inside each tile using the per-slide aspect ratio */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper > .image-slide-anchor,
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper > .js-gallery-lightbox-opener {
   aspect-ratio: var(--ap-aspect, 4 / 3) !important;
   overflow: hidden;
   position: relative;
-  padding-right: var(--ap-gap-x, 10px) !important;
+  display: block;
+  width: 100% !important;
 }
 
 .apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
