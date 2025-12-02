@@ -173,9 +173,8 @@ body, a:hover, button:hover {
   padding-right: 0 !important;       /* use column-gap instead */
 }
 
-/* Actual crop box: the anchor inside the margin wrapper */
-.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper > .image-slide-anchor,
-.sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper > .js-gallery-lightbox-opener {
+/* Actual crop box: our injected inner wrapper */
+.sqs-gallery.sqs-gallery-design-grid .slide .ap-tile-inner {
   aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
   overflow: hidden;
   position: relative;
@@ -319,9 +318,8 @@ h4.tab-title {
   padding-right: var(--ap-gap-x, 10px) !important;
 }
 
-/* Crop the anchor inside each tile using the per-slide aspect ratio */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper > .image-slide-anchor,
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper > .js-gallery-lightbox-opener {
+/* Crop the inner wrapper in each tile using the per-slide aspect ratio */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .ap-tile-inner {
   aspect-ratio: var(--ap-aspect, 4 / 3) !important;
   overflow: hidden;
   position: relative;
@@ -953,8 +951,6 @@ email-yui_3_17_2_1_1761719145716_1287 .newsletter-form {
 /* ——— AP–REPS gallery: lock per-slide aspect +  ——— */
 /* D4 – scoped only to AP–REPS tab galleries */
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
-  aspect-ratio: var(--ap-aspect, 4 / 3);
-  overflow: hidden;
   position: relative;
   box-sizing: border-box !important;
   padding-bottom: 0 !important;
@@ -1415,14 +1411,20 @@ body, a, button, * {
   line-height: 1.4;
   letter-spacing: 0.05em;
   text-transform: none;
-  overflow: visible;
 }
 
-/* Caption container - allow content to flow naturally without clipping */
-.apreps .margin-wrapper {
+/* Let gallery captions wrap without truncation, but keep tile crop */
+.apreps .sqs-gallery-block-show-meta .image-slide-title,
+.apreps .sqs-gallery-block-show-meta .image-meta,
+.apreps .sqs-gallery-block-show-meta .sqs-block-caption {
+  white-space: normal !important;
   overflow: visible !important;
-  height: auto !important;
-  max-height: none !important;
+  text-overflow: clip !important;
+}
+
+/* Small breathing room inside the tile so last caption line isn't flush */
+.apreps .sqs-gallery-block-show-meta .margin-wrapper {
+  padding-bottom: 0.35rem !important;
 }
 
 
