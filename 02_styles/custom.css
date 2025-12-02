@@ -165,22 +165,15 @@ body, a:hover, button:hover {
 /* BEGIN D1:GALLERY-RATIOS v1 2025-11-08 */   
 
 /* ——— AP–REPS gallery: lock per-slide aspect + flush-top crop (GLOBAL) ——— */
-/* Tile container: no crop, just structural padding */
+/* Tile box: rely on grid gaps; remove internal padding to avoid seams */
 .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
-  position: relative;
-  box-sizing: border-box !important;
-  padding-bottom: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* Actual crop box: inner image wrapper */
-.sqs-gallery.sqs-gallery-design-grid .slide .image-wrapper,
-.sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper {
   aspect-ratio: var(--ap-aspect, 4 / 3); /* 4:3 fallback */
   overflow: hidden;
   position: relative;
+  box-sizing: border-box !important; /* prevent padding from expanding tile */
+  padding-bottom: 0 !important;      /* use row-gap instead */
+  padding-right: 0 !important;       /* use column-gap instead */
 }
-
 
 /* Ensure inner img fills its tile without internal insets */
 .sqs-gallery.sqs-gallery-design-grid .margin-wrapper img.thumb-image {
@@ -311,20 +304,15 @@ h4.tab-title {
   display: none !important;
 }
 
-/* AP–REPS: crop only the inner image box */
+/* ratios */
+.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper,
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .image-wrapper,
 .apreps .sqs-gallery.sqs-gallery-design-grid .slide .thumb-image-wrapper {
   aspect-ratio: var(--ap-aspect, 4 / 3) !important;
   overflow: hidden;
   position: relative;
-}
-
-/* Outer margin wrapper: just handles horizontal gap, no cropping */
-.apreps .sqs-gallery.sqs-gallery-design-grid .slide .margin-wrapper {
-  position: relative;
   padding-right: var(--ap-gap-x, 10px) !important;
 }
-
 
 .apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image {
   width: 100% !important;
@@ -1415,30 +1403,11 @@ body, a, button, * {
   overflow: visible;
 }
 
-/* Caption container - this fixed caption but killed the aspect ratio 
+/* Caption container - allow content to flow naturally without clipping */
 .apreps .margin-wrapper {
   overflow: visible !important;
   height: auto !important;
   max-height: none !important;
-}*/
-
-/* let gallery captions wrap without truncation, but keep tile crop */
-
-/* Turn off Squarespace’s ellipsis + nowrap for AP–REPS gallery captions */
-.apreps .sqs-gallery-block-show-meta .image-slide-title,
-.apreps .sqs-gallery-block-show-meta .image-meta,
-.apreps .sqs-gallery-block-show-meta .sqs-block-caption {
-  white-space: normal !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-}
-
-/* In meta-only-title grid mode, the title can live inside margin-wrapper.
-   Make sure it can breathe without changing the tile’s aspect ratio. */
-.apreps .sqs-gallery-block-show-meta-only-title .margin-wrapper .image-slide-title {
-  display: block !important;
-  width: 100% !important;
-  /* text-align: left is already handled elsewhere in your CSS */
 }
 
 
