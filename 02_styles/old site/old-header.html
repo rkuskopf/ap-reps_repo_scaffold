@@ -1,0 +1,65 @@
+<!-- Utilities for Will-Myers.com Plugins -->
+<script src="https://cdn.jsdelivr.net/gh/willmyerscode/toolkit@1/index.min.js"></script>
+<!-- Tabs Code CSS From Will-Myers.com -->
+<link href="https://cdn.jsdelivr.net/gh/willmyerscode/tabs@5/tabs.min.css" rel="stylesheet">
+<script>document.documentElement.classList.add('apreps');</script>
+
+<!-- Dot Cursor by digitalmoves.com.au -->
+<script>
+document.addEventListener("DOMContentLoaded", () => { // once the page is ready
+    // add the element to the body
+    const cursor = document.createElement("span")
+    cursor.classList.add("dot-cursor")
+    cursor.innerHTML = "<span />" // add inner element
+    cursor.style.opacity = 0 // hide until mouse move
+    document.body.appendChild(cursor)
+
+    // update the dot position on mouse move
+    document.addEventListener("mousemove", (e) => {
+        if(e.clientX < 3 || e.clientY < 3){
+            // hide on edges of screen
+            cursor.style.opacity = 0
+        } else {
+            cursor.style.opacity = 1;
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        }
+    })
+
+    // add hover effect when over links and buttons
+    const targets = document.querySelectorAll("a, button") // CSS selectors for which elements have the hover effect
+    targets.forEach((target) => {
+        target.addEventListener("mouseenter", () => cursor.classList.add("active"))
+        target.addEventListener("mouseleave", () => cursor.classList.remove("active"))
+    })
+})
+</script>
+<!-- Dot Cursor by digitalmoves.com.au -->
+
+<!-- ### DELIVERABLE 4. Breakpoints 10.11.25 -->
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const scope = document.documentElement; // body has class "apreps"
+  if (!scope.classList.contains('apreps')) return;
+
+  const patch = (root=document) => {
+    root.querySelectorAll('[data-fluid-engine="true"].fluid-engine').forEach(el => {
+      el.style.setProperty('grid-template-rows','none','important');
+      el.style.setProperty('grid-auto-rows','minmax(8px,auto)','important');
+      el.style.setProperty('height','auto','important');
+      el.style.setProperty('min-height','0','important');
+      el.style.setProperty('max-height','none','important');
+    });
+    root.querySelectorAll('.page-section, .content-wrapper').forEach(el => {
+      el.style.setProperty('padding-top','0','important');
+      el.style.setProperty('padding-bottom','0','important');
+    });
+  };
+
+  patch();
+  new MutationObserver(m => {
+    for (const rec of m)
+      for (const n of rec.addedNodes)
+        if (n.nodeType === 1) patch(n);
+  }).observe(document.body,{subtree:true,childList:true});
+});
+</script>
