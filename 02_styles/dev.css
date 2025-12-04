@@ -279,7 +279,10 @@ body, a:hover, button:hover {
 /* Sub-pixel seam guard on retina zoom levels */
 .apreps .sqs-gallery.sqs-gallery-design-grid img.thumb-image { backface-visibility: hidden; }
 
-
+/* Landscape thumbnails: globally zoom-out inside tile */
+.sqs-gallery.sqs-gallery-design-grid img.thumb-image.ap-landscape-thumb {
+  --ap-scale: 0.9; /* adjustable: try 0.85–0.95 */
+}
 
 /* top alignment */
 .apreps .wm-tabs .tab-panel > .tab-content .page-section:first-of-type {
